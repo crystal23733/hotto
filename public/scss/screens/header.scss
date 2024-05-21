@@ -1,0 +1,21 @@
+@use "../components/font.scss";
+@use "../components/display.scss";
+
+#header{
+    background-color: rgb(46, 45, 45);
+    height: 10vh;
+    @include display.flex(row, space-between, center);
+    padding: 1vh;
+    color: white;
+    & > h1{
+        font-size: font.$title-size;
+        font-weight: font.$title-weight;
+    }
+    & > #login-section{
+        @include display.flex(row, space-between, center);
+        & > a{
+            padding: 5px;
+            color: white;
+        }
+    }
+}

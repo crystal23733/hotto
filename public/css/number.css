@@ -1,0 +1,15 @@
+#number {
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 5vh 50vh;
+  justify-content: center;
+  align-items: center;
+}
+#number > number-header {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+#number > number-list {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
