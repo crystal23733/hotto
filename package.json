@@ -20,5 +20,6 @@
     "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.4",
     "nodemon": "^3.1.0"
-  }
+  },
+  "type": "module"
 }

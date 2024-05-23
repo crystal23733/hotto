@@ -1,1 +1,3 @@
-const numArr = [3, 4, 9, 30, 33,36, 7];
+import { mainNumFetch } from "./API/numberAPI.js";
+
+mainNumFetch();
