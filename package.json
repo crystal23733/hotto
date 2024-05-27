@@ -21,8 +21,5 @@
     "@babel/preset-env": "^7.24.4",
     "nodemon": "^3.1.0"
   },
-  "type": "module",
-  "dependencies": {
-    "cors": "^2.8.5"
-  }
+  "type": "module"
 }

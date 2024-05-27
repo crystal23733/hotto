@@ -1,14 +1,8 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
-import cors from 'cors';
 
 const PORT = 8080;
-
-const corsOptions = {
-  origin : 'http://localhost:8080',
-  credentials : true,
-}
 
 const mimeType = {
   '.html' : 'text/html',
