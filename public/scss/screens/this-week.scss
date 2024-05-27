@@ -2,12 +2,12 @@
 
 @use "../components/display.scss";
 
-#number{
+#this-week{
     @include display.grid(100vw, 5vh 50vh, center, center);
-    & > number-header {
+    & > #this-week__header {
         @include display.gridTemplate(list.slash(1,2), list.slash(1,2));
     }
-    & > number-list {
+    & > #this-week__number {
         @include display.gridTemplate(list.slash(1,2), list.slash(2,3));
     }
 }
