@@ -1,10 +1,14 @@
 @use "../components/font.scss";
 @use "../components/display.scss";
+%rowBeetwen{
+    @include display.flex(row, space-between, center);
+}
+
 
 #header{
     background-color: rgb(46, 45, 45);
     height: 10vh;
-    @include display.flex(row, space-between, center);
+    @extend %rowBeetwen;
     padding: 1vh;
     color: white;
     & > h1{
@@ -12,7 +16,7 @@
         font-weight: font.$title-weight;
     }
     & > #login-section{
-        @include display.flex(row, space-between, center);
+        @extend %rowBeetwen;
         & > a{
             padding: 5px;
             color: white;

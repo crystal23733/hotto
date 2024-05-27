@@ -17,25 +17,22 @@ a {
   text-decoration: none;
 }
 
-#header {
-  background-color: rgb(46, 45, 45);
-  height: 10vh;
+#header > #login-section, #header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+#header {
+  background-color: rgb(46, 45, 45);
+  height: 10vh;
   padding: 1vh;
   color: white;
 }
 #header > h1 {
   font-size: 40px;
   font-weight: 900;
-}
-#header > #login-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 #header > #login-section > a {
   padding: 5px;
@@ -68,6 +65,13 @@ a {
   text-align: center;
 }
 
+#this-week > #this-week__number, #this-week > #this-week__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 #this-week {
   display: flex;
   flex-direction: column;
@@ -76,16 +80,8 @@ a {
   height: 50vh;
 }
 #this-week > #this-week__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   height: 10vh;
 }
 #this-week > #this-week__number {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 }
