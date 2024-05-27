@@ -1,13 +1,17 @@
-@use 'sass:list';
-
 @use "../components/display.scss";
+%rowFlex{
+    @include display.flex(row, center, center);
+}
 
 #this-week{
-    @include display.grid(100vw, 5vh 50vh, center, center);
-    & > #this-week__header {
-        @include display.gridTemplate(list.slash(1,2), list.slash(1,2));
+    @include display.flex(column, center, center);
+    height: 50vh;
+    & > #this-week__header{
+        @extend %rowFlex;
+        height: 10vh;
     }
-    & > #this-week__number {
-        @include display.gridTemplate(list.slash(1,2), list.slash(2,3));
+    & > #this-week__number{
+        @extend %rowFlex;
+        height: 100%;
     }
 }

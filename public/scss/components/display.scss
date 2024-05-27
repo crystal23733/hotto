@@ -1,15 +1,3 @@
-@mixin grid($columns, $rows, $justify, $align){
-    display: grid;
-    grid-template-columns: $columns;
-    grid-template-rows: $rows;
-    justify-content: $justify;
-    align-items: $align;
-}
-
-@mixin gridTemplate($column, $row){
-    grid-column: $column;
-    grid-row: $row;
-}
 @mixin flex($direction, $justify, $align){
     display: flex;
     flex-direction: $direction;
