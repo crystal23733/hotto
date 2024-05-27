@@ -1,6 +1,7 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import cors from 'cors';
 
 const PORT = 8080;
 
@@ -36,9 +37,6 @@ const fileUtils = {
 
 const server = http.createServer((req, res) => {
   const { method, url } = req;
-  res.setHeader('Access-Control-Allow-origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
   let filePath = fileUtils.getFilePath(url);
   let fileExt = fileUtils.getFileExtention(filePath);
   let fileContent = fileUtils.getFileContent(fileExt);
