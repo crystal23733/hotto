@@ -5,6 +5,11 @@ import cors from 'cors';
 
 const PORT = 8080;
 
+const corsOptions = {
+  origin : 'http://localhost:8080',
+  credentials : true,
+}
+
 const mimeType = {
   '.html' : 'text/html',
   '.css' : 'text/css',
@@ -52,8 +57,8 @@ const server = http.createServer((req, res) => {
           res.end('서버에러');
         }
       } else {
-        res.writeHead(200, {'Content-type' : fileContent});
-        res.end(data);
+          res.writeHead(200, {'Content-type' : fileContent});
+          res.end(data);
       }
     })
   }
