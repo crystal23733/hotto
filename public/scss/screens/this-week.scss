@@ -22,5 +22,15 @@
         width: 100%;
         color: white;
         background-color: black; //! 테스트용 작업 후 지우기 필수!
+        & > div{
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 50%;
+            background-color: yellow;
+            text-align: center;
+            align-content: center;
+        }
     }
 }
