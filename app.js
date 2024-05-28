@@ -1,8 +1,19 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import { lottoNum } from './public/js/API/numberAPI.js';
 
 const PORT = 8080;
+
+// *API
+http.get(lottoNum, stream => {
+  let rawdata = '';
+  stream.setEncoding('utf8');
+  stream.on('data', buffer => rawdata += buffer);
+  stream.on('end', function () {
+    console.log(rawdata); // 긁어온 내용 뿌리기
+  });
+});
 
 const mimeType = {
   '.html' : 'text/html',
