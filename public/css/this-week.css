@@ -23,7 +23,6 @@
   height: 100%;
   width: 100%;
   color: white;
-  background-color: black;
 }
 #this-week > #this-week__number > div {
   width: 100px;
@@ -34,4 +33,7 @@
   background-color: yellow;
   text-align: center;
   align-content: center;
+}
+#this-week > #this-week__number > p {
+  color: black;
 }
