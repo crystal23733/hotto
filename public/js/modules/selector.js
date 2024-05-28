@@ -2,7 +2,7 @@
 export const thisWeekNumber = document.getElementById('this-week__number');
 
 export const numberAll = {
-  homeNumber : document.querySelector('#this-week__number div'),
+  homeNumber : document.querySelectorAll('#this-week__number div'),
 }
 
 
