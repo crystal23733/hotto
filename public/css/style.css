@@ -102,3 +102,8 @@ a {
   text-align: center;
   align-content: center;
 }
+
+#content-box {
+  height: 35vh;
+  width: 100%;
+}

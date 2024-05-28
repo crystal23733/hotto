@@ -1,8 +1,9 @@
 @use "../components/display.scss";
+@use '../components/height.scss';
 
 #menu{
     background-color: black;
-    height: 5vh;
+    height: height.$menu-height;
     & > #menu-list{
         @include display.flex(row, space-evenly, center);
         height: 100%;

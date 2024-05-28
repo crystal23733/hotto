@@ -1,0 +1,6 @@
+@use '../components/height.scss';
+
+#content-box{
+  height: height.$content-box-height;
+  width: 100%;
+}

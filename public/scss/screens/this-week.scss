@@ -1,5 +1,6 @@
 @use "../components/display.scss";
 @use '../components/font.scss';
+@use '../components/height.scss';
 
 %rowFlex{
     @include display.flex(row, center, center);
@@ -7,7 +8,7 @@
 
 #this-week{
     @include display.flex(column, center, center);
-    height: 50vh;
+    height: height.$this-week-height;
     & > #this-week__header{
         @extend %rowFlex;
         font-size: font.$sub-size;
@@ -28,7 +29,7 @@
             padding: 20px;
             margin: 10px;
             border-radius: 50%;
-            background-color: yellow;
+            background-color: yellow; //! 테스트용 색깔 작업 후 지우기 필수
             text-align: center;
             align-content: center;
         }

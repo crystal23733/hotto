@@ -1,5 +1,7 @@
 @use "../components/font.scss";
 @use "../components/display.scss";
+@use '../components/height.scss';
+
 %rowBeetwen{
     @include display.flex(row, space-between, center);
 }
@@ -7,7 +9,7 @@
 
 #header{
     background-color: rgb(46, 45, 45);
-    height: 10vh;
+    height: height.$header-height;
     @extend %rowBeetwen;
     padding: 1vh;
     color: white;
