@@ -1,3 +1,5 @@
+// todo CORS해결하거나 다른 방안으로 API요청 필요
+
 const numHistoryAPI = () => {
   const xhr = new XMLHttpRequest();
   let url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=+1';
