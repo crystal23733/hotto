@@ -1,19 +1,9 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
-import { lottoNum } from './public/js/API/numberAPI.js';
+import cors from 'cors';
 
 const PORT = 8080;
-
-// *API
-http.get(lottoNum, stream => {
-  let rawdata = '';
-  stream.setEncoding('utf8');
-  stream.on('data', buffer => rawdata += buffer);
-  stream.on('end', function () {
-    console.log(rawdata); // 긁어온 내용 뿌리기
-  });
-});
 
 const mimeType = {
   '.html' : 'text/html',
@@ -50,7 +40,11 @@ const server = http.createServer((req, res) => {
   let filePath = fileUtils.getFilePath(url);
   let fileExt = fileUtils.getFileExtention(filePath);
   let fileContent = fileUtils.getFileContent(fileExt);
-  console.log(filePath, fileExt, fileContent);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Request-Method', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  // console.log(filePath, fileExt, fileContent);
   if(method === 'GET'){
     fs.readFile(filePath, (err, data) => {
       if(err){
@@ -62,7 +56,10 @@ const server = http.createServer((req, res) => {
           res.end('서버에러');
         }
       } else {
-          res.writeHead(200, {'Content-type' : fileContent});
+          res.writeHead(200, {
+            'Content-type' : fileContent,
+            'Access-Control-Allow-Origin': '*'
+          });
           res.end(data);
       }
     })
