@@ -12,3 +12,6 @@ export const mainNumFetch = () => {
     }
   }
 }
+
+
+
