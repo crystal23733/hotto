@@ -3,14 +3,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 60px;
-  height: 50vh;
+  height: 85vh;
   width: 100%;
 }
 #join-form > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 20px;
 }
 #join-form > div > label {
   width: 100px;
+}
+#join-form > input {
+  padding: 20px;
+  border: none;
+  background-color: #0D99FF;
+  border-radius: 20px;
+  color: white;
 }
