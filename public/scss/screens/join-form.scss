@@ -1,0 +1,15 @@
+@use '../components/display.scss';
+
+#join-form{
+  @include display.flex(column, center, center);
+  padding: 60px;
+  height: 50vh;
+  width: 100%;
+  & > div{
+    width: 100%;
+    padding: 20px;
+    & > label{
+      width: 100px;
+    }
+  }
+}

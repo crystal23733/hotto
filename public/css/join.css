@@ -67,3 +67,20 @@ a {
   color: white;
   text-align: center;
 }
+
+#join-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  height: 50vh;
+  width: 100%;
+}
+#join-form > div {
+  width: 100%;
+  padding: 20px;
+}
+#join-form > div > label {
+  width: 100px;
+}
