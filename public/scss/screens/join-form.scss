@@ -11,6 +11,8 @@
     padding: 20px;
     & > label{
       width: 100px;
+      text-align: end;
+      padding-right: 5px;
     }
   }
   & > input{

@@ -86,6 +86,8 @@ a {
 }
 #join-form > div > label {
   width: 100px;
+  text-align: end;
+  padding-right: 5px;
 }
 #join-form > input {
   padding: 20px;
