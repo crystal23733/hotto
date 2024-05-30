@@ -16,6 +16,8 @@ const fileUtils = {
   getFilePath : (fileUrl) => {
     if(fileUrl === '/'){
       fileUrl = './public/home.html';
+    } else if(fileUrl === '/join'){
+      fileUrl = './public/join.html';
     } else {
       fileUrl = `./public${fileUrl}`;
     }
