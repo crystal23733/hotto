@@ -1,2 +1,3 @@
-import { join } from "./modules/selector.js";
+import { joinFormHandle } from "./modules/functions/joinHandle.js";
 
+joinFormHandle();
