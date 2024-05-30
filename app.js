@@ -1,3 +1,4 @@
+// todo DB연결 전까지 회원정보 스토리지나 POST처리로 json파일에 담아놓기
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -16,6 +17,8 @@ const fileUtils = {
   getFilePath : (fileUrl) => {
     if(fileUrl === '/'){
       fileUrl = './public/home.html';
+    } else if(fileUrl === '/join'){
+      fileUrl = './public/join.html';
     } else {
       fileUrl = `./public${fileUrl}`;
     }
@@ -55,6 +58,30 @@ const server = http.createServer((req, res) => {
           res.end(data);
       }
     })
+  } else if(method === 'POST'){
+    if(url === '/'){
+      let body = '';
+      req.on('data', (chunk) => {
+        body += chunk.toString();
+      });
+      req.on('end', () => {
+        const params = new URLSearchParams(body);
+        fs.readFile('./public/home.html', (err, data) => {
+          if(err){
+            if(err.code === 'ENOENT'){
+              res.writeHead(404, {'Content-type' : 'text/plain; charset=utf-8'});
+              res.end('페이지를 찾을 수 없음');
+            } else {
+              res.writeHead(500, {'Content-type' : 'text/plain; charset=utf-8'});
+              res.end('서버에러');
+            }
+          } else {
+            res.writeHead(200, {'Content-type' : 'text/html'});
+            res.end(data);
+          }
+        })
+      })
+    }
   }
 })
 
