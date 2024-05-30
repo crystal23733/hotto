@@ -12,10 +12,13 @@
     height: height.$header-height;
     @extend %rowBeetwen;
     padding: 1vh;
-    color: white;
     & > h1{
         font-size: font.$title-size;
         font-weight: font.$title-weight;
+        & > a{
+            text-decoration: none;
+            color: white;
+        }
     }
     & > #login-section{
         @extend %rowBeetwen;
