@@ -2,13 +2,6 @@
 
 import { join, joinForm } from "../selector.js";
 
-export const joinFormHandle = () => {
-  joinForm.addEventListener('submit', (event) => {
-    console.log(join.name.value);
-    console.log(join.email.value);
-    console.log(join.password.value)
-    console.log(join.checkPassword.value);
-    console.log(join.phone.value);
-    console.log(join.joinLocation.value);
-  });
-}
+// export const joinFormHandle = () => {
+  
+// }
