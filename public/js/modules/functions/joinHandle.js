@@ -1,5 +1,6 @@
 // todo DB연결 전까지 회원정보 스토리지나 POST처리로 json파일에 담아놓기
 
+import { USERNAME_KEY } from "../KEY.js";
 import { join } from "../selector.js";
 
 // *localStorage에 회원정보를 담을 그릇
