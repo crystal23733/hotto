@@ -6,6 +6,12 @@ export const numberAll = {
 }
 
 // *join html 선택자
+export const joinForm = document.getElementById('join-form');
 export const join = {
-  joinForm : document.getElementById('join-form'),
+  name : document.getElementById('name'),
+  email : document.getElementById('email'),
+  password : document.getElementById('password'),
+  checkPassword : document.getElementById('checkPassword'),
+  phone : document.getElementById('phone'),
+  joinLocation : document.getElementById('location'),
 }
