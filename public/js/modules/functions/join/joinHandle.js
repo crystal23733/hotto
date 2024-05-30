@@ -2,9 +2,7 @@
 
 import { USERNAME_KEY } from "../../KEY.js";
 import { join } from "../../selector.js";
-
-// *localStorage에 회원정보를 담을 그릇
-let users = [];
+import { conditional } from "./joinCondition.js";
 
 export const joinValue = (event) => {
   event.preventDefault();
@@ -17,14 +15,7 @@ export const joinValue = (event) => {
     phone:join.phone.value,
     joinLocation:join.joinLocation.value
   }
-  if(join.password.value === join.checkPassword.value){
-    console.log(true);
-    console.log(join.password.value, join.checkPassword.value);
-  } else if(join.password.value !== join.checkPassword.value){
-    console.log(false);
-    console.log(join.password.value, join.checkPassword.value);
-  }
+  console.log(conditional.passwordCon(joinObj.password, joinObj.checkPassword));
   // *오브젝트를 배열에 담음
-  users.push(joinObj);
   localStorage.setItem(USERNAME_KEY, JSON.stringify(joinObj));
 }
