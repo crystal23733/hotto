@@ -1,7 +1,4 @@
-import { joinFormHandle } from "./modules/functions/joinHandle.js";
+import { joinValue } from "./modules/functions/joinHandle.js";
+import { joinForm } from "./modules/selector.js";
 
-joinForm.addEventListener('submit', (event) => {
-  
-});
-
-joinFormHandle();
+joinForm.addEventListener('submit', joinValue);
