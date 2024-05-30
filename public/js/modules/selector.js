@@ -5,5 +5,7 @@ export const numberAll = {
   homeNumber : document.querySelectorAll('#this-week__number div'),
 }
 
-
-// todo 당첨번호별 색깔 핸들링을 위한 DOM API 선택자 만들기
+// *join html 선택자
+export const join = {
+  joinForm : document.getElementById('join-form'),
+}
