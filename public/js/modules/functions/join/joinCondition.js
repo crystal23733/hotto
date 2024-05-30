@@ -1,4 +1,11 @@
 export const conditional = {
+  nameCon : (name) => {
+    if(name.length > 1 || name.length < 10){
+      return true;
+    } else {
+      return false;
+    }
+  },
   passwordCon : (pwd, checkPwd) => {
     if(pwd === checkPwd){
       return true;
@@ -16,5 +23,5 @@ export const conditional = {
     } else {
       return false;
     }
-  }
+  },
 }

@@ -16,6 +16,7 @@ export const joinValue = (event) => {
     joinLocation:join.joinLocation.value
   }
   console.log(conditional.passwordCon(joinObj.password, joinObj.checkPassword));
+  console.log(conditional.phoneCon(joinObj.phone));
   // *오브젝트를 배열에 담음
   localStorage.setItem(USERNAME_KEY, JSON.stringify(joinObj));
 }

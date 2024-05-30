@@ -42,7 +42,8 @@ const server = http.createServer((req, res) => {
   let filePath = fileUtils.getFilePath(url);
   let fileExt = fileUtils.getFileExtention(filePath);
   let fileContent = fileUtils.getFileContent(fileExt);
-  console.log(filePath, fileExt, fileContent);
+  // console.log(filePath, fileExt, fileContent);
+  console.log(method, url);
   if(method === 'GET'){
     fs.readFile(filePath, (err, data) => {
       if(err){
