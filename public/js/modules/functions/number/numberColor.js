@@ -2,7 +2,7 @@
 
 import { numberAll } from "../../selector.js";
 
-const numberColor = () => {
+export const numberColor = () => {
   numberAll.homeNumber.forEach((child) => {
     const intText = parseInt(child.textContent);
     if(intText < 11){
