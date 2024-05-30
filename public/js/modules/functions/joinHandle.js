@@ -3,12 +3,12 @@
 import { join, joinForm } from "../selector.js";
 
 export const joinFormHandle = () => {
-  joinForm.addEventListener('submit', () => {
-    console.log(join.name);
-    console.log(join.email);
-    console.log(join.password)
-    console.log(join.checkPassword);
-    console.log(join.phone);
-    console.log(join.joinLocation);
+  joinForm.addEventListener('submit', (event) => {
+    console.log(join.name.value);
+    console.log(join.email.value);
+    console.log(join.password.value)
+    console.log(join.checkPassword.value);
+    console.log(join.phone.value);
+    console.log(join.joinLocation.value);
   });
 }

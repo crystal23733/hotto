@@ -58,6 +58,30 @@ const server = http.createServer((req, res) => {
           res.end(data);
       }
     })
+  } else if(method === 'POST'){
+    if(url === '/'){
+      let body = '';
+      req.on('data', (chunk) => {
+        body += chunk.toString();
+      });
+      req.on('end', () => {
+        const params = new URLSearchParams(body);
+        fs.readFile('./public/home.html', (err, data) => {
+          if(err){
+            if(err.code === 'ENOENT'){
+              res.writeHead(404, {'Content-type' : 'text/plain; charset=utf-8'});
+              res.end('페이지를 찾을 수 없음');
+            } else {
+              res.writeHead(500, {'Content-type' : 'text/plain; charset=utf-8'});
+              res.end('서버에러');
+            }
+          } else {
+            res.writeHead(200, {'Content-type' : 'text/html'});
+            res.end(data);
+          }
+        })
+      })
+    }
   }
 })
 
