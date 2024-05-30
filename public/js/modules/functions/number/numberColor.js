@@ -4,11 +4,11 @@ import { numberAll } from "../../selector.js";
 
 const numberColor = () => {
   numberAll.homeNumber.forEach((child) => {
-    console.dir(child);
     const intText = parseInt(child.textContent);
     if(intText < 12){
-      child.style.backgroudColor = '#FAC400';
+      child.style.backgroundColor = '#FAC400';
     }
+    console.dir(child);
   })
 }
 
