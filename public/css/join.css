@@ -89,6 +89,16 @@ a {
   text-align: end;
   padding-right: 5px;
 }
+#join-form > div > input {
+  height: 30px;
+}
+#join-form > div > div {
+  height: 30px;
+  width: 30px;
+  background-color: red;
+  margin-left: 5px;
+  border-radius: 5px;
+}
 #join-form > input {
   padding: 20px;
   border: none;
