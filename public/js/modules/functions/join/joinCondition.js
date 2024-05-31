@@ -6,6 +6,20 @@ export const conditional = {
       return false;
     }
   },
+  emailCon : (email) => {
+    if(email.endsWith('.com') || email.endsWith('.co.kr') || email.endsWith('.net')){
+      return true;
+    } else {
+      return false;
+    }
+  },
+  passwordLength : (pwd) => {
+    if(pwd.length > 4){
+      return true;
+    } else {
+      return false;
+    }
+  },
   passwordCon : (pwd, checkPwd) => {
     if(pwd === checkPwd){
       return true;

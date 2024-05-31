@@ -5,7 +5,7 @@ import { join, joinForm } from "../../selector.js";
 import { conditional } from "./joinCondition.js";
 
 // *회원가입 성공시 실행될 함수
-const joinSuccess = (event) => {
+export const joinSuccess = (event) => {
   event.preventDefault(); // !함수 완성시 삭제
   // *회원 정보 오브젝트에 담기
   const joinObj = {
@@ -13,8 +13,7 @@ const joinSuccess = (event) => {
     email:join.email.value,
     password:join.password.value,
     checkPassword:join.checkPassword.value,
-    phone:join.phone.value,
-    joinLocation:join.joinLocation.value
+    phone:join.phone.value
   }
   console.log(conditional.passwordCon(joinObj.password, joinObj.checkPassword));
   console.log(conditional.phoneCon(joinObj.phone));
