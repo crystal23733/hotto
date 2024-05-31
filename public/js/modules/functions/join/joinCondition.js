@@ -1,7 +1,11 @@
 export const conditional = {
   nameCon : (name) => {
-    if(name.length > 1 || name.length < 10){
-      return true;
+    if(name.length > 1){
+      if(name.length < 10){
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
