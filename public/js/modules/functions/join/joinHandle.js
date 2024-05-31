@@ -22,11 +22,12 @@ export const joinSuccess = (event) => {
 }
 
 // *회원가입 실패시 실행될 함수
-const joinFail = (event) => {
+export const joinFail = (event) => {
   event.preventDefault();
   console.error('입력한 정보가 유효하지 않습니다.');
   const p = document.createElement('p');
   joinForm.appendChild(p);
+  p.style.color = 'red';
   p.textContent = '입력한 정보가 유효하지 않습니다.';
 }
 // joinForm.addEventListener('submit', joinSuccess);
