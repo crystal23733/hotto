@@ -43,3 +43,11 @@ export const conditional = {
     }
   },
 }
+
+export const joinCondition = {
+  trueStatus : (statusArr) => {
+    const isValue = (currentValue) => currentValue === true;
+    console.log(statusArr.every(isValue));
+    return statusArr.every(isValue);
+  }
+}
