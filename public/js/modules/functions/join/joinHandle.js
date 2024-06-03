@@ -2,11 +2,9 @@
 
 import { USERNAME_KEY } from "../../KEY.js";
 import { join, joinForm } from "../../selector.js";
-import { conditional } from "./joinCondition.js";
 
 // *회원가입 성공시 실행될 함수
-export const joinSuccess = (event) => {
-  event.preventDefault(); // !함수 완성시 삭제
+export const joinSuccess = () => {
   // *회원 정보 오브젝트에 담기
   const joinObj = {
     name:join.name.value,
@@ -15,8 +13,6 @@ export const joinSuccess = (event) => {
     checkPassword:join.checkPassword.value,
     phone:join.phone.value
   }
-  console.log(conditional.passwordCon(joinObj.password, joinObj.checkPassword));
-  console.log(conditional.phoneCon(joinObj.phone));
   // *오브젝트를 배열에 담음
   localStorage.setItem(USERNAME_KEY, JSON.stringify(joinObj));
 }
