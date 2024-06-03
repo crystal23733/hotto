@@ -13,7 +13,6 @@ export const statusCondition = () => {
       statusSearch.falseSearch(status);
       if(joinCondition.trueStatus(status) === true){
         joinForm.addEventListener('submit', joinSuccess);
-        console.log(joinCondition.trueStatus(status));
       }
     } else {
       joinStatusBox.name.style.backgroundColor = 'red';
@@ -27,7 +26,6 @@ export const statusCondition = () => {
       statusSearch.falseSearch(status);
       if(joinCondition.trueStatus(status) === true){
         joinForm.addEventListener('submit', joinSuccess);
-        console.log(joinCondition.trueStatus(status));
       }
     } else {
       joinStatusBox.email.style.backgroundColor = 'red';
@@ -41,7 +39,6 @@ export const statusCondition = () => {
       statusSearch.falseSearch(status);
       if(joinCondition.trueStatus(status) === true){
         joinForm.addEventListener('submit', joinSuccess);
-        console.log(joinCondition.trueStatus(status));
       }
     } else {
       joinStatusBox.password.style.backgroundColor = 'red';
@@ -55,7 +52,6 @@ export const statusCondition = () => {
       statusSearch.falseSearch(status);
       if(joinCondition.trueStatus(status) === true){
         joinForm.addEventListener('submit', joinSuccess);
-        console.log(joinCondition.trueStatus(status));
       }
     } else {
       joinStatusBox.checkPassword.style.backgroundColor = 'red';
@@ -69,7 +65,6 @@ export const statusCondition = () => {
       statusSearch.falseSearch(status);
       if(joinCondition.trueStatus(status) === true){
         joinForm.addEventListener('submit', joinSuccess);
-        console.log(joinCondition.trueStatus(status));
       }
     } else {
       joinStatusBox.phone.style.backgroundColor = 'red';
