@@ -13,5 +13,11 @@ export const join = {
   password : document.getElementById('password'),
   checkPassword : document.getElementById('checkPassword'),
   phone : document.getElementById('phone'),
-  joinLocation : document.getElementById('location'),
+}
+export const joinStatusBox = {
+  name : document.getElementById('name-box'),
+  email : document.getElementById('email-box'),
+  password : document.getElementById('password-box'),
+  checkPassword : document.getElementById('checkPassword-box'),
+  phone : document.getElementById('phone-box'),
 }

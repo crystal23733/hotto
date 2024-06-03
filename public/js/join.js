@@ -1,4 +1,4 @@
-import { joinValue } from "./modules/functions/joinHandle.js";
-import { joinForm } from "./modules/selector.js";
+import { statusCondition } from "./modules/functions/join/joinStatus.js";
 
-joinForm.addEventListener('submit', joinValue);
+statusCondition();
+
