@@ -1,14 +1,26 @@
 // todo DB연결 전까지 회원정보 스토리지나 POST처리로 json파일에 담아놓기
 // todo express 대체하기
+// todo 서버 모듈화 진행
 import express from 'express';
-
-const app = express();
-console.log(app);
-// import http from 'http';
-// import fs from 'fs';
-// import path from 'path';
+import path from 'path';
 
 const PORT = 8080;
+
+const __dirname = path.resolve();
+
+const app = express();
+
+app.set(express.static(path.join(__dirname, '/public')));
+
+app.get('/', (req, res) => {
+  const {method, url} = req;
+  console.log(method, url);
+  res.sendFile(path.join(__dirname, './public/home.html'));
+})
+
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
+})
 
 // const mimeType = {
 //   '.html' : 'text/html',
@@ -91,6 +103,3 @@ const PORT = 8080;
 //   }
 // })
 
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
-})
