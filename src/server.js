@@ -15,13 +15,23 @@ const app = express();
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
+  const { method, url } = req;
+  console.log(method, url);
   const filePath = path.join(__dirname, 'public', 'home.html');
   res.status(200).sendFile(filePath);
 })
 
+app.post('/', (req, res) => {
+  const { method, url } = req;
+  console.log(method, url);
+  res.redirect('/');
+})
+
 app.get('/join', (req,res) => {
+  const { method, url } = req;
   const filePath = path.join(__dirname, 'public', 'join.html');
   res.status(200).sendFile(filePath);
+  console.log(method, url);
 })
 
 app.listen(PORT, () => {
