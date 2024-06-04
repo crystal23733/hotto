@@ -16,12 +16,12 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   const filePath = path.join(__dirname, 'public', 'home.html');
-  res.sendFile(filePath);
+  res.status(200).sendFile(filePath);
 })
 
 app.get('/join', (req,res) => {
   const filePath = path.join(__dirname, 'public', 'join.html');
-  res.sendFile(filePath);
+  res.status(200).sendFile(filePath);
 })
 
 app.listen(PORT, () => {
