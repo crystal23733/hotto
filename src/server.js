@@ -6,100 +6,24 @@ import path from 'path';
 
 const PORT = 8080;
 
+// *작업중인 디렉토리를 변수로 할당
 const __dirname = path.resolve();
 
 const app = express();
 
-app.set(express.static(path.join(__dirname, '/public')));
+// *css나 js같은 정적 파일을 폴더에서 전달할 수 있는지 확인하는 모든 수신 요청을 받아들이는 미들웨어. 파라미터로는 정적 파일에 대한 폴더 이름을 받는다.
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  const {method, url} = req;
-  console.log(method, url);
-  res.sendFile(path.join(__dirname, './public/home.html'));
+  const filePath = path.join(__dirname, 'public', 'home.html');
+  res.sendFile(filePath);
+})
+
+app.get('/join', (req,res) => {
+  const filePath = path.join(__dirname, 'public', 'join.html');
+  res.sendFile(filePath);
 })
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 })
-
-// const mimeType = {
-//   '.html' : 'text/html',
-//   '.css' : 'text/css',
-//   '.js' : 'application/javascript',
-//   '.json' : 'application/json',
-//   '.ico' : 'image/x-icon'
-// }
-
-// const fileUtils = {
-//   getFilePath : (fileUrl) => {
-//     if(fileUrl === '/'){
-//       fileUrl = './public/home.html';
-//     } else if(fileUrl === '/join'){
-//       fileUrl = './public/join.html';
-//     } else {
-//       fileUrl = `./public${fileUrl}`;
-//     }
-//     return fileUrl;
-//   },
-//   getFileExtention : (filePath) => {
-//     let ext = path.extname(filePath);
-//     return ext.toLowerCase();
-//   },
-//   getFileContent : (ext) => {
-//     if(mimeType.hasOwnProperty(ext)){
-//       return mimeType[ext];
-//     } else {
-//       return 'text/plain';
-//     }
-//   }
-// }
-
-// const server = http.createServer((req, res) => {
-//   const { method, url } = req;
-//   let filePath = fileUtils.getFilePath(url);
-//   let fileExt = fileUtils.getFileExtention(filePath);
-//   let fileContent = fileUtils.getFileContent(fileExt);
-//   // console.log(filePath, fileExt, fileContent);
-//   console.log(method, url);
-//   if(method === 'GET'){
-//     fs.readFile(filePath, (err, data) => {
-//       if(err){
-//         if(err.code === 'ENOENT'){
-//           res.writeHead(404, {'Content-type' : 'text/plain; charset=utf-8'});
-//           res.end('페이지를 찾을 수 없음');
-//         } else {
-//           res.writeHead(500, {'Content-type' : 'text/plain; charset=utf-8'});
-//           res.end('서버에러');
-//         }
-//       } else {
-//           res.writeHead(200, {'Content-type' : fileContent});
-//           res.end(data);
-//       }
-//     })
-//   } else if(method === 'POST'){
-//     if(url === '/'){
-//       let body = '';
-//       req.on('data', (chunk) => {
-//         body += chunk.toString();
-//       });
-//       req.on('end', () => {
-//         const params = new URLSearchParams(body);
-//         fs.readFile('./public/home.html', (err, data) => {
-//           if(err){
-//             if(err.code === 'ENOENT'){
-//               res.writeHead(404, {'Content-type' : 'text/plain; charset=utf-8'});
-//               res.end('페이지를 찾을 수 없음');
-//             } else {
-//               res.writeHead(500, {'Content-type' : 'text/plain; charset=utf-8'});
-//               res.end('서버에러');
-//             }
-//           } else {
-//             res.writeHead(200, {'Content-type' : 'text/html'});
-//             res.end(data);
-//           }
-//         })
-//       })
-//     }
-//   }
-// })
-
