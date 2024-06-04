@@ -2,8 +2,7 @@
 // todo express 대체하기
 // todo 서버 모듈화 진행
 import express from 'express';
-import path from 'path';
-import rootRouter from './routers/rootRouter';
+import rootRouter from './routers/rootRouter.js';
 
 const PORT = 8080;
 
