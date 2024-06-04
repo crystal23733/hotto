@@ -6,6 +6,11 @@ export const getHome = (req, res) => {
   return res.status(200).sendFile(filePath);
 }
 
-export const postHome = (req, res) => {
-  return res.redirect('/');
+export const getJoin = (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'join.html');
+  return res.status(200).sendFile(filePath);
+}
+
+export const postJoin = (req, res) => {
+  return res.status(302).redirect('/');
 }

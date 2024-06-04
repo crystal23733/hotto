@@ -13,13 +13,6 @@ app.use(express.static('public'));
 
 app.use('/', rootRouter);
 
-// app.get('/join', (req,res) => {
-//   const { method, url } = req;
-//   const filePath = path.join(__dirname, 'public', 'join.html');
-//   res.status(200).sendFile(filePath);
-//   console.log(method, url);
-// })
-
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 })
