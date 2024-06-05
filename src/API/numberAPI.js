@@ -1,17 +1,43 @@
 import https from 'https';
-import { __dirname } from '../modules/findDirectory.js';
-import path from 'path';
-// *JSON파일 또한 필요하여 파일을 만들기 위한 fs
 import fs from 'fs';
+import path from 'path';
+import { __dirname } from '../modules/findDirectory.js';
 
-const lottoAPIFunc = () => {
+// const numberAPI = () => {
+//   let time = 1122;
+//   for(let i = 1; i <= time; i++){
+//     let url = `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=+${i}`;
+//     https.get(url, (res) => {
+//       let body = '';
+//       res.on('data', (data) => {
+//         body += data.toString();
+//         fs.writeFile(path.join(__dirname, `/public/js/API/historyNumber/history${i}.json`), body, (err) => {
+//           if(err){
+//             throw new Error('데이터를 생성할 수 없습니다.');
+//           }
+//           console.log('데이터를 성공적으로 생성하였습니다.');
+//         })
+//       });
+//     })
+//   }
+// }
 
-  const lottoAPI = `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=+1`;
-  https.get(lottoAPI, (res) => {
-    res.on('data', (data) => {
-      const numAPI = JSON.parse(data);
-      // fs.writeFile(path.join(__dirname, 'public/js/API/historyNumber/'))
-      console.log(numAPI);
-    })
-  })
-}
+// numberAPI();
+
+// const numberAPI = () => {
+//   let url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=+1';
+//   https.get(url, (res) => {
+//     let body = '';
+//     res.on('data', (data) => {
+//       body += data.toString();
+//       // fs.writeFile(path.join(__dirname, '/public/js/API/historyNumber/history1.json'), body, (err) => {
+//       //   if(err){
+//       //     throw new Error('데이터를 생성할 수 없습니다.');
+//       //   }
+//       //   console.log('데이터를 성공적으로 생성하였습니다.');
+//       // })
+//     })
+//   })
+// }
+
+// numberAPI();
