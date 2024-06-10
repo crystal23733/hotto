@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "easy roulette",
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crystal23733/Roulette.git"
+    "url": "git+https://github.com/crystal23733/lotto.git"
   },
   "author": "hoyeong Yoo<crystal33733@gmail.com, crystal_237@naver.com>",
   "license": "MIT",
