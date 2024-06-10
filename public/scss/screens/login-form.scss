@@ -1,0 +1,25 @@
+@use '../components/display.scss';
+@use '../components/height.scss';
+
+#login-form{
+  @include display.flex(column, center, center);
+  height: 100vh - height.$header-height - height.$menu-height;
+  width: 100%;
+  & > div{
+    @include display.flex(row, center, center);
+    width: 100%;
+    padding: 20px;
+    & > label{
+      width: 100px;
+      text-align: end;
+      padding-right: 5px;
+    }
+  }
+  & > input{
+    padding: 20px;
+    border: none;
+    background-color: #0D99FF;
+    border-radius: 20px;
+    color: white;
+  }
+}
