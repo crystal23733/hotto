@@ -9,7 +9,6 @@ export const thisNumText = () => {
   xhr.send();
   xhr.onload = () => {
     if(xhr.status === 200){
-      const data = JSON.parse(xhr.response);
       console.log(data);
       thisNumber.one.textContent = data.drwtNo1;
       thisNumber.two.textContent = data.drwtNo2;
