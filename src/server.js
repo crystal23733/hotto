@@ -2,6 +2,7 @@
 // todo express 대체하기
 // todo 서버 모듈화 진행
 import express from 'express';
+import { __dirname } from './modules/findDirectory.js';
 import rootRouter from './routers/rootRouter.js';
 
 const app = express();

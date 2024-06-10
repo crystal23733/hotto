@@ -6,4 +6,4 @@ import { thisWeekNumber } from "./modules/selector.js";
 numberID(thisWeekNumber.children);
 
 // *번호별 색깔 함수
-// thisNumText();
+thisNumText();
