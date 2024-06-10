@@ -2,7 +2,7 @@ import { thisNumber } from "../../selector.js";
 import { numberColor } from "./numberColor.js";
 
 // *최근 회차를 불러오는 함수
-export const thisNumText = (color) => {
+export const thisNumText = () => {
   const xhr = new XMLHttpRequest();
   const url = '/public/js/API/historyNumber/history1123.json';
   xhr.open('GET', url);
