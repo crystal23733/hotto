@@ -15,7 +15,7 @@ export const numberID = (week) => {
         continue;
       }
     }
-  } 
+  };
 }
 
 // todo 번호마다 id 붙이기
