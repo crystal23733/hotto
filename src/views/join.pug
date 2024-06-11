@@ -4,23 +4,23 @@ block link
 block content
   form(id='join-form', method='POST') 
     div 
-      label(for="name") 
-      input(type="text", required, name='name', placeholder='이름', minlength='2')#name
+      label(for="name") 아이디
+      input(type="text", required, name='name', placeholder='아이디', minlength='2')#name
       div#name-box
     div 
-      label(for="email") 
+      label(for="email") 이메일
       input(type="email", required, name='email', placeholder='이메일')#email
       div#email-box
     div 
-      label(for="password") 
+      label(for="password") 비밀번호
       input(type="password", required, name='password', placeholder='비밀번호', minlength='5')#password
       div#password-box
     div 
-      label(for="checkPassword") 
+      label(for="checkPassword") 비밀번호 확인
       input(type="password", required, name='checkPassword', placeholder='비밀번호 확인', minlength='5')#checkPassword
       div#checkPassword-box
     div 
-      label(for="phone") 
+      label(for="phone") 전화번호
       input(type="number", required, name='phone', placeholder='전화번호')#phone
       div#phone-box
     input(type="submit", value='회원가입')
