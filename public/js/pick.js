@@ -8,7 +8,10 @@ const randomNumber = () => {
   }
   let random = [];
   for(let i = 1; i <= 6; i++){
-    const randomPick = Math.ceil(Math.random() * number.length);
+    if(random.includes(randomPick) === true){
+      let randomPick = Math.ceil(Math.random() * number.length);
+      random.push(randomPick);
+    }
     random.push(randomPick);
   }
   console.log(random);
