@@ -1,9 +1,9 @@
 export const home = (req, res) => {
-  return res.status(200).render('home');
+  return res.status(200).render('home', {pageTitle : 'Home'});
 }
 
 export const getJoin = (req, res) => {
-  return res.status(200).render('join');
+  return res.status(200).render('join', {pageTitle : 'Join'});
 }
 
 export const postJoin = (req, res) => {
@@ -11,7 +11,7 @@ export const postJoin = (req, res) => {
 }
 
 export const getLogin = (req, res) => {
-  return res.status(200).render('login');
+  return res.status(200).render('login', {pageTitle : 'Login'});
 }
 
 export const postLogin = (req, res) => {
