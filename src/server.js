@@ -4,6 +4,7 @@
 import express from 'express';
 import { __dirname } from './modules/findDirectory.js';
 import rootRouter from './routers/rootRouter.js';
+import contentRouter from './routers/contentRouter.js';
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended : true}));
 
 app.use('/', rootRouter);
+app.use('/content', contentRouter);
 
 export default app;
