@@ -6,7 +6,12 @@ const randomNumber = () => {
   for(let i = 1; i <= 45; i++){
     number.push(i);
   }
-  console.log(number);
+  let random = [];
+  for(let i = 1; i <= 6; i++){
+    const randomPick = Math.ceil(Math.random() * number.length);
+    random.push(randomPick);
+  }
+  console.log(random);
 }
 
 randomNumber();
