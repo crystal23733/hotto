@@ -10,11 +10,10 @@ export const postJoin = (req, res) => {
   return res.status(302).redirect('/');
 }
 
-// export const getLogin = (req, res) => {
-//   const filePath = path.join(__dirname, 'public', 'login.html');
-//   return res.status(200).sendFile(filePath);
-// }
+export const getLogin = (req, res) => {
+  return res.status(200).render('login');
+}
 
-// export const postLogin = (req, res) => {
-//   return res.status(302).redirect('/');
-// }
+export const postLogin = (req, res) => {
+  return res.status(302).redirect('/');
+}

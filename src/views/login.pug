@@ -1,4 +1,12 @@
 extends layout 
 block link
   link(rel="stylesheet", href="./css/login.css")
-  
+block content
+  form(action="/", id='login-form') 
+    div 
+      label(for="email") 이메일
+      input(type="email", placeholder='이메일', name='email', id='email')
+    div 
+      label(for="password") 비밀번호
+      input(type="password", placeholder='비밀번호', name='password', id='password')
+    input(type="submit", value='로그인')
