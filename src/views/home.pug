@@ -1,9 +1,54 @@
-doctype html
-html(lang="kr")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title 호또
-    link(rel="stylesheet", href="/public/css/home.css")
-    script(src="https://kit.fontawesome.com/8809ab29cc.js", crossorigin="anonymous")
-  body 
+extends layout
+block link
+  link(rel="stylesheet", href="./css/home.css")
+block content
+  div#header
+    h1
+      a(href='/') hotto 
+    div#login-section
+      a(href='/login') 로그인
+      a(href='/join') 회원가입
+  nav#menu
+    ul#menu-list
+      li 
+        a(href='') 예상번호 돌리기
+      li 
+        a(href='') 회차별 당첨번호
+      li 
+        a(href='') 운세
+  div#this-week
+    div#this-week__header
+      h1 금주 당첨번호
+    div#this-week__number
+      div 
+      div 
+      div 
+      div 
+      div 
+      div 
+      p 
+        i.fa-solid.fa-plus
+      div 
+  div#content-box
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+    div 
+      a(href='') 게시글입니다.
+block script 
+  script(src='/js/thisWeek.js', type='module')

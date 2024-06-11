@@ -1,10 +1,11 @@
 import express from 'express';
-import { getHome, getJoin, getLogin, postJoin, postLogin } from '../controllers/rootController.js';
+import { home } from '../controllers/rootController.js';
+
 
 const rootRouter = express.Router();
 
-rootRouter.get('/', getHome);
-rootRouter.route('/join').get(getJoin).post(postJoin);
-rootRouter.route('/login').get(getLogin).post(postLogin);
+rootRouter.get('/', home);
+// rootRouter.route('/join').get(getJoin).post(postJoin);
+// rootRouter.route('/login').get(getLogin).post(postLogin);
 
 export default rootRouter;
