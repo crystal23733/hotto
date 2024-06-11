@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPick } from '../controllers/contentController';
+import { getPick } from '../controllers/contentController.js';
 
 const contentRouter = express.Router();
 
