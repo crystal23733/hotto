@@ -1,6 +1,5 @@
 // *숫자별 색상 할당 함수
-
-import { numberAll } from "../../selector.js";
+import { numberAll } from "../../selectors/weekNumSelec.js";
 
 export const numberColor = () => {
   numberAll.homeNumber.forEach((child) => {

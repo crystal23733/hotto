@@ -1,6 +1,6 @@
 import data from '../../../API/historyNumber/history1123.json' with {type : 'json'};
 
-import { thisNumber } from "../../selector.js";
+import { thisNumber } from '../../selectors/weekNumSelec.js';
 import { numberColor } from "./numberColor.js";
 
 // *최근 회차를 불러오는 함수

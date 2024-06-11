@@ -1,7 +1,7 @@
 // todo DB연결 전까지 회원정보 스토리지나 POST처리로 json파일에 담아놓기
 
 import { USERNAME_KEY } from "../../KEY.js";
-import { join, joinForm } from "../../selector.js";
+import { join } from "../../selectors/joinSelec.js";
 
 // *회원가입 성공시 실행될 함수
 export const joinSuccess = () => {
@@ -26,4 +26,3 @@ export const joinFail = (event) => {
   p.style.color = 'red';
   p.textContent = '입력한 정보가 유효하지 않습니다.';
 }
-// joinForm.addEventListener('submit', joinSuccess);
