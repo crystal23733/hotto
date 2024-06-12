@@ -18,7 +18,6 @@ const randomNumber = () => {
   while (random.length < 6) {
     repPick(number, random);
   }
-  console.log(random);
 
   numberEach(numberListArr, random);
 };
