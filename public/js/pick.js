@@ -13,7 +13,6 @@ const randomNumber = () => {
   while (random.length < 6) {
     repPick(number, random);
   }
-  console.log(random.sort());
 };
 
 // *조합이 겹칠 경우 뽑기 반복하는 함수
@@ -24,6 +23,7 @@ const repPick = (number, random) => {
     repPick(number, random);
   } else {
     random.push(randomPick);
+    random.sort((a, b) => a - b);
   }
 };
 

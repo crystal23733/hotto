@@ -1,0 +1,40 @@
+@use '../components/display.scss';
+@use '../components/height.scss';
+@use '../components/font.scss';
+
+%rowFlex {
+  @include display.flex(row, center, center);
+}
+
+#number {
+  @include display.flex(column, center, center);
+  height: 100 - height.$header-height - height.$menu-height;
+  & > #number__header {
+    @extend %rowFlex;
+    font-size: font.$sub-size;
+    font-weight: font.$sub-weight;
+    height: 10vh;
+  }
+  & > #number__list {
+    @extend %rowFlex;
+    font-size: font.$title-size;
+    font-weight: font.$title-weight;
+    height: 100%;
+    width: 100%;
+    color: white;
+    & > div {
+      width: 100px;
+      height: 100px;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 50%;
+      text-align: center;
+      align-content: center;
+    }
+  }
+  & > input {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #0d99ff;
+  }
+}

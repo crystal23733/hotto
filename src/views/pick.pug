@@ -4,14 +4,16 @@ block link
   link(rel="stylesheet", href="/css/pick.css")
 
 block content
-  div 
-    div#number-list
+  div#number
+    div#number__header
+      header 번호 생성
+    div#number__list
       div 
       div 
       div 
       div 
       div 
       div 
-    input(type="submit", value='번호 뽑기')
+    input(type="submit", value='번호 생성')
 block script
   script(src='/js/pick.js', type='module')

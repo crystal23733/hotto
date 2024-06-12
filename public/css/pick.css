@@ -67,3 +67,44 @@ a {
   color: white;
   text-align: center;
 }
+
+#number > #number__list, #number > #number__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+#number > #number__header {
+  font-size: 25px;
+  font-weight: 600;
+  height: 10vh;
+}
+#number > #number__list {
+  font-size: 40px;
+  font-weight: 900;
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+#number > #number__list > div {
+  width: 100px;
+  height: 100px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 50%;
+  text-align: center;
+  align-content: center;
+}
+#number > input {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #0d99ff;
+}
