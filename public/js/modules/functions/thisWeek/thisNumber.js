@@ -1,6 +1,6 @@
 import data from '../../../API/history/history1123.json' with {type : 'json'};
 
-import { thisNumber } from '../../selectors/weekNumSelec.js';
+import { numberAll, thisNumber } from '../../selectors/weekNumSelec.js';
 import { numberColor } from './numberColor.js';
 
 // *최근 회차를 불러오는 함수
@@ -12,5 +12,5 @@ export const thisNumText = () => {
   thisNumber.five.textContent = data.drwtNo5;
   thisNumber.six.textContent = data.drwtNo6;
   thisNumber.bonus.textContent = data.bnusNo;
-  numberColor();
+  numberColor(numberAll.homeNumber);
 };

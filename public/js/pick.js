@@ -3,6 +3,7 @@
 // *random번호를 뽑기위한 함수
 
 import { repPick } from './modules/functions/pick/repPick.js';
+import { numberEach } from './modules/functions/pick/text.js';
 import { numberListArr } from './modules/selectors/pickSelec.js';
 // *랜덤 번호를 지정해주는 함수
 const randomNumber = () => {
@@ -18,11 +19,8 @@ const randomNumber = () => {
     repPick(number, random);
   }
   console.log(random);
-  numberListArr.forEach((child, index) => {
-    console.log(child);
-    child.textContent = random[index];
-    child.style.color = 'black';
-  });
+
+  numberEach(numberListArr, random);
 };
 
 randomNumber();
