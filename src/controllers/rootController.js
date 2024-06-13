@@ -9,7 +9,10 @@ export const getJoin = (req, res) => {
 };
 
 export const postJoin = async (req, res) => {
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, checkPassword, phone } = req.body;
+  if (password !== checkPassword) {
+    return res.status(400).render('join', { pageTitle: 'Join' });
+  }
   await User.create({
     name: name,
     email: email,

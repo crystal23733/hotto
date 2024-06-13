@@ -3,8 +3,7 @@
 export const joinSuccess = () => {};
 
 // *회원가입 실패시 실행될 함수
-export const joinFail = (event) => {
-  event.preventDefault();
+export const joinFail = () => {
   console.error('입력한 정보가 유효하지 않습니다.');
   const p = document.createElement('p');
   joinForm.appendChild(p);
