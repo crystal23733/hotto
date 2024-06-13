@@ -1,6 +1,7 @@
-import { repPick } from './modules/functions/pick/repPick.js';
-import { numberEach } from './modules/functions/pick/text.js';
-import { numberListArr } from './modules/selectors/pickSelec.js';
+import { numberListArr } from '../selectors/pickSelec.js';
+import { repPick } from './pick/repPick.js';
+import { numberEach } from './pick/text.js';
+
 // *랜덤 번호를 지정해주는 함수
 export const randomNumber = () => {
   // *1~45 번까지 저장하는 배열
