@@ -16,13 +16,17 @@ export const postJoin = async (req, res) => {
       errmsg: '비밀번호가 동일하지 않습니다.',
     });
   }
-  await User.create({
-    name: name,
-    email: email,
-    password: password,
-    phone: phone,
-  });
-  return res.status(201).redirect('/');
+  const user = await User.find({});
+  console.log(user);
+  try {
+    await User.create({
+      name: name,
+      email: email,
+      password: password,
+      phone: phone,
+    });
+    return res.status(201).redirect('/');
+  } catch {}
 };
 
 export const getLogin = (req, res) => {

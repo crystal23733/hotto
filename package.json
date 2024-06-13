@@ -1,7 +1,7 @@
 {
   "name": "lotto",
   "version": "1.0.0",
-  "description": "easy roulette",
+  "description": "easy lotto",
   "scripts": {
     "dev": "nodemon --exec babel-node src/init.js"
   },
@@ -12,9 +12,9 @@
   "author": "hoyeong Yoo<crystal33733@gmail.com, crystal_237@naver.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/crystal23733/Roulette/issues"
+    "url": "https://github.com/crystal23733/lotto/issues"
   },
-  "homepage": "https://github.com/crystal23733/Roulette#readme",
+  "homepage": "https://github.com/crystal23733/lotto#readme",
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/node": "^7.23.9",
