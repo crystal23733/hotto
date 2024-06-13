@@ -1,16 +1,6 @@
-import { join } from '../../selectors/joinSelec.js';
-
 // *회원가입 성공시 실행될 함수
-export const joinSuccess = () => {
-  // *회원 정보 오브젝트에 담기
-  const joinObj = {
-    name: join.name.value,
-    email: join.email.value,
-    password: join.password.value,
-    checkPassword: join.checkPassword.value,
-    phone: join.phone.value,
-  };
-};
+// *DB로 옮겨서 빈 함수임.
+export const joinSuccess = () => {};
 
 // *회원가입 실패시 실행될 함수
 export const joinFail = (event) => {
