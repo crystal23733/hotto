@@ -11,7 +11,10 @@ export const getJoin = (req, res) => {
 export const postJoin = async (req, res) => {
   const { name, email, password, checkPassword, phone } = req.body;
   if (password !== checkPassword) {
-    return res.status(400).render('join', { pageTitle: 'Join' });
+    return res.status(400).render('join', {
+      pageTitle: 'Join',
+      errmsg: '비밀번호가 동일하지 않습니다.',
+    });
   }
   await User.create({
     name: name,

@@ -23,6 +23,8 @@ block content
       label(for="phone") 전화번호
       input(type="number", required, name='phone', placeholder='전화번호')#phone
       div#phone-box
+    if errmsg
+      p#errmsg=errmsg
     input(type="submit", value='회원가입')
 block script 
   script(src='/js/join.js', type='module')

@@ -29,10 +29,13 @@
   margin-left: 5px;
   border-radius: 5px;
 }
+#join-form > p {
+  color: red;
+}
 #join-form > input {
   padding: 20px;
   border: none;
-  background-color: #0D99FF;
+  background-color: #0d99ff;
   border-radius: 20px;
   color: white;
 }
