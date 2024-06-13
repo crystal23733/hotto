@@ -2,3 +2,4 @@
 .vscode
 /public/js/API/*
 .prettierrc
+db.js
