@@ -2,3 +2,5 @@
 const numberList = document.getElementById('number__list');
 
 export const numberListArr = [...numberList.children];
+
+export const createBtn = document.getElementById('create');
