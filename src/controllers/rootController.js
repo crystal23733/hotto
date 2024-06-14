@@ -30,8 +30,7 @@ export const postJoin = async (req, res) => {
       errmsg: '전화번호 양식이 유효하지 않습니다.',
     });
   }
-  const user = await User.find({});
-  console.log(user);
+  const existsUser = await User.find({ name, email, phone });
   try {
     await User.create({
       name: name,
@@ -40,7 +39,16 @@ export const postJoin = async (req, res) => {
       phone: phone,
     });
     return res.status(201).redirect('/');
-  } catch {}
+  } catch (error) {
+    if (existsUser) {
+      return res
+        .status(400)
+        .render('join', {
+          pageTitle: 'Join',
+          errmsg: '아이디 or 이메일 or 전화번호가 존재합니다.',
+        });
+    }
+  }
 };
 
 export const getLogin = (req, res) => {
