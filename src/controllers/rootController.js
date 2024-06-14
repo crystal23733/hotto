@@ -10,6 +10,7 @@ export const getJoin = (req, res) => {
   return res.status(200).render('join', { pageTitle: 'Join' });
 };
 
+// todo 각 정보마다 존재할 시 실패로 할당 필요
 export const postJoin = async (req, res) => {
   const { name, email, password, checkPassword, phone } = req.body;
   if (conditional.emailCon(email) === false) {
@@ -30,7 +31,9 @@ export const postJoin = async (req, res) => {
       errmsg: '전화번호 양식이 유효하지 않습니다.',
     });
   }
-  const existsUser = await User.find({ name, email, phone });
+  const existsName = await User.find({ name });
+  const existsEmail = await User.find({ email });
+  const existsPhone = await User.find({ phone });
   try {
     await User.create({
       name: name,
@@ -40,13 +43,23 @@ export const postJoin = async (req, res) => {
     });
     return res.status(201).redirect('/');
   } catch (error) {
-    if (existsUser) {
-      return res
-        .status(400)
-        .render('join', {
-          pageTitle: 'Join',
-          errmsg: '아이디 or 이메일 or 전화번호가 존재합니다.',
-        });
+    if (existsName) {
+      return res.status(400).render('join', {
+        pageTitle: 'Join',
+        errmsg: '아이디가 이미 존재합니다.',
+      });
+    }
+    if (existsEmail) {
+      return res.status(400).render('join', {
+        pageTitle: 'Join',
+        errmsg: '이메일이 이미 존재합니다.',
+      });
+    }
+    if (existsPhone) {
+      return res.status(400).render('join', {
+        pageTitle: 'Join',
+        errmsg: '전화번호가 이미 존재합니다.',
+      });
     }
   }
 };
