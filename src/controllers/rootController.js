@@ -32,12 +32,9 @@ export const postJoin = async (req, res) => {
     });
   }
   console.log(name, email, phone);
-  const existsName = await User.find({ name });
-  const existsEmail = await User.find({ email });
-  const existsPhone = await User.find({ phone });
-  console.log(existsName);
-  console.log(existsEmail);
-  console.log(existsPhone);
+  const existsName = await User.exists({ name });
+  const existsEmail = await User.exists({ email });
+  const existsPhone = await User.exists({ phone });
   try {
     await User.create({
       name: name,
