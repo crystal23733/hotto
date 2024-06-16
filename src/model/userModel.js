@@ -12,7 +12,7 @@ const userSchema = new Schema({
   },
   email: { type: String, required: true, unique: true, trim: true },
   password: { type: String, required: true, trim: true, minlength: 5 },
-  phone: { type: Number, required: true, unique: true, trim: true },
+  phone: { type: String, required: true, unique: true, trim: true },
 });
 
 const User = mongoose.model('User', userSchema);
