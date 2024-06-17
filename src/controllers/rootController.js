@@ -10,7 +10,6 @@ export const getJoin = (req, res) => {
   return res.status(200).render('join', { pageTitle: 'Join' });
 };
 
-// todo 각 정보마다 존재할 시 실패로 할당 필요
 export const postJoin = async (req, res) => {
   const JOIN = 'Join';
   const { name, email, password, checkPassword, phone } = req.body;
