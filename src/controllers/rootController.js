@@ -12,26 +12,26 @@ export const getJoin = (req, res) => {
 
 // todo 각 정보마다 존재할 시 실패로 할당 필요
 export const postJoin = async (req, res) => {
+  const JOIN = 'Join';
   const { name, email, password, checkPassword, phone } = req.body;
   if (conditional.emailCon(email) === false) {
     return res.status(400).render('join', {
-      pageTitle: 'Join',
+      pageTitle: JOIN,
       errmsg: '이메일 양식이 유효하지 않습니다.',
     });
   }
   if (password !== checkPassword) {
     return res.status(400).render('join', {
-      pageTitle: 'Join',
+      pageTitle: JOIN,
       errmsg: '비밀번호가 동일하지 않습니다.',
     });
   }
   if (conditional.phoneCon(phone) === false) {
     return res.status(400).render('join', {
-      pageTitle: 'Join',
+      pageTitle: JOIN,
       errmsg: '전화번호 양식이 유효하지 않습니다.',
     });
   }
-  console.log(name, email, phone);
   const existsName = await User.exists({ name });
   const existsEmail = await User.exists({ email });
   const existsPhone = await User.exists({ phone });
@@ -46,17 +46,17 @@ export const postJoin = async (req, res) => {
   } catch (error) {
     if (existsName) {
       return res.status(400).render('join', {
-        pageTitle: 'Join',
+        pageTitle: JOIN,
         errmsg: '아이디가 이미 존재합니다.',
       });
     } else if (existsEmail) {
       return res.status(400).render('join', {
-        pageTitle: 'Join',
+        pageTitle: JOIN,
         errmsg: '이메일이 이미 존재합니다.',
       });
     } else if (existsPhone) {
       return res.status(400).render('join', {
-        pageTitle: 'Join',
+        pageTitle: JOIN,
         errmsg: '전화번호가 이미 존재합니다.',
       });
     }
