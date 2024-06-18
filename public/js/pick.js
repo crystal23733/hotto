@@ -7,3 +7,5 @@ import { randomNumber } from './modules/functions/randonNumber.js';
 import { createBtn } from './modules/selectors/pickSelec.js';
 
 createBtn.addEventListener('click', randomNumber);
+
+console.log(numberOption);
