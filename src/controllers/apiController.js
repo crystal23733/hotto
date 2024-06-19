@@ -1,30 +1,13 @@
-import path from 'path';
-import { __dirname } from '../modules/findDirectory.js';
-import fs from 'fs';
+import { lottoDataFunc } from '../API/lottoDataFunc.js';
 
 export const getLottoData = (req, res) => {
-  const lottoData = [];
-  for (let i = 1; i <= 1124; i++) {
-    const filePath = path.join(
-      __dirname,
-      `public/js/API/history/history${i}.json`,
-    );
-    console.log(filePath);
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-      if (err) {
-        console.error(err);
-      }
-      const jsonData = JSON.parse(data);
-      const drawNumbers = [
-        jsonData.drwtNo1,
-        jsonData.drwtNo2,
-        jsonData.drwtNo3,
-        jsonData.drwtNo4,
-        jsonData.drwtNo5,
-        jsonData.drwtNo6,
-      ];
-      lottoData.push(drawNumbers);
-      console.log(lottoData);
-    });
+  try {
+    const data = lottoDataFunc();
+    return res.json(data);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ error: '데이터를 읽어오는데에 실패하였습니다.' });
   }
 };
