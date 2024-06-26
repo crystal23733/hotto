@@ -5,7 +5,7 @@ import { __dirname } from '../modules/findDirectory.js';
 
 // !트래픽 초과 방지를 위해 일정한 시간마다 데이터 생성
 const numberAPI = () => {
-  let i = 1124;
+  let i = 1125;
   const autoDataCreate = setInterval(() => {
     let url = `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=+${i}`;
     console.log(i, url);
@@ -26,7 +26,7 @@ const numberAPI = () => {
         );
       });
     });
-    if (i === 1124) {
+    if (i === 1125) {
       clearInterval(autoDataCreate);
     }
   }, 7000);

@@ -3,14 +3,15 @@ import fs from 'fs';
 import path from 'path';
 import { __dirname } from '../modules/findDirectory.js';
 
-export const lottoDataFunc = () => {
+const HISTORY_DIR = path.join(__dirname, 'public/js/API/history');
+
+export const lottoDataFunc = async () => {
   const lottoData = [];
   for (let i = 1; i <= 1124; i++) {
     const filePath = path.join(
       __dirname,
       `public/js/API/history/history${i}.json`,
     );
-    console.log(filePath);
     fs.readFile(filePath, 'utf-8', (err, data) => {
       if (err) {
         console.error(err);
@@ -25,7 +26,6 @@ export const lottoDataFunc = () => {
         jsonData.drwtNo6,
       ];
       lottoData.push(drawNumbers);
-      return lottoData;
     });
   }
 };
