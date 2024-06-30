@@ -3,3 +3,4 @@
 /public/js/API/*
 .prettierrc
 .env
+/public/css

@@ -1,9 +1,7 @@
-import { numberListArr } from '../selectors/pickSelec.js';
-import { repPick } from './pick/repPick.js';
-import { numberEach } from './pick/text.js';
+import repPick from './pick/repPick.js';
 
 // *랜덤 번호를 지정해주는 함수
-export const randomNumber = () => {
+export default () => {
   // *1~45 번까지 저장하는 배열
   let number = [];
   for (let i = 1; i <= 45; i++) {
@@ -15,6 +13,5 @@ export const randomNumber = () => {
   while (random.length < 6) {
     repPick(number, random);
   }
-
-  numberEach(numberListArr, random);
+  return random;
 };

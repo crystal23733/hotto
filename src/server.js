@@ -2,9 +2,10 @@
 // todo 서버 모듈화 진행
 import express from 'express';
 import morgan from 'morgan';
-import { __dirname } from './modules/findDirectory.js';
+import __dirname from './modules/__dirname.js';
 import rootRouter from './routers/rootRouter.js';
 import contentRouter from './routers/contentRouter.js';
+import apiRouter from './routers/apiRouter.js';
 
 const app = express();
 
@@ -17,5 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/', rootRouter);
 app.use('/content', contentRouter);
+// *api주소
+app.use('/api', apiRouter);
 
 export default app;
