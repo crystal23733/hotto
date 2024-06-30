@@ -2,7 +2,6 @@
 // todo 모듈화 필요
 // *random번호를 뽑기위한 함수
 
-import repPick from './modules/functions/pick/repPick.js';
 import { numberEach } from './modules/functions/pick/text.js';
 import randomNumber from './modules/functions/randonNumber.js';
 import { createBtn, numberListArr } from './modules/selectors/pickSelec.js';
