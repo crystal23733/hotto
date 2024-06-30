@@ -2,7 +2,7 @@
 // todo 서버 모듈화 진행
 import express from 'express';
 import morgan from 'morgan';
-import { __dirname } from './modules/findDirectory.js';
+import __dirname from './modules/__dirname.js';
 import rootRouter from './routers/rootRouter.js';
 import contentRouter from './routers/contentRouter.js';
 import apiRouter from './routers/apiRouter.js';

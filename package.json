@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "easy lotto",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init.js"
+    "server": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
