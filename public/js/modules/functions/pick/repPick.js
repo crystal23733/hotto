@@ -1,5 +1,5 @@
 // *조합이 겹칠 경우 뽑기 반복하는 함수
-export default (number, random) => {
+const repPick = (number, random) => {
   let randomPick = Math.ceil(Math.random() * number.length);
   if (random.includes(randomPick) === true) {
     repPick(number, random);
@@ -8,3 +8,5 @@ export default (number, random) => {
     random.sort((a, b) => a - b);
   }
 };
+
+export default repPick;

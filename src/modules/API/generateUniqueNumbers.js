@@ -1,5 +1,5 @@
 // * 중복되지 않는 새로운 번호를 조합하는 함수
-import { randomNumber } from '../../../public/js/modules/functions/randonNumber.js';
+import randomNumber from '../../../public/js/modules/functions/randonNumber.js';
 import loadHistory from './loadHistory.js';
 
 export default async () => {
