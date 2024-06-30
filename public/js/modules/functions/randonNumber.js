@@ -1,5 +1,5 @@
 import { numberListArr } from '../selectors/pickSelec.js';
-import { repPick } from './pick/repPick.js';
+import repPick from './pick/repPick.js';
 import { numberEach } from './pick/text.js';
 
 // *랜덤 번호를 지정해주는 함수
