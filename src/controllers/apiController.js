@@ -1,5 +1,7 @@
 import generateUniqueNumbers from '../modules/API/generateUniqueNumbers.js';
 
 export const getLottoData = async (req, res) => {
-  console.log(generateUniqueNumbers());
+  generateUniqueNumbers().then((history) => {
+    console.log(history);
+  });
 };
