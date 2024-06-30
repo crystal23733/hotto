@@ -1,3 +1,5 @@
+// ! 역대 당첨번호를 가져오기 위한 실행파일
+
 import https from 'https';
 import fs from 'fs';
 import path from 'path';
