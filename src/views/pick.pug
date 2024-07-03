@@ -1,7 +1,7 @@
 extends layout
 
 block link
-  link(rel="stylesheet", href="/css/pick.css")
+  link(rel="stylesheet", href="/public/css/pick.css")
 
 block content
   div#number
@@ -16,4 +16,4 @@ block content
       div 
     input(type="submit", value='번호 생성', id='create')
 block script
-  script(src='/js/pick.js', type='module')
+  script(src='/src/client/ts/pick.js', type='module')

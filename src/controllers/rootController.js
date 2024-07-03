@@ -1,5 +1,5 @@
 // *가입 정보의 양식이 유효한지 알기위해 불러온 함수
-import { conditional } from '../../public/js/modules/functions/join/joinCondition.js';
+import { conditional } from '../client/ts/modules/functions/join/joinCondition.js';
 import User from '../model/userModel.js';
 
 export const home = (req, res) => {
