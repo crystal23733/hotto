@@ -1,20 +1,26 @@
-module.exports = {
-  files: ['**/*.{js,jsx,ts,tsx}'],
-  parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
+import eslintPluginJs from "@eslint/js";
+import tseslint from "typescript-eslint";
+import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+import globals from "globals";
+
+export default [
+  {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2023,
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended', // React를 사용하는 경우
-    'plugin:@typescript-eslint/recommended', // TypeScript를 사용하는 경우
-    'prettier', // Prettier와 충돌되는 ESLint 규칙을 덮어쓰기 위한 설정
-  ],
-  plugins: ['react', '@typescript-eslint'],
-  rules: {
-    // 추가적인 규칙 설정 가능
-  },
-};
+  eslintPluginJs.configs.recommended, // @eslint/js에서 제공하는 추천 설정을 직접 배열에 추가합니다.
+  ...tseslint.configs.recommended,
+  pluginReactConfig,
+];

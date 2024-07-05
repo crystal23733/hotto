@@ -1,7 +1,7 @@
-import data from '../../../API/history/history1123.json' with {type : 'json'};
+import data from "../../../API/history/history1123.json" with { type: "json" };
 
-import { numberAll, thisNumber } from '../../selectors/weekNumSelec.js';
-import { thisWeekColor } from './thisWeekColor.js';
+import { numberAll, thisNumber } from "../../selectors/weekNumSelec.js";
+import { thisWeekColor } from "./thisWeekColor.js";
 
 // *최근 회차를 불러오는 함수
 export const thisNumText = () => {

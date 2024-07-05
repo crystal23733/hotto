@@ -4,7 +4,8 @@
   "description": "easy lotto",
   "scripts": {
     "dev:server": "nodemon --exec babel-node src/init.js",
-    "dev:build": "webpack"
+    "dev:build": "webpack",
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",

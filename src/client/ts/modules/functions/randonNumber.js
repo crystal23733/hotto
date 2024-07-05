@@ -1,4 +1,4 @@
-import repPick from './pick/repPick.js';
+import repPick from "./pick/repPick.js";
 
 // *랜덤 번호를 지정해주는 함수
 export default () => {
