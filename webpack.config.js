@@ -16,10 +16,10 @@ export default {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js', // 각 청크에 따라 파일명을 지정합니다.
+    filename: '[name].bundle.js',
     publicPath: '/',
   },
-  mode: 'development', // 또는 'production'
+  mode: 'development',
   module: {
     rules: [
       {
@@ -52,7 +52,7 @@ export default {
               },
             },
           },
-          'sass-loader',
+          'sass-loader', // sass-loader 추가
         ],
       },
     ],
