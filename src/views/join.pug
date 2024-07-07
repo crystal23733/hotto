@@ -1,6 +1,6 @@
 extends layout 
 block link
-  link(rel="stylesheet", href="./css/join.css")
+  link(rel="stylesheet", href="/dist/join.css")
 block content
   form(id='join-form', method='POST') 
     div 
@@ -27,4 +27,4 @@ block content
       p#errmsg=errmsg
     input(type="submit", value='회원가입')
 block script 
-  script(src='/js/join.js', type='module')
+  script(src='/dist/join.bundle.js', type='module')

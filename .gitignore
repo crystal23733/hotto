@@ -1,6 +1,7 @@
 /node_modules
 .vscode
-/public/js/API/*
 .prettierrc
 .env
 /public/css
+/dist
+*.json

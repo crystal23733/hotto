@@ -12,9 +12,9 @@ export const conditional = {
   },
   emailCon: (email) => {
     if (
-      email.endsWith('.com') ||
-      email.endsWith('.co.kr') ||
-      email.endsWith('.net')
+      email.endsWith(".com") ||
+      email.endsWith(".co.kr") ||
+      email.endsWith(".net")
     ) {
       return true;
     } else {
@@ -37,7 +37,7 @@ export const conditional = {
   },
   phoneCon: (p) => {
     if (p.length === 11) {
-      if (p.startsWith('010')) {
+      if (p.startsWith("010")) {
         return true;
       } else {
         return false;
