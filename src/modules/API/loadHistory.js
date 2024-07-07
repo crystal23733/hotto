@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import __dirname from "../__dirname.js";
 
-const HISTORY_DIR = path.join(__dirname, "public/js/API/history");
+const HISTORY_DIR = path.join(__dirname, "src/client/ts/API/history");
 
 export default async () => {
   const historyData = new Set();

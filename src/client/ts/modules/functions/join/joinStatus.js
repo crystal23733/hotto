@@ -1,7 +1,6 @@
-import { join, joinForm, joinStatusBox } from "../../selectors/joinSelec.js";
+import { join, joinStatusBox } from "../../selectors/joinSelec.js";
 import { statusSearch } from "../arrayOnOff.js";
-import { conditional, joinCondition } from "./joinCondition.js";
-import { joinFail, joinSuccess } from "./joinHandle.js";
+import { conditional } from "./joinCondition.js";
 
 // *status-box의 컬러와 최종적으로 status에 따라 회원가입을 핸들링 할 수 있는 함수
 export const statusCondition = () => {
