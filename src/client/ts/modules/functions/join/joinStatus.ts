@@ -3,10 +3,10 @@ import { statusSearch } from "../arrayOnOff.js";
 import { conditional } from "./joinCondition.js";
 
 // *status-box의 컬러와 최종적으로 status에 따라 회원가입을 핸들링 할 수 있는 함수
-export const statusCondition = () => {
+export const statusCondition = ():void => {
   // todo status배열 안의 모든 값이 true가 될 경우 가입 가능하게 할 것
-  let status = [false, false, false, false, false];
-  join.name.addEventListener("change", () => {
+  let status:boolean[] = [false, false, false, false, false];
+  join.name.addEventListener("change", ():void => {
     if (conditional.nameCon(join.name.value) === true) {
       joinStatusBox.name.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
@@ -15,7 +15,7 @@ export const statusCondition = () => {
       statusSearch.trueSearch(status);
     }
   });
-  join.email.addEventListener("change", () => {
+  join.email.addEventListener("change", ():void => {
     if (conditional.emailCon(join.email.value) === true) {
       joinStatusBox.email.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
@@ -24,7 +24,7 @@ export const statusCondition = () => {
       statusSearch.trueSearch(status);
     }
   });
-  join.password.addEventListener("change", () => {
+  join.password.addEventListener("change", ():void => {
     if (conditional.passwordLength(join.password.value) === true) {
       joinStatusBox.password.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
@@ -33,7 +33,7 @@ export const statusCondition = () => {
       statusSearch.trueSearch(status);
     }
   });
-  join.checkPassword.addEventListener("change", () => {
+  join.checkPassword.addEventListener("change", ():void => {
     if (
       conditional.passwordCon(join.password.value, join.checkPassword.value) ===
       true
@@ -45,7 +45,7 @@ export const statusCondition = () => {
       statusSearch.trueSearch(status);
     }
   });
-  join.phone.addEventListener("change", () => {
+  join.phone.addEventListener("change", ():void => {
     if (conditional.phoneCon(join.phone.value) === true) {
       joinStatusBox.phone.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
