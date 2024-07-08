@@ -43,7 +43,7 @@ export default {
         test: /\.scss$/,
         include: stylesPath,
         use: [
-          MiniCssExtractPlugin.loader,
+          "style-loader",
           "css-loader",
           {
             loader: "postcss-loader",
