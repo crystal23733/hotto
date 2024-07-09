@@ -1,56 +1,56 @@
 import { join, joinStatusBox } from "../../selectors/joinSelec";
-import { statusSearch } from "../arrayOnOff.js";
-import { conditional } from "./joinCondition.js";
+import { statusSearch } from "../arrayOnOff";
+import { conditional } from "./joinCondition";
 
+// todo 생성자 함수로 요약할 수 있도록 하기
 // *status-box의 컬러와 최종적으로 status에 따라 회원가입을 핸들링 할 수 있는 함수
 export const statusCondition = ():void => {
-  // todo status배열 안의 모든 값이 true가 될 경우 가입 가능하게 할 것
   let status:boolean[] = [false, false, false, false, false];
-  join.name.addEventListener("change", ():void => {
-    if (conditional.nameCon(join.name.value) === true) {
-      joinStatusBox.name.style.backgroundColor = "green";
+  join.name!.addEventListener("change", ():void => {
+    if (conditional.nameCon(join.name!.value) === true) {
+      joinStatusBox.name!.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
     } else {
-      joinStatusBox.name.style.backgroundColor = "red";
+      joinStatusBox.name!.style.backgroundColor = "red";
       statusSearch.trueSearch(status);
     }
   });
-  join.email.addEventListener("change", ():void => {
-    if (conditional.emailCon(join.email.value) === true) {
-      joinStatusBox.email.style.backgroundColor = "green";
+  join.email!.addEventListener("change", ():void => {
+    if (conditional.emailCon(join.email!.value) === true) {
+      joinStatusBox.email!.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
     } else {
-      joinStatusBox.email.style.backgroundColor = "red";
+      joinStatusBox.email!.style.backgroundColor = "red";
       statusSearch.trueSearch(status);
     }
   });
-  join.password.addEventListener("change", ():void => {
-    if (conditional.passwordLength(join.password.value) === true) {
-      joinStatusBox.password.style.backgroundColor = "green";
+  join.password!.addEventListener("change", ():void => {
+    if (conditional.passwordLength(join.password!.value) === true) {
+      joinStatusBox.password!.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
     } else {
-      joinStatusBox.password.style.backgroundColor = "red";
+      joinStatusBox.password!.style.backgroundColor = "red";
       statusSearch.trueSearch(status);
     }
   });
-  join.checkPassword.addEventListener("change", ():void => {
+  join.checkPassword!.addEventListener("change", ():void => {
     if (
-      conditional.passwordCon(join.password.value, join.checkPassword.value) ===
+      conditional.passwordCon(join.password!.value, join.checkPassword!.value) ===
       true
     ) {
-      joinStatusBox.checkPassword.style.backgroundColor = "green";
+      joinStatusBox.checkPassword!.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
     } else {
-      joinStatusBox.checkPassword.style.backgroundColor = "red";
+      joinStatusBox.checkPassword!.style.backgroundColor = "red";
       statusSearch.trueSearch(status);
     }
   });
-  join.phone.addEventListener("change", ():void => {
-    if (conditional.phoneCon(join.phone.value) === true) {
-      joinStatusBox.phone.style.backgroundColor = "green";
+  join.phone!.addEventListener("change", ():void => {
+    if (conditional.phoneCon(join.phone!.value) === true) {
+      joinStatusBox.phone!.style.backgroundColor = "green";
       statusSearch.falseSearch(status);
     } else {
-      joinStatusBox.phone.style.backgroundColor = "red";
+      joinStatusBox.phone!.style.backgroundColor = "red";
       statusSearch.trueSearch(status);
     }
   });
