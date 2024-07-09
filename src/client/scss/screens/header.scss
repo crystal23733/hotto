@@ -1,30 +1,29 @@
 @use "../components/font.scss";
 @use "../components/display.scss";
-@use '../components/height.scss';
+@use "../components/height.scss";
 
-%rowBeetwen{
-    @include display.flex(row, space-between, center);
+%rowBeetwen {
+  @include display.flex(row, space-between, center);
 }
 
-
-#header{
-    background-color: rgb(46, 45, 45);
-    height: height.$header-height;
+#header {
+  background-color: rgb(46, 45, 45);
+  height: height.$header-height;
+  @extend %rowBeetwen;
+  padding: 1vh;
+  & > h1 {
+    font-size: font.$title-size;
+    font-weight: font.$title-weight;
+    & > a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  & > #login-section {
     @extend %rowBeetwen;
-    padding: 1vh;
-    & > h1{
-        font-size: font.$title-size;
-        font-weight: font.$title-weight;
-        & > a{
-            text-decoration: none;
-            color: white;
-        }
+    & > a {
+      padding: 5px;
+      color: white;
     }
-    & > #login-section{
-        @extend %rowBeetwen;
-        & > a{
-            padding: 5px;
-            color: white;
-        }
-    }
+  }
 }

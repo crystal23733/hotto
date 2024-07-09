@@ -5,7 +5,8 @@
   "scripts": {
     "dev:server": "nodemon --exec babel-node src/init.js",
     "dev:build": "webpack",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,html,css,scss}\""
   },
   "repository": {
     "type": "git",

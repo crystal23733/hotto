@@ -1,24 +1,24 @@
-@use '../components/display.scss';
-@use '../components/height.scss';
+@use "../components/display.scss";
+@use "../components/height.scss";
 
-#login-form{
+#login-form {
   @include display.flex(column, center, center);
   height: 100vh - height.$header-height - height.$menu-height;
   width: 100%;
-  & > div{
+  & > div {
     @include display.flex(row, center, center);
     width: 100%;
     padding: 20px;
-    & > label{
+    & > label {
       width: 100px;
       text-align: end;
       padding-right: 5px;
     }
   }
-  & > input{
+  & > input {
     padding: 20px;
     border: none;
-    background-color: #0D99FF;
+    background-color: #0d99ff;
     border-radius: 20px;
     color: white;
   }

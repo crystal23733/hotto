@@ -1,5 +1,5 @@
-@use '../components/display.scss';
-@use '../components/height.scss';
+@use "../components/display.scss";
+@use "../components/height.scss";
 
 #join-form {
   @include display.flex(column, center, center);

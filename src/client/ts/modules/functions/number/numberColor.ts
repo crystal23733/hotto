@@ -1,5 +1,5 @@
-export const numberColor = (selector) => {
-  const intText = parseInt(selector.textContent);
+export default (selector:HTMLElement) => {
+  const intText = parseInt(selector.textContent || "0", 10);
   if (intText < 11) {
     selector.style.backgroundColor = "#FAC400";
   } else if (intText < 21) {

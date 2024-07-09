@@ -1,6 +1,6 @@
-@use '../components/display.scss';
-@use '../components/height.scss';
-@use '../components/font.scss';
+@use "../components/display.scss";
+@use "../components/height.scss";
+@use "../components/font.scss";
 
 %rowFlex {
   @include display.flex(row, center, center);
