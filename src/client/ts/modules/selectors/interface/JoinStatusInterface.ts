@@ -1,4 +1,4 @@
-interface JoinInfo {
+interface JoinStatusInterface {
   name: HTMLElement | null;
   email:HTMLElement | null;
   password: HTMLElement | null;
@@ -6,4 +6,4 @@ interface JoinInfo {
   phone: HTMLElement | null;
 }
 
-export default JoinInfo;
+export default JoinStatusInterface;
