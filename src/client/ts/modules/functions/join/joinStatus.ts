@@ -1,4 +1,4 @@
-import { join, joinStatusBox } from "../../selectors/joinSelec.js";
+import { join, joinStatusBox } from "../../selectors/joinSelec";
 import { statusSearch } from "../arrayOnOff.js";
 import { conditional } from "./joinCondition.js";
 
