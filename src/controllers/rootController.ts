@@ -1,16 +1,17 @@
 // *가입 정보의 양식이 유효한지 알기위해 불러온 함수
-import { conditional } from "../client/ts/modules/functions/join/joinCondition.js";
-import User from "../model/userModel.js";
+import { Request, Response } from "express";
+import { conditional } from "../client/ts/modules/functions/join/joinCondition";
+import User, { UserDocument } from "../model/userModel";
 
-export const home = (req, res) => {
+export const home = (req:Request, res:Response) => {
   return res.status(200).render("home", { pageTitle: "Home" });
 };
 
-export const getJoin = (req, res) => {
+export const getJoin = (req:Request, res:Response) => {
   return res.status(200).render("join", { pageTitle: "Join" });
 };
 
-export const postJoin = async (req, res) => {
+export const postJoin = async (req:Request, res:Response):Promise<void> => {
   const JOIN = "Join";
   const { name, email, password, checkPassword, phone } = req.body;
   if (conditional.emailCon(email) === false) {
@@ -35,7 +36,7 @@ export const postJoin = async (req, res) => {
   const existsEmail = await User.exists({ email });
   const existsPhone = await User.exists({ phone });
   try {
-    await User.create({
+    const newUser:UserDocument = await User.create({
       name: name,
       email: email,
       password: password,
@@ -62,10 +63,10 @@ export const postJoin = async (req, res) => {
   }
 };
 
-export const getLogin = (req, res) => {
+export const getLogin = (req:Request, res:Response) => {
   return res.status(200).render("login", { pageTitle: "Login" });
 };
 
-export const postLogin = (req, res) => {
+export const postLogin = (req:Request, res:Response) => {
   return res.status(302).redirect("/");
 };

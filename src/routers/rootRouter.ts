@@ -1,13 +1,13 @@
-import express from "express";
+import express, { Router } from "express";
 import {
   home,
   getJoin,
   postJoin,
   getLogin,
   postLogin,
-} from "../controllers/rootController.js";
+} from "../controllers/rootController";
 
-const rootRouter = express.Router();
+const rootRouter:Router = express.Router();
 
 rootRouter.get("/", home);
 rootRouter.route("/join").get(getJoin).post(postJoin);

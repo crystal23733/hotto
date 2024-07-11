@@ -1,7 +1,7 @@
-import express from "express";
+import express, { Router } from "express";
 import { getPick } from "../controllers/contentController.js";
 
-const contentRouter = express.Router();
+const contentRouter:Router = express.Router();
 
 contentRouter.get("/pick", getPick);
 
