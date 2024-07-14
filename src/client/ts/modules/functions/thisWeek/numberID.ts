@@ -10,7 +10,7 @@ const number = [
 ];
 
 // *각 번호의 배열 길이 순서와 id로 사용할 각 number순번이 같을 경우 id 할당
-export default (week:HTMLElement[]) => {
+export default (week: HTMLElement[]) => {
   for (let i = 0; i < week.length; i++) {
     for (let j = 0; j < number.length; j++) {
       if (i === j) {
@@ -25,4 +25,3 @@ export default (week:HTMLElement[]) => {
     }
   }
 };
-

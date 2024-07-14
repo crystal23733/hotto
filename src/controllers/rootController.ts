@@ -3,15 +3,15 @@ import { Request, Response } from "express";
 import { conditional } from "../client/ts/modules/functions/join/joinCondition";
 import User, { UserDocument } from "../model/userModel";
 
-export const home = (req:Request, res:Response) => {
+export const home = (req: Request, res: Response) => {
   return res.status(200).render("home", { pageTitle: "Home" });
 };
 
-export const getJoin = (req:Request, res:Response) => {
+export const getJoin = (req: Request, res: Response) => {
   return res.status(200).render("join", { pageTitle: "Join" });
 };
 
-export const postJoin = async (req:Request, res:Response):Promise<void> => {
+export const postJoin = async (req: Request, res: Response): Promise<void> => {
   const JOIN = "Join";
   const { name, email, password, checkPassword, phone } = req.body;
   if (conditional.emailCon(email) === false) {
@@ -36,7 +36,7 @@ export const postJoin = async (req:Request, res:Response):Promise<void> => {
   const existsEmail = await User.exists({ email });
   const existsPhone = await User.exists({ phone });
   try {
-    const newUser:UserDocument = await User.create({
+    const newUser: UserDocument = await User.create({
       name: name,
       email: email,
       password: password,
@@ -63,10 +63,10 @@ export const postJoin = async (req:Request, res:Response):Promise<void> => {
   }
 };
 
-export const getLogin = (req:Request, res:Response) => {
+export const getLogin = (req: Request, res: Response) => {
   return res.status(200).render("login", { pageTitle: "Login" });
 };
 
-export const postLogin = (req:Request, res:Response) => {
+export const postLogin = (req: Request, res: Response) => {
   return res.status(302).redirect("/");
 };

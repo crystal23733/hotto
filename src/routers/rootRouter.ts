@@ -7,7 +7,7 @@ import {
   postLogin,
 } from "../controllers/rootController";
 
-const rootRouter:Router = express.Router();
+const rootRouter: Router = express.Router();
 
 rootRouter.get("/", home);
 rootRouter.route("/join").get(getJoin).post(postJoin);

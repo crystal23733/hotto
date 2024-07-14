@@ -3,9 +3,9 @@
 import randonNumber from "../../client/ts/modules/functions/randonNumber";
 import loadHistory from "./loadHistory";
 
-export default async ():Promise<number[]> => {
+export default async (): Promise<number[]> => {
   const history: Set<string> = await loadHistory();
-  let newNumbers:number[];
+  let newNumbers: number[];
   do {
     newNumbers = randonNumber();
   } while (history.has(newNumbers.join(",")));

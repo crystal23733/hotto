@@ -12,7 +12,7 @@ interface HistoryData {
   drwtNo6: number;
 }
 
-const HISTORY_DIR:string = path.join(__dirname, "src/client/ts/API/history");
+const HISTORY_DIR: string = path.join(__dirname, "src/client/ts/API/history");
 
 export default async (): Promise<Set<string>> => {
   const historyData = new Set<string>();
@@ -20,8 +20,10 @@ export default async (): Promise<Set<string>> => {
     const files = await fs.readdir(HISTORY_DIR);
     for (const file of files) {
       const filePath = path.join(HISTORY_DIR, file);
-      const data:HistoryData = JSON.parse(await fs.readFile(filePath, "utf-8"));
-      const numbers:string = [
+      const data: HistoryData = JSON.parse(
+        await fs.readFile(filePath, "utf-8"),
+      );
+      const numbers: string = [
         data.drwtNo1,
         data.drwtNo2,
         data.drwtNo3,

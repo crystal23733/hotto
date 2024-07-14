@@ -1,4 +1,4 @@
-export default (selector:HTMLElement) => {
+export default (selector: HTMLElement) => {
   const intText = parseInt(selector.textContent || "0", 10);
   if (intText < 11) {
     selector.style.backgroundColor = "#FAC400";
