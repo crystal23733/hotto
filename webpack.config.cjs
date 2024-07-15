@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require("autoprefixer");
@@ -62,6 +63,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
+    }),
+    new webpack.DefinePlugin({
+      __dirname: true, // __dirname을 문자열로 치환하여 정의
+      process: true,   // process를 문자열로 치환하여 정의
     }),
   ],
   devServer: {
