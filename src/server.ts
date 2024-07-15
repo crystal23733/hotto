@@ -2,7 +2,6 @@
 // todo 서버 모듈화 진행
 import express from "express";
 import morgan from "morgan";
-import __dirname from "./modules/__dirname";
 import rootRouter from "./routers/rootRouter";
 import contentRouter from "./routers/contentRouter";
 import apiRouter from "./routers/apiRouter";

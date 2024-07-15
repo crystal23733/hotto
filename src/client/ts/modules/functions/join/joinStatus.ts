@@ -5,7 +5,7 @@ import { conditional } from "./joinCondition";
 // todo 생성자 함수로 요약할 수 있도록 하기
 // *status-box의 컬러와 최종적으로 status에 따라 회원가입을 핸들링 할 수 있는 함수
 export default (): void => {
-  let status: boolean[] = [false, false, false, false, false];
+  const status: boolean[] = [false, false, false, false, false];
   join.name!.addEventListener("change", (): void => {
     if (conditional.nameCon(join.name!.value) === true) {
       joinStatusBox.name!.style.backgroundColor = "green";

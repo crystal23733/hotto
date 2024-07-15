@@ -19,6 +19,11 @@ export default [
         ...globals.node,
       },
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
   },
   eslintPluginJs.configs.recommended, // @eslint/js에서 제공하는 추천 설정을 직접 배열에 추가합니다.
   ...tseslint.configs.recommended,

@@ -11,9 +11,9 @@ const stylesPath = path.join(__dirname, "src", "client", "scss");
 export default {
   watch: true,
   entry: {
-    main: `${clientPath}/thisWeek.js`,
-    join: `${clientPath}/join.js`,
-    pick: `${clientPath}/pick.js`,
+    main: `${clientPath}/thisWeek.ts`,
+    join: `${clientPath}/join.ts`,
+    pick: `${clientPath}/pick.ts`,
   },
   output: {
     path: path.resolve(__dirname, "dist"),
