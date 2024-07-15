@@ -1,7 +1,7 @@
 // todo 나중에 AJAX로 바꾸기
-import data from "../../../API/history/history1123.json" with { type: "json" };
+import data from "../../../API/history/history1123.json";
 
-import { numberAll, thisNumber } from "../../selectors/weekNumSelec.js";
+import { numberAll, thisNumber } from "../../selectors/weekNumSelec";
 import thisWeekColor from "./thisWeekColor";
 
 // *최근 회차를 불러오는 함수

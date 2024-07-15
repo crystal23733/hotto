@@ -10,19 +10,13 @@ const number = [
 ];
 
 // *각 번호의 배열 길이 순서와 id로 사용할 각 number순번이 같을 경우 id 할당
-export default (week:HTMLElement[]) => {
+export default (week: HTMLElement[]) => {
   for (let i = 0; i < week.length; i++) {
-    for (let j = 0; j < number.length; j++) {
-      if (i === j) {
-        week[i].id = number[j];
-      } else if (i === 6) {
-        i++;
-        j += 6;
-        week[i].id = number[j];
-      } else if (i === 6) {
-        continue;
-      }
+    if (i < number.length) {
+      week[i].id = number[i];
+    } else if (i === 6) {
+      week[i].id = number[6];
+      i++; // 여기서 i를 증가시키므로, 이후 루프에서는 i가 7이 됨
     }
   }
 };
-

@@ -1,19 +1,16 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import autoprefixer from "autoprefixer";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const autoprefixer = require("autoprefixer");
 
 const clientPath = path.join(__dirname, "src", "client", "ts");
 const stylesPath = path.join(__dirname, "src", "client", "scss");
 
-export default {
+module.exports = {
   watch: true,
   entry: {
-    main: `${clientPath}/thisWeek.js`,
-    join: `${clientPath}/join.js`,
-    pick: `${clientPath}/pick.js`,
+    main: `${clientPath}/thisWeek.ts`,
+    join: `${clientPath}/join.ts`,
+    pick: `${clientPath}/pick.ts`,
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -53,7 +50,7 @@ export default {
               },
             },
           },
-          "sass-loader", // sass-loader 추가
+          "sass-loader",
         ],
       },
     ],

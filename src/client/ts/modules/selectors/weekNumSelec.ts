@@ -1,12 +1,18 @@
 // *이번주 번호 선택자 / this-week
-const thisWeekNumber = document.getElementById("this-week__number") as HTMLDivElement | null;
+const thisWeekNumber = document.getElementById(
+  "this-week__number",
+) as HTMLDivElement | null;
 
 const numberAll = {
-  homeNumber: Array.from(document.querySelectorAll("#this-week__number div")) as HTMLDivElement[],
+  homeNumber: Array.from(
+    document.querySelectorAll("#this-week__number div"),
+  ) as HTMLDivElement[],
 };
 
 type ThisNumber = {
-  [key in 'one' | 'two' | 'three' | 'four' | 'five' | 'six' | 'bonus']: HTMLDivElement | undefined;
+  [key in "one" | "two" | "three" | "four" | "five" | "six" | "bonus"]:
+    | HTMLDivElement
+    | undefined;
 };
 
 const thisNumber: ThisNumber = {

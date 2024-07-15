@@ -3,7 +3,7 @@
 import numberColor from "../number/numberColor";
 
 // !번호 생성기에도 필요한 함수
-export default (number:HTMLElement[]) => {
+export default (number: HTMLElement[]) => {
   number.forEach((child) => {
     numberColor(child);
   });
