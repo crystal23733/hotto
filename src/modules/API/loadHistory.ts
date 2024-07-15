@@ -1,7 +1,6 @@
 // *apiData 전부 읽어오는 함수
 import fs from "fs/promises";
 import path from "path";
-import __dirname from "../__dirname";
 
 interface HistoryData {
   drwtNo1: number;
@@ -12,7 +11,7 @@ interface HistoryData {
   drwtNo6: number;
 }
 
-const HISTORY_DIR: string = path.join(__dirname, "src/client/ts/API/history");
+const HISTORY_DIR: string = path.resolve("src/client/ts/API/history");
 
 export default async (): Promise<Set<string>> => {
   const historyData = new Set<string>();
@@ -37,5 +36,6 @@ export default async (): Promise<Set<string>> => {
     console.error("Error reading directory:", error);
     throw error;
   }
+  console.log(historyData);
   return historyData;
 };

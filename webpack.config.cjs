@@ -1,14 +1,11 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import autoprefixer from "autoprefixer";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const autoprefixer = require("autoprefixer");
 
 const clientPath = path.join(__dirname, "src", "client", "ts");
 const stylesPath = path.join(__dirname, "src", "client", "scss");
 
-export default {
+module.exports = {
   watch: true,
   entry: {
     main: `${clientPath}/thisWeek.ts`,
@@ -53,7 +50,7 @@ export default {
               },
             },
           },
-          "sass-loader", // sass-loader 추가
+          "sass-loader",
         ],
       },
     ],

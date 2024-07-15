@@ -1,7 +1,7 @@
 // *가입 정보의 양식이 유효한지 알기위해 불러온 함수
 import { Request, Response } from "express";
 import { conditional } from "../client/ts/modules/functions/join/joinCondition";
-import User, { UserDocument } from "../model/userModel";
+import User from "../model/userModel";
 
 export const home = (req: Request, res: Response) => {
   return res.status(200).render("home", { pageTitle: "Home" });
@@ -36,7 +36,7 @@ export const postJoin = async (req: Request, res: Response): Promise<void> => {
   const existsEmail = await User.exists({ email });
   const existsPhone = await User.exists({ phone });
   try {
-    const newUser: UserDocument = await User.create({
+    await User.create({
       name: name,
       email: email,
       password: password,
