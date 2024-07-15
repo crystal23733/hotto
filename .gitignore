@@ -1,7 +1,5 @@
 /node_modules
 .vscode
-.prettierrc
 .env
-/public/css
 /dist
-*.json
+history/
