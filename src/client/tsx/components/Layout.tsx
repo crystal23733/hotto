@@ -1,7 +1,7 @@
 import React from 'react';
-import Head from './components/partials/head';
-import Header from './components/partials/header';
-import Menu from './components/partials/menu';
+import Head from './partials/head';
+import Header from './partials/header';
+import Menu from './partials/menu';
 
 const Layout = ({ children, pageTitle, scriptSrc }) => {
   return (
