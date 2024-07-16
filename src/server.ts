@@ -5,19 +5,21 @@ import morgan from "morgan";
 import rootRouter from "./routers/rootRouter";
 import contentRouter from "./routers/contentRouter";
 import apiRouter from "./routers/apiRouter";
-import webpack from 'webpack';
-import config from '../webpack.config.js';
+import webpack from "webpack";
+import config from "../webpack.config.js";
 import WebpackHotMiddleware from "webpack-hot-middleware";
-import WebpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackDevMiddleware from "webpack-dev-middleware";
 
 const app = express();
 
 const compiler = webpack(config);
 
 // 웹팩 데브 미들웨어 설정
-app.use(WebpackDevMiddleware(compiler, {
-  publicPath: config.output!.publicPath,
-}));
+app.use(
+  WebpackDevMiddleware(compiler, {
+    publicPath: config.output!.publicPath,
+  }),
+);
 
 // 웹팩 핫 미들웨어 설정
 app.use(WebpackHotMiddleware(compiler));

@@ -1,22 +1,30 @@
-import React from 'react';
-import Head from './partials/head';
-import Header from './partials/header';
-import Menu from './partials/menu';
+import React, { ReactNode } from "react";
+import HeadComponent from "./partials/head";
+import HeaderComponent from "./partials/header";
+import MenuComponent from "./partials/menu";
+import PageTitle from "./interface/pageTitle";
+import ScriptSrc from "./interface/scriptSrc";
 
-const Layout = ({ children, pageTitle, scriptSrc }) => {
+interface LayoutComponentProps extends PageTitle, ScriptSrc {
+  children: ReactNode;
+}
+
+const LayoutComponent: React.FC<LayoutComponentProps> = ({
+  children,
+  pageTitle,
+  scriptSrc,
+}) => {
   return (
     <html lang="kr">
-      <Head pageTitle={pageTitle} scriptSrc={scriptSrc} />
+      <HeadComponent pageTitle={pageTitle} scriptSrc={scriptSrc} />
       <body>
-        <Header />
-        <Menu />
-        <div id="content">
-          {children}
-        </div>
+        <HeaderComponent />
+        <MenuComponent />
+        <div id="content">{children}</div>
         <script src="your-script.js"></script>
       </body>
     </html>
   );
 };
 
-export default Layout;
+export default LayoutComponent;
