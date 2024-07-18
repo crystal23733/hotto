@@ -1,7 +1,7 @@
 // *가입 정보의 양식이 유효한지 알기위해 불러온 함수
 import { Request, Response } from "express";
-import { conditional } from "../../frontend/client/ts/modules/functions/join/joinCondition";
-import User from "../model/userModel";
+import { conditional } from "../../client/ts/modules/functions/join/joinCondition";
+import User from "../../shared/model/userModel";
 
 export const home = (req: Request, res: Response) => {
   return res.status(200).render("home", { pageTitle: "Home" });
