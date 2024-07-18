@@ -1,0 +1,10 @@
+extends layout 
+block content
+  form(action="/", id='login-form') 
+    div 
+      label(for="name") 아이디
+      input(type="text", placeholder='아이디', name='name', id='name')
+    div 
+      label(for="password") 비밀번호
+      input(type="password", placeholder='비밀번호', name='password', id='password')
+    input(type="submit", value='로그인')

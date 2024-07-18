@@ -1,0 +1,7 @@
+node_modules
+.vscode
+.env
+/dist
+history/
+model/
+.DS_Store

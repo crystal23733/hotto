@@ -1,0 +1,22 @@
+// *ID로 붙일 배열
+const number = [
+  "number1",
+  "number2",
+  "number3",
+  "number4",
+  "number5",
+  "number6",
+  "bonus",
+];
+
+// *각 번호의 배열 길이 순서와 id로 사용할 각 number순번이 같을 경우 id 할당
+export default (week: HTMLElement[]) => {
+  for (let i = 0; i < week.length; i++) {
+    if (i < number.length) {
+      week[i].id = number[i];
+    } else if (i === 6) {
+      week[i].id = number[6];
+      i++; // 여기서 i를 증가시키므로, 이후 루프에서는 i가 7이 됨
+    }
+  }
+};
