@@ -12,11 +12,9 @@ const Layout: React.FC<LayoutProps> = ({ children, pageTitle, scriptText }) => {
   return (
     <>
       <Head pageTitle={pageTitle} scriptText={scriptText} />
-      <body>
-        <Header />
-        <Menu />
-        {children}
-      </body>
+      <Header />
+      <Menu />
+      {children}
     </>
   );
 }

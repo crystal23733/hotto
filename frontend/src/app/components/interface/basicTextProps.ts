@@ -1,6 +1,6 @@
 interface BasicTextProps {
-  pageTitle : string;
-  scriptText : string;
+  pageTitle? : string;
+  scriptText? : string;
 }
 
 export default BasicTextProps;
