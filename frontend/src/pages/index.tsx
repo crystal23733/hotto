@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import Layout from "../app/layout";
+import setNumberBgColor from "../ts/modules/utils/setNumberBgColor";
+import '../scss/home.scss';
 
 interface Data {
   drwtNo1: number;
@@ -24,7 +26,6 @@ const Home:React.FC = () => {
           throw new Error('Network response was not ok');
         }
         const data: Data = await response.json();
-        console.log(data);
         const fetchedNumbers: (number | string)[] = [
           data.drwtNo1,
           data.drwtNo2,
@@ -48,6 +49,7 @@ const Home:React.FC = () => {
     numberRefs.current.forEach((element, index) => {
       if(element){
         element.id = `number${index + 1}`;
+        setNumberBgColor(element);
       }
     })
   }, [numbers]);
