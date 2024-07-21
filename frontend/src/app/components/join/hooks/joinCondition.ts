@@ -8,7 +8,16 @@ export const conditional = {
    * @returns 유효성 여부
    */
   nameCon: (name: string): boolean => {
-    return name.length > 1 && name.length < 30;
+    const isEnglish = /^[A-Za-z]/.test(name);
+    const isKorean = /^[가-힣]/.test(name);
+
+    if (isEnglish) {
+      return /^[A-Za-z]+$/.test(name) && name.length >= 8;
+    } else if (isKorean) {
+      return /^[가-힣]+$/.test(name) && name.length >= 2;
+    } else {
+      return false;
+    }
   },
   /**
    * 이메일의 유효성을 검사합니다.
@@ -16,11 +25,8 @@ export const conditional = {
    * @returns 유효성 여부
    */
   emailCon: (email: string): boolean => {
-    return (
-      email.endsWith('.com') ||
-      email.endsWith('.co.kr') ||
-      email.endsWith('.net')
-    );
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    return emailRegex.test(email);
   },
   /**
    * 비밀번호 길이의 유효성을 검사합니다.
