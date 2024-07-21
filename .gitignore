@@ -5,3 +5,6 @@ node_modules
 history/
 model/
 .DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
