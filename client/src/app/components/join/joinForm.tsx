@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import useJoinStatus from './hooks/joinStatus';
-import InputField from './inputField';
+import React, { useState } from "react";
+import useJoinStatus from "./hooks/joinStatus";
+import InputField from "./inputField";
 
 const JoinForm: React.FC = () => {
   // useState 훅을 사용하여 폼 데이터를 관리합니다.
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    checkPassword: '',
-    phone: '',
+    name: "",
+    email: "",
+    password: "",
+    checkPassword: "",
+    phone: "",
   });
 
   // 커스텀 훅을 사용하여 입력 값의 유효성을 검사하고 상태를 업데이트합니다.
@@ -18,18 +18,18 @@ const JoinForm: React.FC = () => {
   // 폼 제출을 처리하는 함수입니다.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (status.every(s => s)) {
-      console.log('Form submitted successfully');
+    if (status.every((s) => s)) {
+      console.log("Form submitted successfully");
       // handle form submission
     } else {
-      console.error('Form has errors');
+      console.error("Form has errors");
     }
   };
 
   // 입력 필드의 변경을 처리하는 함수입니다.
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     handleChange(name, value);
   };
 

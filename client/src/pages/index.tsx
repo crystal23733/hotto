@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../app/layout";
 import setNumberBgColor from "../ts/modules/utils/setNumberBgColor";
-import '../scss/home.scss';
+import "../scss/home.scss";
 
 interface Data {
   drwtNo1: number;
@@ -13,17 +13,17 @@ interface Data {
   bnusNo: number;
 }
 
-const Home:React.FC = () => {
+const Home: React.FC = () => {
   const [numbers, setNumbers] = useState<(number | string)[]>([]);
   const numberRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // * 주간 당첨번호를 정적파일로 불러오는 함수
   useEffect(() => {
     const weekNumData = async () => {
-      try{
-        const response = await fetch('/API/history/history1128.json');
+      try {
+        const response = await fetch("/API/history/history1128.json");
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data: Data = await response.json();
         const fetchedNumbers: (number | string)[] = [
@@ -33,25 +33,25 @@ const Home:React.FC = () => {
           data.drwtNo4,
           data.drwtNo5,
           data.drwtNo6,
-          '+',
-          data.bnusNo
+          "+",
+          data.bnusNo,
         ];
         setNumbers(fetchedNumbers);
-      } catch(error){
-        console.error('Error fetching data:', error);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    }
+    };
     weekNumData();
   }, []);
 
   // * number에 id를 담는 함수
   useEffect(() => {
     numberRefs.current.forEach((element, index) => {
-      if(element){
+      if (element) {
         element.id = `number${index + 1}`;
         setNumberBgColor(element);
       }
-    })
+    });
   }, [numbers]);
 
   return (
@@ -62,10 +62,13 @@ const Home:React.FC = () => {
         </div>
         <div id="this-week__number">
           {numbers.map((number, index) => (
-            <div key={index} ref={el => {
-              // 올바른 타입으로 ref 설정
-              if (el) numberRefs.current[index] = el;
-            }}>
+            <div
+              key={index}
+              ref={(el) => {
+                // 올바른 타입으로 ref 설정
+                if (el) numberRefs.current[index] = el;
+              }}
+            >
               {number}
             </div>
           ))}
@@ -80,6 +83,6 @@ const Home:React.FC = () => {
       </div>
     </Layout>
   );
-}
+};
 
 export default Home;

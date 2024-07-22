@@ -1,11 +1,11 @@
-import React, {ReactNode} from "react";
+import React, { ReactNode } from "react";
 import Head from "./components/customHead";
 import Header from "./components/header";
 import Menu from "./components/menu";
 
 interface LayoutProps {
   children: ReactNode;
-  pageTitle : string;
+  pageTitle: string;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, pageTitle }) => {
@@ -17,6 +17,6 @@ const Layout: React.FC<LayoutProps> = ({ children, pageTitle }) => {
       {children}
     </>
   );
-}
+};
 
 export default Layout;

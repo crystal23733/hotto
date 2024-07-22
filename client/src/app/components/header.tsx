@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
 const Header: React.FC = () => {
   return (
@@ -13,6 +13,6 @@ const Header: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

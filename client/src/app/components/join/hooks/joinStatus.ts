@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { conditional } from './joinCondition';
+import { useState, useEffect } from "react";
+import { conditional } from "./joinCondition";
 
 /**
  * 폼 데이터와 상태를 관리하는 커스텀 훅입니다.
@@ -15,22 +15,22 @@ const useJoinStatus = (formData: Record<string, string>) => {
    * @param value 입력 필드의 값
    */
   const handleChange = (name: string, value: string) => {
-    let newStatus = [...status];
+    const newStatus = [...status];
 
     switch (name) {
-      case 'name':
+      case "name":
         newStatus[0] = conditional.nameCon(value);
         break;
-      case 'email':
+      case "email":
         newStatus[1] = conditional.emailCon(value);
         break;
-      case 'password':
+      case "password":
         newStatus[2] = conditional.passwordLength(value);
         break;
-      case 'checkPassword':
+      case "checkPassword":
         newStatus[3] = conditional.passwordCon(formData.password, value);
         break;
-      case 'phone':
+      case "phone":
         newStatus[4] = conditional.phoneCon(value);
         break;
       default:
@@ -41,7 +41,7 @@ const useJoinStatus = (formData: Record<string, string>) => {
   };
 
   useEffect(() => {
-    console.log('Status updated:', status);
+    console.log("Status updated:", status);
   }, [status]);
 
   return { status, handleChange };

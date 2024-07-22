@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface InputFieldProps {
   label: string;
@@ -33,7 +33,10 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={onChange}
       />
-      <div id={`${name}-box`} style={{ backgroundColor: status ? 'green' : 'red' }}></div>
+      <div
+        id={`${name}-box`}
+        style={{ backgroundColor: status ? "green" : "red" }}
+      ></div>
     </div>
   );
 };

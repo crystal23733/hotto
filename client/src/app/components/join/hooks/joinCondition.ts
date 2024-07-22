@@ -51,7 +51,7 @@ export const conditional = {
    * @returns 유효성 여부
    */
   phoneCon: (p: string): boolean => {
-    return p.length === 11 && p.startsWith('010');
+    return p.length === 11 && p.startsWith("010");
   },
 };
 
@@ -62,6 +62,6 @@ export const conditional = {
  */
 export const joinCondition = {
   trueStatus: (statusArr: boolean[]): boolean => {
-    return statusArr.every(status => status);
+    return statusArr.every((status) => status);
   },
 };

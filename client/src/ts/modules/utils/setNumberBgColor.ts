@@ -12,4 +12,3 @@ export default (element: HTMLElement): void => {
     element.style.backgroundColor = "#B0D840";
   }
 };
-

@@ -17,6 +17,6 @@ const Menu: React.FC = () => {
       </ul>
     </nav>
   );
-}
+};
 
 export default Menu;
