@@ -26,5 +26,5 @@
     "src",
     "pages",
     ".next/types/**/*.ts"
-  ]
+, "../shared/functions/joinCondition.ts"  ]
 }
