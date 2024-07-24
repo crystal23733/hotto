@@ -1,17 +1,24 @@
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { NestExpressApplication } from "@nestjs/platform-express";
-import morgan from "morgan";
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
+import morgan from 'morgan';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const PORT = process.env.PORT || 3001;
+  const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+  const PORT = configService.get<number>('PORT') || 3000;
+  const DB_URL = configService.get<string>('DB_URL')!;
+
+  // CORS 설정
   app.enableCors({
-    origin: "http://localhost:3000",
-    methods: "GET, POST, PUT, PATCH, HEAD, DELETE",
-    allowedHeaders: "Content-Type, Authorization",
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
   });
-  app.use(morgan("dev"));
+
+  // 로깅 미들웨어 설정
+  app.use(morgan('dev'));
+
   await app.listen(PORT);
   console.log(`http://localhost:${PORT}`);
 }
