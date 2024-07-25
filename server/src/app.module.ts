@@ -3,16 +3,16 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
-import { RootModule } from "./root/root.router";
+import { RootModule } from "./root/root.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal:true,
+      isGlobal: true,
     }),
     MongooseModule.forRootAsync({
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('DB_URL')!,
+        uri: configService.get<string>("DB_URL")!,
       }),
       inject: [ConfigService],
     }),

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import User from "@database/model/userModel";
+import User from "server/src/database/model/userModel";
 import { conditional } from "@shared/functions/joinCondition";
 
 @Injectable()
