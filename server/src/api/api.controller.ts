@@ -1,9 +1,12 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get } from '@nestjs/common';
+import { ApiService } from './api.service';
 
-@Controller("/api")
+@Controller('api')
 export class ApiController {
-  @Get("lotto-data")
-  getStatus() {
-    return { message: "API working" };
+  constructor(private readonly apiService: ApiService) {}
+
+  @Get('lotto-data')
+  async getLottoData(): Promise<number[]> {
+    return this.apiService.getLottoData();
   }
 }
