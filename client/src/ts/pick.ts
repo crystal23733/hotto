@@ -4,7 +4,7 @@ import "../scss/pick.scss";
 
 // * js 모듈
 import numberText from "./modules/functions/pick/numberText";
-import randonNumber from "./modules/functions/randonNumber";
+import randonNumber from "../../../shared/functions/randomNumber";
 import { createBtn, numberListArr } from "./modules/selectors/pickSelec";
 
 createBtn.addEventListener("click", () => {

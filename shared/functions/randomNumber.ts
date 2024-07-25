@@ -1,9 +1,9 @@
-import repPick from "./pick/repPick";
+import repPick from "../../client/src/ts/modules/functions/pick/repPick";
 
 // *랜덤 번호를 지정해주는 함수
 export default (): number[] => {
   // *1~45 번까지 저장하는 배열
-  const number = [];
+  const number:number[] = [];
   for (let i = 1; i <= 45; i++) {
     number.push(i);
   }
