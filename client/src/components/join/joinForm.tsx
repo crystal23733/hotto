@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useJoinStatus from "../../utils/join/hooks/joinStatus";
+import useJoinStatus from "../../pipes/joinStatus";
 import InputField from "./inputField";
 
 const JoinForm: React.FC = () => {

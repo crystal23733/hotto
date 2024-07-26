@@ -25,6 +25,6 @@
   "include": [
     "src",
     "pages",
-    ".next/types/**/*.ts"
-, "../shared/functions/joinCondition.ts", "../shared/functions/randomNumber.ts"  ]
+    ".next/types/**/*.ts",
+    "../shared/**/*" ]
 }

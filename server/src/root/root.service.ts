@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import User from "server/src/database/model/userModel";
-import { conditional } from "@shared/functions/joinCondition";
+import { conditional } from "@shared/pipes/joinCondition";
 
 @Injectable()
 export class RootService {

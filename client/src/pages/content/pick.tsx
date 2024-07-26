@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import Layout from '../../app/layout';
-import repPick from '../../utils/pick/repPick';
-import setNumberBgColor from '../../utils/setNumberBgColor';
-import '../../scss/pick.scss';
+import { useState, useEffect, useRef } from "react";
+import Layout from "../../app/layout";
+import repPick from "../../utils/pick/repPick";
+import setNumberBgColor from "../../utils/setNumberBgColor";
+import "../../scss/pick.scss";
 
 const Pick = () => {
   const [numbers, setNumbers] = useState<number[]>([]);
@@ -19,14 +19,16 @@ const Pick = () => {
 
   useEffect(() => {
     if (numberListRef.current) {
-      const children = Array.from(numberListRef.current.children) as HTMLElement[];
+      const children = Array.from(
+        numberListRef.current.children,
+      ) as HTMLElement[];
       children.forEach((child, index) => {
         if (numbers[index] !== undefined) {
           child.textContent = numbers[index].toString();
           setNumberBgColor(child);
         } else {
-          child.textContent = '';
-          child.style.backgroundColor = 'transparent';
+          child.textContent = "";
+          child.style.backgroundColor = "transparent";
         }
       });
     }
@@ -43,7 +45,12 @@ const Pick = () => {
             <div key={i}></div>
           ))}
         </div>
-        <input type="button" value="번호 생성" id="create" onClick={handleClick} />
+        <input
+          type="button"
+          value="번호 생성"
+          id="create"
+          onClick={handleClick}
+        />
       </div>
     </Layout>
   );
