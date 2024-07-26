@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Layout from "../app/layout";
-import setNumberBgColor from "../ts/modules/utils/setNumberBgColor";
+import setNumberBgColor from "../utils/setNumberBgColor";
 import "../scss/home.scss";
 
 interface Data {

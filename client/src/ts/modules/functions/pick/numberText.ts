@@ -1,4 +1,4 @@
-import numberColor from "../number/numberColor";
+import numberColor from "../../../../utils/numberColor";
 
 export default (number: HTMLElement[], random: number[]) => {
   number.forEach((child, index) => {
