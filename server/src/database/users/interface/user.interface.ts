@@ -1,8 +1,9 @@
-import IEmail from "./email";
-import IName from "./name";
-import IPassword from "./password";
-import IPhone from "./phone";
+import { Document } from "mongoose";
+import IEmail from "./IEmail";
+import IName from "./IName";
+import IPassword from "./IPassword";
+import IPhone from "./IPhone";
 
-interface IUser extends IName, IEmail, IPassword, IPhone {}
+interface IUser extends IName, IEmail, IPassword, IPhone, Document {}
 
 export default IUser;
