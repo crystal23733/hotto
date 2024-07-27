@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { RootModule } from "./root/root.module";
 import { ApiModule } from "./api/api.module";
+import { User, UserSchema } from "./database/model/user.schema";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ApiModule } from "./api/api.module";
       }),
       inject: [ConfigService],
     }),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     RootModule,
     ApiModule,
   ],

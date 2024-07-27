@@ -15,17 +15,6 @@ const JoinForm: React.FC = () => {
   // 커스텀 훅을 사용하여 입력 값의 유효성을 검사하고 상태를 업데이트합니다.
   const { status, handleChange } = useJoinStatus(formData);
 
-  // 폼 제출을 처리하는 함수입니다.
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (status.every((s) => s)) {
-      console.log("Form submitted successfully");
-      // handle form submission
-    } else {
-      console.error("Form has errors");
-    }
-  };
-
   // 입력 필드의 변경을 처리하는 함수입니다.
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,7 +23,7 @@ const JoinForm: React.FC = () => {
   };
 
   return (
-    <form id="join-form" onSubmit={handleSubmit}>
+    <form id="join-form">
       <InputField
         label="아이디"
         type="text"
