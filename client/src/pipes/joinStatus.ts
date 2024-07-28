@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { conditional } from "./joinCondition";
 
 /**
@@ -39,10 +39,6 @@ const useJoinStatus = (formData: Record<string, string>) => {
 
     setStatus(newStatus);
   };
-
-  useEffect(() => {
-    console.log("Status updated:", status);
-  }, [status]);
 
   return { status, handleChange };
 };

@@ -25,7 +25,7 @@ const JoinForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // 기본 폼 제출 동작을 방지합니다.
-    const newErrors = [];
+    const newErrors: string[] = [];
     if (!status[0]) newErrors.push("아이디가 유효하지 않습니다.");
     if (!status[1]) newErrors.push("이메일이 유효하지 않습니다.");
     if (!status[2]) newErrors.push("비밀번호가 유효하지 않습니다.");
@@ -36,7 +36,7 @@ const JoinForm: React.FC = () => {
 
     if (newErrors.length === 0) {
       try {
-        const response = await fetch('/api/submit', {
+        const response = await fetch('http://localhost:8080/join', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,8 +46,8 @@ const JoinForm: React.FC = () => {
 
         const result = await response.json();
 
-        if (response.ok) {
-          // 제출이 성공하면 다른 페이지로 리다이렉트합니다.
+        if (response.ok && !result.error) {
+          // 제출이 성공하고 서버에서 에러가 반환되지 않은 경우에만 다른 페이지로 리다이렉트합니다.
           router.push('/');
         } else {
           // 서버로부터의 에러 메시지를 설정합니다.
