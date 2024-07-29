@@ -1,17 +1,7 @@
 import React from "react";
+import IInputFieldProps from "../interface/IInputFieldProps";
 
-interface InputFieldProps {
-  label: string;
-  type: string;
-  name: string;
-  placeholder: string;
-  minLength?: number;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  status: boolean;
-}
-
-const InputField: React.FC<InputFieldProps> = ({
+const InputField: React.FC<IInputFieldProps> = ({
   label,
   type,
   name,
