@@ -5,6 +5,6 @@ export default interface IInputFieldProps {
   placeholder: string;
   minLength?: number;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  status: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  status?: boolean;
 }
