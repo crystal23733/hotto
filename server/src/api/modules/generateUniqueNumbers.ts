@@ -9,6 +9,5 @@ export default async (): Promise<number[]> => {
   do {
     newNumbers = randonNumber();
   } while (history.has(newNumbers.join(",")));
-  console.log(newNumbers);
   return newNumbers;
 };

@@ -36,6 +36,5 @@ export default async (): Promise<Set<string>> => {
     console.error("Error reading directory:", error);
     throw error;
   }
-  console.log(historyData);
   return historyData;
 };

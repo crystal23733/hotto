@@ -3,7 +3,6 @@ node_modules
 .env
 /dist
 history/
-model/
 .DS_Store
 ._.DS_Store
 **/.DS_Store
