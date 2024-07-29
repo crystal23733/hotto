@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useJoinStatus from "../../pipes/joinStatus";
-import InputField from "./inputField";
+import InputField from "../inputField";
 import { useRouter } from "next/router";
 
 const JoinForm: React.FC = () => {
@@ -36,10 +36,10 @@ const JoinForm: React.FC = () => {
 
     if (newErrors.length === 0) {
       try {
-        const response = await fetch('http://localhost:8080/join', {
-          method: 'POST',
+        const response = await fetch("http://localhost:8080/join", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         });
@@ -48,7 +48,7 @@ const JoinForm: React.FC = () => {
 
         if (response.ok && !result.error) {
           // 제출이 성공하고 서버에서 에러가 반환되지 않은 경우에만 다른 페이지로 리다이렉트합니다.
-          router.push('/');
+          router.push("/");
         } else {
           // 서버로부터의 에러 메시지를 설정합니다.
           setErrors([result.error || "Form submission failed"]);
@@ -114,7 +114,9 @@ const JoinForm: React.FC = () => {
       {errors.length > 0 && (
         <div>
           {errors.map((error, index) => (
-            <p key={index} style={{ color: 'red' }}>{error}</p>
+            <p key={index} style={{ color: "red" }}>
+              {error}
+            </p>
           ))}
         </div>
       )}
