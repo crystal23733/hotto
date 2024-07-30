@@ -14,7 +14,8 @@ export default async (email: string, password: string) => {
       body: JSON.stringify({ email, password })
     })
     if (!response.ok) {
-      throw new Error;
+      const errorData = await response.json();
+      throw new Error(errorData || "로그인 실패");
     }
 
     return await response.json();
