@@ -1,30 +1,51 @@
-import React, { useState } from "react";
-import InputField from "../inputField";
+import React from "react";
 
-const LoginForm: React.FC = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+interface LoginFormViewProps {
+  email: string;
+  password: string;
+  error: string | null;
+  onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const LoginFormView: React.FC<LoginFormViewProps> = ({
+  email,
+  password,
+  error,
+  onEmailChange,
+  onPasswordChange,
+  onSubmit,
+}) => {
   return (
-    <form id="login-form">
-      <InputField
-        label="이메일"
-        type="email"
-        name="email"
-        placeholder="이메일"
-        value={formData.email}
-      />
-      <InputField
-        label="로그인"
-        type="password"
-        name="password"
-        placeholder="비밀번호"
-        value={formData.password}
-      />
-      <input type="submit" value="로그인" />
-    </form>
+    <div>
+      <form onSubmit={onSubmit}>
+        <div>
+          <label htmlFor="email">이메일</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={onEmailChange}
+            placeholder="이메일"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">비밀번호</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={onPasswordChange}
+            placeholder="비밀번호"
+            minLength={5}
+          />
+        </div>
+        {error && <div className="error-message">{error}</div>}
+        <button type="submit">로그인</button>
+      </form>
+    </div>
   );
 };
 
-export default LoginForm;
+export default LoginFormView;
