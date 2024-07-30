@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const weekNumData = async () => {
       try {
-        const response = await fetch("/API/history/history1128.json");
+        const response = await fetch("/assets/history/history1128.json");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
