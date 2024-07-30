@@ -5,18 +5,22 @@
   @include display.flex(column, center, center);
   height: 100vh - height.$header-height - height.$menu-height;
   width: 100%;
+
   & > div {
     @include display.flex(row, center, center);
     width: 100%;
     padding: 20px;
+
     & > label {
-      width: 100px;
+      width: 150px;
       text-align: end;
       padding-right: 5px;
     }
+
     & > input {
       height: height.$status-box;
     }
+
     & > div {
       height: height.$status-box;
       width: height.$status-box;
@@ -25,9 +29,11 @@
       border-radius: 5px;
     }
   }
+
   & > p {
     color: red;
   }
+
   & > input {
     padding: 20px;
     border: none;
