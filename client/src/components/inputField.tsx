@@ -1,3 +1,4 @@
+// todo 추후 박스 컴포넌트 따로 나눌 필요가 있음
 import React from "react";
 import IInputFieldProps from "./interface/IInputFieldProps";
 

@@ -1,3 +1,5 @@
+//todo 추후 mvvm방식으로 모듈화 필요
+
 import React, { useState } from "react";
 import useJoinStatus from "../../pipes/joinStatus";
 import InputField from "../inputField";
