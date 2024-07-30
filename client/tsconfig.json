@@ -26,5 +26,6 @@
     "src",
     "pages",
     ".next/types/**/*.ts",
-    "../shared/**/*" ]
+    "../shared/**/*"
+  ]
 }

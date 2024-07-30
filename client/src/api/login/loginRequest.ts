@@ -9,10 +9,10 @@ export default async (email: string, password: string) => {
     const response = await fetch("http://localhost:8080", {
       method: "POST",
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
       },
-      body: JSON.stringify({ email, password })
-    })
+      body: JSON.stringify({ email, password }),
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData || "로그인 실패");
@@ -22,4 +22,4 @@ export default async (email: string, password: string) => {
   } catch (error) {
     throw error;
   }
-}
+};

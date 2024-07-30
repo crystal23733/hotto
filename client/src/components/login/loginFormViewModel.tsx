@@ -1,5 +1,5 @@
 import { conditional } from "@shared/pipes/condition";
-import loginRequest from "client/src/api/login/loginRequest";
+import loginRequest from "../../api/login/loginRequest";
 import React, { useState } from "react";
 
 const LoginFormViewModel: React.FC = () => {
@@ -9,11 +9,11 @@ const LoginFormViewModel: React.FC = () => {
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-  }
+  };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const LoginFormViewModel: React.FC = () => {
     }
 
     try {
-      const result = await loginRequest(email, password)
+      const result = await loginRequest(email, password);
       console.log(result);
     } catch (error) {
       if (error instanceof Error) {
@@ -36,11 +36,9 @@ const LoginFormViewModel: React.FC = () => {
         setError("로그인에 실패했습니다.");
       }
     }
-  }
+  };
 
-  return (
-    <div></div>
-  );
-}
+  return <div></div>;
+};
 
 export default LoginFormViewModel;

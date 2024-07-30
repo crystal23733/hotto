@@ -1,6 +1,6 @@
 import React from "react";
 
-interface LoginFormViewProps {
+interface LoginFormProps {
   email: string;
   password: string;
   error: string | null;
@@ -9,7 +9,7 @@ interface LoginFormViewProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const LoginFormView: React.FC<LoginFormViewProps> = ({
+const LoginForm: React.FC<LoginFormProps> = ({
   email,
   password,
   error,
@@ -48,4 +48,4 @@ const LoginFormView: React.FC<LoginFormViewProps> = ({
   );
 };
 
-export default LoginFormView;
+export default LoginForm;
