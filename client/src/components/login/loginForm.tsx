@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import IInputFieldProps from "../interface/IInputFieldProps";
 import InputField from "../inputField";
 
 const LoginForm: React.FC = () => {
