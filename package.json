@@ -11,6 +11,11 @@
   "bugs": {
     "url": "https://github.com/crystal23733/lotto/issues"
   },
+  "workspaces": [
+    "client/*",
+    "server/*",
+    "shared/*"
+  ],
   "homepage": "https://github.com/crystal23733/lotto#readme",
   "devDependencies": {
     "@types/node": "^20.14.9"

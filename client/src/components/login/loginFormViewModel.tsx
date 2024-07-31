@@ -38,7 +38,7 @@ const LoginFormViewModel: React.FC = () => {
     }
   };
 
-  return <div></div>;
+  return <div>ㅁ</div>;
 };
 
 export default LoginFormViewModel;
