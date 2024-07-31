@@ -19,7 +19,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 }) => {
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id="login-form">
         <div>
           <label htmlFor="email">이메일</label>
           <input

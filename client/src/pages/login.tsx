@@ -1,12 +1,12 @@
 import React from "react";
 import "../scss/login.scss";
 import Layout from "../app/layout";
-import LoginFormViewModel from "../components/login/loginFormViewModel";
+import LoginFormContainer from "../components/login/loginFormContainer";
 
 const Login: React.FC = () => {
   return (
     <Layout pageTitle="Login">
-      <LoginFormViewModel />
+      <LoginFormContainer />
     </Layout>
   );
 };
