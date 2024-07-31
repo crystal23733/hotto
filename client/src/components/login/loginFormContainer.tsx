@@ -1,8 +1,9 @@
 import { conditional } from "@shared/pipes/condition";
 import loginRequest from "../../api/login/loginRequest";
 import React, { useState } from "react";
+import LoginForm from "./loginForm";
 
-const LoginFormViewModel: React.FC = () => {
+const LoginFormContainer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,16 @@ const LoginFormViewModel: React.FC = () => {
     }
   };
 
-  return <div></div>;
+  return (
+    <LoginForm
+      email={email}
+      password={password}
+      onEmailChange={handleEmailChange}
+      onPasswordChange={handlePasswordChange}
+      onSubmit={handleSubmit}
+      error={null}
+    />
+  );
 };
 
-export default LoginFormViewModel;
+export default LoginFormContainer;

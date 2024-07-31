@@ -1,4 +1,5 @@
-import repPick from "client/src/utils/pick/repPick";
+import repPick from "../../client/src/utils/pick/repPick";
+
 
 
 // *랜덤 번호를 지정해주는 함수

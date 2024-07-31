@@ -6,12 +6,13 @@
  */
 export default async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:8080", {
+    const response = await fetch("http://localhost:8080/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+      credentials: "include",
     });
     if (!response.ok) {
       const errorData = await response.json();

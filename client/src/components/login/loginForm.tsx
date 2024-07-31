@@ -19,7 +19,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 }) => {
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id="login-form">
         <div>
           <label htmlFor="email">이메일</label>
           <input
@@ -42,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           />
         </div>
         {error && <div className="error-message">{error}</div>}
-        <button type="submit">로그인</button>
+        <input type="submit" value="로그인" />
       </form>
     </div>
   );

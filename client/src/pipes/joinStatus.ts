@@ -1,5 +1,5 @@
+import { conditional } from "@shared/pipes/condition";
 import { useState } from "react";
-import { conditional } from "./joinCondition";
 
 /**
  * 폼 데이터와 상태를 관리하는 커스텀 훅입니다.
