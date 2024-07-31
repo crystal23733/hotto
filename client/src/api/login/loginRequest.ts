@@ -12,6 +12,7 @@ export default async (email: string, password: string) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+      credentials: "include",
     });
     if (!response.ok) {
       const errorData = await response.json();
