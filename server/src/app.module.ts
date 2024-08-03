@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common";
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -6,7 +11,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { RootModule } from "./root/root.module";
 import { ApiModule } from "./api/api.module";
 import { SessionMiddleware } from "./common/middleware/session.middleware";
-import { AuthModul } from "./login/auth.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
@@ -21,12 +26,12 @@ import { AuthModul } from "./login/auth.module";
     }),
     RootModule,
     ApiModule,
-    AuthModul,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(SessionMiddleware)

@@ -6,7 +6,7 @@
  */
 export default async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
