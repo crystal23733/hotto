@@ -6,7 +6,7 @@ import session from "express-session";
 
 @Injectable()
 export class SessionMiddleware implements NestMiddleware {
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: ConfigService) {}
 
   use(req: any, res: any, next: (error?: Error | any) => void) {
     cookieParser()(req, res, (err) => {
@@ -27,6 +27,6 @@ export class SessionMiddleware implements NestMiddleware {
           collectionName: "sessions",
         }),
       })(req, res, next);
-    })
+    });
   }
 }
