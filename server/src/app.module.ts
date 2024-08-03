@@ -6,6 +6,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { RootModule } from "./root/root.module";
 import { ApiModule } from "./api/api.module";
 import { SessionMiddleware } from "./common/middleware/session.middleware";
+import { AuthModul } from "./login/auth.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SessionMiddleware } from "./common/middleware/session.middleware";
     }),
     RootModule,
     ApiModule,
+    AuthModul,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -28,6 +30,6 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(SessionMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
+      .forRoutes({ path: "*", method: RequestMethod.ALL });
   }
 }
