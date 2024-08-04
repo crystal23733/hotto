@@ -12,7 +12,7 @@ import { Request, Response } from "express";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
   @Post("login")
   async login(
     @Body("email") email: string,
@@ -23,7 +23,7 @@ export class AuthController {
     try {
       const user = await this.authService.login(email, password);
       req.session.userId = user._id.toString();
-      return res.status(200).json({ message: "로그인 성공" });
+      return res.status(HttpStatus.OK).json(user);
     } catch (error) {
       if (error instanceof Error) {
         throw new HttpException(

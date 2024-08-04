@@ -2,11 +2,13 @@ import { conditional } from "@shared/pipes/condition";
 import loginRequest from "../../api/login/loginRequest";
 import React, { useState } from "react";
 import LoginForm from "./loginForm";
+import { useRouter } from "next/router";
 
 const LoginFormContainer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -28,8 +30,8 @@ const LoginFormContainer: React.FC = () => {
     }
 
     try {
-      const result = await loginRequest(email, password);
-      console.log(result);
+      await loginRequest(email, password);
+      router.push("/");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message || "로그인에 실패했습니다.");
@@ -46,7 +48,7 @@ const LoginFormContainer: React.FC = () => {
       onEmailChange={handleEmailChange}
       onPasswordChange={handlePasswordChange}
       onSubmit={handleSubmit}
-      error={null}
+      error={error}
     />
   );
 };
