@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Head from "../components/customHead";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import Menu from "../components/menu";
 
 interface LayoutProps {
