@@ -6,7 +6,7 @@
  */
 export default async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -16,7 +16,7 @@ export default async (email: string, password: string) => {
     });
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData || "로그인 실패");
+      throw new Error(errorData.message || "로그인 실패");
     }
 
     return await response.json();

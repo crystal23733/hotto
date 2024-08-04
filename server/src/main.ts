@@ -1,10 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ConfigService } from "@nestjs/config";
-import morgan from "morgan";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // ! 환경변수 관리를 위한 설정
   const configService = app.get(ConfigService);
   const PORT = configService.get<number>("PORT") || 3000;
 
@@ -13,11 +14,8 @@ async function bootstrap() {
     origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type, Authorization",
-    credentials: true
+    credentials: true,
   });
-
-  // 로깅 미들웨어 설정
-  app.use(morgan("dev"));
 
   await app.listen(PORT);
   console.log(`http://localhost:${PORT}`);

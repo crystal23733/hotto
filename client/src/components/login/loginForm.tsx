@@ -1,3 +1,4 @@
+import { cp } from "fs";
 import React from "react";
 
 interface LoginFormProps {
@@ -41,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             minLength={5}
           />
         </div>
-        {error && <div className="error-message">{error}</div>}
+        {error && <div style={{ color: 'red' }} className="error-message">{error}</div>}
         <input type="submit" value="로그인" />
       </form>
     </div>
