@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import Layout from "../../app/layout";
 import repPick from "../../utils/pick/repPick";
 import setNumberBgColor from "../../utils/setNumberBgColor";
 import "../../scss/pick.scss";
+import Layout from "client/src/app/layout";
 
 const Pick = () => {
   const [numbers, setNumbers] = useState<number[]>([]);

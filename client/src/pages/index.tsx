@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import Layout from "../app/layout";
 import setNumberBgColor from "../utils/setNumberBgColor";
 import "../scss/home.scss";
+import Layout from "../app/layout";
 
 interface Data {
   drwtNo1: number;

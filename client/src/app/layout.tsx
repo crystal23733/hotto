@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
-import Head from "../components/customHead";
-import Header from "../components/header/header";
-import Menu from "../components/menu";
+import CustomHead from "../components/customHead";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,9 +9,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, pageTitle }) => {
   return (
     <>
-      <Head pageTitle={pageTitle} />
-      <Header />
-      <Menu />
+      <CustomHead pageTitle={pageTitle} />
       {children}
     </>
   );
