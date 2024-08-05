@@ -9,7 +9,7 @@ import * as bcrypt from "bcrypt";
 export class AuthService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
-  ) {}
+  ) { }
 
   async validateUser(email: string, password: string): Promise<User | null> {
     if (!conditional.emailCon(email)) {
@@ -35,5 +35,14 @@ export class AuthService {
       );
     }
     return user;
+  }
+
+  async getAuthStatus(req: any): Promise<{ isAuthenticated: boolean, user?: any }> {
+    if (req.session.user) {
+      console.log(req.session.user);
+      return { isAuthenticated: true, user: req.session.user };
+    } else {
+      return { isAuthenticated: false };
+    }
   }
 }
