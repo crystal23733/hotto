@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -38,5 +39,11 @@ export class AuthController {
         );
       }
     }
+  }
+
+  @Get("status")
+  async getAuthStatus(@Req() req: Request, @Res() res: Response) {
+    const status = await this.authService.getAuthStatus(req);
+    return res.json(status);
   }
 }
