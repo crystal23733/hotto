@@ -46,4 +46,14 @@ export class AuthController {
     const status = await this.authService.getAuthStatus(req);
     return res.json(status);
   }
+
+  @Post("logout")
+  async logout(@Req() req: Request, @Res() res: Response) {
+    try {
+      await this.authService.logout(req, res);
+      return res.json({ message: "로그아웃 성공" });
+    } catch (error) {
+      return res.status(500).json({ message: "로그아웃 실패" });
+    }
+  }
 }
