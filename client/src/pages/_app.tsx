@@ -2,13 +2,18 @@ import Header from "../components/header/header";
 import Menu from "../components/menu";
 import { AuthProvider } from "../context/AuthContext";
 
-function MyApp({
-  Component,
-  pageProps,
-}: {
-  Component: React.ComponentType;
-  pageProps: any;
-}) {
+interface PageProps {
+  someProp: string;
+  anotherProp: number;
+}
+
+interface MyAppProps {
+  Component: React.ComponentType<PageProps>;
+  pageProps: PageProps;
+}
+
+// 화살표 함수로 MyApp 컴포넌트를 정의
+const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
       <Header />
@@ -18,6 +23,6 @@ function MyApp({
       </main>
     </AuthProvider>
   );
-}
+};
 
 export default MyApp;
