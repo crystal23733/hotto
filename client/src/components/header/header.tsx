@@ -1,5 +1,5 @@
 import logoutFetch from "client/src/api/logoutFetch";
-import useAuth from "client/src/hook/useAuth";
+import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import React from "react";
 
@@ -24,7 +24,9 @@ const Header: React.FC = () => {
         {isAuthenticated ? (
           <>
             <Link href="/mypage">마이페이지</Link>
-            <a onClick={handleLogout} style={{ cursor: 'pointer' }}>로그아웃</a>
+            <a onClick={handleLogout} style={{ cursor: "pointer" }}>
+              로그아웃
+            </a>
           </>
         ) : (
           <>
