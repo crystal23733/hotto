@@ -3,10 +3,12 @@ import loginRequest from "../../api/login/loginRequest";
 import React, { useState } from "react";
 import LoginForm from "./loginForm";
 import { useRouter } from "next/router";
+import { useAuth } from "client/src/context/AuthContext";
 
 const LoginFormContainer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setIsAuthenticated } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -30,6 +32,7 @@ const LoginFormContainer: React.FC = () => {
     }
 
     try {
+      setIsAuthenticated(true);
       await loginRequest(email, password);
       router.push("/");
     } catch (error) {

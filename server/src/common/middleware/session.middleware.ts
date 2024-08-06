@@ -6,7 +6,7 @@ import session from "express-session";
 
 @Injectable()
 export class SessionMiddleware implements NestMiddleware {
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: ConfigService) {}
 
   use(req: any, res: any, next: (error?: Error | any) => void) {
     cookieParser()(req, res, (cookieErr) => {
@@ -21,7 +21,8 @@ export class SessionMiddleware implements NestMiddleware {
         saveUninitialized: false,
         cookie: {
           httpOnly: true,
-          maxAge: Number(this.configService.get<number>("SECRET_AGE")) || 86400000,
+          maxAge:
+            Number(this.configService.get<number>("SECRET_AGE")) || 86400000,
           sameSite: "strict",
         },
         store: MongoStore.create({

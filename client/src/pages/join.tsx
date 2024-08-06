@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../app/layout";
 import "../scss/join.scss";
 import JoinForm from "../components/join/joinForm";
+import Layout from "../app/layout";
 
 const Join: React.FC = () => {
   return (

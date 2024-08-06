@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -12,7 +13,7 @@ import { Request, Response } from "express";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
   @Post("login")
   async login(
     @Body("email") email: string,
@@ -37,6 +38,22 @@ export class AuthController {
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
+    }
+  }
+
+  @Get("status")
+  async getAuthStatus(@Req() req: Request, @Res() res: Response) {
+    const status = await this.authService.getAuthStatus(req);
+    return res.json(status);
+  }
+
+  @Post("logout")
+  async logout(@Req() req: Request, @Res() res: Response) {
+    try {
+      await this.authService.logout(req, res);
+      return res.json({ message: "로그아웃 성공" });
+    } catch (error) {
+      return res.status(500).json({ message: "로그아웃 실패" });
     }
   }
 }

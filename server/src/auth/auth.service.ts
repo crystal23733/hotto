@@ -36,4 +36,32 @@ export class AuthService {
     }
     return user;
   }
+
+  async getAuthStatus(
+    req: any,
+  ): Promise<{ isAuthenticated: boolean; user?: any }> {
+    console.log("Session:", req.session); // 세션 내용 로깅
+    if (req.session && req.session.userId) {
+      // userId로 확인
+      const user = await this.userModel.findById(req.session.userId).exec();
+      if (user) {
+        console.log("Authenticated user:", user);
+        return { isAuthenticated: true, user: user };
+      }
+    }
+    console.log("Not authenticated");
+    return { isAuthenticated: false };
+  }
+
+  async logout(req: any, res: any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      req.session.destroy((err) => {
+        if (err) {
+          return reject(err);
+        }
+        res.clearCookie("connect.sid");
+        resolve();
+      });
+    });
+  }
 }
