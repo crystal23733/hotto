@@ -6,7 +6,7 @@ const Menu: React.FC = () => {
     <nav id="menu">
       <ul id="menu-list">
         <li>
-          <Link href="/content/pick">예상번호 돌리기</Link>
+          <Link href="/content/Pick">예상번호 돌리기</Link>
         </li>
         <li>
           <Link href="">회차별 당첨번호</Link>

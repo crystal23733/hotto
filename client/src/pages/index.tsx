@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import setNumberBgColor from "../utils/setNumberBgColor";
 import "../scss/home.scss";
-import Layout from "../app/layout";
 
 interface Data {
   drwtNo1: number;
@@ -55,7 +54,7 @@ const Home: React.FC = () => {
   }, [numbers]);
 
   return (
-    <Layout pageTitle="Home">
+    <>
       <div id="this-week">
         <div id="this-week__header">
           <h1>금주 당첨번호</h1>
@@ -81,7 +80,7 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
-    </Layout>
+    </>
   );
 };
 

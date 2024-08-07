@@ -1,4 +1,5 @@
 import React from "react";
+import FormInput from "../FormInput";
 
 interface LoginFormProps {
   email: string;
@@ -20,27 +21,23 @@ const LoginForm: React.FC<LoginFormProps> = ({
   return (
     <div>
       <form onSubmit={onSubmit} id="login-form">
-        <div>
-          <label htmlFor="email">이메일</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={onEmailChange}
-            placeholder="이메일"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={onPasswordChange}
-            placeholder="비밀번호"
-            minLength={5}
-          />
-        </div>
+        <FormInput
+          id="email"
+          type="email"
+          value={email}
+          onChange={onEmailChange}
+          placeholder="이메일"
+          label="이메일"
+        />
+        <FormInput
+          id="password"
+          type="password"
+          value={password}
+          onChange={onPasswordChange}
+          placeholder="비밀번호"
+          label="비밀번호"
+          minLength={5}
+        />
         {error && (
           <div style={{ color: "red" }} className="error-message">
             {error}
