@@ -25,10 +25,10 @@ const JoinForm: React.FC<JoinFormProps> = ({
   return (
     <form id="join-form" onSubmit={onSubmit}>
       <FormInput
-        label="아이디"
+        label="이름"
         type="text"
         id="name"
-        placeholder="아이디"
+        placeholder="이름"
         minLength={2}
         value={formData.name}
         onChange={onInputChange}

@@ -3,9 +3,7 @@ import "../scss/login.scss";
 import LoginFormContainer from "../components/login/LoginFormContainer";
 
 const Login: React.FC = () => {
-  return (
-    <LoginFormContainer />
-  );
+  return <LoginFormContainer />;
 };
 
 export default Login;

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Head from 'next/head';
+import Head from "next/head";
 import Header from "./header/Header";
 import Menu from "./Menu";
 
@@ -8,7 +8,10 @@ interface LayoutProps {
   pageTitle?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, pageTitle = "Default Title" }) => {
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  pageTitle = "Default Title",
+}) => {
   return (
     <>
       <Head>
