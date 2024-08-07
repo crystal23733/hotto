@@ -1,3 +1,7 @@
+/**
+ * 24.08.06
+ * @returns {response} - 로그아웃 요청
+ */
 export default async () => {
   try {
     const response = await fetch("http://localhost:8080/auth/logout", {

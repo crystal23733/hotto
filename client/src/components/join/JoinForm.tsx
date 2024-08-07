@@ -1,6 +1,15 @@
 import React from "react";
 import FormInput from "../FormInput";
 
+/**
+ * 24.08.08
+ * @interface JoinFormProps
+ * @property {formData} - 회원정보가 들어가야할 데이터
+ * @property {error} - 에러 내용
+ * @property {status} - 상태
+ * @property {(e) => void} onInputChange - input값을 바꿔주는 함수
+ * @property {(e) => void} onSubmit - 입력하면 실행되는 함수
+ */
 interface JoinFormProps {
   formData: {
     name: string;
@@ -15,6 +24,10 @@ interface JoinFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
+/**
+ * 24.08.08
+ * @returns {JSX.Element} - 회원가입 컴포넌트
+ */
 const JoinForm: React.FC<JoinFormProps> = ({
   formData,
   errors,

@@ -3,6 +3,10 @@ import useJoinStatus from "../../pipes/joinStatus";
 import { useRouter } from "next/router";
 import JoinForm from "./JoinForm";
 
+/**
+ * 24.08.08
+ * @returns {JSX.Element} - 회원가입에 필요한 함수
+ */
 const JoinFormContainer: React.FC = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({

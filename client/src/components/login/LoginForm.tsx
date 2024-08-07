@@ -1,6 +1,16 @@
 import React from "react";
 import FormInput from "../FormInput";
 
+/**
+ * 24.08.08
+ * @interface LoginFormProps
+ * @property {email} - 이메일
+ * @property {password} - 비밀번호
+ * @property {error} - 에러 내용
+ * @property {(e) => void} onEmailChange - input의 이메일 값을 바꿔주는 함수
+ * @property {(e) => void} onPasswordChange - input의 비밀번호 값을 바꿔주는 함수
+ * @property {(e) => void} onSubmit - 입력시 이벤트 실행시켜주는 함수
+ */
 interface LoginFormProps {
   email: string;
   password: string;
@@ -10,6 +20,10 @@ interface LoginFormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
+/**
+ * 24.08.08
+ * @returns {JSX.Element} - 로그인 컴포넌트
+ */
 const LoginForm: React.FC<LoginFormProps> = ({
   email,
   password,

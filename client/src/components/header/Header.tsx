@@ -3,6 +3,10 @@ import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import React from "react";
 
+/**
+ * 24.08.08
+ * @returns {JSX.Element} - 헤더 컴포넌트
+ */
 const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
 

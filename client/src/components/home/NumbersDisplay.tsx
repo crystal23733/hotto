@@ -1,10 +1,22 @@
 import React from "react";
 
+/**
+ * 24.08.08
+ * @interface NumbersDisplayProps
+ * @property {numbers} - 숫자
+ * @property {numberRefs} - 숫자 레퍼런스
+ */
 interface NumbersDisplayProps {
   numbers: (number | string)[];
   numberRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
 }
 
+/**
+ * 24.08.08
+ * @param {numbers}
+ * @param {numberRefs}
+ * @returns {JSX.Element} - 번호 나열 컴포넌트
+ */
 const NumbersDisplay: React.FC<NumbersDisplayProps> = ({
   numbers,
   numberRefs,

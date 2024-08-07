@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * 24.08.08
+ * todo 추후 실제 게시판 데이터 필요
+ * @returns {JSX.Element} - ContentBox 컴포넌트
+ */
 const ContentBox: React.FC = () => {
   return (
     <div id="content-box">
