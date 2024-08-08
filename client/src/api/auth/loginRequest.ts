@@ -1,3 +1,7 @@
+import FetchApi from "../lib/FetchApi";
+
+const fetchApi = new FetchApi("http://localhost:8080");
+
 /**
  * * 로그인데이터
  * @param email
@@ -5,22 +9,11 @@
  * @return response.json
  */
 export default async (email: string, password: string) => {
-  try {
-    const response = await fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-      credentials: "include",
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "로그인 실패");
-    }
-
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
+  return await fetchApi.request(
+    "/auth/login",
+    "POST",
+    { email, password },
+    undefined,
+    true,
+  );
 };

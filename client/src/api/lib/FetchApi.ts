@@ -35,7 +35,7 @@ export default class {
     method: string,
     body?: object,
     headers?: object,
-    credentials?: boolean
+    credentials?: boolean,
   ): Promise<any> {
     try {
       const response = await fetch(this.baseUrl + endpoint, {
