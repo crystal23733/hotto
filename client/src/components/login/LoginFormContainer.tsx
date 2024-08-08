@@ -1,5 +1,5 @@
 import { conditional } from "@shared/pipes/condition";
-import loginRequest from "../../api/login/loginRequest";
+import loginRequest from "../../api/auth/loginRequest";
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import { useRouter } from "next/router";

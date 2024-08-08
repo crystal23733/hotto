@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import checkAuthStatue from "../api/lib/checkAuthStatue";
+import checkAuthStatue from "../api/auth/checkAuthStatue";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
