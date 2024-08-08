@@ -9,8 +9,9 @@ const fetchApi = new FetchApi("http://localhost:8080");
  * @return response.json
  */
 export default async (email: string, password: string) => {
+  const loginUrl = process.env.NEXT_PUBLIC_AUTH_LOGIN_ENDPOINT as string;
   return await fetchApi.request(
-    "/auth/login",
+    loginUrl,
     "POST",
     { email, password },
     undefined,

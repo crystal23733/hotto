@@ -13,5 +13,6 @@ export default async (formData: {
   checkPassword: string;
   phone: string;
 }) => {
-  return await fetchApi.request("/join", "POST", formData);
+  const joinUrl = process.env.NEXT_PUBLIC_JOIN_ENDPOINT as string;
+  return await fetchApi.request(joinUrl, "POST", formData);
 };
