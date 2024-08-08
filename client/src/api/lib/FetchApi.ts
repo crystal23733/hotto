@@ -3,7 +3,7 @@
  * * API 요청을 처리하는 클래스
  */
 
-export default class {
+export default class<T> {
   private baseUrl: string;
   private defaultHeaders: object;
 
@@ -36,7 +36,7 @@ export default class {
     body?: object,
     headers?: object,
     credentials?: boolean,
-  ): Promise<any> {
+  ): Promise<T> {
     try {
       const response = await fetch(this.baseUrl + endpoint, {
         method,
@@ -48,7 +48,7 @@ export default class {
         const errorData = await response.json();
         throw new Error(errorData.message || "요청 실패");
       }
-      return await response.json();
+      return (await response.json()) as T;
     } catch (error) {
       throw error;
     }
