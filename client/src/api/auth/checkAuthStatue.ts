@@ -1,14 +1,11 @@
+import FetchApi from "../lib/FetchApi";
+
+const fetchApi = new FetchApi("http://localhost:8080");
+
 /**
  * 24.08.06
  * @returns {response} - 세션 상태 확인
  */
 export default async (): Promise<{ isAuthenticated: boolean }> => {
-  const response = await fetch("http://localhost:8080/auth/status", {
-    method: "GET",
-    credentials: "include",
-  });
-  if (!response.ok) {
-    throw new Error("로그인 상태 확인 실패");
-  }
-  return await response.json();
+  return await fetchApi.request("/auth/status", "GET", undefined, undefined, true);
 };
