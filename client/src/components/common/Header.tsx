@@ -1,8 +1,12 @@
-import logoutFetch from "client/src/api/logoutFetch";
+import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import React from "react";
 
+/**
+ * 24.08.08
+ * @returns {JSX.Element} - 헤더 컴포넌트
+ */
 const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
 
@@ -30,8 +34,8 @@ const Header: React.FC = () => {
           </>
         ) : (
           <>
-            <Link href="/login">로그인</Link>
-            <Link href="/join">회원가입</Link>
+            <Link href="/Login">로그인</Link>
+            <Link href="/Join">회원가입</Link>
           </>
         )}
       </div>

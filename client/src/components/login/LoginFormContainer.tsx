@@ -1,10 +1,14 @@
 import { conditional } from "@shared/pipes/condition";
-import loginRequest from "../../api/login/loginRequest";
+import loginRequest from "../../api/auth/loginRequest";
 import React, { useState } from "react";
-import LoginForm from "./loginForm";
+import LoginForm from "./LoginForm";
 import { useRouter } from "next/router";
 import { useAuth } from "client/src/context/AuthContext";
 
+/**
+ * 24.08.08
+ * @returns {JSX.Element} - 로그인 컴포넌트의 함수 집합
+ */
 const LoginFormContainer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

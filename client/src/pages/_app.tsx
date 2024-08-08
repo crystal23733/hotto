@@ -1,26 +1,13 @@
-import Header from "../components/header/header";
-import Menu from "../components/menu";
+import { AppProps } from "next/app";
 import { AuthProvider } from "../context/AuthContext";
+import Layout from "../components/common/Layout";
 
-interface PageProps {
-  someProp: string;
-  anotherProp: number;
-}
-
-interface MyAppProps {
-  Component: React.ComponentType<PageProps>;
-  pageProps: PageProps;
-}
-
-// 화살표 함수로 MyApp 컴포넌트를 정의
-const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <AuthProvider>
-      <Header />
-      <Menu />
-      <main>
+      <Layout pageTitle={pageProps.pageTitle}>
         <Component {...pageProps} />
-      </main>
+      </Layout>
     </AuthProvider>
   );
 };
