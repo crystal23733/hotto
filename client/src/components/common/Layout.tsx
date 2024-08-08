@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import Header from "../header/Header";
+import Header from "./Header";
 import Menu from "./Menu";
 
 /**
