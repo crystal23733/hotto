@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import { AuthProvider } from "../context/AuthContext";
-import Layout from "../components/Layout";
+import Layout from "../components/common/Layout";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

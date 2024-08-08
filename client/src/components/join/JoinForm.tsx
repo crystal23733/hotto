@@ -1,5 +1,5 @@
 import React from "react";
-import FormInput from "../FormInput";
+import FormInput from "../common/FormInput";
 
 /**
  * 24.08.08
