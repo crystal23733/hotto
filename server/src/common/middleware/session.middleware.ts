@@ -13,12 +13,11 @@ export class SessionMiddleware implements NestMiddleware {
       if (cookieErr) {
         return next(cookieErr);
       }
-
-      // const secretAge = this.configService.get<number>("SECRET_AGE");
       session({
         secret: this.configService.get<string>("SECRET_KEY")!,
         resave: false,
         saveUninitialized: false,
+        name: "LIN_HOTTO",
         cookie: {
           httpOnly: true,
           maxAge:
@@ -28,6 +27,8 @@ export class SessionMiddleware implements NestMiddleware {
         store: MongoStore.create({
           mongoUrl: this.configService.get<string>("DB_URL"),
           collectionName: "sessions",
+          autoRemove: "native", // MongoDB의 TTL 인덱스 사용
+          touchAfter: 24 * 3600, // 24시간마다 세션 업데이트
         }),
       })(req, res, (sessionErr) => {
         if (sessionErr) {

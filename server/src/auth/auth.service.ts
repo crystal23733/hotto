@@ -59,7 +59,7 @@ export class AuthService {
         if (err) {
           return reject(err);
         }
-        res.clearCookie("connect.sid");
+        res.clearCookie("LIN_HOTTO");
         resolve();
       });
     });
