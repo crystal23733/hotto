@@ -7,9 +7,9 @@ applications:
             - npm ci --cache .npm --prefer-offline
         build:
           commands:
-            - npm run build --workspace=client
+            - npm run build
       artifacts:
-        baseDirectory: client/.next
+        baseDirectory: .next   # 빌드 결과물이 위치하는 디렉토리
         files:
           - "**/*"
       cache:
@@ -17,4 +17,4 @@ applications:
           - .next/cache/**/*
           - .npm/**/*
       buildPath: /
-    appRoot: client
+    appRoot: client    # 'client' 디렉토리를 기준으로 설정
