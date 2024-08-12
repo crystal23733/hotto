@@ -23,5 +23,5 @@ export const middleware = (req: NextRequest) => {
 };
 
 export const config = {
-  matcher: ["/Logout", "/Profile", "/content/Pick", "/Login", "/Join"],
+  matcher: [...authRequiredPages, ...guestOnlyPages],
 };
