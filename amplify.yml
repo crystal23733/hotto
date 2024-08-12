@@ -1,20 +1,18 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: client
+    frontend:
       phases:
         preBuild:
           commands:
-            - npm ci --cache .npm --prefer-offline
+            - npm ci
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .next   # 빌드 결과물이 위치하는 디렉토리
+        baseDirectory: .next
         files:
           - "**/*"
       cache:
         paths:
-          - .next/cache/**/*
-          - .npm/**/*
-      buildPath: /
-    appRoot: client    # 'client' 디렉토리를 기준으로 설정
+          - node_modules/**/*
