@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,html,css,scss}\" --watch"
   },
   "dependencies": {
+    "bulma": "^1.0.2",
     "js-cookie": "^3.0.5",
     "next": "14.2.5",
     "react": "^18",
