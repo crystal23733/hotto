@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useJoinStatus from "../../pipes/joinStatus";
 import { useRouter } from "next/router";
 import JoinForm from "./JoinForm";
+import joinRequest from "client/src/api/join/joinRequest";
+import FetchApi from "client/src/api/lib/FetchApi";
+
+const fetchApi = new FetchApi(process.env.NEXT_PUBLIC_SERVER_URL as string);
 
 /**
  * 24.08.08
@@ -19,6 +23,13 @@ const JoinFormContainer: React.FC = () => {
 
   const [errors, setErrors] = useState<string[]>([]);
   const { status, handleChange } = useJoinStatus(formData);
+
+  useEffect(() => {
+    return () => {
+      // 컴포넌트가 언마운트될 때 요청 취소
+      fetchApi.abortRequest();
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,24 +50,16 @@ const JoinFormContainer: React.FC = () => {
 
     if (newErrors.length === 0) {
       try {
-        const response = await fetch("http://localhost:8080/join", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await joinRequest(formData);
 
-        const result = await response.json();
-
-        if (response.ok && !result.error) {
-          router.push("/");
+        if (!response.error) {
+          router.push("/Login");
         } else {
-          setErrors([result.error || "Form submission failed"]);
+          setErrors([response.error || "회원가입 실패"]);
         }
       } catch (error) {
-        console.error("An error occurred during form submission:", error);
-        setErrors(["An error occurred during form submission."]);
+        console.error("회원가입 중 오류 발생:", error);
+        setErrors(["회원가입 중 오류가 발생했습니다."]);
       }
     }
   };
