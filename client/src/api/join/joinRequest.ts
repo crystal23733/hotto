@@ -1,7 +1,7 @@
 import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
 
-const fetchApi = new FetchApi<{error?:string}>(serverUrl);
+const fetchApi = new FetchApi<{ error?: string }>(serverUrl);
 
 /**
  * 24.08.08
