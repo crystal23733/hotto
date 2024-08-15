@@ -1,6 +1,7 @@
+import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
 
-const fetchApi = new FetchApi("http://localhost:8080");
+const fetchApi = new FetchApi(serverUrl);
 
 /**
  * * 로그인데이터
