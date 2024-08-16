@@ -23,8 +23,8 @@ const LoginFormContainer: React.FC = () => {
   useEffect(() => {
     return () => {
       fetchApi.abortRequest();
-    }
-  })
+    };
+  });
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);

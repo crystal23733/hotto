@@ -5,7 +5,10 @@ interface OptionSelectorProps {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const OptionSelector: React.FC<OptionSelectorProps> = ({ selectedOption, onChange }) => {
+const OptionSelector: React.FC<OptionSelectorProps> = ({
+  selectedOption,
+  onChange,
+}) => {
   return (
     <div id="options">
       <label htmlFor="lottoOption">번호 뽑기 옵션:</label>
