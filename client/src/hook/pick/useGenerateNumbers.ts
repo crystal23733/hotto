@@ -1,4 +1,4 @@
-import repPick from "client/src/utils/pick/repPick";
+import randomNumber from "@shared/utils/randomNumber";
 import setNumberBgColor from "client/src/utils/setNumberBgColor";
 import { useState, useEffect, useRef } from "react";
 
@@ -22,12 +22,7 @@ const useGenerateNumbers = () => {
   const numberListRef = useRef<HTMLDivElement>(null);
 
   const generateNumbers = () => {
-    const number = Array.from({ length: 45 }, (_, i) => i + 1); // 1부터 45까지의 숫자
-    const random: number[] = [];
-    while (random.length < 6) {
-      repPick(number, random);
-    }
-    setNumbers(random);
+    setNumbers(randomNumber);
   };
 
   useEffect(() => {
