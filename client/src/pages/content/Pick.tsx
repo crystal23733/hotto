@@ -6,7 +6,7 @@ import OptionSelector from "client/src/components/pick/OptionSelector";
 import useLottoOptions from "client/src/hook/pick/useLottoOptions";
 
 const Pick: React.FC = () => {
-  const { numberListRef, generateNumbers, error } = useGenerateNumbers();
+  const { numberListRef, generateNumbers, error, loading } = useGenerateNumbers();
   const { selectedOption, handleOptionChange } = useLottoOptions();
 
   const handleClick = async (e: React.MouseEvent<HTMLInputElement>) => {
@@ -22,6 +22,8 @@ const Pick: React.FC = () => {
         selectedOption={selectedOption}
         onChange={handleOptionChange}
       />
+      {error && <div className="error-message">{error}</div>}
+      {loading && <div className="loading">...로딩중</div>}
       <NumberList numberListRef={numberListRef} />
       <input
         type="button"
@@ -29,7 +31,6 @@ const Pick: React.FC = () => {
         id="create"
         onClick={handleClick}
       />
-      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };
