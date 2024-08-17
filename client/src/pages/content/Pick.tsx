@@ -6,8 +6,12 @@ import OptionSelector from "client/src/components/pick/OptionSelector";
 import useLottoOptions from "client/src/hook/pick/useLottoOptions";
 
 const Pick: React.FC = () => {
-  const { numberListRef, generateNumbers } = useGenerateNumbers();
+  const { numberListRef, generateNumbers, error } = useGenerateNumbers();
   const { selectedOption, handleOptionChange } = useLottoOptions();
+
+  const handleClick = async (e: React.MouseEvent<HTMLInputElement>) => {
+    await generateNumbers(selectedOption);
+  };
 
   return (
     <div id="number">
@@ -23,8 +27,9 @@ const Pick: React.FC = () => {
         type="button"
         value="번호 생성"
         id="create"
-        onClick={generateNumbers}
+        onClick={handleClick}
       />
+      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };
