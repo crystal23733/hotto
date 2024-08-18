@@ -6,7 +6,8 @@ import OptionSelector from "client/src/components/pick/OptionSelector";
 import useLottoOptions from "client/src/hook/pick/useLottoOptions";
 
 const Pick: React.FC = () => {
-  const { numberListRef, generateNumbers, error, loading } = useGenerateNumbers();
+  const { numberListRef, generateNumbers, error, loading } =
+    useGenerateNumbers();
   const { selectedOption, handleOptionChange } = useLottoOptions();
 
   const handleClick = async (e: React.MouseEvent<HTMLInputElement>) => {

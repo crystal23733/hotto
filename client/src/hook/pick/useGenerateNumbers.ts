@@ -27,11 +27,11 @@ const useGenerateNumbers = () => {
 
   const generateNumbers = async (option: string) => {
     setError(null);
-    setLoading(true);
     if (option === "default") {
       setNumbers(randomNumber);
     } else {
       try {
+        setLoading(true);
         const fetchedNumbers = await lottoApi(option);
         console.log(fetchedNumbers);
         setNumbers(fetchedNumbers);
