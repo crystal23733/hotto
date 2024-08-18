@@ -1,4 +1,4 @@
-import repPick from "./repPick";
+import repPick from "../repPick";
 /**
  * 1부터 45까지의 숫자 중에서 무작위로 6개의 번호를 선택하는 함수입니다.
  * 

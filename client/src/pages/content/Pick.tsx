@@ -10,7 +10,7 @@ const Pick: React.FC = () => {
     useGenerateNumbers();
   const { selectedOption, handleOptionChange } = useLottoOptions();
 
-  const handleClick = async (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleClick = async () => {
     await generateNumbers(selectedOption);
   };
 
