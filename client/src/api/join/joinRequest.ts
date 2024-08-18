@@ -12,7 +12,6 @@ export default async (formData: {
   email: string;
   password: string;
   checkPassword: string;
-  phone: string;
 }) => {
   const joinUrl = process.env.NEXT_PUBLIC_JOIN_ENDPOINT as string;
   return await fetchApi.request(joinUrl, "POST", formData);

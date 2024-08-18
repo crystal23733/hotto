@@ -15,9 +15,6 @@ export class User {
   @Prop({ required: true, trim: true, minlength: 5 })
   password: string;
 
-  @Prop({ required: true, trim: true, unique: true })
-  phone: string;
-
   _id: ObjectId;
 }
 

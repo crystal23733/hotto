@@ -45,14 +45,6 @@ export const conditional = {
   passwordCon: (pwd: string, checkPwd: string): boolean => {
     return pwd === checkPwd;
   },
-  /**
-   * 전화번호의 유효성을 검사합니다.
-   * @param p 전화번호
-   * @returns 유효성 여부
-   */
-  phoneCon: (p: string): boolean => {
-    return p.length === 11 && p.startsWith("010");
-  },
 };
 
 /**

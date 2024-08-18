@@ -9,7 +9,7 @@ import * as bcrypt from "bcrypt";
 export class AuthService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
-  ) { }
+  ) {}
 
   async validateUser(email: string, password: string): Promise<User | null> {
     if (!conditional.emailCon(email)) {

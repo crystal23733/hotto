@@ -35,9 +35,6 @@ const useJoinStatus = (formData: Record<string, string>) => {
       case "checkPassword":
         newStatus[3] = conditional.passwordCon(formData.password, value);
         break;
-      case "phone":
-        newStatus[4] = conditional.phoneCon(value);
-        break;
       default:
         break;
     }

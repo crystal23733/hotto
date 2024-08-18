@@ -18,7 +18,6 @@ const JoinFormContainer: React.FC = () => {
     email: "",
     password: "",
     checkPassword: "",
-    phone: "",
   });
 
   const [errors, setErrors] = useState<string[]>([]);
@@ -44,7 +43,6 @@ const JoinFormContainer: React.FC = () => {
     if (!status[1]) newErrors.push("이메일이 유효하지 않습니다.");
     if (!status[2]) newErrors.push("비밀번호가 유효하지 않습니다.");
     if (!status[3]) newErrors.push("비밀번호 확인이 유효하지 않습니다.");
-    if (!status[4]) newErrors.push("전화번호가 유효하지 않습니다.");
 
     setErrors(newErrors);
 
