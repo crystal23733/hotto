@@ -1,6 +1,7 @@
+import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
 
-const fetchApi = new FetchApi("http://localhost:8080");
+const fetchApi = new FetchApi<{ error?: string }>(serverUrl);
 
 /**
  * 24.08.08
@@ -11,7 +12,6 @@ export default async (formData: {
   email: string;
   password: string;
   checkPassword: string;
-  phone: string;
 }) => {
   const joinUrl = process.env.NEXT_PUBLIC_JOIN_ENDPOINT as string;
   return await fetchApi.request(joinUrl, "POST", formData);

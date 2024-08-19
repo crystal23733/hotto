@@ -40,7 +40,6 @@ export class AuthService {
   async getAuthStatus(
     req: any,
   ): Promise<{ isAuthenticated: boolean; user?: any }> {
-    console.log("Session:", req.session); // 세션 내용 로깅
     if (req.session && req.session.userId) {
       // userId로 확인
       const user = await this.userModel.findById(req.session.userId).exec();

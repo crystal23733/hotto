@@ -16,7 +16,6 @@ interface JoinFormProps {
     email: string;
     password: string;
     checkPassword: string;
-    phone: string;
   };
   errors: string[];
   status: boolean[];
@@ -75,15 +74,6 @@ const JoinForm: React.FC<JoinFormProps> = ({
         value={formData.checkPassword}
         onChange={onInputChange}
         status={status[3]}
-      />
-      <FormInput
-        label="전화번호"
-        type="text"
-        id="phone"
-        placeholder="전화번호"
-        value={formData.phone}
-        onChange={onInputChange}
-        status={status[4]}
       />
       <input type="submit" value="회원가입" />
       {errors.length > 0 && (

@@ -5,7 +5,7 @@ import { ApiService } from "./api.service";
 export class ApiController {
   constructor(private readonly apiService: ApiService) {}
 
-  @Get("lotto-data")
+  @Get("unique-number")
   async getLottoData(): Promise<number[]> {
     return this.apiService.getLottoData();
   }

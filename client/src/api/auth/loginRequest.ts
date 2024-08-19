@@ -1,6 +1,8 @@
+import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
+import authUrl from "client/src/module/authUrl";
 
-const fetchApi = new FetchApi("http://localhost:8080");
+const fetchApi = new FetchApi(serverUrl);
 
 /**
  * * 로그인데이터
@@ -11,10 +13,10 @@ const fetchApi = new FetchApi("http://localhost:8080");
 export default async (email: string, password: string) => {
   const loginUrl = process.env.NEXT_PUBLIC_AUTH_LOGIN_ENDPOINT as string;
   return await fetchApi.request(
-    loginUrl,
+    authUrl(loginUrl),
     "POST",
     { email, password },
-    undefined,
+    null,
     true,
   );
 };

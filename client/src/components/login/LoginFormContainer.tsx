@@ -1,9 +1,13 @@
 import { conditional } from "@shared/pipes/condition";
 import loginRequest from "../../api/auth/loginRequest";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import { useRouter } from "next/router";
 import { useAuth } from "client/src/context/AuthContext";
+import FetchApi from "client/src/api/lib/FetchApi";
+import serverUrl from "client/src/module/serverUrl";
+
+const fetchApi = new FetchApi(serverUrl);
 
 /**
  * 24.08.08
@@ -15,6 +19,12 @@ const LoginFormContainer: React.FC = () => {
   const { setIsAuthenticated } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    return () => {
+      fetchApi.abortRequest();
+    };
+  });
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);

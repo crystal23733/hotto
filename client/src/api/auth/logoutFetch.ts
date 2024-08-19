@@ -1,6 +1,8 @@
+import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
+import authUrl from "client/src/module/authUrl";
 
-const fetchApi = new FetchApi("http://localhost:8080");
+const fetchApi = new FetchApi(serverUrl);
 
 /**
  * 24.08.06
@@ -8,5 +10,5 @@ const fetchApi = new FetchApi("http://localhost:8080");
  */
 export default async () => {
   const logoutUrl = process.env.NEXT_PUBLIC_AUTH_LOGOUT_ENDPOINT as string;
-  return await fetchApi.request(logoutUrl, "POST", undefined, undefined, true);
+  return await fetchApi.request(authUrl(logoutUrl), "POST", null, null, true);
 };
