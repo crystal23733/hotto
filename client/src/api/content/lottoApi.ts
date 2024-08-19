@@ -4,11 +4,5 @@ import apiUrl from "client/src/module/apiUrl";
 
 export default async (option: string): Promise<number[]> => {
   const fetchApi = new FetchApi<number[]>(serverUrl);
-  return await fetchApi.request(
-    apiUrl(`${option}`),
-    "GET",
-    undefined,
-    undefined,
-    true,
-  );
+  return await fetchApi.request(apiUrl(`${option}`), "GET", null, null, true);
 };

@@ -16,7 +16,7 @@ export default async (email: string, password: string) => {
     authUrl(loginUrl),
     "POST",
     { email, password },
-    undefined,
+    null,
     true,
   );
 };

@@ -12,7 +12,7 @@ interface AuthContextProps {
   setIsAuthenticated: (value: boolean) => void;
 }
 
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+const AuthContext = createContext<AuthContextProps | null>(null);
 
 /**
  * 인증 상태를 가져오고 설정하는 훅입니다.

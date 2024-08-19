@@ -10,11 +10,5 @@ const fetchApi = new FetchApi(serverUrl);
  */
 export default async () => {
   const logoutUrl = process.env.NEXT_PUBLIC_AUTH_LOGOUT_ENDPOINT as string;
-  return await fetchApi.request(
-    authUrl(logoutUrl),
-    "POST",
-    undefined,
-    undefined,
-    true,
-  );
+  return await fetchApi.request(authUrl(logoutUrl), "POST", null, null, true);
 };

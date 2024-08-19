@@ -41,9 +41,9 @@ export default class FetchApi<T> {
   async request(
     endpoint: string,
     method: string,
-    body?: object,
-    headers?: object,
-    credentials?: boolean,
+    body?: object | null,
+    headers?: object | null,
+    credentials?: boolean | null,
   ): Promise<T> {
     this.createAbortController(); // 요청마다 새로운 컨트롤러 생성
 
@@ -51,7 +51,7 @@ export default class FetchApi<T> {
       const response = await fetch(this.baseUrl + endpoint, {
         method,
         headers: { ...this.defaultHeaders, ...headers },
-        body: body ? JSON.stringify(body) : undefined,
+        body: body ? JSON.stringify(body) : null,
         credentials: credentials ? "include" : "same-origin",
         signal: this.controller?.signal, // AbortController의 signal을 전달하여 요청 취소 가능
       });
