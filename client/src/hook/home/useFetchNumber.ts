@@ -1,14 +1,6 @@
+import LottoData from "@shared/interface/lotto-data.interface";
+import lastNumberApi from "client/src/api/content/lastNumberApi";
 import { useState, useEffect } from "react";
-
-interface Data {
-  drwtNo1: number;
-  drwtNo2: number;
-  drwtNo3: number;
-  drwtNo4: number;
-  drwtNo5: number;
-  drwtNo6: number;
-  bnusNo: number;
-}
 /**
  * 주간 당첨 번호를 가져오는 커스텀 훅입니다.
  *
@@ -26,11 +18,10 @@ const useFetchNumbers = () => {
   useEffect(() => {
     const fetchNumbers = async () => {
       try {
-        const response = await fetch("/assets/history/history1128.json");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data: Data = await response.json();
+        // API 호출을 통해 최신 당첨 번호 데이터를 가져옵니다.
+        const data: LottoData = await lastNumberApi();
+
+        // 가져온 데이터를 가공하여 상태로 설정합니다.
         const fetchedNumbers: (number | string)[] = [
           data.drwtNo1,
           data.drwtNo2,
@@ -43,7 +34,7 @@ const useFetchNumbers = () => {
         ];
         setNumbers(fetchedNumbers);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("데이터를 가져오는 중 오류가 발생했습니다:", error);
       }
     };
     fetchNumbers();
