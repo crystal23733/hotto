@@ -1,4 +1,5 @@
 // *apiData 전부 읽어오는 함수
+import { ConfigService } from "@nestjs/config";
 import fs from "fs/promises";
 import path from "path";
 
@@ -11,7 +12,10 @@ interface HistoryData {
   drwtNo6: number;
 }
 
-const HISTORY_DIR: string = path.resolve("src/assets/history");
+// ConfigService를 통해 환경 변수로부터 HISTORY_DIR을 가져옴
+const configService = new ConfigService();
+const HISTORY_DIR: string = configService.get<string>('HISTORY_DIR') || path.resolve('src/assets/history');
+console.log(HISTORY_DIR);
 
 export default async (): Promise<Set<string>> => {
   const historyData = new Set<string>();
