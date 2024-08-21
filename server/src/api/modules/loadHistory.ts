@@ -14,7 +14,7 @@ interface HistoryData {
 
 // ConfigService를 통해 환경 변수로부터 HISTORY_DIR을 가져옴
 const configService = new ConfigService();
-const HISTORY_DIR: string = configService.get<string>('HISTORY_DIR') || path.resolve('src/assets/history');
+const HISTORY_DIR: string = configService.get<string>('HISTORY_DIR') as string;
 console.log(HISTORY_DIR);
 
 export default async (): Promise<Set<string>> => {
