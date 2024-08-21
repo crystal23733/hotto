@@ -10,7 +10,8 @@ interface HistoryData {
   drwtNo6: number;
 }
 
-const HISTORY_DIR: string = process.env.HISTORY_DIR || path.resolve("src/assets/history");
+const HISTORY_DIR: string =
+  process.env.HISTORY_DIR || path.resolve("src/assets/history");
 
 export default async (): Promise<Set<string>> => {
   const historyData = new Set<string>();
