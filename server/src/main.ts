@@ -10,8 +10,9 @@ async function bootstrap() {
   const PORT = configService.get<number>("PORT") || 3000;
 
   // CORS 설정
+  const CLIENT_URL = configService.get<string>("CLIENT_URL");
   app.enableCors({
-    origin: "http://localhost:3000",
+    origin: CLIENT_URL,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type, Authorization",
     credentials: true,
