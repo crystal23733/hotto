@@ -1,5 +1,4 @@
 import React from "react";
-import '../../scss/screens/pick-optionSelect.scss';
 
 interface OptionSelectorProps {
   selectedOption: string;
