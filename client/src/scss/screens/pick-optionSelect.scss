@@ -1,0 +1,8 @@
+.inline-container {
+  display: flex;
+  align-items: center;
+}
+
+.inline-container .label {
+  margin-right: 10px; /* 레이블과 선택 박스 사이의 간격 조정 */
+}
