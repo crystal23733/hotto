@@ -60,10 +60,29 @@ export class FileReaderService {
    * @throws {Error} - 파일을 읽는 중 오류 발생 시 예외를 던집니다.
    */
   async getLatestLottoData(): Promise<LottoData> {
-    const files = await fs.readdir(this.historyDir);
-    const latestFile = files[files.length - 1];
-    const filePath = path.join(this.historyDir, latestFile);
-    const data: LottoData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-    return data;
+    try {
+      const files = await fs.readdir(this.historyDir);
+
+      // 파일명을 숫자로 변환하여 비교하기 위해 파일명을 정수로 변환합니다.
+      const numberedFiles = files
+        .map(file => ({
+          name: file,
+          number: parseInt(file.replace(/[^0-9]/g, ''), 10),
+        }))
+        .filter(file => !isNaN(file.number)) // 숫자로 변환된 파일만 필터링
+        .sort((a, b) => b.number - a.number); // 최신 파일 순서로 정렬
+
+      if (numberedFiles.length === 0) {
+        throw new Error('로또 데이터 파일이 없습니다.');
+      }
+
+      const latestFile = numberedFiles[0].name;
+      const filePath = path.join(this.historyDir, latestFile);
+      const data: LottoData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+      return data;
+    } catch (error) {
+      console.error('Error reading latest lotto data:', error);
+      throw error;
+    }
   }
 }
