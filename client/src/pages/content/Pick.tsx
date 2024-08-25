@@ -24,7 +24,7 @@ const Pick: React.FC = () => {
         onChange={handleOptionChange}
       />
       {error && <div className="error-message">{error}</div>}
-      {loading && <div className="loading">...로딩중</div>}
+      {loading && <div className="spinner"></div>}
       <NumberList numberListRef={numberListRef} />
       <input
         type="button"
