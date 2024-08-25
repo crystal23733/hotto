@@ -1,6 +1,6 @@
-@use "../components/display.scss";
-@use "../components/height.scss";
-@use "../components/font.scss";
+@use "../../../components/display.scss";
+@use "../../../components/height.scss";
+@use "../../../components/font.scss";
 
 %rowFlex {
   @include display.flex(row, center, center);
@@ -30,6 +30,24 @@
       border-radius: 50%;
       text-align: center;
       align-content: center;
+    }
+  }
+  & > .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #0d99ff;
+    animation: spin 1s ease-in-out infinite;
+    margin-top: 20px;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
   & > input {

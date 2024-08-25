@@ -1,7 +1,7 @@
-@use "../components/display.scss";
-@use "../components/height.scss";
+@use "../../components/display.scss";
+@use "../../components/height.scss";
 
-#join-form {
+#login-form {
   @include display.flex(column, center, center);
   height: 100vh - height.$header-height - height.$menu-height;
   width: 100%;
@@ -20,18 +20,6 @@
     & > input {
       height: height.$status-box;
     }
-
-    & > div {
-      height: height.$status-box;
-      width: height.$status-box;
-      background-color: red;
-      margin-left: 5px;
-      border-radius: 5px;
-    }
-  }
-
-  & > p {
-    color: red;
   }
 
   & > input {
