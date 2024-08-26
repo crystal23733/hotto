@@ -96,11 +96,15 @@ export class FileReaderService {
   async getLottoDataForRound(round: string): Promise<LottoData> {
     try {
       const files = await fs.readdir(this.historyDir);
-      const matchedFile = files.find((file) => file.includes(round));
-      if (!matchedFile) {
+      const foundFile = files.find((file) => {
+        const nameWithoutExt = path.parse(file).name;
+        return nameWithoutExt === round;
+      });
+
+      if (!foundFile) {
         throw new Error("해당 회차의 로또 데이터 파일이 없습니다.");
       }
-      const filePath = path.join(this.historyDir, matchedFile);
+      const filePath = path.join(this.historyDir, foundFile);
       const data: LottoData = JSON.parse(await fs.readFile(filePath, "utf-8"));
       return data;
     } catch (error) {
