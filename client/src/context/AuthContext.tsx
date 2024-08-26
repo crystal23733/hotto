@@ -53,7 +53,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         const status = await checkAuthStatue();
         setIsAuthenticated(status.isAuthenticated);
       } catch (error) {
-        console.error("인증 상태 확인 중 오류 발생:", error);
         setIsAuthenticated(false);
       }
     };
