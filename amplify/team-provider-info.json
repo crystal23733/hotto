@@ -1,0 +1,15 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-myhottoclient-prod-f000a-authRole",
+      "UnauthRoleArn": "arn:aws:iam::533267292654:role/amplify-myhottoclient-prod-f000a-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::533267292654:role/amplify-myhottoclient-prod-f000a-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-myhottoclient-prod-f000a-deployment",
+      "UnauthRoleName": "amplify-myhottoclient-prod-f000a-unauthRole",
+      "StackName": "amplify-myhottoclient-prod-f000a",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:533267292654:stack/amplify-myhottoclient-prod-f000a/33d04610-6347-11ef-910a-02ecf1639107",
+      "AmplifyAppId": "d2p2xepi1kiskc"
+    }
+  }
+}
