@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { LottoService } from './services/lotto.service';
-import { FileReaderService } from './services/file-reader.service';
-import LottoData from '../../../shared/interface/lotto-data.interface';
+import { Injectable } from "@nestjs/common";
+import { LottoService } from "./services/lotto.service";
+import { FileReaderService } from "./services/file-reader.service";
+import LottoData from "../../../shared/interface/lotto-data.interface";
 
 /**
  * ApiService는 API와 관련된 로직을 처리하는 서비스입니다.
@@ -30,5 +30,16 @@ export class ApiService {
    */
   async getLatestLottoData(): Promise<LottoData> {
     return this.fileReaderService.getLatestLottoData();
+  }
+
+  /**
+   * 특정 회차의 로또 데이터를 반환합니다.
+   *
+   * @param {string} round - 회차 번호
+   * @returns {Promise<LottoData>} - 특정 회차의 로또 데이터
+   */
+  async getLottoDataForRound(round: string): Promise<LottoData> {
+    // 파일에서 회차에 맞는 로또 데이터 반환 로직 추가 필요
+    return this.fileReaderService.getLottoDataForRound(round);
   }
 }

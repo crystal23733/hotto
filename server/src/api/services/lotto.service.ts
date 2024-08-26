@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { FileReaderService } from './file-reader.service';
-import randonNumber from '@shared/utils/numberLogic/randomNumber';
+import { Injectable } from "@nestjs/common";
+import { FileReaderService } from "./file-reader.service";
+import randonNumber from "@shared/utils/numberLogic/randomNumber";
 
 /**
  * LottoService는 고유한 로또 번호 조합을 생성하는 기능을 제공합니다.
@@ -19,7 +19,7 @@ export class LottoService {
     let newNumbers: number[];
     do {
       newNumbers = randonNumber();
-    } while (history.has(newNumbers.join(',')));
+    } while (history.has(newNumbers.join(",")));
     return newNumbers;
   }
 }
