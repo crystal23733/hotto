@@ -10,6 +10,14 @@
       "StackName": "amplify-myhottoclient-prod-f000a",
       "StackId": "arn:aws:cloudformation:ap-northeast-2:533267292654:stack/amplify-myhottoclient-prod-f000a/33d04610-6347-11ef-910a-02ecf1639107",
       "AmplifyAppId": "d2p2xepi1kiskc"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2p2xepi1kiskc",
+          "type": "cicd"
+        }
+      }
     }
   }
 }
