@@ -1,6 +1,7 @@
 import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 /**
@@ -9,10 +10,12 @@ import React from "react";
  */
 const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
-
+  const router = useRouter();
   const handleLogout = async () => {
     await logoutFetch();
     setIsAuthenticated(false);
+    router.push("/");
+    router.reload();
   };
 
   if (isAuthenticated === null) {

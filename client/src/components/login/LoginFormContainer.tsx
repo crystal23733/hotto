@@ -49,6 +49,7 @@ const LoginFormContainer: React.FC = () => {
       setIsAuthenticated(true);
       await loginRequest(email, password);
       router.push("/");
+      router.reload();
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message || "로그인에 실패했습니다.");
