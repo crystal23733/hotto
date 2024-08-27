@@ -7,7 +7,6 @@ import MultipleNumberPicker from "./multipleNumberPicker";
  * 
  * @example
  * const evenNumbers = generateEvenNumbers();
- * console.log(evenNumbers); // 예: [2, 6, 12, 20, 26, 34]
  * 
  * @date 24.08.08
  */

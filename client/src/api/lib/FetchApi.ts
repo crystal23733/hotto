@@ -64,7 +64,6 @@ export default class FetchApi<T> {
       return (await response.json()) as T;
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
-        console.log("요청이 취소되었습니다."); // 요청 취소 시 메시지 출력
         throw error; // 요청 취소 에러를 다시 throw하여 처리 흐름 유지
       } else {
         throw error; // 기타 에러 throw
@@ -79,7 +78,6 @@ export default class FetchApi<T> {
   abortRequest() {
     if (this.controller) {
       this.controller.abort(); // 요청 취소
-      console.log("요청이 수동으로 취소되었습니다."); // 취소 시 메시지 출력
     }
   }
 }

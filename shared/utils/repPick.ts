@@ -10,7 +10,6 @@
  * const numbers = Array.from({ length: 45 }, (_, i) => i + 1);
  * const selectedNumbers: number[] = [];
  * repPick(numbers, selectedNumbers);
- * console.log(selectedNumbers); // 중복 없는 6개의 무작위 숫자 배열
  *
  * @date 24.08.08
  */

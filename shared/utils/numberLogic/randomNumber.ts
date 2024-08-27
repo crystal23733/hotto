@@ -9,7 +9,6 @@ import repPick from "../repPick";
  * 
  * @example
  * const randomNumbers = generateRandomNumbers();
- * console.log(randomNumbers); // 예: [5, 12, 23, 30, 34, 41]
  * 
  * @date 24.08.08
  */
