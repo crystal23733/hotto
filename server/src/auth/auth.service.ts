@@ -44,11 +44,9 @@ export class AuthService {
       // userId로 확인
       const user = await this.userModel.findById(req.session.userId).exec();
       if (user) {
-        console.log("Authenticated user:", user);
         return { isAuthenticated: true, user: user };
       }
     }
-    console.log("Not authenticated");
     return { isAuthenticated: false };
   }
 

@@ -7,7 +7,6 @@ import MultipleNumberPicker from "./multipleNumberPicker";
  * 
  * @example
  * const tripleNumbers = generateTripleNumbers();
- * console.log(tripleNumbers); // 예: [3, 9, 18, 27, 42]
  * 
  * @date 24.08.08
  */

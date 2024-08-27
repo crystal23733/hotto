@@ -39,7 +39,6 @@ const useGenerateNumbers = () => {
       try {
         setLoading(true);
         const fetchedNumbers = await lottoApi(option);
-        console.log(fetchedNumbers);
         setNumbers(fetchedNumbers);
       } catch (error) {
         if (error instanceof Error) {
