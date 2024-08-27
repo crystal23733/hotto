@@ -9,6 +9,8 @@ export class SessionMiddleware implements NestMiddleware {
   constructor(private configService: ConfigService) {}
 
   use(req: any, res: any, next: (error?: Error | any) => void) {
+    // * 환경에 따른 secure 설정
+    const isProduction = process.env.NODE_ENV === 'production';
     cookieParser()(req, res, (cookieErr) => {
       if (cookieErr) {
         return next(cookieErr);
@@ -22,7 +24,8 @@ export class SessionMiddleware implements NestMiddleware {
           httpOnly: true,
           maxAge:
             Number(this.configService.get<number>("SECRET_AGE")) || 86400000,
-          sameSite: "strict",
+          sameSite: isProduction ? "none" : "strict",
+          secure: isProduction
         },
         store: MongoStore.create({
           mongoUrl: this.configService.get<string>("DB_URL"),
