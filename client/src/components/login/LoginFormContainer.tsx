@@ -51,7 +51,7 @@ const LoginFormContainer: React.FC = () => {
       const response = await checkAuthStatue();
       if (response.isAuthenticated) {
         setIsAuthenticated(true);
-        router.reload();
+        router.push("/");
       } else {
         setError("로그인 처리 중 문제가 발생했습니다.");
       }
