@@ -23,6 +23,7 @@ export class SessionMiddleware implements NestMiddleware {
         name: "LIN_HOTTO",
         cookie: {
           httpOnly: true,
+          domain: ".hottoplay.com",
           maxAge:
             Number(this.configService.get<number>("SECRET_AGE")) || 86400000,
           sameSite: isProduction ? "none" : "strict",
