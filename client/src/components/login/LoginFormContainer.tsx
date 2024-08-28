@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "client/src/context/AuthContext";
 import FetchApi from "client/src/api/lib/FetchApi";
 import serverUrl from "client/src/module/serverUrl";
+import checkAuthStatue from "client/src/api/auth/checkAuthStatue";
 
 const fetchApi = new FetchApi(serverUrl);
 
@@ -46,10 +47,14 @@ const LoginFormContainer: React.FC = () => {
     }
 
     try {
-      setIsAuthenticated(true);
       await loginRequest(email, password);
-      router.push("/");
-      router.reload();
+      const response = await checkAuthStatue();
+      if (response.isAuthenticated) {
+        setIsAuthenticated(true);
+        router.reload();
+      } else {
+        setError("로그인 처리 중 문제가 발생했습니다.");
+      }
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message || "로그인에 실패했습니다.");
