@@ -4,11 +4,13 @@ import { User } from "../database/model/user.schema";
 import { Model } from "mongoose";
 import { conditional } from "@shared/pipes/condition";
 import * as bcrypt from "bcrypt";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
+    private readonly configService: ConfigService,
   ) {}
 
   async validateUser(email: string, password: string): Promise<User | null> {
@@ -56,7 +58,20 @@ export class AuthService {
         if (err) {
           return reject(err);
         }
-        res.clearCookie("LIN_HOTTO");
+        // 환경에 따라 domain 설정
+        const isProduction = process.env.NODE_ENV === "production";
+        // 환경 변수에서 설정값을 가져옴
+        const cookieDomain = isProduction
+          ? this.configService.get<string>("COOKIE_DOMAIN")
+          : undefined;
+
+        // 쿠키 삭제 시 도메인, 경로, secure 옵션을 명시적으로 설정
+        res.clearCookie("LIN_HOTTO", {
+          domain: cookieDomain, // 쿠키 생성 시 설정한 도메인
+          path: "/", // 기본 경로
+          secure: isProduction, // 환경변수에 따라 secure 설정
+          sameSite: isProduction ? "none" : "strict", // 환경변수에 따라 sameSite 설정
+        });
         resolve();
       });
     });
