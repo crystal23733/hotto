@@ -15,7 +15,6 @@ const Header: React.FC = () => {
     await logoutFetch();
     setIsAuthenticated(false);
     router.push("/");
-    router.reload();
   };
 
   if (isAuthenticated === null) {
