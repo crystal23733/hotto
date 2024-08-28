@@ -1,3 +1,4 @@
+import checkAuthStatue from "client/src/api/auth/checkAuthStatue";
 import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
@@ -13,9 +14,11 @@ const Header: React.FC = () => {
   const router = useRouter();
   const handleLogout = async () => {
     await logoutFetch();
-    setIsAuthenticated(false);
-    router.push("/");
-    router.reload();
+    const response = await checkAuthStatue();
+    if (response.isAuthenticated) {
+      setIsAuthenticated(false);
+      router.reload();
+    }
   };
 
   if (isAuthenticated === null) {
