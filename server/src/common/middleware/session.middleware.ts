@@ -25,7 +25,7 @@ export class SessionMiddleware implements NestMiddleware {
           httpOnly: true,
           maxAge:
             Number(this.configService.get<number>("SECRET_AGE")) || 86400000,
-          sameSite: "strict",
+          sameSite: isProduction ? "none" : "strict",
           secure: isProduction
         },
         store: MongoStore.create({
@@ -34,6 +34,7 @@ export class SessionMiddleware implements NestMiddleware {
           autoRemove: "native", // MongoDB의 TTL 인덱스 사용
           touchAfter: 24 * 3600, // 24시간마다 세션 업데이트
         }),
+        proxy: isProduction
       })(req, res, (sessionErr) => {
         if (sessionErr) {
           console.error("Session middleware 에러:", sessionErr);
