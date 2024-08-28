@@ -17,7 +17,7 @@ const Header: React.FC = () => {
     const response = await checkAuthStatue();
     if (response.isAuthenticated) {
       setIsAuthenticated(false);
-      router.reload();
+      router.push("/");
     }
   };
 
