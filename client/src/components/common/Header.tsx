@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const handleLogout = async () => {
     await logoutFetch();
     const response = await checkAuthStatus();
-    if(!response.isAuthenticated){
+    if (!response.isAuthenticated) {
       setIsAuthenticated(false);
       router.reload();
     }
