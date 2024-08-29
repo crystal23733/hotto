@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "client/src/context/AuthContext";
 import FetchApi from "client/src/api/lib/FetchApi";
 import serverUrl from "client/src/module/serverUrl";
-import checkAuthStatue from "client/src/api/auth/checkAuthStatue";
+import checkAuthStatus from "client/src/api/auth/checkAuthStatus";
 
 const fetchApi = new FetchApi(serverUrl);
 
@@ -48,7 +48,7 @@ const LoginFormContainer: React.FC = () => {
 
     try {
       await loginRequest(email, password);
-      const response = await checkAuthStatue();
+      const response = await checkAuthStatus();
       if (response.isAuthenticated) {
         setIsAuthenticated(true);
         router.reload();

@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import checkAuthStatue from "../api/auth/checkAuthStatue";
+import checkAuthStatus from "../api/auth/checkAuthStatus";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const fetchAuthStatus = async () => {
       try {
-        const status = await checkAuthStatue();
+        const status = await checkAuthStatus();
         setIsAuthenticated(status.isAuthenticated);
       } catch (error) {
         setIsAuthenticated(false);
