@@ -8,7 +8,7 @@ import ILottoRoundData from "@shared/interface/lottoRound.interface";
  * @param {string} round - 조회할 로또 회차
  * @returns {{data: LottoData | null, loading: boolean, error: Error | null}} 로또 데이터, 로딩 상태, 에러 상태
  */
-export default async (round: string) => {
+export default (round: string) => {
   const { data, loading, error, setData, setLoading, setError } =
     useApiRequest<ILottoRoundData>();
 
