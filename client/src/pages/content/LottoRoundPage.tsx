@@ -1,3 +1,4 @@
+import Loading from "client/src/components/common/Loading";
 import LottoDataDisplay from "client/src/components/lottoRoundPage/LottoDataDisplay";
 import RoundSelectOption from "client/src/components/lottoRoundPage/RoundSelectOption";
 import useLottoRound from "client/src/hook/LottoRoundPage/useLottoRound";
@@ -23,13 +24,9 @@ const LottoRoundPage: React.FC = () => {
         maxRound={1134}
       />{" "}
       {/* 최대 회차 설정 */}
-      {loading ? (
-        <div>로딩중...</div>
-      ) : error ? (
-        <p>에러 발생: {error.message}</p>
-      ) : (
-        data && <LottoDataDisplay data={data} />
-      )}
+      {loading && <Loading />}
+      {error && <p>에러 발생: {error.message}</p>}
+      {data && <LottoDataDisplay data={data} />}
     </div>
   );
 };
