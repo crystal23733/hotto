@@ -1,6 +1,6 @@
 import LottoRoundPageApi from "client/src/api/content/LottoRoundPageApi";
 import { useEffect } from "react";
-import useApiRequest from "../common/useApiRequest";
+import useApiRequest from "../common/api/useApiRequest";
 import ILottoRoundData from "@shared/interface/lottoRound.interface";
 
 /**

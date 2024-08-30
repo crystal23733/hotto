@@ -1,6 +1,6 @@
 import lastNumberApi from "client/src/api/content/lastNumberApi";
 import { useEffect } from "react";
-import useApiRequest from "../common/useApiRequest";
+import useApiRequest from "../common/api/useApiRequest";
 
 /**
  * 최신 로또 회차를 가져오는 커스텀 훅
