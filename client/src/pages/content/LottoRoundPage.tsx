@@ -1,32 +1,32 @@
-import Loading from "client/src/components/common/Loading";
-import LottoDataDisplay from "client/src/components/lottoRoundPage/LottoDataDisplay";
 import RoundSelectOption from "client/src/components/lottoRoundPage/RoundSelectOption";
-import useLottoRound from "client/src/hook/LottoRoundPage/useLottoRound";
 import React, { useState } from "react";
+import "../../scss/lottoRoundPage.scss";
+import LottoDataDetails from "client/src/components/common/LottoDataDetails";
+import numberDataFetch from "client/src/hook/common/api/numberDataFetch";
+import formatLottoNumbers from "client/src/utils/formatLottoNumbers";
+import useNumberBalls from "client/src/hook/common/useNumberBall";
+import NumberBalls from "client/src/components/common/NumberBalls";
+import Loading from "client/src/components/common/Loading";
 
 /**
- * 특정 회차의 로또 당첨 번호를 조회하는 페이지 컴포넌트
- * @returns {JSX.Element} 로또 회차별 데이터 페이지 컴포넌트
+ * 특정 회차의 로또 데이터를 가져와서 표시하는 페이지 컴포넌트입니다.
+ *
+ * @returns {JSX.Element} - 로또 회차 페이지를 구성하는 JSX 요소입니다.
  */
 const LottoRoundPage: React.FC = () => {
-  const [selectedRound, setSelectedRound] = useState<string>("history1134"); // 초기값을 최신 회차로 설정
-  const { data, loading, error } = useLottoRound(selectedRound);
-
-  const handleRoundSelect = (round: string) => {
-    setSelectedRound(round);
-  };
+  const [selectedRound, setSelectedRound] = useState<string>("");
+  const { data, loading, error } = numberDataFetch(selectedRound);
+  const numbers = formatLottoNumbers(data);
+  const numberRefs = useNumberBalls(numbers);
 
   return (
     <div>
-      <h1>로또 당첨 번호 조회</h1>
-      <RoundSelectOption
-        onSelectRound={handleRoundSelect}
-        maxRound={1134}
-      />{" "}
-      {/* 최대 회차 설정 */}
+      <RoundSelectOption onSelectRound={setSelectedRound} maxRound={1134} />{" "}
+      {/* 최대 회차는 예시 */}
       {loading && <Loading />}
-      {error && <p>에러 발생: {error.message}</p>}
-      {data && <LottoDataDisplay data={data} />}
+      {error && <p>에러가 발생했습니다: {error.message}</p>}
+      {data && <NumberBalls numbers={numbers} numberRefs={numberRefs} />}
+      {data && <LottoDataDetails data={data} />}
     </div>
   );
 };
