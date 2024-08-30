@@ -4,3 +4,7 @@
 // *screens
 @use "../screens/header.scss";
 @use "../screens/menu.scss";
+
+main {
+  height: 85vh;
+}
