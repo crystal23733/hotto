@@ -15,10 +15,13 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {loading && <Loading />}
-      {error && <p>에러가 발생했습니다: {error.message}</p>}
-      {data && <NumberBalls numbers={numbers} numberRefs={numberRefs} />}
-      {data && <LottoDataDetails data={data} />}
+      <div id="this-week">
+        <h1>금주의 당첨번호</h1>
+        {loading && <Loading />}
+        {error && <p>에러가 발생했습니다: {error.message}</p>}
+        {data && <NumberBalls numbers={numbers} numberRefs={numberRefs} />}
+        {data && <LottoDataDetails data={data} />}
+      </div>
       <ContentBox />
     </>
   );
