@@ -60,7 +60,7 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
     );
 
   return (
-    <>
+    <div id="select-option-container">
       <div className="field">
         <label htmlFor="lottoRoundSearch" className="label">
           회차 검색
@@ -76,22 +76,24 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
           />
         </div>
       </div>
-      <label htmlFor="lottoRoundSelect">회차 선택</label>
-      <div className="select">
-        <select
-          id="lottoRoundSelect"
-          value={selectRound}
-          onChange={handleChange}
-        >
-          <option value="">회차를 선택하세요.</option>
-          {filteredRounds.map((roundNumber) => (
-            <option value={`history${roundNumber}`} key={roundNumber}>
-              {roundNumber} 회차
-            </option>
-          ))}
-        </select>
+      <div className="field">
+        <label htmlFor="lottoRoundSelect">회차 선택</label>
+        <div className="select">
+          <select
+            id="lottoRoundSelect"
+            value={selectRound}
+            onChange={handleChange}
+          >
+            <option value="">회차를 선택하세요.</option>
+            {filteredRounds.map((roundNumber) => (
+              <option value={`history${roundNumber}`} key={roundNumber}>
+                {roundNumber} 회차
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

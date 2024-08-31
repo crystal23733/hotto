@@ -23,10 +23,12 @@ const LottoRoundPage: React.FC = () => {
     <div id="round-container">
       <RoundSelectOption onSelectRound={setSelectedRound} maxRound={1134} />{" "}
       {/* 최대 회차는 예시 */}
-      {loading && <Loading />}
-      {error && <p>에러가 발생했습니다: {error.message}</p>}
-      {data && <NumberBalls numbers={numbers} numberRefs={numberRefs} />}
-      {data && <LottoDataDetails data={data} />}
+      <div id="round-description">
+        {loading && <Loading />}
+        {error && <p>에러가 발생했습니다: {error.message}</p>}
+        {data && <NumberBalls numbers={numbers} numberRefs={numberRefs} />}
+        {data && <LottoDataDetails data={data} />}
+      </div>
     </div>
   );
 };
