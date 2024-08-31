@@ -30,6 +30,7 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
   maxRound,
 }) => {
   const [selectRound, setSelectRound] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   /**
    * handleChange - 사용자가 드롭다운에서 다른 회차를 선택할 때 호출되는 함수
@@ -41,8 +42,37 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
     setSelectRound(selectedValue);
     onSelectRound(selectedValue);
   };
+
+  /**
+   * handleSearchChange - 사용자가 검색 입력란에 텍스트를 입력할 때 호출되는 함수
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - 검색 입력란에서 발생한 change 이벤트 객체
+   */
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // * 검색어에 따라 필터링 된 회차 목록을 생성
+  const filteredRounds = [...Array(maxRound)]
+    .map((_, index) => maxRound - index)
+    .filter((roundNumber) =>
+      roundNumber.toString().includes(searchTerm.trim()),
+    );
+
   return (
     <>
+      <label htmlFor="lottoRoundSearch" className="label">
+        회차 검색
+      </label>
+      <div className="control">
+        <input
+          type="text"
+          id="lottoRoundSearch"
+          placeholder="찾고싶은 회차를 입력해주세요."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+      </div>
       <label htmlFor="lottoRoundSelect">회차 선택</label>
       <div className="select">
         <select
@@ -51,14 +81,11 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
           onChange={handleChange}
         >
           <option value="">회차를 선택하세요.</option>
-          {[...Array(maxRound)].map((_, index) => {
-            const roundNumber = maxRound - index; // * 최신회차가 상단에 오도록 설정
-            return (
-              <option value={`history${roundNumber}`} key={roundNumber}>
-                {roundNumber} 회차
-              </option>
-            );
-          })}
+          {filteredRounds.map((roundNumber) => (
+            <option value={`history${roundNumber}`} key={roundNumber}>
+              {roundNumber} 회차
+            </option>
+          ))}
         </select>
       </div>
     </>
