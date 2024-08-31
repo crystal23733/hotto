@@ -2,7 +2,7 @@
 @use "../../components/font.scss";
 @use "../../components/height.scss";
 
-#this-week{
+#this-week {
   @include display.flex(column, space-evenly, center);
   height: height.$this-week-height;
   & > h1 {
@@ -13,7 +13,7 @@
     @include display.flex(column, center, flex-start);
     width: 100%;
     padding: 20px;
-    & > p{
+    & > p {
       padding: 5px;
     }
     font-weight: font.$sub-weight;
