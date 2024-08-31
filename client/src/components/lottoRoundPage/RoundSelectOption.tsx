@@ -61,17 +61,20 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
 
   return (
     <>
-      <label htmlFor="lottoRoundSearch" className="label">
-        회차 검색
-      </label>
-      <div className="control">
-        <input
-          type="text"
-          id="lottoRoundSearch"
-          placeholder="찾고싶은 회차를 입력해주세요."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
+      <div className="field">
+        <label htmlFor="lottoRoundSearch" className="label">
+          회차 검색
+        </label>
+        <div className="control">
+          <input
+            type="text"
+            id="lottoRoundSearch"
+            className="input"
+            placeholder="찾고싶은 회차를 입력해주세요."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </div>
       </div>
       <label htmlFor="lottoRoundSelect">회차 선택</label>
       <div className="select">
