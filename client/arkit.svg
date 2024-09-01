@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1044px" preserveAspectRatio="none" style="width:1279px;height:1044px;" version="1.1" viewBox="0 0 1279 1044" width="1279px" zoomAndPan="magnify"><defs/><g><ellipse cx="491.6274" cy="516.242" fill="#F8F8F8" rx="25.6274" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="32" x="475.6274" y="519.9842">_app</text><ellipse cx="84.271" cy="797.8542" fill="#F8F8F8" rx="54.771" ry="13.3542" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="74" x="47.271" y="801.5964">_document</text><ellipse cx="84.3701" cy="848.242" fill="#F8F8F8" rx="29.8701" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="38" x="65.3701" y="851.9842">apiUrl</text><!--MD5=[d69747b1a19bc3955cf78d113eab83f1]
+entity _AuthContext--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="89" x="668" y="473"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="678" y="495.0059">AuthContext</text><ellipse cx="84.734" cy="897.242" fill="#F8F8F8" rx="36.234" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="47" x="61.234" y="900.9842">authUrl</text><ellipse cx="1078.6268" cy="490.0254" fill="#F8F8F8" rx="63.1268" ry="15.0254" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="1030.6268" y="493.7675">checkAuthStatus</text><ellipse cx="491.3762" cy="21.242" fill="#F8F8F8" rx="50.3762" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="457.8762" y="24.9842">ContentBox</text><!--MD5=[25621e2fe81645fd1facaa5e62d47718]
+entity _FetchApi--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="68" x="1200" y="727"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="48" x="1210" y="749.0059">FetchApi</text><ellipse cx="280.6526" cy="72.9305" fill="#F8F8F8" rx="72.6526" ry="16.9305" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="119" x="221.1526" y="76.6727">formatLottoNumbers</text><ellipse cx="898.7193" cy="672.242" fill="#F8F8F8" rx="44.7193" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="59" x="869.2193" y="675.9842">FormInput</text><ellipse cx="1078.2843" cy="590.242" fill="#F8F8F8" rx="31.2843" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="40" x="1058.2843" y="593.9842">Header</text><ellipse cx="84.299" cy="633.242" fill="#F8F8F8" rx="22.799" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="28" x="70.299" y="636.9842">Join</text><ellipse cx="712.4767" cy="647.242" fill="#F8F8F8" rx="40.4767" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="53" x="685.9767" y="650.9842">JoinForm</text><ellipse cx="491.5172" cy="633.0034" fill="#F8F8F8" rx="68.0172" ry="16.0034" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="108" x="437.5172" y="636.7456">JoinFormContainer</text><!--MD5=[2048f65bacb8da4195df4e0ee94029b2]
+entity _JoinInput--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="83" x="43" y="933"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="53" y="955.0059">JoinInput</text><ellipse cx="1078.5862" cy="640.2172" fill="#F8F8F8" rx="56.5862" ry="13.7172" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="79" x="1039.0862" y="643.9594">joinRequest</text><ellipse cx="898.7193" cy="599.242" fill="#F8F8F8" rx="44.7193" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="59" x="869.2193" y="602.9842">joinStatus</text><ellipse cx="84.281" cy="1008.0562" fill="#F8F8F8" rx="78.281" ry="18.0562" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="132" x="18.281" y="1011.7984">JoinStatusInterface</text><ellipse cx="1078.7284" cy="691.9457" fill="#F8F8F8" rx="62.7284" ry="14.9457" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="95" x="1031.2284" y="695.6879">lastNumberApi</text><ellipse cx="898.3701" cy="542.242" fill="#F8F8F8" rx="29.8701" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="38" x="879.3701" y="545.9842">Layout</text><ellipse cx="491.3198" cy="121.242" fill="#F8F8F8" rx="34.8198" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="45" x="468.8198" y="124.9842">Loading</text><ellipse cx="84.4558" cy="709.242" fill="#F8F8F8" rx="28.4558" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="36" x="66.4558" y="712.9842">Login</text><ellipse cx="712.4264" cy="696.242" fill="#F8F8F8" rx="45.4264" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="682.4264" y="699.9842">LoginForm</text><ellipse cx="491.4521" cy="709.0904" fill="#F8F8F8" rx="70.9521" ry="16.5904" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="115" x="433.9521" y="712.8326">LoginFormContainer</text><ellipse cx="1078.271" cy="743.8542" fill="#F8F8F8" rx="54.771" ry="13.3542" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="74" x="1041.271" y="747.5964">loginRequest</text><ellipse cx="1078.5862" cy="794.2172" fill="#F8F8F8" rx="56.5862" ry="13.7172" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="79" x="1039.0862" y="797.9594">logoutFetch</text><ellipse cx="1078.2696" cy="844.242" fill="#F8F8F8" rx="39.7696" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="52" x="1052.2696" y="847.9842">lottoApi</text><ellipse cx="491.5267" cy="172.1053" fill="#F8F8F8" rx="63.5267" ry="15.1053" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="97" x="443.0267" y="175.8475">LottoDataDetails</text><ellipse cx="280.5172" cy="798.0034" fill="#F8F8F8" rx="68.0172" ry="16.0034" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="108" x="226.5172" y="801.7456">LottoRoundPage</text><ellipse cx="1078.5339" cy="898.2068" fill="#F8F8F8" rx="76.5339" ry="17.7068" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="128" x="1014.5339" y="901.949">LottoRoundPageApi</text><ellipse cx="1078.7132" cy="541.242" fill="#F8F8F8" rx="24.2132" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="30" x="1063.7132" y="544.9842">Menu</text><ellipse cx="280.6295" cy="850.9259" fill="#F8F8F8" rx="55.1295" ry="13.4259" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="75" x="243.1295" y="854.6681">middleware</text><ellipse cx="280.2904" cy="901.242" fill="#F8F8F8" rx="51.7904" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="69" x="245.7904" y="904.9842">next-env.d</text><ellipse cx="491.4117" cy="223.242" fill="#F8F8F8" rx="53.9117" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="72" x="455.4117" y="226.9842">NumberBalls</text><ellipse cx="712.6408" cy="298.9282" fill="#F8F8F8" rx="65.1408" ry="15.4282" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="101" x="662.1408" y="302.6704">numberDataFetch</text><ellipse cx="280.7013" cy="950.9403" fill="#F8F8F8" rx="57.7013" ry="13.9403" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="82" x="239.7013" y="954.6824">NumbersList</text><ellipse cx="280.6408" cy="1003.9282" fill="#F8F8F8" rx="65.1408" ry="15.4282" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="230.1408" y="1007.6704">OptionSelector</text><ellipse cx="84.2843" cy="172.242" fill="#F8F8F8" rx="31.2843" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="64.2843" y="175.9842">pages</text><ellipse cx="491.5919" cy="798.242" fill="#F8F8F8" rx="22.0919" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="478.0919" y="801.9842">Pick</text><ellipse cx="491.5339" cy="852.2068" fill="#F8F8F8" rx="76.5339" ry="17.7068" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="128" x="427.5339" y="855.949">RoundSelectOption</text><ellipse cx="491.7193" cy="906.242" fill="#F8F8F8" rx="44.7193" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="59" x="462.2193" y="909.9842">serverUrl</text><ellipse cx="491.2999" cy="959.86" fill="#F8F8F8" rx="74.7999" ry="17.36" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="124" x="429.2999" y="963.6022">setNumberBgColor</text><ellipse cx="898.4548" cy="378.091" fill="#F8F8F8" rx="58.4548" ry="14.091" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="856.4548" y="381.8331">useApiRequest</text><ellipse cx="491.5551" cy="378.111" fill="#F8F8F8" rx="93.5551" ry="21.111" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="166" x="408.5551" y="381.8532">useFetchedLastestRound</text><ellipse cx="491.3501" cy="1017.17" fill="#F8F8F8" rx="68.8501" ry="16.17" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="110" x="436.3501" y="1020.9122">useFetchNumber</text><ellipse cx="712.7009" cy="797.9402" fill="#F8F8F8" rx="82.7009" ry="18.9402" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="142" x="641.7009" y="801.6824">useGenerateNumbers</text><ellipse cx="712.6876" cy="856.8375" fill="#F8F8F8" rx="69.6876" ry="16.3375" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="112" x="656.6876" y="860.5797">useLottoOptions</text><ellipse cx="491.7352" cy="437.847" fill="#F8F8F8" rx="64.7352" ry="15.347" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="100" x="441.7352" y="441.5892">useLottoRound</text><ellipse cx="491.7159" cy="320.2432" fill="#F8F8F8" rx="59.2159" ry="14.2432" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="86" x="448.7159" y="323.9854">useNumberBall</text><ellipse cx="712.7259" cy="913.8452" fill="#F8F8F8" rx="72.2259" ry="16.8452" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="118" x="653.7259" y="917.5874">useSetNumberIds</text><!--MD5=[e0106cd34e7c39bf70ad4465d1624c1c]
+link <b>_app</b> to _AuthContext--><path d="M516.774,513.118 C551.839,508.955 617.419,501.169 662.722,495.791 " fill="none" id="&lt;b&gt;_app&lt;/b&gt;-&gt;_AuthContext" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="667.866,495.18,658.4569,492.2698,662.9009,495.7699,659.4008,500.2139,667.866,495.18" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[87ae7a8e0ab67720be16c5dbadee0f90]
+link <b>_app</b> to Layout--><path d="M516.923,517.568 C586.203,522.016 784.105,534.72 863.72,539.831 " fill="none" id="&lt;b&gt;_app&lt;/b&gt;-&gt;Layout" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="868.79,540.157,860.0657,535.5867,863.8003,539.8356,859.5515,543.5702,868.79,540.157" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[1e3681322a183753987c96f82a00efb1]
+link _AuthContext to checkAuthStatus--><path d="M757.045,490 C819.794,490 936.202,490 1010.1,490 " fill="none" id="_AuthContext-&gt;checkAuthStatus" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1015.35,490,1006.35,486,1010.35,490,1006.35,494,1015.35,490" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[cd68136fe40fd0c03809a7e53dbc259a]
+link checkAuthStatus to _FetchApi--><path d="M1126.79,499.652 C1137.12,503.609 1147.27,509.175 1155,517 C1212.26,574.979 1227.55,676.835 1231.58,721.705 " fill="none" id="checkAuthStatus-&gt;_FetchApi" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1232.02,726.888,1235.2477,717.5831,1231.5989,721.9058,1227.2762,718.2569,1232.02,726.888" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[c162486bc59441cdee10f2dba0f0d3f4]
+link <b>Join</b> to JoinFormContainer--><path d="M107.562,633 C165.56,633 324.294,633 418.192,633 " fill="none" id="&lt;b&gt;Join&lt;/b&gt;-&gt;JoinFormContainer" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="423.447,633,414.447,629,418.447,633,414.447,637,423.447,633" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[9c6f626352f1767dbf18372c2d2c6b8c]
+link JoinForm to FormInput--><path d="M750.293,651.999 C779.859,656.016 821.496,661.673 852.948,665.947 " fill="none" id="JoinForm-&gt;FormInput" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="857.905,666.62,849.5252,661.4452,852.9505,665.9471,848.4486,669.3724,857.905,666.62" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[ebc40017af51d64225490d867a541413]
+link JoinFormContainer to JoinForm--><path d="M557.318,637.144 C592.73,639.407 635.667,642.152 667.228,644.17 " fill="none" id="JoinFormContainer-&gt;JoinForm" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="672.587,644.512,663.8601,639.9467,667.5972,644.1934,663.3504,647.9305,672.587,644.512" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[a1a028396170e35aa61f0a16eb4a20c3]
+link JoinFormContainer to joinStatus--><path d="M555.781,627.688 C637.362,620.839 777.372,609.085 850.268,602.965 " fill="none" id="JoinFormContainer-&gt;joinStatus" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="855.399,602.534,846.0958,599.3014,850.4165,602.9525,846.7654,607.2733,855.399,602.534" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[9daa6143b23145e978924fd1740e957a]
+link <b>joinRequest</b> to _FetchApi--><path d="M1118.27,649.635 C1130.55,653.641 1143.83,659.021 1155,666 C1179.25,681.156 1201.76,705.175 1216.29,722.557 " fill="none" id="&lt;b&gt;joinRequest&lt;/b&gt;-&gt;_FetchApi" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1219.82,726.824,1217.177,717.3364,1216.6377,722.9675,1211.0066,722.4281,1219.82,726.824" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[8006259898b8bacb0dba212870591725]
+link <b>lastNumberApi</b> to _FetchApi--><path d="M1115.49,704.192 C1139.41,712.297 1170.78,722.924 1195.09,731.159 " fill="none" id="&lt;b&gt;lastNumberApi&lt;/b&gt;-&gt;_FetchApi" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1199.86,732.773,1192.6138,726.1027,1195.1231,731.1726,1190.0532,733.6818,1199.86,732.773" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[7fef9b0d0959dc7ffa920b41adb61fdc]
+link Layout to Header--><path d="M924.25,548.674 C956.299,557.317 1012.15,572.377 1046.85,581.734 " fill="none" id="Layout-&gt;Header" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1051.81,583.072,1044.1769,576.8481,1046.9856,581.7585,1042.0753,584.5671,1051.81,583.072" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[c25a01d2cdf025838d0d65c2230431a2]
+link Layout to Menu--><path d="M928.893,541.835 C962.261,541.647 1016.32,541.344 1049.22,541.159 " fill="none" id="Layout-&gt;Menu" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1054.31,541.13,1045.2873,537.1815,1049.3101,541.1586,1045.333,545.1814,1054.31,541.13" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[326d11019389733d416cc32fe23b0ca6]
+link <b>Login</b> to LoginFormContainer--><path d="M113.019,709 C174.263,709 323.609,709 415.025,709 " fill="none" id="&lt;b&gt;Login&lt;/b&gt;-&gt;LoginFormContainer" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="420.146,709,411.146,705,415.146,709,411.146,713,420.146,709" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[f2973da877dcba2b576eda22adb338de]
+link LoginForm to FormInput--><path d="M754.336,690.674 C783.36,686.888 822.347,681.803 852.306,677.895 " fill="none" id="LoginForm-&gt;FormInput" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="857.412,677.229,847.97,674.4273,852.454,677.8761,849.0053,682.3601,857.412,677.229" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[449dd45b25f24a27c5b2739d89ba4cbc]
+link LoginFormContainer to LoginForm--><path d="M560.592,704.958 C593.59,702.999 632.471,700.691 662.502,698.909 " fill="none" id="LoginFormContainer-&gt;LoginForm" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="667.622,698.605,658.4002,695.1469,662.6308,698.9021,658.8756,703.1328,667.622,698.605" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f4b967dd98d952980fcde846a5c071c4]
+link LoginFormContainer to loginRequest--><path d="M557.511,715.153 C580.409,717.193 606.334,719.36 630,721 C769.438,730.665 933.579,738.093 1019.06,741.663 " fill="none" id="LoginFormContainer-&gt;loginRequest" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1024.08,741.872,1015.2472,737.5152,1019.084,741.672,1014.9272,745.5088,1024.08,741.872" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[cc94dd1d7c82f28477e4e8b873d9dde8]
+link loginRequest to _FetchApi--><path d="M1133.62,744 C1153.82,744 1176.31,744 1194.78,744 " fill="none" id="loginRequest-&gt;_FetchApi" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1199.88,744,1190.88,740,1194.88,744,1190.88,748,1199.88,744" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[85a3d89a4bee92f40017f6d6c558a879]
+link <b>logoutFetch</b> to _FetchApi--><path d="M1112.81,783.151 C1136.95,775.288 1169.63,764.641 1194.82,756.435 " fill="none" id="&lt;b&gt;logoutFetch&lt;/b&gt;-&gt;_FetchApi" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1199.76,754.828,1189.962,753.828,1195.0084,756.3843,1192.4521,761.4306,1199.76,754.828" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[0e8ad1798586394d17fe7043bc0531ec]
+link <b>lottoApi</b> to _FetchApi--><path d="M1111.72,836.75 C1125.65,832.771 1141.76,826.988 1155,819 C1178.73,804.688 1201.01,781.97 1215.63,765.284 " fill="none" id="&lt;b&gt;lottoApi&lt;/b&gt;-&gt;_FetchApi" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1219.18,761.181,1210.2698,765.3772,1215.9116,764.9649,1216.324,770.6067,1219.18,761.181" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[4d4311f7e8f2599a9bb45060bdb0c263]
+link <b>LottoRoundPageApi</b> to _FetchApi--><path d="M1128.36,884.563 C1137.82,880.543 1147.2,875.434 1155,869 C1188.99,840.955 1212.56,794.047 1224.34,766.365 " fill="none" id="&lt;b&gt;LottoRoundPageApi&lt;/b&gt;-&gt;_FetchApi" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1226.4,761.429,1219.2405,768.1923,1224.4731,766.0428,1226.6225,771.2753,1226.4,761.429" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[a3866136b575d096ff09248493d3b3ab]
+link numberDataFetch to useApiRequest--><path d="M745.131,312.581 C778.33,326.835 830.309,349.152 864.143,363.678 " fill="none" id="numberDataFetch-&gt;useApiRequest" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="868.998,365.763,862.3065,358.5364,864.4037,363.7901,859.1499,365.8873,868.998,365.763" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[2a9b19e6be9aa4d49462772c4a34d73a]
+link <b>pages</b> to ContentBox--><path d="M93.0467,159.297 C109.802,132.432 153.01,70.177 208,44 C283.043,8.28 382.036,9.68 440.71,14.77 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;ContentBox" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="445.91,15.24,437.3072,10.4449,440.9304,14.7893,436.5861,18.4124,445.91,15.24" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[a0cf82532d55c9d8259cd8dc5567f2a7]
+link <b>pages</b> to formatLottoNumbers--><path d="M104.5168,161.868 C128.534,149.116 171.173,126.63 208,108 C219.33,102.268 231.737,96.143 242.989,90.644 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;formatLottoNumbers" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="247.734,88.329,237.8915,88.6819,243.2406,90.5221,241.4004,95.8713,247.734,88.329" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[0bf8da4a139a483e97d34de13fedaeb0]
+link <b>pages</b> to Loading--><path d="M114.686,167.798 C139.493,164.263 176.06,159.138 208,155 C295.561,143.656 398.562,131.579 452.761,125.322 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;Loading" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="457.851,124.735,448.4511,121.7951,452.8841,125.3093,449.37,129.7422,457.851,124.735" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[2967bad79074abae83538a9353f0d5a4]
+link <b>pages</b> to LottoDataDetails--><path d="M116.273,172 C181.249,172 333.755,172 422.732,172 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;LottoDataDetails" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="427.972,172,418.972,168,422.972,172,418.972,176,427.972,172" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[9b6cbd18d998c3537427cf5aae559440]
+link <b>pages</b> to NumberBalls--><path d="M114.953,175.709 C183.04,184.283 352.081,205.57 438.23,216.418 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;NumberBalls" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="443.279,217.054,434.849,211.9614,438.3181,216.4296,433.8499,219.8988,443.279,217.054" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[4291c64d0663e79d5df21a29258b49b9]
+link <b>pages</b> to numberDataFetch--><path d="M108.741,180.327 C133.203,188.871 172.947,202.134 208,211 C364.99,250.708 554.008,278.521 649.622,291.221 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;numberDataFetch" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="654.664,291.888,646.2663,286.7423,649.7072,291.2323,645.2172,294.6732,654.664,291.888" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[889dff14110dffffd2f42a166301e6cc]
+link <b>pages</b> to useNumberBall--><path d="M94.2307,184.516 C112.245,209.213 156.216,263.907 208,288 C278.809,320.945 370.005,325.39 429.338,323.979 " fill="none" id="&lt;b&gt;pages&lt;/b&gt;-&gt;useNumberBall" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="434.621,323.836,425.5158,320.0817,429.6228,323.9717,425.7329,328.0788,434.621,323.836" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[f455e36c4a9f7e84f76676c603b05b1a]
+link <b>useFetchedLastestRound</b> to useApiRequest--><path d="M585.161,378 C661.625,378 768.047,378 834.827,378 " fill="none" id="&lt;b&gt;useFetchedLastestRound&lt;/b&gt;-&gt;useApiRequest" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="839.964,378,830.964,374,834.964,378,830.964,382,839.964,378" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[42f6f3f81bf5296554158c9649abddb3]
+link <b>useLottoRound</b> to useApiRequest--><path d="M546.7,429.97 C624.211,418.487 765.891,397.498 843.366,386.02 " fill="none" id="&lt;b&gt;useLottoRound&lt;/b&gt;-&gt;useApiRequest" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="848.375,385.278,838.8859,382.6404,843.429,386.0109,840.0585,390.554,848.375,385.278" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[e3084b7769fa476724b163870a6f2d6f]
+link <b>_document</b> to <b>apiUrl</b>--><!--MD5=[fb0dc6dfbea4c0a2bc8972d4bc898a94]
+link <b>apiUrl</b> to <b>authUrl</b>--><!--MD5=[9a8277c7f798e7f85adcfd2d3b6f4c5a]
+link <b>authUrl</b> to _JoinInput--><!--MD5=[159548267275cdc42d674210859f6aaf]
+link _JoinInput to <b>JoinStatusInterface</b>--><!--MD5=[adf3cd9e253b67ca02cdc54e57b4e1d8]
+link <b>_document</b> to <b>LottoRoundPage</b>--><!--MD5=[12821c818bf64ab545c2599def9c1f01]
+link <b>LottoRoundPage</b> to <b>middleware</b>--><!--MD5=[688b7b9bbec8a0390e1c4d207dba911a]
+link <b>middleware</b> to <b>next-env.d</b>--><!--MD5=[2fc8596c19b9e6e0cd1bad04aea0b310]
+link <b>next-env.d</b> to <b>NumbersList</b>--><!--MD5=[089f24bac36e387fcdf69cb31607c24b]
+link <b>NumbersList</b> to <b>OptionSelector</b>--><!--MD5=[3fff21922f8affbddd9db2b904dc9435]
+link <b>LottoRoundPage</b> to <b>Pick</b>--><!--MD5=[579c94da6960c44554c45834d2e64253]
+link <b>Pick</b> to <b>RoundSelectOption</b>--><!--MD5=[0654af8b998ffe5116951453d0f15988]
+link <b>RoundSelectOption</b> to <b>serverUrl</b>--><!--MD5=[be9f3bd02d58ebbedea7ec34c8d83eda]
+link <b>serverUrl</b> to <b>setNumberBgColor</b>--><!--MD5=[0f99d16ffce884b5e851c47d3eef438f]
+link <b>setNumberBgColor</b> to <b>useFetchNumber</b>--><!--MD5=[2d4fb3040af01151118ae070d6cba5e1]
+link <b>Pick</b> to <b>useGenerateNumbers</b>--><!--MD5=[29cd0a4baa475ad393597619c276efb7]
+link <b>useGenerateNumbers</b> to <b>useLottoOptions</b>--><!--MD5=[c47fa78fc372c6d52e8730a521fbfb1c]
+link <b>useLottoOptions</b> to <b>useSetNumberIds</b>--><script type="text/plantuml"><![CDATA[MD5=[5d26dd3bcfa97a04b2df39f7c2a55144]
+@startuml
+
+scale max 1920 width
+left to right direction
+
+skinparam nodesep 23
+skinparam ranksep 45
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+(<b>_app</b>)
+(<b>_document</b>)
+(<b>apiUrl</b>)
+rectangle "AuthContext" as _AuthContext
+(<b>authUrl</b>)
+(checkAuthStatus)
+(ContentBox)
+rectangle "FetchApi" as _FetchApi
+(formatLottoNumbers)
+(FormInput)
+(Header)
+(<b>Join</b>)
+(JoinForm)
+(JoinFormContainer)
+rectangle "<b>JoinInput</b>" as _JoinInput
+(<b>joinRequest</b>)
+(joinStatus)
+(<b>JoinStatusInterface</b>)
+(<b>lastNumberApi</b>)
+(Layout)
+(Loading)
+(<b>Login</b>)
+(LoginForm)
+(LoginFormContainer)
+(loginRequest)
+(<b>logoutFetch</b>)
+(<b>lottoApi</b>)
+(LottoDataDetails)
+(<b>LottoRoundPage</b>)
+(<b>LottoRoundPageApi</b>)
+(Menu)
+(<b>middleware</b>)
+(<b>next-env.d</b>)
+(NumberBalls)
+(numberDataFetch)
+(<b>NumbersList</b>)
+(<b>OptionSelector</b>)
+(<b>pages</b>)
+(<b>Pick</b>)
+(<b>RoundSelectOption</b>)
+(<b>serverUrl</b>)
+(<b>setNumberBgColor</b>)
+(useApiRequest)
+(<b>useFetchedLastestRound</b>)
+(<b>useFetchNumber</b>)
+(<b>useGenerateNumbers</b>)
+(<b>useLottoOptions</b>)
+(<b>useLottoRound</b>)
+(useNumberBall)
+(<b>useSetNumberIds</b>)
+
+
+(<b>_app</b>) --[thickness=1]> _AuthContext
+(<b>_app</b>) ---[thickness=1]> (Layout)
+_AuthContext ---> (checkAuthStatus)
+(checkAuthStatus) --> _FetchApi
+(<b>Join</b>) ---[thickness=1]> (JoinFormContainer)
+(JoinForm) --> (FormInput)
+(JoinFormContainer) --> (JoinForm)
+(JoinFormContainer) ---> (joinStatus)
+(<b>joinRequest</b>) --[thickness=1]> _FetchApi
+(<b>lastNumberApi</b>) --[thickness=1]> _FetchApi
+(Layout) --> (Header)
+(Layout) --> (Menu)
+(<b>Login</b>) ---[thickness=1]> (LoginFormContainer)
+(LoginForm) --> (FormInput)
+(LoginFormContainer) --> (LoginForm)
+(LoginFormContainer) ----> (loginRequest)
+(loginRequest) --> _FetchApi
+(<b>logoutFetch</b>) --[thickness=1]> _FetchApi
+(<b>lottoApi</b>) --[thickness=1]> _FetchApi
+(<b>LottoRoundPageApi</b>) --[thickness=1]> _FetchApi
+(numberDataFetch) --> (useApiRequest)
+(<b>pages</b>) ---[thickness=1]> (ContentBox)
+(<b>pages</b>) --[thickness=1]> (formatLottoNumbers)
+(<b>pages</b>) ---[thickness=1]> (Loading)
+(<b>pages</b>) ---[thickness=1]> (LottoDataDetails)
+(<b>pages</b>) ---[thickness=1]> (NumberBalls)
+(<b>pages</b>) ----[thickness=1]> (numberDataFetch)
+(<b>pages</b>) ---[thickness=1]> (useNumberBall)
+(<b>useFetchedLastestRound</b>) ---[thickness=1]> (useApiRequest)
+(<b>useLottoRound</b>) ---[thickness=1]> (useApiRequest)
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>

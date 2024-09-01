@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="409px" preserveAspectRatio="none" style="width:1115px;height:409px;" version="1.1" viewBox="0 0 1115 409" width="1115px" zoomAndPan="magnify"><defs/><g><ellipse cx="1057.9706" cy="223.242" fill="#F8F8F8" rx="19.9706" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="24" x="1045.9706" y="226.9842">_IId</text><!--MD5=[96c134bc812a51952deb295d42c4629f]
+entity _api_controller--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="95" x="306" y="44"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="75" x="316" y="66.0059">api.controller</text><!--MD5=[45e4d6cf79030b90eb0726ae0cd991ff]
+entity _api_module--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="83" x="161.5" y="44"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="63" x="171.5" y="66.0059">api.module</text><!--MD5=[83e5b7f5e8028ac3cde05928e97e849d]
+entity _api_service--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="81" x="441" y="27"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="61" x="451" y="49.0059">api.service</text><!--MD5=[020f95b8b4c1359fa977b11c18abe2be]
+entity _app_controller--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="99" x="153.5" y="124"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="79" x="163.5" y="146.0059">app.controller</text><!--MD5=[a2785d03199c592de6063576bb7e3eae]
+entity _app_module--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="87" x="11.5" y="187"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="21.5" y="209.0059">app.module</text><!--MD5=[e43281efa73d4bf6fe69bf8688402c40]
+entity _app_service--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="85" x="311" y="128"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="65" x="321" y="150.0059">app.service</text><!--MD5=[d06a8b9102defe736655824e5da7ce2d]
+entity _auth_controller--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="103" x="302" y="246"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="83" x="312" y="268.0059">auth.controller</text><!--MD5=[20b4a1a3e10464ed0ad4cd0abc9eac0b]
+entity _auth_module--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="91" x="157.5" y="208"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="167.5" y="230.0059">auth.module</text><!--MD5=[e2b932e41919c0199308f833dd59d992]
+entity _auth_service--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="89" x="437" y="246"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="447" y="268.0059">auth.service</text><!--MD5=[21907f5206a76616c96f4bdf01585928]
+entity _file_reader_service--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="122" x="681" y="27"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="102" x="691" y="49.0059">file-reader.service</text><ellipse cx="1057.9558" cy="265.242" fill="#F8F8F8" rx="28.4558" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="36" x="1039.9558" y="268.9842">IEmail</text><ellipse cx="1057.8701" cy="307.242" fill="#F8F8F8" rx="29.8701" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="38" x="1038.8701" y="310.9842">IName</text><ellipse cx="1058.1335" cy="349.242" fill="#F8F8F8" rx="46.1335" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="61" x="1027.6335" y="352.9842">IPassword</text><!--MD5=[2e1868a9409bc347f3af8a6c71fcc2d8]
+entity _lotto_service--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="91" x="558" y="69"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="568" y="91.0059">lotto.service</text><ellipse cx="55.1274" cy="158.242" fill="#F8F8F8" rx="25.6274" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="32" x="39.1274" y="161.9842">main</text><!--MD5=[1d56fd0c0c7b7cfdf53ea275d3b8f54f]
+entity _root_controller--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="102" x="302.5" y="364"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="82" x="312.5" y="386.0059">root.controller</text><!--MD5=[daa94348a5deebbf6c0b6b2822cb73f3]
+entity _root_module--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="90" x="158" y="288"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="70" x="168" y="310.0059">root.module</text><!--MD5=[e51a63a367bda29230ae996425e4cf7b]
+entity _root_service--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="88" x="437.5" y="330"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="447.5" y="352.0059">root.service</text><ellipse cx="54.9619" cy="116.242" fill="#F8F8F8" rx="48.9619" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="65" x="22.4619" y="119.9842">session.d</text><!--MD5=[66001060af34c6172f37fe7e86ceb862]
+entity _session_middleware--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="134" x="136" y="338"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="114" x="146" y="360.0059">session.middleware</text><ellipse cx="924.2187" cy="286.1437" fill="#F8F8F8" rx="56.2187" ry="13.6437" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="885.2187" y="289.8859">user.interface</text><!--MD5=[b5392f4c4b45cb56b942e668f5f1e4d4]
+entity _user_schema--><rect fill="#F8F8F8" height="34.4844" rx="3" ry="3" style="stroke: #000000; stroke-width: 0.5;" width="94" x="695" y="269"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="74" x="705" y="291.0059">user.schema</text><!--MD5=[07ad7b243305aa5a335c8dd1acd07633]
+link _api_controller to _api_service--><path d="M401.06,54.718 C412.367,53.193 424.434,51.564 435.66,50.05 " fill="none" id="_api_controller-&gt;_api_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="440.753,49.363,431.299,46.6022,435.7979,50.0315,432.3686,54.5304,440.753,49.363" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[de80aee0585e7f7358ac76c6e660a96c]
+link _api_module to _api_controller--><path d="M244.578,61 C261.926,61 282.384,61 300.799,61 " fill="none" id="_api_module-&gt;_api_controller" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="305.934,61,296.934,57,300.934,61,296.934,65,305.934,61" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[224729b6ecb683caa6ca16f4d209f8e8]
+link _api_module to _api_service--><path d="M244.568,48.228 C262.047,43.36 282.836,38.406 302,36 C347.421,30.298 359.286,33.585 405,36 C414.976,36.527 425.662,37.443 435.764,38.472 " fill="none" id="_api_module-&gt;_api_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="440.987,39.019,432.4518,34.1047,436.0141,38.499,431.6198,42.0613,440.987,39.019" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[e3b51ce822c59ad64c82108d4c2a4c6c]
+link _api_module to _file_reader_service--><path d="M237.997,43.99 C256.442,35.664 279.928,26.485 302,22 C432.513,-4.522 589.105,15.343 675.562,30.674 " fill="none" id="_api_module-&gt;_file_reader_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="680.644,31.584,672.4901,26.06,675.7223,30.7025,671.0798,33.9347,680.644,31.584" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[8b31373f00cb9f65a9e6bf0559b80ae4]
+link _api_module to _lotto_service--><path d="M244.568,73.772 C262.047,78.64 282.836,83.594 302,86 C389.682,97.008 492.892,93.448 552.693,89.78 " fill="none" id="_api_module-&gt;_lotto_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="557.988,89.448,548.7554,86.0188,552.9978,89.7608,549.2559,94.0032,557.988,89.448" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[cf7491ee12f6a9ef82a45612cce2cc28]
+link _api_service to _file_reader_service--><path d="M522.042,44 C562.844,44 627.18,44 675.577,44 " fill="none" id="_api_service-&gt;_file_reader_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="680.802,44,671.802,40,675.802,44,671.802,48,680.802,44" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[3e8c8b9e84f2790fa0971228a9c68dcf]
+link _api_service to _lotto_service--><path d="M522.125,57.869 C532.071,61.35 542.864,65.128 553.218,68.751 " fill="none" id="_api_service-&gt;_lotto_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="557.939,70.404,550.7649,63.6562,553.2195,68.7528,548.123,71.2073,557.939,70.404" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[ca1a2c2b1cf7223be4312272bea36583]
+link _app_controller to _app_service--><path d="M252.624,142.31 C269.642,142.768 288.707,143.282 305.583,143.736 " fill="none" id="_app_controller-&gt;_app_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="310.745,143.875,301.8557,139.6347,305.7468,143.7407,301.6408,147.6319,310.745,143.875" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[33ed9f1b0e9ba93262addd61d14893b5]
+link _app_module to _api_module--><path d="M94.7281,186.677 C98.0666,184.362 101.2238,181.805 104,179 C126.093,156.68 116.424,140.557 136,116 C146.442,102.902 160.423,90.711 172.83,81.152 " fill="none" id="_app_module-&gt;_api_module" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="176.97,78.014,167.3818,80.265,172.986,81.0352,172.2158,86.6394,176.97,78.014" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[a71c3262f75d80357b2db069d5e6edfd]
+link _app_module to _app_controller--><path d="M95.5097,186.951 C114.743,178.652 137.935,168.644 157.76,160.09 " fill="none" id="_app_module-&gt;_app_controller" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="162.459,158.062,152.6107,157.954,157.8679,160.0425,155.7795,165.2997,162.459,158.062" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[d1256d5fd64c92f928d243e258fa0e7f]
+link _app_module to _app_service--><path d="M98.8134,197.348 C142.144,190.393 210.984,178.733 270,166 C281.63,163.491 294.104,160.483 305.74,157.539 " fill="none" id="_app_module-&gt;_app_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="310.671,156.282,300.9621,154.6273,305.8257,157.5162,302.9368,162.3797,310.671,156.282" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[0dc7ede2abf42a1a0fad0ac7d5f23cd6]
+link _app_module to _auth_module--><path d="M98.6217,210.131 C115.326,212.533 134.614,215.308 151.972,217.804 " fill="none" id="_app_module-&gt;_auth_module" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="157.292,218.569,148.9526,213.3293,152.3429,217.8577,147.8145,221.248,157.292,218.569" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f0c6eb76312ca760f32935020ec2fff1]
+link _app_module to _root_module--><path d="M80.7669,221.133 C106.251,238.763 145.93,266.212 172.897,284.867 " fill="none" id="_app_module-&gt;_root_module" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="177.112,287.783,171.9862,279.3731,173.0001,284.9384,167.4348,285.9522,177.112,287.783" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[88e341549df3eb4aeb70a36f264b79ce]
+link _app_module to _session_middleware--><path d="M62.6529,221.148 C73.8791,247.97 99.0351,299.8877 136,330 C138.256,331.8379 140.662,333.55 143.17,335.1438 " fill="none" id="_app_module-&gt;_session_middleware" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="147.784,337.8864,142.0906,329.8499,143.4857,335.332,138.0036,336.7272,147.784,337.8864" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[80a6eb0b4acb08d9ca843842c08c8a77]
+link _auth_controller to _auth_service--><path d="M405.023,263 C413.754,263 422.819,263 431.509,263 " fill="none" id="_auth_controller-&gt;_auth_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="436.865,263,427.865,259,431.865,263,427.865,267,436.865,263" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[32a00e8b6955f4b539b7875572f2eb52]
+link _auth_module to _auth_controller--><path d="M248.555,236.401 C263.807,240.304 281.061,244.719 297.066,248.815 " fill="none" id="_auth_module-&gt;_auth_controller" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="301.99,250.075,294.263,243.9681,297.1462,248.8351,292.2792,251.7183,301.99,250.075" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[0ad10f6159924d16e704b56fb672f1ed]
+link _auth_module to _auth_service--><path d="M248.726,224.644 C289.737,225.083 351.968,227.681 405,238 C413.805,239.713 423.004,242.167 431.83,244.875 " fill="none" id="_auth_module-&gt;_auth_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="436.689,246.403,429.3034,239.8874,431.9193,244.9031,426.9036,247.5189,436.689,246.403" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[bff88cf42abf2db11fdbe57b9d5f9bf8]
+link _auth_module to _user_schema--><path d="M248.866,222.23 C265.543,221.327 284.629,220.443 302,220 C347.763,218.833 359.347,216.623 405,220 C514.665,228.112 541.809,236.456 649,261 C662.363,264.06 676.71,267.757 690.005,271.358 " fill="none" id="_auth_module-&gt;_user_schema" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="694.852,272.679,687.2199,266.454,690.0278,271.3647,685.1171,274.1727,694.852,272.679" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[7e9a7e0b5376e317c5f4af2378be2c09]
+link _auth_service to _user_schema--><path d="M526.059,266.876 C571.178,270.89 641.654,277.161 689.503,281.418 " fill="none" id="_auth_service-&gt;_user_schema" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="694.641,281.875,686.0307,277.0935,689.6607,281.4321,685.3221,285.0621,694.641,281.875" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[ee08d859ad87d46764e823bc82c07f14]
+link _lotto_service to _file_reader_service--><path d="M649.195,72.248 C659.309,69.136 670.21,65.782 680.844,62.51 " fill="none" id="_lotto_service-&gt;_file_reader_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="685.708,61.013,675.9294,59.8387,680.9294,62.4844,678.2837,67.4844,685.708,61.013" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[49d82cc179279774c0f16d837713b4e0]
+link <b>main</b> to _app_module--><path d="M55,171.027 C55,174.467 55,177.906 55,181.345 " fill="none" id="&lt;b&gt;main&lt;/b&gt;-&gt;_app_module" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="55,186.75,59,177.75,55,181.75,51,177.75,55,186.75" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[b02ee8615954876e8e8ab565f3e0b3d8]
+link _root_controller to _root_service--><path d="M404.661,367.4646 C413.809,364.9958 423.336,362.4253 432.422,359.9733 " fill="none" id="_root_controller-&gt;_root_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="437.42,358.6247,427.6886,357.1079,432.5927,359.9275,429.7731,364.8316,437.42,358.6247" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[be38813998a3f584ee08fcd390d53604]
+link _root_module to _root_controller--><path d="M248.314,320.0994 C255.691,323.0886 263.161,326.4204 270,330 C285.291,338.0034 287.393,342.8062 302,352 C306.947,355.1136 312.234,358.2998 317.457,361.3672 " fill="none" id="_root_module-&gt;_root_controller" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="321.82,363.9116,316.0622,355.9211,317.5013,361.3919,312.0306,362.831,321.82,363.9116" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[18fd518f622e81316b5091e289cf9b24]
+link _root_module to _root_service--><path d="M248.118,311.7015 C298.383,319.3367 380.264,331.7744 432.206,339.6642 " fill="none" id="_root_module-&gt;_root_service" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="437.449,340.4606,429.1523,335.1535,432.5058,339.7092,427.9501,343.0626,437.449,340.4606" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f8bb75efc52164e4b51f383df0a6e137]
+link _root_module to _user_schema--><path d="M248.402,303.429 C347.124,299.936 584.375,291.542 689.437,287.824 " fill="none" id="_root_module-&gt;_user_schema" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="694.644,287.64,685.5079,283.9614,689.6471,287.8171,685.7914,291.9563,694.644,287.64" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[5020ad9b390368a3b1de512149abc411]
+link _root_service to _user_schema--><path d="M525.685,341.4417 C559.539,336.6142 607.674,328.7106 649,318 C662.996,314.3726 677.906,309.5987 691.557,304.8488 " fill="none" id="_root_service-&gt;_user_schema" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="696.526,303.1021,686.7087,302.3139,691.8091,304.7606,689.3624,309.861,696.526,303.1021" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[c49e5aca060067cc5562dd5e0fcf20c3]
+link user.interface to _IId--><path d="M949.709,273.965 C967.1,265.52 990.939,253.997 1012,244 C1020,240.204 1028.82,236.074 1036.52,232.489 " fill="none" id="user.interface-&gt;_IId" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1041.15,230.336,1031.3023,230.4887,1036.613,232.4373,1034.6644,237.7479,1041.15,230.336" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[7ed38c8b754a18fe9af242910a55e4b7]
+link user.interface to IEmail--><path d="M971.167,278.655 C989.068,275.807 1009.12,272.618 1025.33,270.038 " fill="none" id="user.interface-&gt;IEmail" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1030.67,269.188,1021.1532,266.6522,1025.7321,269.9738,1022.4105,274.5528,1030.67,269.188" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[6d99d3080f2c893f53805eba8c0113c8]
+link user.interface to IName--><path d="M971.167,293.345 C988.667,296.129 1008.22,299.2393 1024.24,301.7875 " fill="none" id="user.interface-&gt;IName" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1029.52,302.6289,1021.2604,297.2643,1024.5821,301.8432,1020.0033,305.165,1029.52,302.6289" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[4b8b37eba305421f6010c6689aca023a]
+link user.interface to IPassword--><path d="M949.709,298.035 C967.1,306.4796 990.939,318.0027 1012,328 C1017.35,330.5417 1023.08,333.2328 1028.59,335.8097 " fill="none" id="user.interface-&gt;IPassword" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="1033.15,337.9417,1026.6862,330.5107,1028.6192,335.8271,1023.3028,337.7601,1033.15,337.9417" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[82fc3f14dcda748a5d1187e20226f62a]
+link _user_schema to user.interface--><path d="M789.354,286 C811.722,286 838.834,286 862.778,286 " fill="none" id="_user_schema-&gt;user.interface" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="867.836,286,858.836,282,862.836,286,858.836,290,867.836,286" style="stroke: #000000; stroke-width: 0.5;"/><script type="text/plantuml"><![CDATA[MD5=[45194e6dec8ce302a9b4d0f70df906ee]
+@startuml
+
+scale max 1920 width
+left to right direction
+
+skinparam nodesep 16
+skinparam ranksep 32
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+(_IId)
+rectangle "api.controller" as _api_controller
+rectangle "api.module" as _api_module
+rectangle "api.service" as _api_service
+rectangle "app.controller" as _app_controller
+rectangle "app.module" as _app_module
+rectangle "app.service" as _app_service
+rectangle "auth.controller" as _auth_controller
+rectangle "auth.module" as _auth_module
+rectangle "auth.service" as _auth_service
+rectangle "file-reader.service" as _file_reader_service
+(IEmail)
+(IName)
+(IPassword)
+rectangle "lotto.service" as _lotto_service
+(<b>main</b>)
+rectangle "root.controller" as _root_controller
+rectangle "root.module" as _root_module
+rectangle "root.service" as _root_service
+(<b>session.d</b>)
+rectangle "session.middleware" as _session_middleware
+(user.interface)
+rectangle "user.schema" as _user_schema
+
+
+_api_controller --> _api_service
+_api_module --> _api_controller
+_api_module --> _api_service
+_api_module --> _file_reader_service
+_api_module --> _lotto_service
+_api_service --> _file_reader_service
+_api_service --> _lotto_service
+_app_controller --> _app_service
+_app_module --> _api_module
+_app_module --> _app_controller
+_app_module --> _app_service
+_app_module --> _auth_module
+_app_module --> _root_module
+_app_module --> _session_middleware
+_auth_controller --> _auth_service
+_auth_module --> _auth_controller
+_auth_module --> _auth_service
+_auth_module ---> _user_schema
+_auth_service ---> _user_schema
+_lotto_service --> _file_reader_service
+(<b>main</b>) -[thickness=1]> _app_module
+_root_controller --> _root_service
+_root_module --> _root_controller
+_root_module --> _root_service
+_root_module ---> _user_schema
+_root_service ---> _user_schema
+(user.interface) --> (_IId)
+(user.interface) --> (IEmail)
+(user.interface) --> (IName)
+(user.interface) --> (IPassword)
+_user_schema ---> (user.interface)
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>
