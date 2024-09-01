@@ -1,0 +1,17 @@
+// * components
+@use "../../../components/display.scss";
+
+#select-option-container {
+  height: 100%;
+  width: 25%;
+  @include display.flex(column, flex-start, flex-start);
+  & > .field {
+    padding: 75px;
+    * {
+      padding: 5px;
+    }
+  }
+  & > .field:last-child {
+    @include display.flex(column, flex-start, flex-start);
+  }
+}

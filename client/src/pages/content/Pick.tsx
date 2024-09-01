@@ -4,6 +4,7 @@ import useGenerateNumbers from "client/src/hook/pick/useGenerateNumbers";
 import NumberList from "client/src/components/pick/NumbersList";
 import OptionSelector from "client/src/components/pick/OptionSelector";
 import useLottoOptions from "client/src/hook/pick/useLottoOptions";
+import Loading from "client/src/components/common/Loading";
 
 const Pick: React.FC = () => {
   const { numberListRef, generateNumbers, error, loading } =
@@ -24,7 +25,7 @@ const Pick: React.FC = () => {
         onChange={handleOptionChange}
       />
       {error && <div className="error-message">{error}</div>}
-      {loading && <div className="spinner"></div>}
+      {loading && <Loading />}
       <NumberList numberListRef={numberListRef} />
       <input
         type="button"
