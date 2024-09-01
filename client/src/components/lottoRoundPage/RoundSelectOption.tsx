@@ -78,9 +78,11 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
       </div>
       <div className="field">
         <label htmlFor="lottoRoundSelect">회차 선택</label>
-        <div className="select">
+        <div className="select is-link">
           <select
             id="lottoRoundSelect"
+            multiple
+            size={16}
             value={selectRound}
             onChange={handleChange}
           >
