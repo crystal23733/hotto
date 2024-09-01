@@ -10,11 +10,14 @@
     font-weight: font.$title-weight;
   }
   & > .lotto-data-details {
-    @include display.flex(column, center, flex-start);
-    width: 100%;
+    @include display.flex(column, space-around, flex-start);
+    width: 50%;
+    height: 50%;
     padding: 20px;
     & > p {
       padding: 5px;
+      font-size: font.$sub-size;
+      font-weight: font.$sub-weight;
     }
     font-weight: font.$sub-weight;
   }
