@@ -1,4 +1,4 @@
-import LottoData from "@shared/interface/lotto-data.interface";
+import ILottoRoundData from "@shared/interface/lottoRound.interface";
 import lastNumberApi from "client/src/api/content/lastNumberApi";
 import { useState, useEffect } from "react";
 /**
@@ -19,7 +19,7 @@ const useFetchNumbers = () => {
     const fetchNumbers = async () => {
       try {
         // API 호출을 통해 최신 당첨 번호 데이터를 가져옵니다.
-        const data: LottoData = await lastNumberApi();
+        const data: ILottoRoundData = await lastNumberApi();
 
         // 가져온 데이터를 가공하여 상태로 설정합니다.
         const fetchedNumbers: (number | string)[] = [

@@ -17,7 +17,6 @@ export default (round: string) => {
       setLoading(true);
       try {
         const result = await LottoRoundPageApi(round);
-        console.log(result);
         setData(result);
       } catch (error) {
         setError(

@@ -1,7 +1,7 @@
 import ILottoRoundData from "@shared/interface/lottoRound.interface";
 import lastNumberApi from "client/src/api/content/lastNumberApi";
 import LottoRoundPageApi from "client/src/api/content/LottoRoundPageApi";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import useApiRequest from "./useApiRequest";
 
 /**
