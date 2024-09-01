@@ -7,22 +7,29 @@ import {
 } from "react";
 import checkAuthStatus from "../api/auth/checkAuthStatus";
 
+/**
+ * 인증 상태와 사용자 정보를 포함하는 인터페이스
+ *
+ * @interface AuthContextProps
+ * @property {boolean} isAuthenticated - 사용자의 인증 상태를 나타냅니다.
+ * @property {function} setIsAuthenticated - 인증 상태를 업데이트하는 함수입니다.
+ * @property {string | null} userName - 인증된 사용자의 이름입니다.
+ * @property {function} setUserName - 사용자 이름을 업데이트하는 함수입니다.
+ */
 interface AuthContextProps {
   isAuthenticated: boolean;
   setIsAuthenticated: (value: boolean) => void;
+  userName: string | null;
+  setUserName: (value: string | null) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 /**
- * 인증 상태를 가져오고 설정하는 훅입니다.
- * 이 훅은 `AuthProvider` 컴포넌트 내부에서만 사용할 수 있습니다.
+ * useAuth 훅 - 인증 상태와 사용자 이름을 제공하는 커스텀 훅
  *
- * @returns {AuthContextProps} 인증 상태와 설정 함수를 포함하는 객체를 반환합니다.
- *
- * @throws {Error} `AuthProvider` 외부에서 사용하려고 할 때 오류를 발생시킵니다.
- *
- * @date 24.08.08
+ * @returns {AuthContextProps} 인증 상태, 사용자 이름, 설정 함수를 포함하는 객체를 반환합니다.
+ * @throws {Error} 이 훅은 반드시 AuthProvider 내부에서 사용해야 합니다.
  */
 export const useAuth = (): AuthContextProps => {
   const context = useContext(AuthContext);
@@ -46,12 +53,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAuthStatus = async () => {
       try {
         const status = await checkAuthStatus();
         setIsAuthenticated(status.isAuthenticated);
+        if (status.isAuthenticated && status.user?.name) {
+          setUserName(status.user.name);
+        }
       } catch (error) {
         setIsAuthenticated(false);
       }
@@ -60,7 +71,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, setIsAuthenticated, userName, setUserName }}
+    >
       {children}
     </AuthContext.Provider>
   );
