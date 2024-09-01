@@ -10,7 +10,7 @@ import React from "react";
  * @returns {JSX.Element} - 헤더 컴포넌트
  */
 const Header: React.FC = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
   const router = useRouter();
   const handleLogout = async () => {
     await logoutFetch();
@@ -33,6 +33,7 @@ const Header: React.FC = () => {
       <div id="login-section">
         {isAuthenticated ? (
           <>
+            <span>{userName}님 어서오세요.</span>
             <Link href="/mypage">마이페이지</Link>
             <a onClick={handleLogout} style={{ cursor: "pointer" }}>
               로그아웃
