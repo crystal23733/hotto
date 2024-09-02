@@ -1,0 +1,26 @@
+// * components
+@use "../../../components/display.scss";
+@use "../../../components/font.scss";
+
+#round-description {
+  width: 75%;
+  height: 90%;
+  @include display.flex(column, flex-start, flex-start);
+  & > #round-description__title {
+    font-size: font.$title-size;
+    font-weight: font.$title-weight;
+    padding-bottom: 20px;
+  }
+  & > #number-balls {
+    padding: 100px;
+  }
+  & > .lotto-data-details {
+    @include display.flex(column, space-around, center);
+    height: 50%;
+    width: 100%;
+    > p {
+      font-size: font.$sub-size;
+      font-weight: font.$sub-weight;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 // *각 섹션 높이
 $header-height: 10vh;
 $menu-height: 5vh;
+$content-box: 100vh - $header-height - $menu-height;
 $this-week-height: 50vh;
 $content-box-height: 35vh;
 

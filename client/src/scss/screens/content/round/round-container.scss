@@ -1,0 +1,13 @@
+// * components
+@use "../../../components/display.scss";
+@use "../../../components/height.scss";
+
+// * screens
+@use "./round-select-option.scss";
+@use "./round-description.scss";
+
+#round-container {
+  height: height.$content-box;
+  width: 100vw;
+  @include display.flex(row, center, center);
+}

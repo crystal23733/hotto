@@ -18,6 +18,7 @@
   ],
   "homepage": "https://github.com/crystal23733/lotto#readme",
   "devDependencies": {
-    "@types/node": "^20.14.9"
+    "@types/node": "^20.14.9",
+    "arkit": "^1.6.4"
   }
 }

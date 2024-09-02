@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import LottoData from "@shared/interface/lotto-data.interface";
+import ILottoRoundData from "@shared/interface/lottoRound.interface";
 import * as fs from "fs/promises";
 import * as path from "path";
 
@@ -33,7 +33,7 @@ export class FileReaderService {
       const files = await fs.readdir(this.historyDir);
       for (const file of files) {
         const filePath = path.join(this.historyDir, file);
-        const data: LottoData = JSON.parse(
+        const data: ILottoRoundData = JSON.parse(
           await fs.readFile(filePath, "utf-8"),
         );
         const numbers: string = [
@@ -56,10 +56,10 @@ export class FileReaderService {
   /**
    * 최신 회차의 로또 데이터를 반환합니다.
    *
-   * @returns {Promise<LottoData>} - 최신 회차의 로또 데이터
+   * @returns {Promise<ILottoRoundData>} - 최신 회차의 로또 데이터
    * @throws {Error} - 파일을 읽는 중 오류 발생 시 예외를 던집니다.
    */
-  async getLatestLottoData(): Promise<LottoData> {
+  async getLatestLottoData(): Promise<ILottoRoundData> {
     try {
       const files = await fs.readdir(this.historyDir);
 
@@ -78,7 +78,7 @@ export class FileReaderService {
 
       const latestFile = numberedFiles[0].name;
       const filePath = path.join(this.historyDir, latestFile);
-      const data: LottoData = JSON.parse(await fs.readFile(filePath, "utf-8"));
+      const data: ILottoRoundData = JSON.parse(await fs.readFile(filePath, "utf-8"));
       return data;
     } catch (error) {
       console.error("Error reading latest lotto data:", error);
@@ -90,10 +90,10 @@ export class FileReaderService {
    * 특정 회차의 로또 데이터를 반환합니다.
    *
    * @param {string} round - 회차 번호
-   * @returns {Promise<LottoData>} - 특정 회차의 로또 데이터
+   * @returns {Promise<ILottoRoundData>} - 특정 회차의 로또 데이터
    * @throws {Error} - 파일을 읽는 중 오류 발생 시 예외를 던집니다.
    */
-  async getLottoDataForRound(round: string): Promise<LottoData> {
+  async getLottoDataForRound(round: string): Promise<ILottoRoundData> {
     try {
       const files = await fs.readdir(this.historyDir);
       const foundFile = files.find((file) => {
@@ -105,7 +105,7 @@ export class FileReaderService {
         throw new Error("해당 회차의 로또 데이터 파일이 없습니다.");
       }
       const filePath = path.join(this.historyDir, foundFile);
-      const data: LottoData = JSON.parse(await fs.readFile(filePath, "utf-8"));
+      const data: ILottoRoundData = JSON.parse(await fs.readFile(filePath, "utf-8"));
       return data;
     } catch (error) {
       throw error;

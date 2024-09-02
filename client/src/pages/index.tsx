@@ -1,17 +1,27 @@
 import React from "react";
 import "../scss/home.scss";
-import useFetchNumbers from "../hook/home/useFetchNumber";
-import useSetNumberIds from "../hook/home/useSetNumberIds";
-import NumbersDisplay from "../components/home/NumbersDisplay";
 import ContentBox from "../components/home/ContentBox";
+import useNumberBalls from "../hook/common/useNumberBall";
+import NumberBalls from "../components/common/NumberBalls";
+import numberDataFetch from "../hook/common/api/numberDataFetch";
+import formatLottoNumbers from "../utils/formatLottoNumbers";
+import LottoDataDetails from "../components/common/LottoDataDetails";
+import Loading from "../components/common/Loading";
 
 const Home: React.FC = () => {
-  const numbers = useFetchNumbers();
-  const numberRefs = useSetNumberIds(numbers);
+  const { data, loading, error } = numberDataFetch();
+  const numbers = data ? formatLottoNumbers(data) : [];
+  const numberRefs = useNumberBalls(numbers);
 
   return (
     <>
-      <NumbersDisplay numbers={numbers} numberRefs={numberRefs} />
+      <div id="this-week">
+        <h1>금주의 당첨번호</h1>
+        {loading && <Loading />}
+        {error && <p>에러가 발생했습니다: {error.message}</p>}
+        {data && <NumberBalls numbers={numbers} numberRefs={numberRefs} />}
+        {data && <LottoDataDetails data={data} />}
+      </div>
       <ContentBox />
     </>
   );

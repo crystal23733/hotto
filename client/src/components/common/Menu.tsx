@@ -18,7 +18,7 @@ const Menu: React.FC = () => {
           <Link href="/content/Pick">예상번호 돌리기</Link>
         </li>
         <li>
-          <Link href="">회차별 당첨번호</Link>
+          <Link href="/content/LottoRoundPage">회차별 당첨번호</Link>
         </li>
         <li>
           <Link href="">운세</Link>
