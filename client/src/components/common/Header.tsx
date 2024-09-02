@@ -4,7 +4,7 @@ import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Modal from "./Modal";
+import MypageModal from "./MypageModal";
 
 /**
  * 24.08.08
@@ -12,6 +12,7 @@ import Modal from "./Modal";
  */
 const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
+  const [isActive, setIsActive] = useState<boolean>(false); // * 모달창의 상태를 관리
   const router = useRouter();
   const handleLogout = async () => {
     await logoutFetch();
@@ -26,6 +27,14 @@ const Header: React.FC = () => {
     return <div>로딩중...</div>;
   }
 
+  const handleMypageModal = () => {
+    setIsActive(true);
+  };
+
+  const closeModal = () => {
+    setIsActive(false);
+  };
+
   return (
     <div id="header">
       <h1>
@@ -34,9 +43,9 @@ const Header: React.FC = () => {
       <div id="login-section">
         {isAuthenticated ? (
           <>
-            <Modal />
+            <MypageModal isActive={isActive} closeModal={closeModal} />
             <span>{userName}님 어서오세요.</span>
-            <Link href="/mypage">마이페이지</Link>
+            <button onClick={handleMypageModal}>마이페이지</button>
             <a onClick={handleLogout} style={{ cursor: "pointer" }}>
               로그아웃
             </a>
