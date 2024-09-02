@@ -38,7 +38,7 @@ export class SessionMiddleware implements NestMiddleware {
           autoRemove: "native", // MongoDB의 TTL 인덱스 사용
           touchAfter: 24 * 3600, // 24시간마다 세션 업데이트
         }),
-        // proxy: isProduction
+        proxy: isProduction
       })(req, res, (sessionErr) => {
         if (sessionErr) {
           console.error("Session middleware 에러:", sessionErr);
