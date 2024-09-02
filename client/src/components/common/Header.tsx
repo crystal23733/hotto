@@ -3,7 +3,8 @@ import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./Modal";
 
 /**
  * 24.08.08
@@ -33,6 +34,7 @@ const Header: React.FC = () => {
       <div id="login-section">
         {isAuthenticated ? (
           <>
+            <Modal />
             <span>{userName}님 어서오세요.</span>
             <Link href="/mypage">마이페이지</Link>
             <a onClick={handleLogout} style={{ cursor: "pointer" }}>
