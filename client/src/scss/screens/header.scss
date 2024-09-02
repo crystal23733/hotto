@@ -21,6 +21,10 @@
   }
   & > #login-section {
     @extend %rowBeetwen;
+    & > span {
+      color: white;
+      padding-right: 10px;
+    }
     & > a {
       padding: 5px;
       color: white;
