@@ -82,7 +82,7 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
           <select
             id="lottoRoundSelect"
             multiple
-            size={16}
+            size={10}
             value={selectRound}
             onChange={handleChange}
           >
