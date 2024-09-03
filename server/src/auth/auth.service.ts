@@ -5,6 +5,7 @@ import { Model } from "mongoose";
 import { conditional } from "@shared/pipes/condition";
 import * as bcrypt from "bcrypt";
 import { ConfigService } from "@nestjs/config";
+import userDto from "../pipe/dto/user.dto";
 
 @Injectable()
 export class AuthService {
@@ -41,12 +42,19 @@ export class AuthService {
 
   async getAuthStatus(
     req: any,
-  ): Promise<{ isAuthenticated: boolean; user?: any }> {
+  ): Promise<{ isAuthenticated: boolean; user?: userDto }> {
     if (req.session && req.session.userId) {
       // userId로 확인
       const user = await this.userModel.findById(req.session.userId).exec();
       if (user) {
-        return { isAuthenticated: true, user: user };
+        return {
+          isAuthenticated: true,
+          user: {
+            _id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+          },
+        };
       }
     }
     return { isAuthenticated: false };
