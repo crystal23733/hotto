@@ -2,8 +2,18 @@ import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
 import authUrl from "client/src/module/authUrl";
 
-const fetchApi = new FetchApi(serverUrl);
+interface IPasswordRequestResponse {
+  success: boolean;
+  message?: string;
+}
 
+const fetchApi = new FetchApi<IPasswordRequestResponse>(serverUrl);
+
+/**
+ * 비밀번호 검증 요청을 서버에 보냅니다.
+ * @param {string} password - 검증할 비밀번호
+ * @returns {Promise<PasswordRequestResponse>} - 서버의 응답
+ */
 export default async (password: string) => {
   const passwordUrl = process.env
     .NEXT_PUBLIC_VERIFY_PASSWORD_ENDPOINT as string;
@@ -11,7 +21,7 @@ export default async (password: string) => {
     authUrl(passwordUrl),
     "POST",
     { password },
-    { "Content-type": "application/json" },
+    null,
     true,
   );
 };
