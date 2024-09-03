@@ -37,7 +37,9 @@ export class ApiController {
    * @returns {Promise<ILottoRoundData>} - 로또 데이터
    */
   @Get(":round")
-  async getLottoDataRound(@Param("round") round: string): Promise<ILottoRoundData> {
+  async getLottoDataRound(
+    @Param("round") round: string,
+  ): Promise<ILottoRoundData> {
     // 서비스에서 회차에 맞는 데이터 조회 로직 추가 필요
     return this.apiService.getLottoDataForRound(round);
   }

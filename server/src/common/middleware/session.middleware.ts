@@ -30,7 +30,7 @@ export class SessionMiddleware implements NestMiddleware {
           maxAge:
             Number(this.configService.get<number>("SECRET_AGE")) || 86400000,
           sameSite: isProduction ? "none" : "strict",
-          secure: isProduction
+          secure: isProduction,
         },
         store: MongoStore.create({
           mongoUrl: DB_URL,
