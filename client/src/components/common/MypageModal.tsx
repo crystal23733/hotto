@@ -52,7 +52,9 @@ const MypageModal: React.FC<MypageModalProps> = ({ isActive, closeModal }) => {
         </section>
         <footer className="modal-card-foot">
           <div className="buttons">
-            <button className="button is-success" onClick={handleMypageBtn}>마이페이지</button>
+            <button className="button is-success" onClick={handleMypageBtn}>
+              마이페이지
+            </button>
             <button className="button" type="reset" onClick={closeModal}>
               취소
             </button>
