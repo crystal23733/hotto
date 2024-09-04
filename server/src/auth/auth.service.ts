@@ -84,4 +84,27 @@ export class AuthService {
       });
     });
   }
+
+  /**
+   * 사용자가 입력한 비밀번호를 검증하는 메서드입니다.
+   * @param {string} userId - 세션에서 가져온 사용자 ID
+   * @param {string} password - 사용자가 입력한 비밀번호
+   * @returns {Promise<{ success: boolean; message?: string }>} - 비밀번호 검증 결과를 반환합니다.
+   * @throws {UnauthorizedException} - 사용자가 존재하지 않을 경우 예외를 발생시킵니다.
+   */
+  async verifyPassword(
+    userId: string,
+    password: string,
+  ): Promise<{ success: boolean; message?: string }> {
+    const user = await this.userModel.findById(userId).exec();
+    if (!user) {
+      throw new UnauthorizedException("사용자를 찾을 수 없습니다.");
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return { success: false, message: "비밀번호가 일치하지 않습니다." };
+    }
+    return { success: true };
+  }
 }

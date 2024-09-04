@@ -60,7 +60,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       try {
         const status = await checkAuthStatus();
         setIsAuthenticated(status.isAuthenticated);
-        console.log(status);
         if (status.isAuthenticated && status.user?.name) {
           setUserName(status.user.name);
         }
