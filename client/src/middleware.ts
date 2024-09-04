@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // 로그인한 사용자만 접근 가능한 페이지 목록
-const authRequiredPages = ["/Logout", "/Profile", "/content/Pick"];
+const authRequiredPages = ["/Logout", "/Profile", "/content/Pick", "/Mypage"];
 
 // 로그인하지 않은 사용자만 접근 가능한 페이지 목록
 const guestOnlyPages = ["/Login", "/Join"];
