@@ -1,7 +1,6 @@
-import { conditional } from "@shared/pipes/condition";
-import passwordRequest from "client/src/api/auth/passwordRequest";
+import useMypageModal from "client/src/hook/common/useMypageModal";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 
 interface MypageModalProps {
   isActive: boolean;
@@ -9,22 +8,17 @@ interface MypageModalProps {
 }
 
 const MypageModal: React.FC<MypageModalProps> = ({ isActive, closeModal }) => {
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const { password, setPassword, data, loading, error, verifyPassword } =
+    useMypageModal();
   const router = useRouter();
 
   const handleMypageBtn = async () => {
-    if (!conditional.passwordLength(password)) {
-      setError("비밀번호가 5자 이상이어야 합니다.");
-      return;
-    }
+    await verifyPassword();
+    console.log(data);
 
-    try {
-      console.log(password);
-      await passwordRequest(password);
+    if (data?.success) {
       router.push("/Mypage");
-    } catch (error) {
-      setError("비밀번호가 일치하지 않습니다.");
+      closeModal();
     }
   };
 
@@ -48,7 +42,7 @@ const MypageModal: React.FC<MypageModalProps> = ({ isActive, closeModal }) => {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-          {error && <p className="help is-danger">{error}</p>}
+          {error && <p className="help is-danger">{error.message}</p>}
         </section>
         <footer className="modal-card-foot">
           <div className="buttons">
