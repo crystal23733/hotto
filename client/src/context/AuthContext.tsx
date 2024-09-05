@@ -21,6 +21,8 @@ interface AuthContextProps {
   setIsAuthenticated: (value: boolean) => void;
   userName: string | null;
   setUserName: (value: string | null) => void;
+  userEmail: string | null;
+  setUserEmail: (value: string | null) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | null>(null);
@@ -54,14 +56,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAuthStatus = async () => {
       try {
         const status = await checkAuthStatus();
         setIsAuthenticated(status.isAuthenticated);
-        if (status.isAuthenticated && status.user?.name) {
+        if (status.isAuthenticated && status.user?.name && status.user?.email) {
           setUserName(status.user.name);
+          setUserEmail(status.user.email);
         }
       } catch (error) {
         setIsAuthenticated(false);
@@ -72,7 +76,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, userName, setUserName }}
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        userName,
+        setUserName,
+        userEmail,
+        setUserEmail,
+      }}
     >
       {children}
     </AuthContext.Provider>
