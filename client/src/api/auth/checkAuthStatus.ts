@@ -9,11 +9,13 @@ import authUrl from "client/src/module/authUrl";
  * @property {boolean} isAuthenticated - 사용자의 인증 상태를 나타냅니다.
  * @property {object} user - 인증된 사용자 정보를 포함하는 객체입니다.
  * @property {string} user.name - 인증된 사용자의 이름입니다.
+ * @property {string} user.email - 인증된 사용자의 이메일입니다.
  */
 interface AuthStatusResponse {
   isAuthenticated: boolean;
   user: {
     name: string | null;
+    email: string | null;
   };
 }
 
