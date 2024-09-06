@@ -2,7 +2,7 @@ import React from "react";
 
 const MypageFormContainer: React.FC = () => {
   return (
-    <form action="" className="box">
+    <form action="">
       <div className="field">
         <label className="label">Name</label>
         <div className="control">

@@ -1,13 +1,14 @@
 import React from "react";
-import MypageFormContainer from "../components/Mypage/MypageFormContainer";
+import "../scss/myPage.scss";
 import MypageInfoContainer from "../components/Mypage/MypageInfoContainer";
 
 const Mypage: React.FC = () => {
   return (
-    <>
-      <MypageInfoContainer />
-      <MypageFormContainer />
-    </>
+    <div id="mypage-container">
+      <div className="box" id="mypage-container__content">
+        <MypageInfoContainer />
+      </div>
+    </div>
   );
 };
 

@@ -1,0 +1,13 @@
+// * components
+@use "../../components/display.scss";
+
+#mypage-container {
+  width: 100%;
+  height: 100%;
+  @include display.flex(column, center, center);
+  & > #mypage-container__content {
+    @include display.flex(column, flex-start, center);
+    height: 90%;
+    width: 90%;
+  }
+}
