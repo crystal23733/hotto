@@ -14,6 +14,7 @@ const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
   const [isActive, setIsActive] = useState<boolean>(false); // * 모달창의 상태를 관리
   const router = useRouter();
+
   const handleLogout = async () => {
     await logoutFetch();
     const response = await checkAuthStatus();
@@ -53,10 +54,10 @@ const Header: React.FC = () => {
         ) : (
           <>
             <Link href="/Login">로그인</Link>
-            <Link href="/Join">회원가입</Link>
+            <Link href="/Join">회원가입</Link>{" "}
           </>
-        )}
-      </div>
+        )}{" "}
+      </div>{" "}
     </div>
   );
 };
