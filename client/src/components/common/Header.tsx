@@ -3,8 +3,9 @@ import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import MypageModal from "./MypageModal";
+import useModal from "client/src/hook/Modal/useModal";
 
 /**
  * 24.08.08
@@ -12,7 +13,7 @@ import MypageModal from "./MypageModal";
  */
 const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
-  const [isActive, setIsActive] = useState<boolean>(false); // * 모달창의 상태를 관리
+  const {isActive, handleMypageModal, closeModal} = useModal();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -27,14 +28,6 @@ const Header: React.FC = () => {
   if (isAuthenticated === null) {
     return <div>로딩중...</div>;
   }
-
-  const handleMypageModal = () => {
-    setIsActive(true);
-  };
-
-  const closeModal = () => {
-    setIsActive(false);
-  };
 
   return (
     <div id="header">
