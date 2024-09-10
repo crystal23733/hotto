@@ -5,11 +5,11 @@ export default () => {
 
   const handleMypageModal = () => {
     setIsActive(true);
-  } 
+  };
 
   const closeModal = () => {
     setIsActive(false);
-  }
+  };
 
-  return {isActive, handleMypageModal, closeModal};
+  return { isActive, handleMypageModal, closeModal };
 };

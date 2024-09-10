@@ -13,7 +13,7 @@ import useModal from "client/src/hook/Modal/useModal";
  */
 const Header: React.FC = () => {
   const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
-  const {isActive, handleMypageModal, closeModal} = useModal();
+  const { isActive, handleMypageModal, closeModal } = useModal();
   const router = useRouter();
 
   const handleLogout = async () => {
