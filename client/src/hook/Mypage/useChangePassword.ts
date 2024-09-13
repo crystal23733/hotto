@@ -20,9 +20,16 @@ export default () => {
         changePassword,
         changePasswordConfirm,
       );
-      console.log("result:", result);
-      setData(result);
+      if (result.success) {
+        console.log("result:", result);
+        setData(result);
+        setOldPassword("");
+        setChangePassword("");
+        setChangePasswordConfirm("");
+        return true;
+      }
     } catch (error) {
+      return false;
     } finally {
       setLoading(false);
     }
