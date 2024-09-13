@@ -107,4 +107,49 @@ export class AuthService {
     }
     return { success: true };
   }
+
+  /**
+   * 비밀번호를 변경하는 메서드입니다.
+   * @param {string} userId - 세션에서 가져온 사용자 ID
+   * @param {string} oldPassword - 기존에 사용중이던 비밀번호
+   * @param {string} changePassword - 변경할 비밀번호
+   * @param {string} changePasswordConfirm - 변경할 비밀번호 확인
+   * @returns {Promise<{success: boolean, message?: string}>}  - 비밀번호 변경 여부에 따른 검증 결과를 반환합니다.
+   */
+  async changePassword(
+    userId: string,
+    oldPassword: string,
+    changePassword: string,
+    changePasswordConfirm: string,
+  ): Promise<{ success: boolean; message?: string }> {
+    const user = await this.userModel.findById(userId).exec();
+    if (!user) {
+      throw new UnauthorizedException("사용자를 찾을 수 없습니다.");
+    }
+    console.log("serviceUser", user);
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+
+    if (
+      !conditional.passwordLength(changePassword) ||
+      !conditional.passwordLength(changePasswordConfirm)
+    ) {
+      return { success: false, message: "비밀번호가 너무 짧습니다." };
+    }
+
+    if (!isPasswordValid) {
+      return { success: false, message: "기존 비밀번호가 일치하지 않습니다." };
+    }
+
+    if (changePassword !== changePasswordConfirm) {
+      return {
+        success: false,
+        message: "변경할 비밀번호가 일치하지 않습니다.",
+      };
+    }
+
+    user.password = changePassword;
+    await user.save();
+
+    return { success: true, message: "비밀번호가 성공적으로 변경되었습니다." };
+  }
 }
