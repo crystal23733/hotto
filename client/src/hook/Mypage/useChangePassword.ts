@@ -21,7 +21,7 @@ export default () => {
         changePasswordConfirm,
       );
       if (result.success) {
-        console.log("result:", result);
+        router.reload();
         setData(result);
         setOldPassword("");
         setChangePassword("");
