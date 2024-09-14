@@ -50,6 +50,7 @@ export default () => {
     setPassword,
     data,
     error,
+    setError,
     loading,
     verifyPasswordAndNavigate,
   };

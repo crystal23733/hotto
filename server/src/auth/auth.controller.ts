@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Put,
   Req,
   Res,
   UnauthorizedException,
@@ -81,6 +82,59 @@ export class AuthController {
       }
       const result = await this.authService.verifyPassword(userId, password);
       if (result.success) {
+        return res.status(HttpStatus.OK).json({ success: true });
+      } else {
+        return res
+          .status(HttpStatus.UNAUTHORIZED)
+          .json({ success: false, message: result.message });
+      }
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        return res
+          .status(HttpStatus.UNAUTHORIZED)
+          .json({ success: false, message: error.message });
+      } else {
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+          success: false,
+          message: "비밀번호 검사중 알 수 없는 오류가 발생하였습니다.",
+        });
+      }
+    }
+  }
+
+  /**
+   * 사용자 비밀번호를 변경하는 엔드포인트입니다.
+   * @param {string} oldPassword - 사용자가 입력한 기존 비밀번호
+   * @param  {string} changePassword - 사용자가 입력한 변경할 비밀번호
+   * @param  {string} changePasswordConfirm - 사용자가 입력한 변경할 비밀번호 재확인
+   * @param {Request} req - Express 요청 객체 (세션을 포함)
+   * @param {Response} res - Express 응답 객체
+   * @returns {Promise<Response>} - 비밀번호 변경 결과를 응답합니다.
+   * @throws {UnauthorizedException} - 세션이 만료되었거나 존재하지 않을 경우 예외를 발생시킵니다.
+   */
+  @Put("change-password")
+  async changePasswordController(
+    @Body("oldPassword") oldPassword: string,
+    @Body("changePassword") changePassword: string,
+    @Body("changePasswordConfirm") changePasswordConfirm,
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<Response> {
+    try {
+      const userId = req.session.userId;
+      if (!userId) {
+        throw new UnauthorizedException(
+          "세션이 만료되었거나 존재하지 않습니다.",
+        );
+      }
+      const result = await this.authService.changePassword(
+        userId,
+        oldPassword,
+        changePassword,
+        changePasswordConfirm,
+      );
+      if (result.success) {
+        await this.authService.logout(req, res);
         return res.status(HttpStatus.OK).json({ success: true });
       } else {
         return res
