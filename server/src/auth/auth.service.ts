@@ -126,7 +126,6 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException("사용자를 찾을 수 없습니다.");
     }
-    console.log("serviceUser", user);
     const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
 
     if (

@@ -133,7 +133,6 @@ export class AuthController {
         changePassword,
         changePasswordConfirm,
       );
-      console.log("controller:", result);
       if (result.success) {
         return res.status(HttpStatus.OK).json({ success: true });
       } else {
