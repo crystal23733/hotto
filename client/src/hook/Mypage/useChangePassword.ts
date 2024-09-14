@@ -27,8 +27,16 @@ export default () => {
         setChangePassword("");
         setChangePasswordConfirm("");
         return true;
+      } else {
+        setError(new Error(result.message));
+        return false;
       }
     } catch (error) {
+      setError(
+        error instanceof Error
+          ? error
+          : new Error("서버에서 얘기치 못한 오류가 발생하였습니다."),
+      );
       return false;
     } finally {
       setLoading(false);
@@ -44,5 +52,7 @@ export default () => {
     data,
     verifyPassword,
     loading,
+    error,
+    setError,
   };
 };
