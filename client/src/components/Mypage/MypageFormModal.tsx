@@ -14,11 +14,16 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
     data,
     verifyPassword,
     loading,
+    error,
+    setError,
   } = useChangePassword();
-  console.log(oldPassword);
-  console.log("data:", data);
+
   const handleChangePasswordBtn = async () => {
     const success = await verifyPassword();
+    if (success) {
+      closeModal();
+      setError(null);
+    }
   };
   return (
     <Modal
@@ -49,6 +54,7 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
         onChange={(event) => setChangePasswordConfirm(event.target.value)}
         value={changePasswordConfirm}
       />
+      {error && <p className="help is-danger">{error.message}</p>}
     </Modal>
   );
 };
