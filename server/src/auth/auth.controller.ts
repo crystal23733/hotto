@@ -134,6 +134,7 @@ export class AuthController {
         changePasswordConfirm,
       );
       if (result.success) {
+        await this.authService.logout(req, res);
         return res.status(HttpStatus.OK).json({ success: true });
       } else {
         return res
