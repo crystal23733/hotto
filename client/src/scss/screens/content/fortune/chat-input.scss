@@ -1,0 +1,22 @@
+#content__chat-box {
+  width: 100%;
+  height: 100%;
+  & > .content__chat-form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    & > .content__chat-input-box {
+      display: flex;
+      position: fixed;
+      width: 100%;
+      height: 50px;
+      bottom: 10px;
+      justify-content: center;
+      & > input:first-child {
+        height: 100%;
+        width: 80%;
+        margin-right: 5px;
+      }
+    }
+  }
+}
