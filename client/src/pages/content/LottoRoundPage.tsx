@@ -14,14 +14,14 @@ import Loading from "client/src/components/common/Loading";
  * @returns {JSX.Element} - 로또 회차 페이지를 구성하는 JSX 요소입니다.
  */
 const LottoRoundPage: React.FC = () => {
-  const [selectedRound, setSelectedRound] = useState<string>("");
-  const { data, loading, error } = numberDataFetch(selectedRound);
+  const [selectedRound, setSelectedRound] = useState<string[]>([]);
+  const { data, loading, error } = numberDataFetch(selectedRound.join(","));
   const numbers = formatLottoNumbers(data);
   const numberRefs = useNumberBalls(numbers);
 
   return (
     <div id="round-container">
-      <RoundSelectOption onSelectRound={setSelectedRound} maxRound={1135} />{" "}
+      <RoundSelectOption onSelectRound={setSelectedRound} maxRound={1137} />{" "}
       {/* 최대 회차는 예시 */}
       <div id="round-description">
         <h1 id="round-description__title">회차별 당첨번호 조회</h1>
