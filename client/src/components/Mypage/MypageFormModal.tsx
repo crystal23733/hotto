@@ -11,7 +11,6 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
     setChangePassword,
     changePasswordConfirm,
     setChangePasswordConfirm,
-    data,
     verifyPassword,
     loading,
     error,
