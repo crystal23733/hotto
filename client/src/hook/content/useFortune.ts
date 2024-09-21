@@ -7,20 +7,31 @@ export default () => {
   const { data, setData, loading, setLoading, error, setError } =
     useApiRequest();
   console.log(contentText);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const result = await fortuneRequest(contentText);
-        setData(result);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const fortuneSubmit = async () => {
+    setLoading(true);
+    try {
+      const result = await fortuneRequest(contentText);
+      console.log(result);
+      setData(result);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const result = await fortuneRequest(contentText);
+  //       setData(result);
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   return {
     data,
     setData,
@@ -30,5 +41,6 @@ export default () => {
     setError,
     contentText,
     setContentText,
+    fortuneSubmit,
   };
 };

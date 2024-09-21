@@ -2,7 +2,7 @@ import React from "react";
 import useFortune from "client/src/hook/content/useFortune";
 
 const ChatInput: React.FC = () => {
-  const { contentText, setContentText } = useFortune();
+  const { contentText, setContentText, fortuneSubmit } = useFortune();
   return (
     <div id="content__chat-box">
       <form action="" className="content__chat-form" method="POST">
@@ -14,7 +14,15 @@ const ChatInput: React.FC = () => {
             value={contentText}
             onChange={(event) => setContentText(event.target.value)}
           />
-          <input type="submit" value="전송" className="button is-primary" />
+          <input
+            type="submit"
+            value="전송"
+            className="button is-primary"
+            onSubmit={(event: React.FormEvent) => {
+              event.preventDefault();
+              fortuneSubmit();
+            }}
+          />
         </div>
       </form>
     </div>
