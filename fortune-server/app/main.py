@@ -1,15 +1,11 @@
-from typing import Union
-
 from fastapi import FastAPI
+from routers.content import router as content_router  # content 패키지를 가져옵니다.
 
 app = FastAPI()
 
+# content 라우터 등록
+app.include_router(content_router, prefix="/content", tags=["content"])
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World!"}
-
-
-@app.get("/content/fortune")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
