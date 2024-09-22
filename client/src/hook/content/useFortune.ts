@@ -18,20 +18,6 @@ export default () => {
       setLoading(false);
     }
   };
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const result = await fortuneRequest(contentText);
-  //       setData(result);
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
   return {
     data,
     setData,
