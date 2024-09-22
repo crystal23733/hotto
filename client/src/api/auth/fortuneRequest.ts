@@ -1,8 +1,8 @@
-import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
 import contentUrl from "client/src/module/contentUrl";
+import fortuneServerUrl from "client/src/module/fortuneServer";
 
-const fetchApi = new FetchApi(serverUrl);
+const fetchApi = new FetchApi(fortuneServerUrl);
 
 export default async (text: string) => {
   const fortuneText = process.env
