@@ -7,12 +7,27 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    & > .my-message {
+    & > .user-message {
+      display: flex;
+      justify-content: flex-start;
       width: 100%;
       & > .bubble {
-        margin: 5px;
+        margin: 8px;
         border-radius: 15px;
         border-bottom-left-radius: 0;
+        display: inline-block;
+        padding: 17px;
+        background-color: white;
+      }
+    }
+    & > .ai-message {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      & > .bubble {
+        margin: 8px;
+        border-radius: 15px;
+        border-bottom-right-radius: 0;
         display: inline-block;
         padding: 17px;
         background-color: white;
