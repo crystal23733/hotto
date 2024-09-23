@@ -7,7 +7,7 @@ import React, { useState } from "react";
  * @property {number} maxRound - 선택할 수 있는 최대 회차 번호
  */
 interface IRoundSelectOption {
-  onSelectRound: (round: string) => void;
+  onSelectRound: (round: string[]) => void;
   maxRound: number;
 }
 
@@ -29,7 +29,7 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
   onSelectRound,
   maxRound,
 }) => {
-  const [selectRound, setSelectRound] = useState<string>("");
+  const [selectRound, setSelectRound] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   /**
@@ -38,7 +38,10 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
    * @param {React.ChangeEvent<HTMLSelectElement>} e - 드롭다운에서 발생한 change 이벤트 객체
    */
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = e.target.value;
+    const selectedValue = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value,
+    );
     setSelectRound(selectedValue);
     onSelectRound(selectedValue);
   };

@@ -1,0 +1,20 @@
+@use "./common/common.scss";
+
+//components
+@use "./components/height.scss";
+
+// screens
+@use "./screens/content/fortune/background-sky.scss";
+@use "./screens/content/fortune/chat.scss";
+
+#background-box {
+  position: relative;
+  height: 100 - height.$header-height - height.$menu-height;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: "Anton", sans-serif;
+  justify-content: center;
+  align-items: center;
+}

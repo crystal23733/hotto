@@ -21,7 +21,7 @@ const Menu: React.FC = () => {
           <Link href="/content/LottoRoundPage">회차별 당첨번호</Link>
         </li>
         <li>
-          <Link href="">운세</Link>
+          <Link href="/content/Fortune">운세</Link>
         </li>
       </ul>
     </nav>
