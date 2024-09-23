@@ -6,7 +6,9 @@ const Fortune: React.FC = () => {
   return (
     <div id="background-box">
       <BackgroundSky />
-      <ChatForm />
+      <div id="content__chat-box">
+        <ChatForm />
+      </div>
     </div>
   );
 };
