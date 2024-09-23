@@ -1,16 +1,17 @@
 #content__chat-box {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
   & > .content__chat-form {
     display: flex;
+    position: fixed;
     width: 100%;
-    height: 100%;
+    height: 50px;
+    bottom: 50px;
     & > .content__chat-input-box {
       display: flex;
-      position: fixed;
       width: 100%;
-      height: 50px;
-      bottom: 10px;
+      height: 100%;
       justify-content: center;
       & > input:first-child {
         height: 100%;
