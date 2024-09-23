@@ -19,7 +19,7 @@ async def generate_fortune(user_input: str) -> str:
                 },
                 {"role": "user", "content": user_input},
             ],
-            max_tokens=150,
+            max_tokens=250,
         )
         fortune = response.choices[0].message
         return fortune
