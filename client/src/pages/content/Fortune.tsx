@@ -14,8 +14,9 @@ import React, { useState } from "react";
  * @returns {JSX.Element} 운세 페이지를 렌더링하는 컴포넌트
  */
 const Fortune: React.FC = () => {
-  const [userMessages, setUserMessages] = useState<string[]>([]);
-  const [aiMessage, setAiMessage] = useState<string[]>([]);
+  const [messages, setMessages] = useState<
+    { type: "user" | "ai"; content: string }[]
+  >([]);
 
   /**
    * 사용자 메시지를 메시지 배열에 추가합니다.
@@ -23,7 +24,10 @@ const Fortune: React.FC = () => {
    * @param {string} message - 추가할 사용자 입력 메시지
    */
   const addUserMessage = (message: string) => {
-    setUserMessages([...userMessages, message]);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: "user", content: message },
+    ]);
   };
 
   /**
@@ -32,19 +36,23 @@ const Fortune: React.FC = () => {
    * @param {string} message - 추가할 AI 응답 메시지
    */
   const addAiMessage = (message: string) => {
-    setAiMessage([...aiMessage, message]);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: "ai", content: message },
+    ]);
   };
   return (
     <div id="background-box">
       <BackgroundSky />
       <div id="content__chat-box">
         <div className="main-chat">
-          {userMessages.map((msg, index) => (
-            <UserMessage key={index} message={msg} />
-          ))}
-          {aiMessage.map((msg, index) => (
-            <AiMessage key={index} message={msg} />
-          ))}
+          {messages.map((msg, index) => {
+            return msg.type === "user" ? (
+              <UserMessage key={index} message={msg.content} />
+            ) : (
+              <AiMessage key={index} message={msg.content} />
+            );
+          })}
         </div>
         <ChatForm addUserMessage={addUserMessage} addAiMessage={addAiMessage} />
       </div>
