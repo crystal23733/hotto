@@ -5,7 +5,13 @@ interface AiMessageProps {
 }
 
 const AiMessage: React.FC<AiMessageProps> = ({ message }) => {
-  return <div></div>;
+  return (
+    <div>
+      <div className="ai-message">
+        <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}
+      </div>
+    </div>
+  );
 };
 
 export default AiMessage;
