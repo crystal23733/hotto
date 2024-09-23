@@ -3,15 +3,22 @@ import useFortune from "client/src/hook/content/useFortune";
 
 interface ChatFormProps {
   addUserMessage: (message: string) => void;
+  addAiMessage: (message: string) => void;
 }
 
-const ChatForm: React.FC<ChatFormProps> = ({ addUserMessage }) => {
+const ChatForm: React.FC<ChatFormProps> = ({
+  addUserMessage,
+  addAiMessage,
+}) => {
   const { contentText, setContentText, fortuneSubmit, data, setData } =
     useFortune();
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     addUserMessage(contentText);
-    fortuneSubmit();
+    const response = await fortuneSubmit(); // fortuneSubmit 호출 후 결과 받기
+    if (response && response.fortune) {
+      addAiMessage(response.fortune.content); // 응답에서 fortune.content 추출하여 AI 메시지로 넘기기
+    }
     setContentText("");
   };
   return (
