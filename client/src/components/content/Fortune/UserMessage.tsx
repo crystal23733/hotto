@@ -1,16 +1,16 @@
 import React from "react";
 
-interface MyMessageProps {
+interface UserMessageProps {
   message: string;
 }
 
-const MyMessage: React.FC<MyMessageProps> = ({ message }) => {
+const UserMessage: React.FC<UserMessageProps> = ({ message }) => {
   console.log(message);
   return (
-    <div className="my-message">
+    <div className="user-message">
       <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}
     </div>
   );
 };
 
-export default MyMessage;
+export default UserMessage;
