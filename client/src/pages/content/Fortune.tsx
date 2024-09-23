@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 const Fortune: React.FC = () => {
   const [userMessages, setUserMessages] = useState<string[]>([]);
-  const addMessage = (message: string) => {
+  const addUserMessage = (message: string) => {
     console.log(message);
     setUserMessages([...userMessages, message]);
   };
@@ -18,7 +18,7 @@ const Fortune: React.FC = () => {
             <UserMessage key={index} message={msg} />
           ))}
         </div>
-        <ChatForm addMessage={addMessage} />
+        <ChatForm addUserMessage={addUserMessage} />
       </div>
     </div>
   );

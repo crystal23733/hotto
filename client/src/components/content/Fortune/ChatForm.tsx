@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import useFortune from "client/src/hook/content/useFortune";
 
 interface ChatFormProps {
-  addMessage: (message: string) => void;
+  addUserMessage: (message: string) => void;
 }
 
-const ChatForm: React.FC<ChatFormProps> = ({ addMessage }) => {
-  const { contentText, setContentText, fortuneSubmit } = useFortune();
+const ChatForm: React.FC<ChatFormProps> = ({ addUserMessage }) => {
+  const { contentText, setContentText, fortuneSubmit, data, setData } =
+    useFortune();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    addUserMessage(contentText);
+    fortuneSubmit();
+    setContentText("");
+  };
   return (
     <form
       action=""
       className="content__chat-form"
       method="POST"
-      onSubmit={(event: React.FormEvent) => {
-        event.preventDefault();
-        addMessage(contentText);
-        fortuneSubmit();
-        setContentText("");
-      }}
+      onSubmit={handleSubmit}
     >
       <div className="content__chat-input-box">
         <input
