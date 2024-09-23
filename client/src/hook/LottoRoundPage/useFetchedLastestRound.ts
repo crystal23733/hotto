@@ -15,7 +15,6 @@ export const useFetchLatestRound = () => {
       setLoading(true);
       try {
         const result = await lastNumberApi();
-        console.log(result);
         setData(result);
       } catch (err) {
         setError(

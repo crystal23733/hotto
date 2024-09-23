@@ -8,12 +8,10 @@ const Fortune: React.FC = () => {
   const [userMessages, setUserMessages] = useState<string[]>([]);
   const [aiMessage, setAiMessage] = useState<string[]>([]);
   const addUserMessage = (message: string) => {
-    console.log(message);
     setUserMessages([...userMessages, message]);
   };
 
   const addAiMessage = (message: string) => {
-    console.log("AI message:", message);
     setAiMessage([...aiMessage, message]);
   };
   return (

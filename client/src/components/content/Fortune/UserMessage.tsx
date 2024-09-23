@@ -5,7 +5,6 @@ interface UserMessageProps {
 }
 
 const UserMessage: React.FC<UserMessageProps> = ({ message }) => {
-  console.log(message);
   return (
     <div className="user-message">
       <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}

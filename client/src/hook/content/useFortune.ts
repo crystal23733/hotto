@@ -7,12 +7,10 @@ export default () => {
   const [contentText, setContentText] = useState<string>("");
   const { data, setData, loading, setLoading, error, setError } =
     useApiRequest();
-  console.log(contentText);
   const fortuneSubmit = async (): Promise<FortuneResponse | null> => {
     setLoading(true);
     try {
       const result = await fortuneRequest(contentText);
-      console.log(result);
       setData(result);
       return result as FortuneResponse;
     } catch (error) {
