@@ -1,7 +1,7 @@
 import React from "react";
 import useFortune from "client/src/hook/content/useFortune";
 
-const ChatInput: React.FC = () => {
+const ChatForm: React.FC = () => {
   const { contentText, setContentText, fortuneSubmit } = useFortune();
   return (
     <div id="content__chat-box">
@@ -29,4 +29,4 @@ const ChatInput: React.FC = () => {
   );
 };
 
-export default ChatInput;
+export default ChatForm;
