@@ -1,11 +1,6 @@
-"""
-/fortune 엔드포인트에 관련된 처리 로직.
-
-포춘텔링 결과를 제공하는 엔드포인트 설정.
-"""
-
 from fastapi import APIRouter, Request
 from services.content.fortune_service import generate_fortune
+from services.content.token_management import get_user, check_token_limit, update_tokens
 
 router = APIRouter()
 
@@ -14,6 +9,9 @@ router = APIRouter()
 async def get_fortune(request: Request):
     """
     /fortune 기본 엔드포인트.
+
+    Args:
+        request (Request): 요청 객체.
 
     Returns:
         JSON: 포춘텔링 결과 반환.
