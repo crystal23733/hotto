@@ -7,30 +7,36 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    & > .user-message {
+    & > .message-area:nth-child(odd) {
+      width: 100%;
       display: flex;
       justify-content: flex-start;
-      width: 100%;
-      & > .bubble {
-        margin: 8px;
-        border-radius: 15px;
-        border-bottom-left-radius: 0;
-        display: inline-block;
-        padding: 17px;
-        background-color: white;
+      & > .user-message {
+        width: 50%;
+        & > .bubble {
+          margin: 8px;
+          border-radius: 15px;
+          border-bottom-left-radius: 0;
+          display: inline-block;
+          padding: 17px;
+          background-color: white;
+        }
       }
     }
-    & > .ai-message {
+    & > .message-area:nth-child(even) {
+      width: 100%;
       display: flex;
       justify-content: flex-end;
-      width: 100%;
-      & > .bubble {
-        margin: 8px;
-        border-radius: 15px;
-        border-bottom-right-radius: 0;
-        display: inline-block;
-        padding: 17px;
-        background-color: white;
+      & > .ai-message {
+        width: 50%;
+        & > .bubble {
+          margin: 8px;
+          border-radius: 15px;
+          border-bottom-right-radius: 0;
+          display: inline-block;
+          padding: 17px;
+          background-color: rgb(68, 255, 0);
+        }
       }
     }
   }

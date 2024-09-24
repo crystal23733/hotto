@@ -1,4 +1,5 @@
 import React from "react";
+import MessageArea from "./MessageArea";
 
 /**
  * AiMessageProps 인터페이스
@@ -20,9 +21,11 @@ interface AiMessageProps {
  */
 const AiMessage: React.FC<AiMessageProps> = ({ message }) => {
   return (
-    <div className="ai-message">
-      <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}
-    </div>
+    <MessageArea>
+      <div className="ai-message">
+        <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}
+      </div>
+    </MessageArea>
   );
 };
 

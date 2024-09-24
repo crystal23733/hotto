@@ -1,4 +1,5 @@
 import React from "react";
+import MessageArea from "./MessageArea";
 
 /**
  * UserMessageProps 인터페이스
@@ -20,9 +21,11 @@ interface UserMessageProps {
  */
 const UserMessage: React.FC<UserMessageProps> = ({ message }) => {
   return (
-    <div className="user-message">
-      <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}
-    </div>
+    <MessageArea>
+      <div className="user-message">
+        <div className="bubble">{message}</div> {/* 말풍선 스타일 적용 */}
+      </div>
+    </MessageArea>
   );
 };
 
