@@ -15,6 +15,12 @@ export class User {
   @Prop({ required: true, trim: true, minlength: 5 })
   password: string;
 
+  @Prop({ default: 0 })
+  tokensUsedToday: number;
+
+  @Prop({ default: 4 })
+  dailyTokenLimit: number;
+
   _id: ObjectId;
 }
 
