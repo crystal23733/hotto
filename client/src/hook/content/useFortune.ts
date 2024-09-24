@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useApiRequest from "../common/api/useApiRequest";
 import fortuneRequest from "client/src/api/auth/fortuneRequest";
 import FortuneResponse from "@shared/interface/fortune.interface";
