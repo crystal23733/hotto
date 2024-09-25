@@ -1,7 +1,10 @@
 import { useState } from "react";
 import useApiRequest from "../common/api/useApiRequest";
 import fortuneRequest from "client/src/api/auth/fortuneRequest";
-import FortuneResponse from "@shared/interface/fortune.interface";
+import {
+  FortuneResponse,
+  ErrorResponse,
+} from "@shared/interface/fortune.interface";
 
 /**
  * 운세 기능을 위한 커스텀 훅
@@ -19,7 +22,7 @@ export default () => {
    *
    * @returns {Promise<FortuneResponse | null>} 운세 API 응답 또는 null
    */
-  const fortuneSubmit = async (): Promise<FortuneResponse | null> => {
+  const fortuneSubmit = async (): Promise<FortuneResponse | ErrorResponse> => {
     setLoading(true);
     try {
       const result = await fortuneRequest(contentText);
@@ -29,7 +32,7 @@ export default () => {
       setError(
         error instanceof Error ? error : new Error("에러가 발생하였습니다."),
       );
-      return null;
+      return error as ErrorResponse;
     } finally {
       setLoading(false);
     }

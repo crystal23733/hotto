@@ -20,7 +20,8 @@ const ChatForm: React.FC<ChatFormProps> = ({
   addUserMessage,
   addAiMessage,
 }) => {
-  const { contentText, setContentText, fortuneSubmit, loading } = useFortune();
+  const { contentText, setContentText, fortuneSubmit, loading, error } =
+    useFortune();
 
   /**
    * 폼 제출 시 사용자 메시지를 추가하고 서버로 운세 요청을 보냅니다.
@@ -31,8 +32,10 @@ const ChatForm: React.FC<ChatFormProps> = ({
     event.preventDefault();
     addUserMessage(contentText);
     const response = await fortuneSubmit(); // fortuneSubmit 호출 후 결과 받기
-    if (response && response.fortune) {
+    if (response && "fortune" in response) {
       addAiMessage(response.fortune.content); // 응답에서 fortune.content 추출하여 AI 메시지로 넘기기
+    } else if (response && "error" in response) {
+      addAiMessage(`${response.error.message}`);
     }
     setContentText("");
   };
@@ -58,6 +61,7 @@ const ChatForm: React.FC<ChatFormProps> = ({
           disabled={loading}
         />
       </div>
+      {error && <p className="help is-danger">{error.message}</p>}
     </form>
   );
 };
