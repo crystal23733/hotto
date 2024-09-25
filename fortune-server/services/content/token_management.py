@@ -1,6 +1,5 @@
 import os
 from fastapi import HTTPException
-from pymongo import MongoClient
 from bson import ObjectId
 from dotenv import load_dotenv
 
@@ -14,17 +13,10 @@ if env == "production":
 else:
     load_dotenv(".env.development")
 
-# 환경변수에서 DB URL 가져오기
-mongo_uri = os.getenv("DB_URL")
-mongo_name = os.getenv("DB_NAME")
-
-# MongoDB 클라이언트 설정
-client = MongoClient(mongo_uri)
-db = client[mongo_name]
-users_collection = db["users"]
-
 
 def get_user(session_id: str):
+    from main import users_collection
+
     """
     세션 ID를 기반으로 사용자 정보를 가져오는 함수.
     Args:
@@ -52,6 +44,8 @@ def check_token_limit(user):
 
 
 def update_tokens(user_id):
+    from main import users_collection
+
     """
     사용자 토큰 사용량을 업데이트하는 함수.
     Args:
@@ -63,6 +57,8 @@ def update_tokens(user_id):
 
 
 def reset_tokens(user_id: str):
+    from main import users_collection
+
     """
     사용자 토큰 사용량을 리셋하는 함수.
     Args:

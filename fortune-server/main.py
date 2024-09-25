@@ -5,10 +5,21 @@ from routers.content.content import (
     router as content_router,
 )  # content 패키지를 가져옵니다.
 from dotenv import load_dotenv
+from pymongo import MongoClient
 
 load_dotenv()  # dotenv
 
 app = FastAPI()
+
+# DB설정
+# 환경변수에서 DB URL 가져오기
+mongo_uri = os.getenv("DB_URL")
+mongo_name = os.getenv("DB_NAME")
+
+# MongoDB 클라이언트 설정
+client = MongoClient(mongo_uri)
+db = client[mongo_name]
+users_collection = db["users"]
 
 # CORS설정
 origin = os.getenv("CLIENT_URL")
