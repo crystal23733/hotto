@@ -9,7 +9,7 @@
  * @property {string | null} tool_calls 도구 호출 정보 (있을 경우)
  * @date 2024.09.23
  */
-export default interface FortuneResponse {
+export interface FortuneResponse {
     fortune: {
       content: string;
       refusal: string | null;
@@ -17,4 +17,11 @@ export default interface FortuneResponse {
       function_call: string | null;
       tool_calls: string | null;
     };
+  }
+
+  export interface ErrorResponse {
+    error:{
+      message:string;
+      status:number;
+    }
   }
