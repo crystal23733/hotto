@@ -1,7 +1,6 @@
 import os
 from fastapi import HTTPException
 from pymongo import MongoClient
-from datetime import datetime
 from bson import ObjectId
 from dotenv import load_dotenv
 
@@ -21,10 +20,8 @@ mongo_name = os.getenv("DB_NAME")
 
 # MongoDB 클라이언트 설정
 client = MongoClient(mongo_uri)
-print(client)
 db = client[mongo_name]
 users_collection = db["users"]
-print(users_collection)
 
 
 def get_user(session_id: str):
@@ -35,9 +32,7 @@ def get_user(session_id: str):
     Returns:
         dict: 사용자 정보.
     """
-    print(users_collection)
     user = users_collection.find_one({"session_id": session_id})
-    print(user)
     return user
 
 
@@ -49,9 +44,11 @@ def check_token_limit(user):
     Raises:
         HTTPException: 토큰 한도 초과 시 예외 발생.
     """
-    current_date = datetime.now().date()
     if user["tokensUsedToday"] >= user["dailyTokenLimit"]:
-        raise HTTPException(status_code=403, detail="토큰 한도를 초과했습니다.")
+        raise HTTPException(
+            status_code=403, detail="오늘 가능한 질문 수를 초과하였습니다."
+        )
+    return
 
 
 def update_tokens(user_id):
@@ -61,7 +58,7 @@ def update_tokens(user_id):
         user_id (str): 사용자 ID.
     """
     users_collection.update_one(
-        {"_id": ObjectId(user_id)}, {"$inc": {"tokenUsedToday": 1}}
+        {"_id": ObjectId(user_id)}, {"$inc": {"tokensUsedToday": 1}}
     )
 
 
