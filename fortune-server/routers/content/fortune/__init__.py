@@ -1,1 +1,0 @@
-from .fortune import router

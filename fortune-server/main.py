@@ -1,7 +1,9 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.content import router as content_router  # content 패키지를 가져옵니다.
+from routers.content.content import (
+    router as content_router,
+)  # content 패키지를 가져옵니다.
 from dotenv import load_dotenv
 
 load_dotenv()  # dotenv
