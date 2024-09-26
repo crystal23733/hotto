@@ -1,0 +1,8 @@
+[tool.black]
+line-length = 88
+exclude = '''
+/(
+    folder_to_ignore|  # 무시할 폴더 이름
+    fortune/
+)/
+'''

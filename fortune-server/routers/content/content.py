@@ -5,7 +5,7 @@ content 관련 라우터 설정 파일.
 """
 
 from fastapi import APIRouter
-from .fortune import router as fortune_router
+from .fortune.fortune import router as fortune_router
 
 router = APIRouter()
 
