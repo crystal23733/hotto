@@ -2,6 +2,8 @@ import os
 from fastapi import HTTPException
 from bson import ObjectId
 from dotenv import load_dotenv
+from datetime import datetime
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # 환경변수 로드
 load_dotenv()
@@ -56,7 +58,7 @@ def update_tokens(user_id):
     )
 
 
-def reset_tokens(user_id: str):
+def reset_tokens():
     from main import users_collection
 
     """
@@ -64,6 +66,16 @@ def reset_tokens(user_id: str):
     Args:
         user_id (str): 사용자 ID.
     """
-    users_collection.update_one(
-        {"_id": ObjectId(user_id)}, {"$set": {"tokensUsedToday": 0}}
-    )
+    current_date = datetime.now().date()
+    print(f"{current_date} - 모든 사용자의 질문 횟수 리셋")
+    users_collection.update_one({}, {"$set": {"tokensUsedToday": 0}})
+
+
+# 스케쥴러 실행
+scheduler = BackgroundScheduler(timezone="Asia/Seoul")
+
+# 자정마다 실행되도록 작업 추가
+scheduler.add_job(reset_tokens, "cron", hour=0, minute=0)
+
+# 스케줄러 시작
+scheduler.start()
