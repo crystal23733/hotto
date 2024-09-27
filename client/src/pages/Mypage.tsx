@@ -1,7 +1,7 @@
 import React from "react";
 import "../scss/myPage.scss";
 import MypageInfoContainer from "../components/Mypage/MypageInfoContainer";
-import useModal from "../hook/Modal/useModal";
+import useModal from "../hook/Modal/useMyModal";
 import MypageFormModal from "../components/Mypage/MypageFormModal";
 
 const Mypage: React.FC = () => {
