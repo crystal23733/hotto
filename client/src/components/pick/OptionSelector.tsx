@@ -1,9 +1,5 @@
+import OptionSelectorProps from "@shared/interface/optionSelector.interface";
 import React from "react";
-
-interface OptionSelectorProps {
-  selectedOption: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
 
 const OptionSelector: React.FC<OptionSelectorProps> = ({
   selectedOption,
