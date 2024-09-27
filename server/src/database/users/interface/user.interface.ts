@@ -1,3 +1,4 @@
+import IBlance from "./IBlance";
 import IDailyTokenLimit from "./IDailyTokenLimit";
 import IEmail from "./IEmail";
 import IName from "./IName";
@@ -11,6 +12,7 @@ interface IUser
     IPassword,
     IId,
     ITokensUsedToday,
-    IDailyTokenLimit {}
+    IDailyTokenLimit,
+    IBlance {}
 
 export default IUser;
