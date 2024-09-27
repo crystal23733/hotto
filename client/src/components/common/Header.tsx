@@ -39,10 +39,17 @@ const Header: React.FC = () => {
         {isAuthenticated ? (
           <>
             <MypageModal isActive={isActive} closeModal={closeModal} />
-            <span>{userName}님 어서오세요.</span>
+            <span>{userName}님</span>
             <span>잔액: {userBalance}</span>
-            <button onClick={handleMypageModal}>마이페이지</button>
-            <a onClick={handleLogout} style={{ cursor: "pointer" }}>
+            <button className="button is-link">금액 충전</button>
+            <button onClick={handleMypageModal} className="button is-link">
+              마이페이지
+            </button>
+            <a
+              onClick={handleLogout}
+              style={{ cursor: "pointer" }}
+              className="button is-link"
+            >
               로그아웃
             </a>
           </>

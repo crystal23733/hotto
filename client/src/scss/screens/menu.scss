@@ -2,7 +2,7 @@
 @use "../components/height.scss";
 
 #menu {
-  background-color: black;
+  background: linear-gradient(135deg, rgb(33, 33, 33), rgb(58, 58, 58));
   height: height.$menu-height;
   & > #menu-list {
     @include display.flex(row, space-evenly, center);
