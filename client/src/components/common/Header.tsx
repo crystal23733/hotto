@@ -12,7 +12,8 @@ import useModal from "client/src/hook/Modal/useModal";
  * @returns {JSX.Element} - 헤더 컴포넌트
  */
 const Header: React.FC = () => {
-  const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
+  const { isAuthenticated, setIsAuthenticated, userName, userBalance } =
+    useAuth();
   const { isActive, handleMypageModal, closeModal } = useModal();
   const router = useRouter();
 
@@ -39,6 +40,7 @@ const Header: React.FC = () => {
           <>
             <MypageModal isActive={isActive} closeModal={closeModal} />
             <span>{userName}님 어서오세요.</span>
+            <span>잔액: {userBalance}</span>
             <button onClick={handleMypageModal}>마이페이지</button>
             <a onClick={handleLogout} style={{ cursor: "pointer" }}>
               로그아웃

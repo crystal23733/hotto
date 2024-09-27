@@ -23,6 +23,8 @@ interface AuthContextProps {
   setUserName: (value: string | null) => void;
   userEmail: string | null;
   setUserEmail: (value: string | null) => void;
+  userBalance: number;
+  setUserBalance: (value: number) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | null>(null);
@@ -57,15 +59,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userName, setUserName] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userBalance, setUserBalance] = useState<number>(0);
 
   useEffect(() => {
     const fetchAuthStatus = async () => {
       try {
         const status = await checkAuthStatus();
         setIsAuthenticated(status.isAuthenticated);
-        if (status.isAuthenticated && status.user?.name && status.user?.email) {
+        if (
+          status.isAuthenticated &&
+          status.user?.name &&
+          status.user?.email &&
+          status.user?.balance
+        ) {
           setUserName(status.user.name);
           setUserEmail(status.user.email);
+          setUserBalance(status.user.balance);
         }
       } catch (error) {
         setIsAuthenticated(false);
@@ -83,6 +92,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         setUserName,
         userEmail,
         setUserEmail,
+        userBalance,
+        setUserBalance,
       }}
     >
       {children}
