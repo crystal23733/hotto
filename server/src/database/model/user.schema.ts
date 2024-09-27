@@ -21,6 +21,9 @@ export class User {
   @Prop({ default: 4 })
   dailyTokenLimit: number;
 
+  @Prop({ default: 0 })
+  balance: number;
+
   _id: ObjectId;
 }
 
