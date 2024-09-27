@@ -14,6 +14,7 @@ import authUrl from "client/src/module/authUrl";
 interface AuthStatusResponse {
   isAuthenticated: boolean;
   user: {
+    balance: number;
     name: string | null;
     email: string | null;
   };
