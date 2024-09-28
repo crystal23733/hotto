@@ -7,9 +7,11 @@ import usePaymentModal from "client/src/hook/common/usePaymentModal";
 
 const PaymentModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const { selectedOption, handleOptionChange } = useLottoOptions();
-  const { data, error, loading } = usePaymentModal(selectedOption);
+  const { data, error, loading, fetchPaymentData } = usePaymentModal(selectedOption);
   console.log(data);
-  const handlePaymentBtn = () => {};
+  const handlePaymentBtn = () => {
+    fetchPaymentData();
+  };
   return (
     <Modal
       isActive={isActive}
