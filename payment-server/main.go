@@ -1,16 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello from Go!")
-}
-
 func main() {
-	http.HandleFunc("/", helloHandler)
-	fmt.Println("Server is running on port 5505")
-	http.ListenAndServe(":5505", nil)
+	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!")
+	})
+	e.Logger.Fatal(e.Start(":5505"))
 }
