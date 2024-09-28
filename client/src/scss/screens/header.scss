@@ -7,7 +7,7 @@
 }
 
 #header {
-  background-color: rgb(46, 45, 45);
+  background: linear-gradient(135deg, rgb(20, 20, 40), rgb(46, 45, 45));
   height: height.$header-height;
   @extend %rowBeetwen;
   padding: 1vh;
@@ -21,6 +21,10 @@
   }
   & > #login-section {
     @extend %rowBeetwen;
+    & > .button {
+      margin: 5px;
+      height: 40px;
+    }
     & > span {
       color: white;
       padding-right: 10px;

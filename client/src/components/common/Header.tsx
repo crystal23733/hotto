@@ -5,15 +5,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import MypageModal from "./MypageModal";
-import useModal from "client/src/hook/Modal/useModal";
+import useMyModal from "client/src/hook/Modal/useMyModal";
+import usePayModal from "client/src/hook/Modal/usePayModal";
+import PaymentModal from "./PaymentModal";
 
 /**
  * 24.08.08
  * @returns {JSX.Element} - 헤더 컴포넌트
  */
 const Header: React.FC = () => {
-  const { isAuthenticated, setIsAuthenticated, userName } = useAuth();
-  const { isActive, handleMypageModal, closeModal } = useModal();
+  const { isAuthenticated, setIsAuthenticated, userName, userBalance } =
+    useAuth();
+  const { isActive, handleMypageModal, closeModal } = useMyModal();
+  const { isPayActive, handlePaymentModal, closePayModal } = usePayModal();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -37,10 +41,21 @@ const Header: React.FC = () => {
       <div id="login-section">
         {isAuthenticated ? (
           <>
+            <PaymentModal isActive={isPayActive} closeModal={closePayModal} />
             <MypageModal isActive={isActive} closeModal={closeModal} />
-            <span>{userName}님 어서오세요.</span>
-            <button onClick={handleMypageModal}>마이페이지</button>
-            <a onClick={handleLogout} style={{ cursor: "pointer" }}>
+            <span>{userName}님</span>
+            <span>잔액: {userBalance}</span>
+            <button onClick={handlePaymentModal} className="button is-link">
+              금액 충전
+            </button>
+            <button onClick={handleMypageModal} className="button is-link">
+              마이페이지
+            </button>
+            <a
+              onClick={handleLogout}
+              style={{ cursor: "pointer" }}
+              className="button is-link"
+            >
               로그아웃
             </a>
           </>

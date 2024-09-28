@@ -6,7 +6,7 @@ import { Document, ObjectId } from "mongoose";
 export type UserDocument = IUser & Document;
 @Schema()
 export class User {
-  @Prop({ required: true, trim: true, minlength: 2 })
+  @Prop({ required: true, unique: true, trim: true, minlength: 2 })
   name: string;
 
   @Prop({ required: true, unique: true, trim: true })
@@ -20,6 +20,9 @@ export class User {
 
   @Prop({ default: 4 })
   dailyTokenLimit: number;
+
+  @Prop({ default: 0 })
+  balance: number;
 
   _id: ObjectId;
 }

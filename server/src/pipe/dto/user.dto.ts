@@ -1,4 +1,4 @@
-import { IsEmail, IsString } from "class-validator";
+import { IsEmail, IsNumber, IsString } from "class-validator";
 
 /**
  * 사용자 정보를 클라이언트에 전달하기 위한 DTO.
@@ -13,4 +13,7 @@ export default class {
 
   @IsEmail()
   readonly email: string;
+
+  @IsNumber()
+  readonly balance: number;
 }
