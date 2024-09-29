@@ -12,9 +12,9 @@ const PaymentLabel: React.FC<OptionSelectorProps> = ({
       </label>
       <div className="select">
         <select id="paymentOption" value={selectedOption} onChange={onChange}>
-          <option value="default">3000원</option>
-          <option value="fiveThousand">5000원</option>
-          <option value="tenThousand">10000원</option>
+          <option value="3000">3000원</option>
+          <option value="5000">5000원</option>
+          <option value="10000">10000원</option>
         </select>
       </div>
     </>
