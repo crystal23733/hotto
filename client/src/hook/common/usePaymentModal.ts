@@ -1,7 +1,16 @@
-import { useEffect } from "react";
 import useApiRequest from "./api/useApiRequest";
 import paymentRequest from "client/src/api/pay/paymentRequest";
 
+/**
+ * 결제 요청 커스텀 훅
+ * @param {string} option - 결제 요청 금액
+ * @returns {{
+ *  data:string,
+ *  error:string,
+ *  loading:boolean,
+ *  fetchPaymentData:Function
+ * }}
+ */
 export default (option: string) => {
   const { data, setData, loading, setLoading, error, setError } =
     useApiRequest();

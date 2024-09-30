@@ -1,6 +1,12 @@
 import OptionSelectorProps from "@shared/interface/optionSelector.interface";
 import React from "react";
 
+/**
+ * 결제 모달창 옵션 컴포넌트
+ * @param {selectedOption} string - 옵션 값
+ * @param {(e: React.ChangeEvent<HTMLSelectElement>) => void} - 옵션 변경 이벤트
+ * @returns {JSX.Element} - 결제 옵션 컴포넌트
+ */
 const PaymentLabel: React.FC<OptionSelectorProps> = ({
   selectedOption,
   onChange,
