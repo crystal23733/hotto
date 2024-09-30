@@ -12,9 +12,7 @@ export default (option: string) => {
       const response = await paymentRequest(option);
       setData(response);
     } catch (error) {
-      setError(
-        error instanceof Error ? error : new Error("An Error occurred"),
-      );
+      setError(error instanceof Error ? error : new Error("An Error occurred"));
     } finally {
       setLoading(false);
     }

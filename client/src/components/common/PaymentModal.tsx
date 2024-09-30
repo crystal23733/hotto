@@ -2,12 +2,13 @@ import React from "react";
 import Modal from "./Modal";
 import IModalProps from "@shared/interface/modal.interface";
 import PaymentLabel from "./PaymentLabel";
-import useLottoOptions from "client/src/hook/pick/useLottoOptions";
 import usePaymentModal from "client/src/hook/common/usePaymentModal";
+import usePayOption from "client/src/hook/Modal/usePayOption";
 
 const PaymentModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
-  const { selectedOption, handleOptionChange } = useLottoOptions();
-  const { data, error, loading, fetchPaymentData } = usePaymentModal(selectedOption);
+  const { selectedOption, handleOptionChange } = usePayOption();
+  const { data, error, loading, fetchPaymentData } =
+    usePaymentModal(selectedOption);
   console.log(data);
   const handlePaymentBtn = () => {
     fetchPaymentData();
