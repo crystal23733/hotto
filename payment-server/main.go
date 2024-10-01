@@ -16,6 +16,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -96,7 +97,6 @@ func main() {
 		if err!=nil {
 			return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID를 디코딩하는 데 실패했습니다."})
 		}
-		log.Printf("[INFO] 디코딩된 세션 ID: %s\n", decodedSessionID)
 
 		// 세션 ID에서 실제 세션 ID 추출
 		// 예시: "s:rQiAJCvE3YCS8qkmD3TO1tKLdF4NRgCO.UzOO+MND8le0SFK6p90F8P+oLDLhQmK/azvUythZb2Q"
@@ -154,6 +154,26 @@ func main() {
 			Balance int `json:"balance" bson:"balance"`	
 		}
 		
+		//userID로 users컬렉션 조회
+		userCollection := client.Database(db_name).Collection("users")
+		var user User
+		objectID, err := primitive.ObjectIDFromHex(userID)
+		 if err != nil{
+			return c.JSON(http.StatusBadRequest, map[string]string{"error":"유효하지 않은 ID입니다."})
+		}
+
+		err = userCollection.FindOne(ctx, bson.M{"_id":objectID}).Decode(&user)
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				log.Printf("사용자 에러")
+				return c.JSON(http.StatusNotFound, map[string]string{"error":"사용자를 찾을 수 없습니다."})
+			}
+			log.Printf("데이터 에러")
+			return c.JSON(http.StatusInternalServerError, map[string]string{"error":"데이터베이스 오류가 발생했습니다."})
+		}
+
+		log.Printf("찾은 사용자 데이터:%+v\n", user)
+
 		body, err := io.ReadAll(c.Request().Body)
 		if err != nil {
 			return c.String(http.StatusBadRequest, "요청 본문을 읽는 데 실패했습니다")
