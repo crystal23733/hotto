@@ -125,16 +125,27 @@ func main() {
 		}
 
 		//session ID로 세션 문서 조회
-		err = sessionCollection.FindOne(ctx, bson.M{"_id":sessionID.Value}).Decode(&sessionDoc)
+		err = sessionCollection.FindOne(ctx, bson.M{"_id":actualSessionID}).Decode(&sessionDoc)
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
 					log.Printf("[ERROR] 세션을 찾을 수 없습니다: %v\n", err)
 					return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 			}
-			log.Printf("[ERROR] 데이터베이스 오류: %v\n", err)
+			log.Printf("[ERROR] 세션 문서 조회 오류: %v\n", err)
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 		}
 		log.Printf("[INFO] 세션 데이터 조회 성공: %s\n", sessionDoc.Session)
+
+		//세션 필드 내의 문자열을 JSON으로 파싱
+		var sessionData struct {
+			UserID string `json:"userId"`
+		}
+		err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
+		if err!=nil {
+			log.Printf("[ERROR]세션 데이터 파싱 실패:%v\n", err)
+			return c.JSON(http.StatusInternalServerError, map[string]string{"error":"세션 데이터를 파싱하는데 실패하였습니다."})
+		}
+		log.Printf("파싱된 데이터:%s\n", sessionData);
 
 		//사용자의 정보를 나타내는 구조체
 		type User struct {
@@ -144,29 +155,6 @@ func main() {
 			Balance int `json:"balance" bson:"balance"`	
 		}
 		
-		
-
-		// if err != nil {
-		// 	log.Println("세션쿠키를 찾을 수 없습니다.")
-		// 	return c.JSON(http.StatusUnauthorized, map[string]string{"error": "세션쿠키를 찾을 수 없습니다."})
-		// }
-		// // DB 사용자 조회
-		// userCollection := client.Database(db_name).Collection("users")
-		// ctx, cancel:= context.WithTimeout(context.Background(), 5*time.Second)
-		// defer cancel()
-
-		// var user User
-		// err = userCollection.FindOne(ctx, bson.M{"_id":sessionID.Value}).Decode(&user)
-		// if err != nil {
-		// 	if err == mongo.ErrNoDocuments {
-		// 		log.Printf("사용자를 찾을 수 없습니다.")
-		// 		return c.JSON(http.StatusNotFound, map[string]string{"error": "사용자를 찾을 수 없습니다."})
-		// 	}
-		// 	log.Println("데이터베이스에 오류가 발생하였습니다.")
-		// 	return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스에 오류가 발생하였습니다."})
-		// }
-		// fmt.Printf("찾은 데이터: %+v\n", user)
-		// 요청 본문을 읽음
 		body, err := io.ReadAll(c.Request().Body)
 		if err != nil {
 			return c.String(http.StatusBadRequest, "요청 본문을 읽는 데 실패했습니다")
