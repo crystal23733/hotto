@@ -87,16 +87,13 @@ func main() {
 		// 클라이언트가 제공한 세션 쿠키 가져오기
     sessionID, err := c.Cookie("LIN_HOTTO")
     if err != nil {
-        log.Printf("[ERROR] 세션 쿠키를 찾을 수 없습니다: %v\n", err)
         return c.JSON(http.StatusUnauthorized, map[string]string{"error": "세션 쿠키를 찾을 수 없습니다."})
     }
-    log.Printf("[INFO] 세션 ID: %s\n", sessionID.Value)
 		db_name := os.Getenv("DB_NAME")
 
 		//세션ID URL디코딩
 		decodedSessionID, err := url.QueryUnescape(sessionID.Value)
 		if err!=nil {
-			log.Printf("sessionID 디코딩실패!:%v\n", err)
 			return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID를 디코딩하는 데 실패했습니다."})
 		}
 		log.Printf("[INFO] 디코딩된 세션 ID: %s\n", decodedSessionID)
@@ -106,13 +103,11 @@ func main() {
 		// 실제 세션 ID는 "rQiAJCvE3YCS8qkmD3TO1tKLdF4NRgCO"
 		parts := strings.Split(decodedSessionID, ":")
 		if len(parts) < 2 {
-			log.Printf("[ERROR] 세션 ID 형식이 잘못되었습니다: %s\n", decodedSessionID)
 			return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID 형식이 잘못되었습니다."})
 		}
 		sessionAndRest := parts[1]
 		sessionParts := strings.Split(sessionAndRest, ".")
 		actualSessionID := sessionParts[0]
-		log.Printf("[INFO] 추출된 실제 세션 ID: %s\n", actualSessionID)
 
 		//DB세션정보 조회
 		sessionCollection := client.Database(db_name).Collection("sessions") // 세션 컬렉션
@@ -128,13 +123,11 @@ func main() {
 		err = sessionCollection.FindOne(ctx, bson.M{"_id":actualSessionID}).Decode(&sessionDoc)
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
-					log.Printf("[ERROR] 세션을 찾을 수 없습니다: %v\n", err)
 					return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 			}
-			log.Printf("[ERROR] 세션 문서 조회 오류: %v\n", err)
+
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 		}
-		log.Printf("[INFO] 세션 데이터 조회 성공: %s\n", sessionDoc.Session)
 
 		//세션 필드 내의 문자열을 JSON으로 파싱
 		var sessionData struct {
@@ -145,7 +138,13 @@ func main() {
 			log.Printf("[ERROR]세션 데이터 파싱 실패:%v\n", err)
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error":"세션 데이터를 파싱하는데 실패하였습니다."})
 		}
-		log.Printf("파싱된 데이터:%s\n", sessionData);
+
+		userID := sessionData.UserID
+		
+		if userID == "" {
+			log.Printf("[ERROR]세션에 유효한 사용자가 없습니다!\n")
+			return c.JSON(http.StatusUnauthorized, map[string]string{"error":"세션에 유효한 사용자가 없습니다."})
+		}
 
 		//사용자의 정보를 나타내는 구조체
 		type User struct {
