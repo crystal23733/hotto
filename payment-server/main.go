@@ -21,13 +21,13 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-//결제 요청을 나타내는 구조체
+// 결제 요청을 나타내는 구조체
 type PaymentRequest struct {
-	Option     string    `json:"option"`
+	Option    string `json:"option"`
 	SessionID string `json:"session_id"`
 }
 
-//MongoDB에 연결하고 클라이언트를 반환하는 함수
+// MongoDB에 연결하고 클라이언트를 반환하는 함수
 func connectDB() (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -38,13 +38,13 @@ func connectDB() (*mongo.Client, error) {
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(db_url))
 	if err != nil {
 		log.Println("DB연결에 실패하였습니다.")
-			return nil, err
+		return nil, err
 	}
 
 	err = client.Ping(ctx, nil)
 	if err != nil {
-		 	log.Println("DB연결이 확인되지 않습니다.")
-			return nil, err
+		log.Println("DB연결이 확인되지 않습니다.")
+		return nil, err
 	}
 	log.Println("DB에 성공적으로 연결하였습니다.")
 	return client, nil
@@ -86,15 +86,15 @@ func main() {
 	//라우트
 	e.POST("/pay", func(c echo.Context) error {
 		// 클라이언트가 제공한 세션 쿠키 가져오기
-    sessionID, err := c.Cookie("LIN_HOTTO")
-    if err != nil {
-        return c.JSON(http.StatusUnauthorized, map[string]string{"error": "세션 쿠키를 찾을 수 없습니다."})
-    }
+		sessionID, err := c.Cookie("LIN_HOTTO")
+		if err != nil {
+			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "세션 쿠키를 찾을 수 없습니다."})
+		}
 		db_name := os.Getenv("DB_NAME")
 
 		//세션ID URL디코딩
 		decodedSessionID, err := url.QueryUnescape(sessionID.Value)
-		if err!=nil {
+		if err != nil {
 			return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID를 디코딩하는 데 실패했습니다."})
 		}
 
@@ -111,19 +111,19 @@ func main() {
 
 		//DB세션정보 조회
 		sessionCollection := client.Database(db_name).Collection("sessions") // 세션 컬렉션
-    ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-    defer cancel()
-	
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
 		//세션ID를 나타내는 구조체
 		var sessionDoc struct {
 			Session string `bson:"session"` // 세션 데이터를 담는 필드
 		}
 
 		//session ID로 세션 문서 조회
-		err = sessionCollection.FindOne(ctx, bson.M{"_id":actualSessionID}).Decode(&sessionDoc)
+		err = sessionCollection.FindOne(ctx, bson.M{"_id": actualSessionID}).Decode(&sessionDoc)
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
-					return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
+				return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 			}
 
 			return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
@@ -134,42 +134,42 @@ func main() {
 			UserID string `json:"userId"`
 		}
 		err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
-		if err!=nil {
+		if err != nil {
 			log.Printf("[ERROR]세션 데이터 파싱 실패:%v\n", err)
-			return c.JSON(http.StatusInternalServerError, map[string]string{"error":"세션 데이터를 파싱하는데 실패하였습니다."})
+			return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 데이터를 파싱하는데 실패하였습니다."})
 		}
 
 		userID := sessionData.UserID
-		
+
 		if userID == "" {
 			log.Printf("[ERROR]세션에 유효한 사용자가 없습니다!\n")
-			return c.JSON(http.StatusUnauthorized, map[string]string{"error":"세션에 유효한 사용자가 없습니다."})
+			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "세션에 유효한 사용자가 없습니다."})
 		}
 
 		//사용자의 정보를 나타내는 구조체
 		type User struct {
-			ID string `json:"_id" bson:"_id"`
-			Name string `json:"name" bson:"name"`
-			Email string `json:"email" bson:"email"`
-			Balance int `json:"balance" bson:"balance"`	
+			ID      string `json:"_id" bson:"_id"`
+			Name    string `json:"name" bson:"name"`
+			Email   string `json:"email" bson:"email"`
+			Balance int    `json:"balance" bson:"balance"`
 		}
-		
+
 		//userID로 users컬렉션 조회
 		userCollection := client.Database(db_name).Collection("users")
 		var user User
 		objectID, err := primitive.ObjectIDFromHex(userID)
-		 if err != nil{
-			return c.JSON(http.StatusBadRequest, map[string]string{"error":"유효하지 않은 ID입니다."})
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 ID입니다."})
 		}
 
-		err = userCollection.FindOne(ctx, bson.M{"_id":objectID}).Decode(&user)
+		err = userCollection.FindOne(ctx, bson.M{"_id": objectID}).Decode(&user)
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
 				log.Printf("사용자 에러")
-				return c.JSON(http.StatusNotFound, map[string]string{"error":"사용자를 찾을 수 없습니다."})
+				return c.JSON(http.StatusNotFound, map[string]string{"error": "사용자를 찾을 수 없습니다."})
 			}
 			log.Printf("데이터 에러")
-			return c.JSON(http.StatusInternalServerError, map[string]string{"error":"데이터베이스 오류가 발생했습니다."})
+			return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 		}
 
 		log.Printf("찾은 사용자 데이터:%+v\n", user)
