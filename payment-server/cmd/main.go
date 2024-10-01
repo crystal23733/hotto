@@ -8,17 +8,13 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // 결제 요청을 나타내는 구조체
@@ -27,36 +23,8 @@ type PaymentRequest struct {
 	SessionID string `json:"session_id"`
 }
 
-// MongoDB에 연결하고 클라이언트를 반환하는 함수
-func connectDB() (*mongo.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
-	db_url := os.Getenv("DB_URL")
-	log.Println("DB 연결중...")
-
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(db_url))
-	if err != nil {
-		log.Println("DB연결에 실패하였습니다.")
-		return nil, err
-	}
-
-	err = client.Ping(ctx, nil)
-	if err != nil {
-		log.Println("DB연결이 확인되지 않습니다.")
-		return nil, err
-	}
-	log.Println("DB에 성공적으로 연결하였습니다.")
-	return client, nil
-}
-
 // 애플리케이션 진입점
 func main() {
-	// .env파일 로드
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("환경변수를 찾을 수 없습니다.")
-	}
 	client, err := connectDB()
 	if err != nil {
 		log.Fatal(err)
@@ -65,12 +33,6 @@ func main() {
 
 	e := echo.New()
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "5000"
-	}
-
-	client_url := os.Getenv("CLIENT_URL")
 
 	//CORS설정
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
@@ -90,7 +52,6 @@ func main() {
 		if err != nil {
 			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "세션 쿠키를 찾을 수 없습니다."})
 		}
-		db_name := os.Getenv("DB_NAME")
 
 		//세션ID URL디코딩
 		decodedSessionID, err := url.QueryUnescape(sessionID.Value)
