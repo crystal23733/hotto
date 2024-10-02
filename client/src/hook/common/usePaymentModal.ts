@@ -11,7 +11,7 @@ import paymentRequest from "client/src/api/pay/paymentRequest";
  *  fetchPaymentData:Function
  * }}
  */
-export default (option: string) => {
+export default (option: number) => {
   const { data, setData, loading, setLoading, error, setError } =
     useApiRequest();
 

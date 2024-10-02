@@ -8,7 +8,7 @@ const fetchApi = new FetchApi(payServer);
  * @param {string} option - 요청할 금액
  * @returns {Promise} API응답 결과
  */
-export default async (option: string) => {
+export default async (option: number) => {
   const payUrl = process.env.NEXT_PUBLIC_PAY_ENDPOINT as string;
   console.log(payServer, payUrl);
   return fetchApi.request(payUrl, "POST", { option }, null, true);

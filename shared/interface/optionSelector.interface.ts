@@ -1,4 +1,4 @@
 export default interface OptionSelectorProps {
-  selectedOption: string;
+  selectedOption: string | number;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
