@@ -19,3 +19,16 @@ type KakaoPayRequest struct {
 	cancelUrl      string `json:"cancel_url"`       // 결제 취소시 redirect url
 	failUrl        string `json:"fail_url"`
 }
+
+// KakaoPayResponse는 KakaoPay로부터의 응답을 나타낸다.
+type KakaoPayResponse struct {
+	tid string `json:"tid"` // 결제 고유 번호
+	nextRedirectAppUrl string `json:"next_redirect_app_url"` // 요청한 클라이언트가 모바일앱일경우 카카오톡결제페이지 URL
+	nextRedirectMobileUrl string `json:"next_redirect_mobile_url"` // 요청한 클라이언트가 모바일웹일경우 카카오톡결제페이지 URL
+	nextRedirectPcUrl string `json:"next_redirect_pa_url"` // 요청한 클라이언트가 PC일경우 카카오톡결제페이지 URL
+	androidAppScheme string `json:"android_app_scheme"` // 카카오페이 결제 화면으로 이동하는 Android 앱 스킴(Scheme) - 내부 서비스용
+	iosAppScheme string `json:"ios_app_scheme"` // 카카오페이 결제 화면으로 이동하는 iOS 앱 스킴 - 내부 서비스용
+	createdAt string `json:"created_at"` // 결제 준비 요청 시간
+}
+
+
