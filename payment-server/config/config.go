@@ -45,3 +45,8 @@ func DBURL() string {
 func DBName() string {
 	return os.Getenv("DB_NAME")
 }
+
+// Cid은 환경변수에서 Cid를 반환한다.
+func Cid() string {
+	return os.Getenv("CID")
+}
