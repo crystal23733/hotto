@@ -49,7 +49,7 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	sessionAndRest := parts[1]
 	sessionParts := strings.Split(sessionAndRest, ".")
 	actualSessionID := sessionParts[0]
-
+	log.Printf("[INFO] MongoDB에서 조회할 세션 ID: %s", actualSessionID)
 	// DB 세션정보 조회
 	dbName := config.DBName() // 환경변수에서 가져온 값
 	sessionCollection := client.Database(dbName).Collection("sessions")
@@ -65,6 +65,7 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	err = sessionCollection.FindOne(ctx, bson.M{"_id": actualSessionID}).Decode(&sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
+			log.Printf("[ERROR] 세션을 찾을 수 없습니다: %v", err)
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 		}
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})

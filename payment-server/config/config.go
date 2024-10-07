@@ -13,13 +13,17 @@ import (
 )
 
 // LoadEnv는 .env파일을 로드한다.
+/*
+LoadEnv는 프로젝트 루트에 있는 .env 파일을 로드하여
+환경 변수를 설정합니다. 파일 로드에 실패하면 오류를 반환합니다.
+*/
 func LoadEnv() error {
-	err := godotenv.Load()
-	if err != nil {
-		log.Printf("환경변수 파일을 찾을 수 없습니다.")
-		return err
-	}
-	return nil
+    err := godotenv.Load()
+    if err != nil {
+        log.Printf("환경변수 파일을 찾을 수 없습니다.")
+        return err
+    }
+    return nil
 }
 
 // Port는 환경변수에서 Port를 반환하거나 기본값을 반환한다.

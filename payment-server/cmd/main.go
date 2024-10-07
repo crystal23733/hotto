@@ -20,6 +20,12 @@ type PaymentRequest struct {
 
 // 애플리케이션 진입점
 func main() {
+	// .env파일 로드
+	err := config.LoadEnv()
+	if err != nil {
+		log.Fatal("환경 변수를 로드하지 못했습니다:", err)
+	}
+
 	client, err := db.ConnectDB()
 	if err != nil {
 		log.Fatal(err)
