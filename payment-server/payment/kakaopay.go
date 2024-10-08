@@ -5,20 +5,28 @@ kakaopay.go는 KakaoPay 결제 요청을 처리하는 기능을 포함한다.
 
 package payment
 
-import "payment/config"
+import (
+	"payment/config"
+	"payment/models"
+)
 
 // KakaoPayClient는 KakaoPay API와 상호작용하기 위한 클라이언트 구조체입니다.
 type KakaoPayClient struct {
-	APIEndpoint: string 
-	Cid: string
+	APIEndpoint string 
+	Cid string
 	CidSecret string
 }
 
 // KakaopayClient 인스턴스 생성 함수
 func newKakaoPayClient() *KakaoPayClient {
 	return &KakaoPayClient {
-		APIEndpoint: "https://open-api.kakaopay.com/online/v1/payment/ready"
-		Cid: config.Cid()
-		CidSecret: config.CidSecret()
+		APIEndpoint: "https://open-api.kakaopay.com/online/v1/payment/ready",
+		Cid: config.Cid(),
+		CidSecret: config.CidSecret(),
 	}
 }
+
+// RequestPayment는 카카오페이에 결제 요청을 보낸다.
+func (c *KakaoPayClient) RequestPayment(request models.KakaPayRequest) (*models.KakaoPayResponse, error) {
+	// 요청 본문 생성
+	request
