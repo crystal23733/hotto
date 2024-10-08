@@ -22,7 +22,7 @@ type KakaoPayClient struct {
 }
 
 // KakaopayClient 인스턴스 생성 함수
-func newKakaoPayClient() *KakaoPayClient {
+func NewKakaoPayClient() *KakaoPayClient {
 	return &KakaoPayClient{
 		APIEndpoint: "https://open-api.kakaopay.com/online/v1/payment/ready",
 		Cid:         config.Cid(),
