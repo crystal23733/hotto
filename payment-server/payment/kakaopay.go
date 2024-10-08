@@ -19,5 +19,6 @@ func newKakaoPayClient() *KakaoPayClient {
 	return &KakaoPayClient {
 		APIEndpoint: "https://open-api.kakaopay.com/online/v1/payment/ready"
 		Cid: config.Cid()
+		CidSecret: config.CidSecret()
 	}
 }
