@@ -57,3 +57,8 @@ func DBName() string {
 func Cid() string {
 	return os.Getenv("CID")
 }
+
+// CidSecret은 환경변수에서 CID_SECRET을 반환한다.
+func CidSecret() string {
+	return os.Getenv("CID_SECRET")
+}
