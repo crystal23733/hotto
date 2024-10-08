@@ -38,21 +38,18 @@ func Port() string {
 // ClientURL은 환경변수에서 ClientURL을 반환한다.
 func ClientURL() string {
 	clientURL := os.Getenv("CLIENT_URL")
-	log.Printf("ClientURL: %s", clientURL)
 	return clientURL
 }
 
 // DBURL은 환경변수에서 DBURL을 반환한다.
 func DBURL() string {
 	dbURL := os.Getenv("DB_URL")
-	log.Printf("DB_URL: %s", dbURL)
 	return dbURL
 }
 
 // DBName은 환경변수에서 DBName을 반환한다.
 func DBName() string {
 	dbName := os.Getenv("DB_NAME")
-	log.Printf("DB_NAME: %s", dbName)
 	return dbName
 }
 
