@@ -14,6 +14,7 @@ type KakaoPayClient struct {
 	CidSecret string
 }
 
+// KakaopayClient 인스턴스 생성 함수
 func newKakaoPayClient() *KakaoPayClient {
 	return &KakaoPayClient {
 		APIEndpoint: "https://open-api.kakaopay.com/online/v1/payment/ready"
