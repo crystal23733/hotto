@@ -15,6 +15,7 @@ import (
 	"net/url"
 	"payment-server/config"
 	"payment-server/models"
+	"payment-server/payment"
 	"strings"
 	"time"
 
@@ -109,14 +110,42 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	}
 
 	// body를 JSON으로 파싱
-	var data interface{}
-	err = json.Unmarshal(body, &data)
+	var requestData struct {
+		Option int `json:"option"`
+	}
+	err = json.Unmarshal(body, &requestData)
 	if err != nil {
 		fmt.Printf("수신된 데이터 (원본): %s\n", string(body))
 		return c.String(http.StatusOK, "비 JSON 데이터 수신됨")
 	}
 
+	// 카카오페이 클라이언트 생성
+	kakaoClient := payment.NewKakaoPayClient()
+
+	// 가맹점 주문번호 생성
+	partnerOrderID := fmt.Sprintf("order-%d", time.Now().Unix())
+
+	// 카카오페이 결제 요청
+	kakaoPayRequest := models.KakaoPayRequest{
+		Cid:            kakaoClient.Cid,
+		CidSecret:      kakaoClient.CidSecret,
+		PartnerOrderId: partnerOrderID,
+		PartnerUserId:  user.ID,
+		ItemName:       fmt.Sprintf("%d", requestData.Option), // option값을 문자열로 반환
+		Quantity:       1,
+		TotalAmount:    requestData.Option,
+		TaxFreeAmount:  requestData.Option,
+		ApprovalUrl:    config.ClientURL() + "/payment/success",
+		CancelUrl:      config.ClientURL() + "/payment/cancel",
+		FailUrl:        config.ClientURL() + "/payment/fail",
+	}
+
+	// 결제 요청을 위해 카카오페이에 전송(결제 준비)
+	response, err := kakaoClient.RequestPayment(kakaoPayRequest)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "카카오페이 결제 요청에 실패하였습니다."})
+	}
 	// 파싱된 JSON데이터 출력
-	fmt.Printf("수신된 데이터 (JSON): %+v\n", data)
-	return c.JSON(http.StatusOK, map[string]string{"message": "데이터 수신됨"})
+	fmt.Printf("수신된 데이터 (JSON): %+v\n", response)
+	return c.JSON(http.StatusOK, response)
 }
