@@ -128,7 +128,6 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	// 카카오페이 결제 요청
 	kakaoPayRequest := models.KakaoPayRequest{
 		Cid:            kakaoClient.Cid,
-		CidSecret:      kakaoClient.CidSecret,
 		PartnerOrderId: partnerOrderID,
 		PartnerUserId:  user.ID,
 		ItemName:       fmt.Sprintf("%d", requestData.Option), // option값을 문자열로 반환
