@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 	"payment-server/config"
 	"payment-server/models"
@@ -37,12 +38,15 @@ func (c *KakaoPayClient) RequestPayment(request models.KakaoPayRequest) (*models
 	if err != nil {
 		return nil, errors.New("결제 요청 본문을 생성하는데에 실패하였습니다.")
 	}
+	
+	log.Printf("카카오페이 요청본문:%+v", requestBody)
 
 	// 카카오페이 API에 요청 전송
 	req, err := http.NewRequest("POST", c.APIEndpoint, bytes.NewBuffer(requestBody))
 	if err != nil {
 		return nil, err
 	}
+	log.Printf("카카오페이 요청사항:%+v", req)
 
 	// 헤더설정
 	req.Header.Set("Authorization", "SECRET_KEY "+c.CidSecret)
@@ -64,5 +68,6 @@ func (c *KakaoPayClient) RequestPayment(request models.KakaoPayRequest) (*models
 	if err := json.NewDecoder(resp.Body).Decode(&kakaoPayResponse); err != nil {
 		return nil, errors.New("카카오페이 응답을 파싱하는데에 실패하였습니다.")
 	}
+	log.Printf("카카오페이 응답:%+v", kakaoPayResponse)
 	return &kakaoPayResponse, nil
 }
