@@ -8,7 +8,6 @@ package models
 // KakaoPayRequest는 KakaoPay에 결제 요청시 필요한 필드들을 나타낸다.
 type KakaoPayRequest struct {
 	Cid            string `json:"cid"`              // 가맹점 cid
-	CidSecret      string `json:"cid_secret"`       // 가맹점 코드 인증키
 	PartnerOrderId string `json:"partner_order_id"` // 가맹점 주문번호
 	PartnerUserId  string `json:"partner_user_id"`  // 가맹점 회원 id
 	ItemName       string `json:"item_name"`        // 상품명

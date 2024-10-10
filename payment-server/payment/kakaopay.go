@@ -47,11 +47,11 @@ func (c *KakaoPayClient) RequestPayment(request models.KakaoPayRequest) (*models
 		log.Printf("API요청 실패:%v", err)
 		return nil, err
 	}
-	log.Printf("카카오페이 요청사항:%+v", req)
 
 	// 헤더설정
-	req.Header.Set("Authorization", "KakaoAK "+c.CidSecret)
+	req.Header.Set("Authorization", c.CidSecret)
 	req.Header.Set("Content-Type", "application/json")
+	log.Printf("카카오페이 요청사항: Method=%s, URL=%s, Headers=%v", req.Method, req.URL, req.Header)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
