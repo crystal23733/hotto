@@ -39,33 +39,37 @@ func (c *KakaoPayClient) RequestPayment(request models.KakaoPayRequest) (*models
 		return nil, errors.New("결제 요청 본문을 생성하는데에 실패하였습니다.")
 	}
 	
-	log.Printf("카카오페이 요청본문:%+v", requestBody)
+	log.Printf("카카오페이 요청본문: %s", string(requestBody))
 
 	// 카카오페이 API에 요청 전송
 	req, err := http.NewRequest("POST", c.APIEndpoint, bytes.NewBuffer(requestBody))
 	if err != nil {
+		log.Printf("API요청 실패:%v", err)
 		return nil, err
 	}
 	log.Printf("카카오페이 요청사항:%+v", req)
 
 	// 헤더설정
-	req.Header.Set("Authorization", "SECRET_KEY "+c.CidSecret)
+	req.Header.Set("Authorization", "KakaoAK "+c.CidSecret)
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
+		log.Printf("헤더 에러:%v", err)
 		return nil, err
 	}
 	defer resp.Body.Close()
 
 	// 응답처리
 	if resp.StatusCode != http.StatusOK {
+		log.Printf("API호출 실패:%v", err)
 		return nil, errors.New("카카오페이 API호출 실패: " + resp.Status)
 	}
 
 	var kakaoPayResponse models.KakaoPayResponse
 	if err := json.NewDecoder(resp.Body).Decode(&kakaoPayResponse); err != nil {
+		log.Printf("API응답 파싱 실패:%v", err)
 		return nil, errors.New("카카오페이 응답을 파싱하는데에 실패하였습니다.")
 	}
 	log.Printf("카카오페이 응답:%+v", kakaoPayResponse)
