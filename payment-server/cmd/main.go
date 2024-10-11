@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 	"payment-server/config"
 	"payment-server/db"
 	"payment-server/routers"
@@ -50,6 +51,21 @@ func main() {
 	routers.SetupRoutes(e, client)
 
 	// 서버 시작
+	// 개발 환경인지 확인
+	isDevelopment := os.Getenv("NODE_ENV") == "development"
 	port := config.Port()
-	e.Logger.Fatal(e.Start(":" + port))
+
+	if isDevelopment {
+		// HTTPS 설정
+		certFile := config.CertPath()
+		keyFile := config.KeyPath()
+
+		// HTTPS 서버 실행
+		log.Printf("Starting HTTPS server on port %s", port)
+		e.Logger.Fatal(e.StartTLS(":"+port, certFile, keyFile))
+	} else {
+		// HTTP 서버 실행
+		log.Printf("Starting HTTP server on port %s", port)
+		e.Logger.Fatal(e.Start(":" + port))
+	}
 }
