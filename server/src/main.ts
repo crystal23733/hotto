@@ -1,10 +1,26 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ConfigService } from "@nestjs/config";
+import * as fs from "fs";
+import * as path from "path";
 import "dotenv/config";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const isDevelopment = process.env.NODE_ENV === "development";
+  const PEM_URL = process.env.PEM_URL as string;
+  const PEM_KEY_URL = process.env.PEM_KEY_URL as string;
+
+  // HTTPS 옵션 설정 (개발 환경에서만)
+  const httpsOptions = isDevelopment
+    ? {
+        key: fs.readFileSync(path.join(PEM_KEY_URL)),
+        cert: fs.readFileSync(path.join(PEM_URL)),
+      }
+    : null;
+
+  const app = await NestFactory.create(AppModule, {
+    ...(httpsOptions && { httpsOptions }),
+  });
 
   // ! 환경변수 관리를 위한 설정
   const configService = app.get(ConfigService);
@@ -20,6 +36,8 @@ async function bootstrap() {
   });
 
   await app.listen(PORT);
-  console.log(`http://localhost:${PORT}`);
+  console.log(
+    `Server running on ${isDevelopment ? "https" : "http"}://localhost:${PORT}`,
+  );
 }
 bootstrap();
