@@ -49,5 +49,13 @@ if __name__ == "__main__":
     """
     import uvicorn
 
+    is_development = os.getenv("NODE_ENV") == "development"
     port = int(os.getenv("PORT", 8000))
-    uvicorn.run(app, host="127.0.0.1", port=port)
+
+    # HTTPS 옵션 적용 (개발 환경에서만)
+    if is_development:
+        pem_cert = os.getenv("PEM_URL")
+        pem_key = os.getenv("PEM_KEY_URL")
+        uvicorn.run(app, host="127.0.0.1", port=port, ssl_certfile=pem_cert, ssl_keyfile=pem_key)
+    else:
+        uvicorn.run(app, host="127.0.0.1", port=port)
