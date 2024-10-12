@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"payment-server/config"
@@ -49,7 +50,7 @@ func (c *KakaoPayClient) RequestPayment(request models.KakaoPayRequest) (*models
 	}
 
 	// 헤더설정
-	req.Header.Set("Authorization", c.CidSecret)
+	req.Header.Set("Authorization", "SECRET_KEY " + c.CidSecret)
 	req.Header.Set("Content-Type", "application/json")
 	log.Printf("카카오페이 요청사항: Method=%s, URL=%s, Headers=%v", req.Method, req.URL, req.Header)
 
@@ -63,7 +64,8 @@ func (c *KakaoPayClient) RequestPayment(request models.KakaoPayRequest) (*models
 
 	// 응답처리
 	if resp.StatusCode != http.StatusOK {
-		log.Printf("API호출 실패:%v", err)
+		body, _ := io.ReadAll(resp.Body) // 응답 본문을 읽어들임
+		log.Printf("API 호출 실패: %v, 응답 본문: %s", resp.Status, string(body))
 		return nil, errors.New("카카오페이 API호출 실패: " + resp.Status)
 	}
 
