@@ -20,6 +20,9 @@ export default (option: number) => {
     try {
       const response = await paymentRequest(option);
       setData(response);
+      if(response.redirect_url){
+	      window.location.href = response.redirect_url;
+      }
     } catch (error) {
       setError(error instanceof Error ? error : new Error("An Error occurred"));
     } finally {
