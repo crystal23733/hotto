@@ -153,5 +153,5 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 
 	// 파싱된 JSON데이터 출력
 	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
-	return c.JSON(http.StatusOK, response)
+	return c.JSON(http.StatusOK, responseData)
 }
