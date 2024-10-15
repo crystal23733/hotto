@@ -24,7 +24,7 @@ type KakaoPayResponse struct {
 	Tid string `json:"tid"` // 결제 고유 번호
 	NextRedirectAppUrl string `json:"next_redirect_app_url"` // 요청한 클라이언트가 모바일앱일경우 카카오톡결제페이지 URL
 	NextRedirectMobileUrl string `json:"next_redirect_mobile_url"` // 요청한 클라이언트가 모바일웹일경우 카카오톡결제페이지 URL
-	NextRedirectPcUrl string `json:"next_redirect_pa_url"` // 요청한 클라이언트가 PC일경우 카카오톡결제페이지 URL
+	NextRedirectPcUrl string `json:"next_redirect_pc_url"` // 요청한 클라이언트가 PC일경우 카카오톡결제페이지 URL
 	AndroidAppScheme string `json:"android_app_scheme"` // 카카오페이 결제 화면으로 이동하는 Android 앱 스킴(Scheme) - 내부 서비스용
 	IosAppScheme string `json:"ios_app_scheme"` // 카카오페이 결제 화면으로 이동하는 iOS 앱 스킴 - 내부 서비스용
 	CreatedAt string `json:"created_at"` // 결제 준비 요청 시간
