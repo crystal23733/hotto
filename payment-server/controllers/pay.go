@@ -148,7 +148,6 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	// 결제 URL과 TID를 클라이언트에 전달
 	responseData := map[string]string {
 		"redirect_url": response.NextRedirectPcUrl,
-		"tid": response.Tid,
 	}
 
 	// 파싱된 JSON데이터 출력
