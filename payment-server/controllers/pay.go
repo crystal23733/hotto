@@ -144,7 +144,14 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "카카오페이 결제 요청에 실패하였습니다."})
 	}
+
+	// 결제 URL과 TID를 클라이언트에 전달
+	responseData := map[string]string {
+		"redirect_url": response.NextRedirectPcUrl,
+		"tid": response.Tid,
+	}
+
 	// 파싱된 JSON데이터 출력
-	fmt.Printf("수신된 데이터 (JSON): %+v\n", response)
+	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
 	return c.JSON(http.StatusOK, response)
 }
