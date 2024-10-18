@@ -134,7 +134,7 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 		Quantity:       1,
 		TotalAmount:    requestData.Option,
 		TaxFreeAmount:  requestData.Option,
-		ApprovalUrl:    config.ClientURL() + "/payment/success",
+		ApprovalUrl:    config.ClientURL() + "/kakaopay/success",
 		CancelUrl:      config.ClientURL() + "/payment/cancel",
 		FailUrl:        config.ClientURL() + "/payment/fail",
 	}
