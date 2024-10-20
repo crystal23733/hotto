@@ -154,3 +154,35 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
 	return c.JSON(http.StatusOK, responseData)
 }
+
+// PayApproveHandler는 카카오페이 결제 승인 요청을 처리하는 함수
+func PayApproveHandler(c echo.Context, client *mongo.Client) error{
+	// 요청 본문에서 필요한 정보 추출
+	var requestBody struct{
+		PgToken string `json:"pg_token"`
+		Tid string `json:"tid"`
+		OrderId string `json:"order_id"`
+		UserId string `json:"user_id"`
+	}
+	if err := c.Bind(&requestBody); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error":"잘못된 요청 형식입니다."})
+	}
+
+	// 카카오페이 클라이언트 생성
+	kakaoClient := payment.NewKakaoPayClient()
+
+	// 결제 승인 요청
+	approveResponse, err := kakaoClient.ApprovePayment(
+		requestBody.Tid,
+		requestBody.PgToken,
+		requestBody.OrderId,
+		requestBody.UserId,
+	)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 승인에 실패했습니다."})
+	}
+
+	return c.JSON(http.StatusOK, approveResponse)
+}
+
+
