@@ -21,7 +21,7 @@ export default () => {
 			const payUrl = process.env.NEXT_PUBLIC_PAY_ENDPOINT as string;
 			const approvalUrl = process.env.NEXT_PUBLIC_PAY_APPROVAL_ENDPOINT as string;
 			const fetchApi = new FetchApi<PaymentApprovalResponse>(payServer);
-			fetchApi.request(payUrl + approvalUrl, "POST", {pg_token: pgToken})
+			fetchApi.request(payUrl + approvalUrl, "POST", {pg_token: pgToken}, null, true)
 			.then((reponse) => {
 				setData(reponse);
 				setLoading(false);
