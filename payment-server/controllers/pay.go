@@ -19,6 +19,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -145,10 +146,17 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "카카오페이 결제 요청에 실패하였습니다."})
 	}
 
-	// 결제 URL과 TID를 클라이언트에 전달
+	// 결제 URL을 클라이언트에 전달
 	responseData := map[string]string {
 		"redirect_url": response.NextRedirectPcUrl,
 	}
+
+	// 세션에 tid저장
+	sess, _ := session.Get("session", c)
+	log.Printf("[INFO] 세션 불러오기 성공")
+	sess.Values["tid"] = response.Tid
+	sess.Save(c.Request(), c.Response())
+	log.Printf("[INFO] 세션에 TID 저장 성공: %s", response.Tid)
 
 	// 파싱된 JSON데이터 출력
 	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
@@ -160,6 +168,9 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error{
 	// 요청 본문에서 필요한 정보 추출
 	var requestBody struct{
 		PgToken string `json:"pg_token"`
+		Tid string `json:"tid"`
+		OrderId string `json:"order_id"`
+		UserId string `json:"user_id"`
 	}
 	if err := c.Bind(&requestBody); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error":"잘못된 요청 형식입니다."})
@@ -171,6 +182,9 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error{
 	// 결제 승인 요청
 	approveResponse, err := kakaoClient.ApprovePayment(
 		requestBody.PgToken,
+		requestBody.Tid,
+		requestBody.OrderId,
+		requestBody.UserId,
 	)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 승인에 실패했습니다."})
