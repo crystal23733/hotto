@@ -84,3 +84,8 @@ func Cid() string {
 func CidSecret() string {
 	return os.Getenv("CID_SECRET")
 }
+
+// CookieSecret은 환경변수에서 COOKIE_SECRET을 반환한다.
+func CookieSecret() string {
+	return os.Getenv("COOKIE_SECRET")
+}
