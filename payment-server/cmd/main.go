@@ -9,6 +9,8 @@ import (
 	"payment-server/db"
 	"payment-server/routers"
 
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -35,6 +37,9 @@ func main() {
 
 	e := echo.New()
 
+	// 세션 미들웨어 설정
+	CookieSecretKey := config.CookieSecret()
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte(CookieSecretKey))))
 
 	//CORS설정
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
