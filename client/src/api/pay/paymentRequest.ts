@@ -11,6 +11,5 @@ const fetchApi = new FetchApi<Kakaopayment>(payServer);
  */
 export default async (option: number) => {
   const payUrl = process.env.NEXT_PUBLIC_PAY_ENDPOINT as string;
-  console.log(payServer, payUrl);
   return fetchApi.request(payUrl, "POST", { option }, null, true);
 };

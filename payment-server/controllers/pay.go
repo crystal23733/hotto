@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
 	"payment-server/config"
@@ -51,7 +50,6 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	sessionAndRest := parts[1]
 	sessionParts := strings.Split(sessionAndRest, ".")
 	actualSessionID := sessionParts[0]
-	log.Printf("[INFO] MongoDB에서 조회할 세션 ID: %s", actualSessionID)
 	// DB 세션정보 조회
 	dbName := config.DBName() // 환경변수에서 가져온 값
 	sessionCollection := client.Database(dbName).Collection("sessions")
@@ -67,7 +65,6 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	err = sessionCollection.FindOne(ctx, bson.M{"_id": actualSessionID}).Decode(&sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			log.Printf("[ERROR] 세션을 찾을 수 없습니다: %v", err)
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 		}
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
@@ -102,8 +99,6 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 		}
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
-
-	log.Printf("찾은 사용자 데이터:%+v\n", user)
 
 	body, err := io.ReadAll(c.Request().Body)
 	if err != nil {
@@ -154,22 +149,19 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	// 세션에 tid저장
 	sess, err := session.Get("tid", c)
 	if err != nil {
-	    log.Printf("[ERROR] 세션 가져오기 실패: %v", err)
-	    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 처리 중 오류가 발생했습니다"})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 처리 중 오류가 발생했습니다"})
 	}
 
 	// TID를 세션에 저장
-	log.Printf("[INFO] 결제 단계에서 저장할 TID: %s", response.Tid)
+
 	sess.Values["tid"] = response.Tid
 
 	// 세션 저장 확인
 	err = sess.Save(c.Request(), c.Response())
 	if err != nil {
-	    log.Printf("[ERROR] 세션 저장 실패: %v", err)
-	    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 저장 중 오류가 발생했습니다"})
+
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 저장 중 오류가 발생했습니다"})
 	}
-	log.Printf("[INFO] 결제 단계에서 세션 저장 성공, 세션 ID: %v", sess.ID)
-	log.Printf("[INFO] 세션 저장 후 쿠키: %s", c.Response().Header().Get("Set-Cookie"))
 
 	// 결제 정보를 DB에 저장
 	order := models.Order{
@@ -182,10 +174,9 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	}
 
 	if _, err := client.Database(dbName).Collection("orders").InsertOne(context.Background(), order); err != nil {
-		log.Printf("[ERROR] 결제 정보를 DB에 저장하는데 실패하였습니다: %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 정보를 DB에 저장하는데 실패하였습니다."})
 	}
-	log.Println("[INFO] 결제 정보 DB 저장 성공")
 
 	// 파싱된 JSON데이터 출력
 	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
@@ -198,46 +189,37 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error {
 	// 세션 불러오기
 	sess, err := session.Get("tid", c)
 	if err != nil {
-    log.Printf("[ERROR] 세션 가져오기 실패: %v", err)
-    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션을 불러올 수 없습니다"})
-}
 
-	log.Printf("승인 측 세션값 %v", sess.Values["tid"])
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션을 불러올 수 없습니다"})
+	}
 
 	// 요청 본문에서 필요한 정보 추출
 	var requestBody struct {
 		PgToken string `json:"pg_token"`
 	}
 
-	// 로그 추가: 승인 요청 본문 받기 전
-	log.Println("[INFO] 승인 요청: 요청 본문 수신 대기")
-
 	if err := c.Bind(&requestBody); err != nil {
-		log.Printf("[ERROR] 승인 요청 본문 파싱 실패: %v", err)
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청 형식입니다."})
 	}
-
-	log.Printf("[INFO] 승인 요청: 요청 본문 파싱 성공: pg_token=%s", requestBody.PgToken)
 
 	// 세션에서 TID 확인
 	tidInterface := sess.Values["tid"]
 	if tidInterface == nil {
-	    log.Printf("[ERROR] 승인 단계에서 세션에 tid가 없습니다")
-	    return c.JSON(http.StatusBadRequest, map[string]string{"error": "결제 정보를 찾을 수 없습니다"})
+
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "결제 정보를 찾을 수 없습니다"})
 	}
 
 	tid, ok := tidInterface.(string)
 	if !ok {
-	    log.Printf("[ERROR] 승인 단계에서 tid 타입 변환 실패, 실제 타입: %T", tidInterface)
-	    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "잘못된 결제 정보 형식입니다"})
-	}
 
-	log.Printf("[INFO] 승인 단계에서 세션에서 가져온 TID: %s, 세션 ID: %v", tid, sess.ID)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "잘못된 결제 정보 형식입니다"})
+	}
 
 	var order models.Order
 	err = client.Database(dbName).Collection("orders").FindOne(context.Background(), bson.M{"tid": tid}).Decode(&order)
 	if err != nil {
-		log.Printf("[ERROR] DB에서 주문 정보를 찾을 수 없습니다: %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "주문 정보를 찾을 수 없습니다."})
 	}
 

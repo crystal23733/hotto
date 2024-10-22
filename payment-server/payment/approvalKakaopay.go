@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"payment-server/models"
 )
@@ -23,9 +22,7 @@ func (c *KakaoPayClient) ApprovePayment(pgToken, tid, orderId, userId string) (*
 	}
 
 	jsonBody, err := json.Marshal(requestBody)
-	log.Printf("카카오페이 승인 요청 본문: %s", string(jsonBody))
 	if err != nil {
-		log.Printf("결제 승인 요청 본문을 생성하는데에 실패하였습니다")
 		return nil, errors.New("결제 승인 요청 본문을 생성하는데에 실패하였습니다")
 	}
 
@@ -46,13 +43,11 @@ func (c *KakaoPayClient) ApprovePayment(pgToken, tid, orderId, userId string) (*
 
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
-		log.Printf("카카오페이 API 호출 실패: %s, 응답 본문: %s", resp.Status, string(body))
 		return nil, fmt.Errorf("카카오페이 API 호출 실패: %s, 응답 본문: %s", resp.Status, string(body))
 	}
 
 	var approveResponse models.KakaoPayApproveResponse
 	if err := json.NewDecoder(resp.Body).Decode(&approveResponse); err != nil {
-		log.Printf("카카오페이 응답을 파싱하는데 실패하였습니다.")
 		return nil, errors.New("카카오페이 응답을 파싱하는데 실패하였습니다.")
 	}
 	return &approveResponse, nil

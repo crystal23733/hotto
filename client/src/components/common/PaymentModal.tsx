@@ -14,7 +14,6 @@ import usePayOption from "client/src/hook/Modal/usePayOption";
 const PaymentModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const { selectedOption, handleOptionChange } = usePayOption();
   const { data, loading, fetchPaymentData } = usePaymentModal(selectedOption);
-  console.log(data);
   const handlePaymentBtn = () => {
     fetchPaymentData();
   };
