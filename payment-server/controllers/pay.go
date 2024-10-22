@@ -147,16 +147,45 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	}
 
 	// 결제 URL을 클라이언트에 전달
-	responseData := map[string]string {
+	responseData := map[string]string{
 		"redirect_url": response.NextRedirectPcUrl,
 	}
 
 	// 세션에 tid저장
-	sess, _ := session.Get("session", c)
-	log.Printf("[INFO] 세션 불러오기 성공")
+	sess, err := session.Get("tid", c)
+	if err != nil {
+	    log.Printf("[ERROR] 세션 가져오기 실패: %v", err)
+	    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 처리 중 오류가 발생했습니다"})
+	}
+
+	// TID를 세션에 저장
+	log.Printf("[INFO] 결제 단계에서 저장할 TID: %s", response.Tid)
 	sess.Values["tid"] = response.Tid
-	sess.Save(c.Request(), c.Response())
-	log.Printf("[INFO] 세션에 TID 저장 성공: %s", response.Tid)
+
+	// 세션 저장 확인
+	err = sess.Save(c.Request(), c.Response())
+	if err != nil {
+	    log.Printf("[ERROR] 세션 저장 실패: %v", err)
+	    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 저장 중 오류가 발생했습니다"})
+	}
+	log.Printf("[INFO] 결제 단계에서 세션 저장 성공, 세션 ID: %v", sess.ID)
+	log.Printf("[INFO] 세션 저장 후 쿠키: %s", c.Response().Header().Get("Set-Cookie"))
+
+	// 결제 정보를 DB에 저장
+	order := models.Order{
+		OrderID:   partnerOrderID,
+		UserID:    objectID,
+		Amount:    requestData.Option,
+		Tid:       response.Tid,
+		Status:    "pending",
+		CreatedAt: time.Now(),
+	}
+
+	if _, err := client.Database(dbName).Collection("orders").InsertOne(context.Background(), order); err != nil {
+		log.Printf("[ERROR] 결제 정보를 DB에 저장하는데 실패하였습니다: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 정보를 DB에 저장하는데 실패하였습니다."})
+	}
+	log.Println("[INFO] 결제 정보 DB 저장 성공")
 
 	// 파싱된 JSON데이터 출력
 	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
@@ -164,16 +193,52 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 }
 
 // PayApproveHandler는 카카오페이 결제 승인 요청을 처리하는 함수
-func PayApproveHandler(c echo.Context, client *mongo.Client) error{
+func PayApproveHandler(c echo.Context, client *mongo.Client) error {
+	dbName := config.DBName()
+	// 세션 불러오기
+	sess, err := session.Get("tid", c)
+	if err != nil {
+    log.Printf("[ERROR] 세션 가져오기 실패: %v", err)
+    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션을 불러올 수 없습니다"})
+}
+
+	log.Printf("승인 측 세션값 %v", sess.Values["tid"])
+
 	// 요청 본문에서 필요한 정보 추출
-	var requestBody struct{
+	var requestBody struct {
 		PgToken string `json:"pg_token"`
-		Tid string `json:"tid"`
-		OrderId string `json:"order_id"`
-		UserId string `json:"user_id"`
 	}
+
+	// 로그 추가: 승인 요청 본문 받기 전
+	log.Println("[INFO] 승인 요청: 요청 본문 수신 대기")
+
 	if err := c.Bind(&requestBody); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error":"잘못된 요청 형식입니다."})
+		log.Printf("[ERROR] 승인 요청 본문 파싱 실패: %v", err)
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청 형식입니다."})
+	}
+
+	log.Printf("[INFO] 승인 요청: 요청 본문 파싱 성공: pg_token=%s", requestBody.PgToken)
+
+	// 세션에서 TID 확인
+	tidInterface := sess.Values["tid"]
+	if tidInterface == nil {
+	    log.Printf("[ERROR] 승인 단계에서 세션에 tid가 없습니다")
+	    return c.JSON(http.StatusBadRequest, map[string]string{"error": "결제 정보를 찾을 수 없습니다"})
+	}
+
+	tid, ok := tidInterface.(string)
+	if !ok {
+	    log.Printf("[ERROR] 승인 단계에서 tid 타입 변환 실패, 실제 타입: %T", tidInterface)
+	    return c.JSON(http.StatusInternalServerError, map[string]string{"error": "잘못된 결제 정보 형식입니다"})
+	}
+
+	log.Printf("[INFO] 승인 단계에서 세션에서 가져온 TID: %s, 세션 ID: %v", tid, sess.ID)
+
+	var order models.Order
+	err = client.Database(dbName).Collection("orders").FindOne(context.Background(), bson.M{"tid": tid}).Decode(&order)
+	if err != nil {
+		log.Printf("[ERROR] DB에서 주문 정보를 찾을 수 없습니다: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "주문 정보를 찾을 수 없습니다."})
 	}
 
 	// 카카오페이 클라이언트 생성
@@ -182,9 +247,9 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error{
 	// 결제 승인 요청
 	approveResponse, err := kakaoClient.ApprovePayment(
 		requestBody.PgToken,
-		requestBody.Tid,
-		requestBody.OrderId,
-		requestBody.UserId,
+		tid,
+		order.OrderID,
+		order.UserID.Hex(),
 	)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 승인에 실패했습니다."})
@@ -192,5 +257,3 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error{
 
 	return c.JSON(http.StatusOK, approveResponse)
 }
-
-
