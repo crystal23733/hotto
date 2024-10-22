@@ -39,7 +39,16 @@ func main() {
 
 	// 세션 미들웨어 설정
 	CookieSecretKey := config.CookieSecret()
-	e.Use(session.Middleware(sessions.NewCookieStore([]byte(CookieSecretKey))))
+	store := sessions.NewCookieStore([]byte(CookieSecretKey))
+	store.Options = &sessions.Options{
+		Path: "/",
+		MaxAge: 360000,
+		HttpOnly: true,
+		Secure: true,
+		SameSite: http.SameSiteStrictMode,
+	}
+
+	e.Use(session.Middleware(store))
 
 	//CORS설정
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
