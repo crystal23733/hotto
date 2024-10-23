@@ -4,6 +4,10 @@ import { useRouter } from "next/router";
 import usePaymentSuccess from "../../hook/payment/usePaymentSuccess";
 import Loading from "client/src/components/common/Loading";
 
+/**
+ * 카카오페이 결제 성공 시 컴포넌트
+ * @returns {JSX.Element} - 결제 성공 컴포넌트
+ */
 const KakaoPaymentSuccess: React.FC = () => {
   const { data, loading, error } = usePaymentSuccess();
   const router = useRouter();
