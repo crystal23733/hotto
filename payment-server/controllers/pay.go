@@ -233,8 +233,15 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error {
 		order.OrderID,
 		order.UserID.Hex(),
 	)
+
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 승인에 실패했습니다."})
+	}
+
+	// 결제 승인 성공 시, 주문 상태 업데이트
+	_, err = client.Database(dbName).Collection("orders").UpdateOne(context.Background(), bson.M{"tid": tid}, bson.M{"$set": bson.M{"status": "completed"}})
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 상태 업데이트에 실패했습니다."})
 	}
 
 	return c.JSON(http.StatusOK, approveResponse)
