@@ -119,7 +119,7 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	kakaoClient := payment.NewKakaoPayClient()
 
 	// 가맹점 주문번호 생성
-	partnerOrderID := fmt.Sprintf("order-%d", time.Now().Unix())
+	partnerOrderID := fmt.Sprintf("order-%s-%d", user.Email, time.Now().Unix())
 
 	// 카카오페이 결제 요청
 	kakaoPayRequest := models.KakaoPayRequest{
