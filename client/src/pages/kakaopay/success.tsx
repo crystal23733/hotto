@@ -16,13 +16,19 @@ const KakaoPaymentSuccess: React.FC = () => {
     router.push("/");
   };
   return (
-    <div>
+    <div className="payment-success">
       <h1>결제가 성공적으로 완료되었습니다.</h1>
-      {data && <p>주문 번호: {data.partner_order_id}</p>}
-      {data && <p>결제 금액: {data.amount.total}</p>}
-      {data && <p>상품명: {data.item_name}</p>}
+      {data && (
+        <div className="payment-details">
+          <p>주문 번호: {data.partner_order_id}</p>
+          <p>결제 금액: {data.amount.total}</p>
+          <p>상품명: {data.item_name}</p>
+        </div>
+      )}
       {loading && <Loading />}
-      {error && <p>에러가 발생햇습니다: {error.message}</p>}
+      {error && (
+        <p className="error-message">에러가 발생햇습니다: {error.message}</p>
+      )}
 
       <button className="home-button" onClick={handleHome}>
         홈으로 돌아가기
