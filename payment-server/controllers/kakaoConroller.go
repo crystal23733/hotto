@@ -244,5 +244,17 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 상태 업데이트에 실패했습니다."})
 	}
 
+	// 세션에서 tid 삭제
+	delete(sess.Values, "tid")
+	sess.Save(c.Request(), c.Response())
+
+	// 클라이언트 cookie삭제
+	cookie := new(http.Cookie)
+	cookie.Name = "tid"
+	cookie.Value = ""
+	cookie.Path = "/"
+	cookie.MaxAge = -1 // 쿠키 삭제
+	c.SetCookie(cookie)
+
 	return c.JSON(http.StatusOK, approveResponse)
 }
