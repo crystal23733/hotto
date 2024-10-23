@@ -5,8 +5,8 @@ import "../../scss/kakaoCancel-Fail.scss";
 const Cancel: React.FC = () => {
   return (
     <div className="payment-cancel">
-      <h1>결제가 취소되었습니다.</h1>
-      <p>결제가 정상적으로 진행되지 않았습니다.</p>
+      <h1>결제를 실패하였습니다.</h1>
+      <p>결제 중 오류가 발생하였습니다.</p>
       <HomeButton />
     </div>
   );
