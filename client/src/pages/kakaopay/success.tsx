@@ -3,6 +3,7 @@ import "../../scss/kakaoSuccess.scss";
 import { useRouter } from "next/router";
 import usePaymentSuccess from "../../hook/payment/usePaymentSuccess";
 import Loading from "client/src/components/common/Loading";
+import HomeButton from "../../components/common/button/kakaopay/HomeButton";
 
 /**
  * 카카오페이 결제 성공 시 컴포넌트
@@ -10,11 +11,7 @@ import Loading from "client/src/components/common/Loading";
  */
 const KakaoPaymentSuccess: React.FC = () => {
   const { data, loading, error } = usePaymentSuccess();
-  const router = useRouter();
 
-  const handleHome = () => {
-    router.push("/");
-  };
   return (
     <div className="payment-success">
       <h1>결제가 성공적으로 완료되었습니다.</h1>
@@ -30,9 +27,7 @@ const KakaoPaymentSuccess: React.FC = () => {
         <p className="error-message">에러가 발생햇습니다: {error.message}</p>
       )}
 
-      <button className="home-button" onClick={handleHome}>
-        홈으로 돌아가기
-      </button>
+      <HomeButton />
     </div>
   );
 };

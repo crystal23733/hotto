@@ -1,3 +1,5 @@
+@use "../home-button.scss";
+
 .payment-success {
   display: flex;
   flex-direction: column;
@@ -26,24 +28,5 @@
   .error-message {
     color: red;
     margin-bottom: 1.5rem;
-  }
-
-  .home-button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    background-color: #f7e600; // 카카오톡 메인 색상
-    color: #3b1e1e; // 텍스트는 어두운 색으로
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: darken(#f7e600, 10%); // 호버 시 약간 어두운 톤
-    }
-
-    &:active {
-      background-color: darken(#f7e600, 15%); // 클릭 시 더 어두운 톤
-    }
   }
 }

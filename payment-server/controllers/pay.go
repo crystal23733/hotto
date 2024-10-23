@@ -131,8 +131,8 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 		TotalAmount:    requestData.Option,
 		TaxFreeAmount:  requestData.Option,
 		ApprovalUrl:    config.ClientURL() + "/kakaopay/success",
-		CancelUrl:      config.ClientURL() + "/payment/cancel",
-		FailUrl:        config.ClientURL() + "/payment/fail",
+		CancelUrl:      config.ClientURL() + "/kakaopay/cancel",
+		FailUrl:        config.ClientURL() + "/kakaopay/fail",
 	}
 
 	// 결제 요청을 위해 카카오페이에 전송(결제 준비)
