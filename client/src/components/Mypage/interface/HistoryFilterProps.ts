@@ -1,3 +1,3 @@
 export default interface HistoryFilterProps {
-	setDateFilter: (date:string) => void;
+  setDateFilter: (date: string) => void;
 }
