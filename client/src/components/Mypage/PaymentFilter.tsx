@@ -12,8 +12,6 @@ const PaymentFilter: React.FC = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-
-
   return (
     <div className="field has-addons">
       <div className="control">
@@ -35,9 +33,7 @@ const PaymentFilter: React.FC = () => {
         />
       </div>
       <div className="control">
-        <button className="button is-primary" >
-          검색
-        </button>
+        <button className="button is-primary">검색</button>
       </div>
     </div>
   );
