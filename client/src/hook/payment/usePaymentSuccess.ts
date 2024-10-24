@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import FetchApi from "../../api/lib/FetchApi";
 import { useRouter } from "next/router";
 import PaymentApprovalResponse from "@shared/interface/payment/kakaoSuccess.interface";
