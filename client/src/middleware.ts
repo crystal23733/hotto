@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import FetchApi from "./api/lib/FetchApi";
 import payServer from "./module/payServer";
 
-interface TIDValidationResponse {
-  ok: boolean;
+export interface TIDValidationResponse {
+  status: string; // 예: "valid" 또는 "invalid"
 }
 
 // 로그인한 사용자만 접근 가능한 페이지 목록
@@ -66,11 +66,10 @@ export const middleware = async (req: NextRequest) => {
       if (hasRequiredCookie) {
         try {
           const tid = req.cookies.get(requiredCookie)?.value;
-          const payUrl = process.env.NEXT_PUBLIC_PAY_SERVER_URL as string;
           const tidUrl = process.env.NEXT_PUBLIC_PAY_TID_ENDPOINT as string;
-          const fetchApi = new FetchApi<TIDValidationResponse>(payUrl);
+          const fetchApi = new FetchApi<TIDValidationResponse>(payServer);
           const response = await fetchApi.request(tidUrl, "POST", { tid });
-          if (!response.ok) {
+          if (!response.status) {
             cleanupPaymentCookies(req);
             return NextResponse.redirect(new URL("/", req.url));
           }
