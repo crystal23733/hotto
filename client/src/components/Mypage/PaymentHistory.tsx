@@ -1,5 +1,6 @@
 import React from "react";
 import HistoryFilter from "./common/HistoryFilter";
+import HistoryList from "./common/HistoryList";
 import useApiHistory from "../../hook/Mypage/useApiHistory";
 
 /**
@@ -14,6 +15,7 @@ const PaymentHistory: React.FC = () => {
   return (
     <div>
       <HistoryFilter setDateFilter={setDateFilter} />
+      <HistoryList data={data} loading={loading} error={error} />
     </div>
   );
 };
