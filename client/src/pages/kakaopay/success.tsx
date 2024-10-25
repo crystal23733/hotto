@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../../scss/kakaoSuccess.scss";
-import { useRouter } from "next/router";
 import usePaymentSuccess from "../../hook/payment/usePaymentSuccess";
 import Loading from "client/src/components/common/Loading";
 import HomeButton from "../../components/common/button/kakaopay/HomeButton";

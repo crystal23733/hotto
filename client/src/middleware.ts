@@ -28,6 +28,7 @@ const paymentGateway = {
 
 // 결제 관련 쿠키 정리 함수
 const cleanupPaymentCookies = (req: NextRequest) => {
+  console.log(req);
   const response = NextResponse.next();
   response.cookies.delete("tid");
   response.cookies.delete("payment_in_progress");
@@ -51,6 +52,7 @@ export const middleware = async (req: NextRequest) => {
 
   // 결제 고유번호 유무에 따른 페이지 검증
   for (const [gateway, config] of Object.entries(paymentGateway)) {
+    console.log(`Using gateway: ${gateway}`);
     const { requiredPages, requiredCookie, paymentInProgressCookie } = config;
 
     if (requiredPages.includes(pathname)) {

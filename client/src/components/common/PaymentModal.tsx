@@ -14,7 +14,7 @@ import usePaymentSecurity from "../../hook/payment/usePaymentSecurity";
  */
 const PaymentModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const { selectedOption, handleOptionChange } = usePayOption();
-  const { data, loading, fetchPaymentData } = usePaymentModal(selectedOption);
+  const { loading, fetchPaymentData } = usePaymentModal(selectedOption);
   const { initializePayment, cleanupPayment } = usePaymentSecurity();
 
   const handlePaymentBtn = () => {
