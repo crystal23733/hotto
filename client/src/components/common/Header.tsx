@@ -14,19 +14,14 @@ import PaymentModal from "./PaymentModal";
  * @returns {JSX.Element} - 헤더 컴포넌트
  */
 const Header: React.FC = () => {
-  const { isAuthenticated, setIsAuthenticated, userName, userBalance } =
-    useAuth();
+  const { isAuthenticated, userName, userBalance } = useAuth();
   const { isActive, handleMypageModal, closeModal } = useMyModal();
   const { isPayActive, handlePaymentModal, closePayModal } = usePayModal();
   const router = useRouter();
 
   const handleLogout = async () => {
     await logoutFetch();
-    const response = await checkAuthStatus();
-    if (!response.isAuthenticated) {
-      setIsAuthenticated(false);
-      router.reload();
-    }
+    router.reload();
   };
 
   if (isAuthenticated === null) {
