@@ -1,10 +1,5 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import useSWR from "swr";
+import { createContext, ReactNode, useContext } from "react";
 import checkAuthStatus from "../api/auth/checkAuthStatus";
 
 /**
@@ -12,27 +7,24 @@ import checkAuthStatus from "../api/auth/checkAuthStatus";
  *
  * @interface AuthContextProps
  * @property {boolean} isAuthenticated - 사용자의 인증 상태를 나타냅니다.
- * @property {function} setIsAuthenticated - 인증 상태를 업데이트하는 함수입니다.
  * @property {string | null} userName - 인증된 사용자의 이름입니다.
- * @property {function} setUserName - 사용자 이름을 업데이트하는 함수입니다.
+ * @property {string | null} userEmail - 인증된 사용자의 이메일입니다.
+ * @property {number} userBalance - 인증된 사용자의 잔액입니다.
  */
 interface AuthContextProps {
   isAuthenticated: boolean;
-  setIsAuthenticated: (value: boolean) => void;
   userName: string | null;
-  setUserName: (value: string | null) => void;
   userEmail: string | null;
-  setUserEmail: (value: string | null) => void;
   userBalance: number;
-  setUserBalance: (value: number) => void;
 }
 
+// 인증 상태를 관리하는 컨텍스트 생성
 const AuthContext = createContext<AuthContextProps | null>(null);
 
 /**
- * useAuth 훅 - 인증 상태와 사용자 이름을 제공하는 커스텀 훅
+ * 인증 상태와 사용자 정보를 제공하는 커스텀 훅
  *
- * @returns {AuthContextProps} 인증 상태, 사용자 이름, 설정 함수를 포함하는 객체를 반환합니다.
+ * @returns {AuthContextProps} 인증 상태와 사용자 정보를 포함하는 객체를 반환합니다.
  * @throws {Error} 이 훅은 반드시 AuthProvider 내부에서 사용해야 합니다.
  */
 export const useAuth = (): AuthContextProps => {
@@ -51,52 +43,44 @@ export const useAuth = (): AuthContextProps => {
  *
  * @returns {JSX.Element} `AuthContext.Provider`를 포함하는 JSX 요소를 반환합니다.
  *
- * @date 24.08.08
+ * @date 24.10.24
  */
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string | null>(null);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [userBalance, setUserBalance] = useState<number>(0);
-
-  useEffect(() => {
-    const fetchAuthStatus = async () => {
-      try {
-        const status = await checkAuthStatus();
-        setIsAuthenticated(status.isAuthenticated);
-        if (
-          status.isAuthenticated &&
-          status.user?.name &&
-          status.user?.email &&
-          status.user?.balance
-        ) {
-          setUserName(status.user.name);
-          setUserEmail(status.user.email);
-          setUserBalance(status.user.balance);
-        }
-      } catch (error) {
-        setIsAuthenticated(false);
-      }
+  /**
+   * 사용자 인증 정보를 가져오는 함수입니다.
+   *
+   * @returns {Promise<{ isAuthenticated: boolean, userName: string | null, userEmail: string | null, userBalance: number }>} 사용자 인증 정보
+   */
+  const fetcher = async () => {
+    const status = await checkAuthStatus();
+    return {
+      isAuthenticated: status.isAuthenticated,
+      userName: status.user?.name || null,
+      userEmail: status.user?.email || null,
+      userBalance: status.user?.balance || 0,
     };
-    fetchAuthStatus();
-  }, []);
+  };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        setIsAuthenticated,
-        userName,
-        setUserName,
-        userEmail,
-        setUserEmail,
-        userBalance,
-        setUserBalance,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  // SWR을 사용하여 인증 상태를 10초마다 새로고침합니다.
+  const { data, error } = useSWR("/auth-status", fetcher, {
+    refreshInterval: 3600000,
+  });
+
+  // 기본 데이터 설정
+  const value: AuthContextProps = {
+    isAuthenticated: data?.isAuthenticated || false,
+    userName: data?.userName || null,
+    userEmail: data?.userEmail || null,
+    userBalance: data?.userBalance || 0,
+  };
+
+  // 데이터 로딩 중일 경우 로딩 UI 반환
+  if (!data && !error) {
+    return <div>로딩중...</div>;
+  }
+
+  // 인증 상태와 사용자 정보를 Context에 제공
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
