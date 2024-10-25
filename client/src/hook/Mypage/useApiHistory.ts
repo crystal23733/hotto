@@ -19,6 +19,7 @@ export default <T extends IHistoryItem>(endpoint: string) => {
     setLoading(true);
     try {
       const response = await mypageHistoryRequest<T[]>(endpoint);
+      console.log(response);
       setData(response);
     } catch (err) {
       setError(err as Error);
