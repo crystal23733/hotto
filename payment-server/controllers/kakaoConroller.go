@@ -244,6 +244,21 @@ func PayApproveHandler(c echo.Context, client *mongo.Client) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 상태 업데이트에 실패했습니다."})
 	}
 
+	// 사용자 금액 업데이트
+	var user models.User
+	err = client.Database(dbName).Collection("users").FindOne(context.Background(), bson.M{"_id": order.UserID}).Decode(&user)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보를 찾을 수 없습니다."})
+	}
+	// 기존 금액에 결제금액 추가
+	updatedBalance := user.Balance + order.Amount
+
+	// 잔액 업데이트
+	_, err = client.Database(dbName).Collection("users").UpdateOne(context.Background(), bson.M{"_id": order.UserID}, bson.M{"$set": bson.M{"balance": updatedBalance}})
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 금액 업데이트에 실패했습니다."})
+	}
+
 	// 세션에서 tid 삭제
 	delete(sess.Values, "tid")
 	sess.Save(c.Request(), c.Response())
