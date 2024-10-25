@@ -7,7 +7,9 @@ export default () => {
   const router = useRouter();
 
   const handleHome = () => {
-    router.push("/");
+    router.push("/").then(() => {
+      router.reload();
+    });
   };
 
   return { handleHome };
