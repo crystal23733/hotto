@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import IUser from "../users/interface/user.interface";
 import bcrypt from "bcrypt";
-import { Document, ObjectId } from "mongoose";
+import { Document, ObjectId, SchemaTypes } from "mongoose";
 
 export type UserDocument = IUser & Document;
 @Schema()
@@ -23,6 +23,9 @@ export class User {
 
   @Prop({ default: 0 })
   balance: number;
+
+  @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: 'Order' }], default: [] })
+  orders: ObjectId[];
 
   _id: ObjectId;
 }
