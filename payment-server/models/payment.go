@@ -6,8 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Order struct {
-	OrderID   string             `json:"order_id" bson:"order_id"`
+type PayOrder struct {
+	PayOrderID   string             `json:"pay_order_id" bson:"pay_order_id"`
 	UserID    primitive.ObjectID `json:"user_id" bson:"user_id"`
 	Amount    int                `json:"amount" bson:"amount"`
 	Tid       string             `json:"tid" bson:"tid"`
