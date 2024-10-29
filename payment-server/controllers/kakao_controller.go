@@ -176,13 +176,12 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	return c.JSON(http.StatusOK, responseData)
 }
 
-
 // PayApproveHandler는 카카오페이 결제 승인 요청을 처리하는 함수
 func PayApproveHandler(c echo.Context, client *mongo.Client) error {
 	dbName := config.DBName()
 
 	var requestBody struct {
-		PgToken string `json:"pg_token"`
+		PgToken           string `json:"pg_token"`
 		PartnerPayOrderID string `json:"pay_order"`
 	}
 
