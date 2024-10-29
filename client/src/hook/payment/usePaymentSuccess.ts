@@ -31,8 +31,8 @@ export default () => {
           null,
           true,
         )
-        .then((reponse) => {
-          setData(reponse);
+        .then((response) => {
+          setData(response);
           setLoading(false);
         })
         .catch((err: Error) => {
