@@ -1,8 +1,8 @@
 import React from "react";
-import "../../scss/kakaoSuccess.scss";
-import usePaymentSuccess from "../../hook/payment/usePaymentSuccess";
+import "../../../scss/kakaoSuccess.scss";
+import usePaymentSuccess from "../../../hook/payment/usePaymentSuccess";
 import Loading from "client/src/components/common/Loading";
-import HomeButton from "../../components/common/button/kakaopay/HomeButton";
+import HomeButton from "../../../components/common/button/kakaopay/HomeButton";
 
 /**
  * 카카오페이 결제 성공 시 컴포넌트
