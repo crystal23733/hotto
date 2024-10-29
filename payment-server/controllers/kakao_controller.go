@@ -171,6 +171,16 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보 업데이트에 실패하였습니다."})
 	}
 
+	indexModel := mongo.IndexModel{
+		Keys:    bson.M{"expires_at": 1},
+		Options: options.Index().SetExpireAfterSeconds(0),
+	}
+
+	_, err = paymentCollection.Indexes().CreateOne(context.Background(), indexModel)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, map[string]string{"error": "인덱스 설정에 실패하였습니다."})
+	}
+
 	// 로그 및 응답
 	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
 	return c.JSON(http.StatusOK, responseData)
