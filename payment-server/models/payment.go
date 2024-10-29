@@ -1,17 +1,42 @@
 package models
 
 import (
+	"context"
+	"log"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type PayOrder struct {
-	PayOrderID   string             `json:"pay_order_id" bson:"pay_order_id"`
-	UserID    primitive.ObjectID `json:"user_id" bson:"user_id"`
-	Amount    int                `json:"amount" bson:"amount"`
-	Tid       string             `json:"tid" bson:"tid"`
-	Status    string             `json:"status" bson:"status"`
-	CreatedAt time.Time          `json:"created_at" bson:"created_at"`
-	ExpiresAt time.Time 	`bson:"expires_at"` 
+	PayOrderID string             `json:"pay_order_id" bson:"pay_order_id"`
+	UserID     primitive.ObjectID `json:"user_id" bson:"user_id"`
+	Amount     int                `json:"amount" bson:"amount"`
+	Tid        string             `json:"tid" bson:"tid"`
+	Status     string             `json:"status" bson:"status"`
+	CreatedAt  time.Time          `json:"created_at" bson:"created_at"`
+	ExpiresAt  time.Time          `bson:"expires_at"`
+}
+
+// CreateTTLIndex 함수는 결제내역 컬렉션에 인덱스를 설정하는 함수이다.
+func CreateTTLIndex(client *mongo.Client, dbName string) {
+	// 결제 내역 컬렉션 참조
+	paymentCollection := client.Database(dbName).Collection("payments")
+
+	// TTL인덱스 생성
+	indexModel := mongo.IndexModel{
+		Keys:    bson.M{"expires_at": 1},
+		Options: options.Index().SetExpireAfterSeconds(0),
+	}
+
+	// 인덱스 생성
+	_, err := paymentCollection.Indexes().CreateOne(context.Background(), indexModel)
+	if err != nil {
+		log.Printf("TTL 인덱스 설정에 실패하였습니다: %v", err)
+	}
+
+	log.Println("TTL 인덱스 생성에 성공하였습니다.")
 }
