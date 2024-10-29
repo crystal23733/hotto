@@ -13,4 +13,5 @@ type PayOrder struct {
 	Tid       string             `json:"tid" bson:"tid"`
 	Status    string             `json:"status" bson:"status"`
 	CreatedAt time.Time          `json:"created_at" bson:"created_at"`
+	ExpiresAt time.Time 	`bson:"expires_at"` 
 }
