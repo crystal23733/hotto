@@ -29,6 +29,11 @@ import (
 // PayHandler는 /pay 경로에 대한 핸들러 함수이다.
 // 클라이언트의 세션 쿠키를 검증하고, 세션 정보를 조회한 후 요청 본문을 처리한다.
 func PayHandler(c echo.Context, client *mongo.Client) error {
+	dbName := config.DBName()
+
+	// 결제 내역 컬렉션
+	paymentCollection := client.Database(dbName).Collection("payments")
+
 	// 클라이언트가 제공하는 세션 쿠키 가져오기
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {
@@ -54,7 +59,6 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	actualSessionID := sessionParts[0]
 	log.Printf("해독된 세션 %s", actualSessionID)
 	// DB 세션 정보 조회
-	dbName := config.DBName()
 	sessionCollection := client.Database(dbName).Collection("sessions")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -155,7 +159,7 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 		ExpiresAt:  time.Now().Add(30 * time.Minute),
 	}
 
-	result, err := client.Database(dbName).Collection("payments").InsertOne(context.Background(), payOrder)
+	result, err := paymentCollection.InsertOne(context.Background(), payOrder)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 정보를 DB에 저장하는데 실패하였습니다."})
 	}
