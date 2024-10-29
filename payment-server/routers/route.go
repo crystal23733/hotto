@@ -21,8 +21,4 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client) {
 	e.POST("/pay/approval", func(c echo.Context) error {
 		return controllers.PayApproveHandler(c, client)
 	})
-
-	e.POST("/pay/validate-tid", func(c echo.Context) error {
-		return controllers.ValidateTIDHandler(c, client)
-	})
 }

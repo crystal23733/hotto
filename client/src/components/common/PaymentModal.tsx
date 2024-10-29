@@ -4,7 +4,6 @@ import IModalProps from "@shared/interface/modal.interface";
 import PaymentLabel from "./PaymentLabel";
 import usePaymentModal from "client/src/hook/common/usePaymentModal";
 import usePayOption from "client/src/hook/Modal/usePayOption";
-import usePaymentSecurity from "../../hook/payment/usePaymentSecurity";
 
 /**
  * 결제 요청 창을 생성하는 모달창
@@ -15,17 +14,9 @@ import usePaymentSecurity from "../../hook/payment/usePaymentSecurity";
 const PaymentModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const { selectedOption, handleOptionChange } = usePayOption();
   const { loading, fetchPaymentData } = usePaymentModal(selectedOption);
-  const { initializePayment, cleanupPayment } = usePaymentSecurity();
 
   const handlePaymentBtn = () => {
-    try {
-      // 결제 시작 시 쿠키 설정
-      initializePayment();
-      fetchPaymentData();
-    } catch (error) {
-      // 에러 발생 시 쿠키 삭제
-      cleanupPayment();
-    }
+    fetchPaymentData();
   };
   return (
     <Modal
