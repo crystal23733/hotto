@@ -170,7 +170,8 @@ func PayHandler(c echo.Context, client *mongo.Client) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보 업데이트에 실패하였습니다."})
 	}
-
+	
+	// TTL인덱스 생성
 	indexModel := mongo.IndexModel{
 		Keys:    bson.M{"expires_at": 1},
 		Options: options.Index().SetExpireAfterSeconds(0),
