@@ -1,5 +1,6 @@
 import React from "react";
 import HistoryListProps from "../interface/HistoryListProps";
+import Loading from "../../common/Loading";
 
 /**
  * 공통내역 리스트 컴포넌트
@@ -15,6 +16,8 @@ const HistoryList: React.FC<HistoryListProps> = ({ data, loading, error }) => {
           <p>상품 금액: {item.amount}</p>
           <p>결제 상태: {item.status}</p>
           <p>결제일: {item.createAt}</p>
+          {loading && <Loading />}
+          {error && <p className="help is-danger">{error.message}</p>}
         </div>
       ))}
     </div>

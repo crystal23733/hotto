@@ -1,4 +1,3 @@
-import checkAuthStatus from "client/src/api/auth/checkAuthStatus";
 import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
