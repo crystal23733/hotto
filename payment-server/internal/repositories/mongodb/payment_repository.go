@@ -30,15 +30,6 @@ func (r *PaymentRepository) CreatePayOrder(ctx context.Context, order entity.Pay
 	return nil
 }
 
-// UpdatePayOrderStatus는 결제 상태를 업데이트한다.
-func (r *PaymentRepository) UpdatePayOrderStatus(ctx context.Context, payOrderID string, status string) error{
-	filter := bson.M{"pay_order_id": payOrderID}
-	update := bson.M{"$set":bson.M{"status": status}}
-
-	_, err := r.Collection.UpdateOne(ctx, filter, update)
-	return err
-}
-
 // CreateTTLIndex는 결제 내역 컬렉션에 TTL 인덱스를 설정한다.
 func (r *PaymentRepository) CreateTTLIndex() {
 	// TTL 인덱스 생성
