@@ -5,10 +5,9 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"payment-server/config"
-	"payment-server/models"
-	"payment-server/repositories/mongodb"
-	"payment-server/routers"
+	"payment-server/internal/config"
+	"payment-server/internal/repositories/mongodb"
+	"payment-server/internal/routers"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
@@ -29,9 +28,6 @@ func main() {
 		log.Fatal(err)
 	}
 	defer client.Disconnect(context.Background())
-
-	// TTL 인덱스 생성
-	models.CreateTTLIndex(client, config.DBName())
 
 	e := echo.New()
 

@@ -1,4 +1,4 @@
-package kakaopay
+package usecase
 
 import (
 	"context"
