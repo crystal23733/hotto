@@ -19,11 +19,16 @@ func NewPaymentUsecase(repo *mongodb.PaymentRepository, kakaoService *kakaopay.K
 }
 
 // CreatePayOrder는 결제 요청을 생성하는 유즈케이스이다.
-func (u *PaymentUsecase) CreatePayOrder(ctx context.Context, order entity.PayOrder) error {
-	return u.PaymentRepo.CreatePayOrder(ctx, order)
-}
+func (u *PaymentUsecase) CreatePayOrder(ctx context.Context, order entity.PayOrder, request entity.KakaoPayRequest) (*entity.KakaoPayResponse, error) {
+	response, err := u.KakaoPayService.RequestPayment(request)
+	if err != nil {
+		return nil, err
+	}
 
-// UpdatePayOrderStatus는 결제 상태를 업데이트하는 유즈케이스이다.
-func (u *PaymentUsecase) UpdatePayOrderStatus(ctx context.Context, payOrderID string, status string) error{
-	return u.PaymentRepo.UpdatePayOrderStatus(ctx, payOrderID, status)
+	// 결제 요청을 저장합니다.
+	if err := u.PaymentRepo.CreatePayOrder(ctx, order); err != nil {
+		return nil, err
+	}
+
+	return response, nil
 }
