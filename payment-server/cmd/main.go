@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 	"payment-server/config"
-	"payment-server/db"
 	"payment-server/models"
+	"payment-server/repositories/mongodb"
 	"payment-server/routers"
 
 	"github.com/gorilla/sessions"
@@ -24,7 +24,7 @@ func main() {
 		log.Fatal("환경 변수를 로드하지 못했습니다:", err)
 	}
 
-	client, err := db.ConnectDB()
+	client, err := mongodb.ConnectDB()
 	if err != nil {
 		log.Fatal(err)
 	}

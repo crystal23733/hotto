@@ -1,9 +1,9 @@
 /*
-models 패키지는 데이터 구조체를 정의한다.
+entity 패키지는 데이터 구조체를 정의한다.
 kakaopay.go는 KakaoPay 결제 요청 및 응답을 위한 구조체를 정의한다.
 */
 
-package models
+package entity
 
 // KakaoPayRequest는 KakaoPay에 결제 요청시 필요한 필드들을 나타낸다.
 type KakaoPayRequest struct {
