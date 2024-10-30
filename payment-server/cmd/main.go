@@ -29,6 +29,10 @@ func main() {
 	}
 	defer client.Disconnect(context.Background())
 
+	dbName := config.DBName()
+	paymentRepo := mongodb.NewPaymentRepository(client, dbName)
+	paymentRepo.CreateTTLIndex()
+
 	e := echo.New()
 
 	// 세션 미들웨어 설정
