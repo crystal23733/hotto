@@ -7,6 +7,7 @@ import (
 	"os"
 	"payment-server/config"
 	"payment-server/db"
+	"payment-server/models"
 	"payment-server/routers"
 
 	"github.com/gorilla/sessions"
@@ -28,6 +29,9 @@ func main() {
 		log.Fatal(err)
 	}
 	defer client.Disconnect(context.Background())
+
+	// TTL 인덱스 생성
+	models.CreateTTLIndex(client, config.DBName())
 
 	e := echo.New()
 

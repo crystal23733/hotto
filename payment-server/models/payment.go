@@ -21,22 +21,22 @@ type PayOrder struct {
 	ExpiresAt  time.Time          `bson:"expires_at"`
 }
 
-// CreateTTLIndex 함수는 결제내역 컬렉션에 인덱스를 설정하는 함수이다.
+// CreateTTLIndex는 결제 내역 컬렉션에 TTL 인덱스를 설정하는 함수입니다.
 func CreateTTLIndex(client *mongo.Client, dbName string) {
 	// 결제 내역 컬렉션 참조
 	paymentCollection := client.Database(dbName).Collection("payments")
 
-	// TTL인덱스 생성
+	// TTL 인덱스 생성
 	indexModel := mongo.IndexModel{
-		Keys:    bson.M{"expires_at": 1},
-		Options: options.Index().SetExpireAfterSeconds(0),
+		Keys:    bson.M{"expires_at": 1},                  // "expires_at" 필드에 대한 인덱스 생성
+		Options: options.Index().SetExpireAfterSeconds(0), // 문서 만료 시간이 지나면 자동 삭제
 	}
 
 	// 인덱스 생성
 	_, err := paymentCollection.Indexes().CreateOne(context.Background(), indexModel)
 	if err != nil {
-		log.Printf("TTL 인덱스 설정에 실패하였습니다: %v", err)
+		log.Fatalf("TTL 인덱스 설정에 실패하였습니다: %v", err)
 	}
 
-	log.Println("TTL 인덱스 생성에 성공하였습니다.")
+	log.Println("TTL 인덱스가 성공적으로 설정되었습니다.")
 }
