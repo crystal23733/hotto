@@ -7,6 +7,7 @@ package controllers
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -18,6 +19,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // PaymentHandler는 결제 관련 요청을 처리하는 핸들러입니다.
@@ -58,12 +60,50 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 
 	log.Printf("세션 완전히 해석된 세션 %s", actualSessionID)
 
-	// 사용자 정보 조회
-	userID := actualSessionID
-	objectID, err := primitive.ObjectIDFromHex(userID)
+	// Session 구조체 정의
+	type Session struct {
+		Session string `bson:"session"`
+	}
+
+	// 세션 정보 조회
+	var sessionDoc Session
+	err = h.PaymentUsecase.UserRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
 	if err != nil {
-		log.Printf("유효하지 않은 사용자 %v", err)
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 사용자 ID입니다."})
+		if err == mongo.ErrNoDocuments {
+			log.Printf("세션을 찾을 수 없음: %v", err)
+			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
+		}
+		log.Printf("데이터베이스 오류: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
+	}
+	log.Printf("세션 조회 성공: %+v", sessionDoc)
+
+	// 세션 데이터 파싱
+	var sessionData struct {
+		UserID string `json:"userId"`
+	}
+	err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
+	if err != nil {
+		log.Printf("세션 데이터 파싱 실패: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터를 파싱하는데 실패하였습니다."})
+	}
+
+	log.Printf("파싱한 세션: %v", sessionData)
+
+	var user entity.User
+	objectID, err := primitive.ObjectIDFromHex(user.ID)
+	if err != nil {
+		log.Printf("유효하지 않은 ID: %v", err)
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 ID입니다."})
+	}
+
+	err = h.PaymentUsecase.UserRepo.UserFind(context.Background(), objectID, &user)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return c.JSON(http.StatusNotFound, map[string]string{"error": "사용자를 찾을 수 없습니다."})
+		}
+		log.Printf("데이터베이스 오류: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
 
 	var req struct {
@@ -75,8 +115,10 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "요청 형식이 잘못되었습니다."})
 	}
 
+	userID := sessionData.UserID
+
 	// 결제 요청 생성
-	partnerPayOrderID := fmt.Sprintf("pay-order-%s-%d", userID, time.Now().Unix())
+	partnerPayOrderID := fmt.Sprintf("pay-order-%s-%d", user.Email, time.Now().Unix())
 
 	payOrder := entity.PayOrder{
 		PayOrderID: partnerPayOrderID,
