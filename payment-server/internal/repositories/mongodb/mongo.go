@@ -3,11 +3,11 @@ db패키지는 MongoDB 연결 및 초기화 기능을 제공한다.
 ConnectDB 함수를 이용하여 MongoDBClient를 생성하고 반환한다.
 */
 
-package db
+package mongodb
 
 import (
 	"log"
-	"payment-server/config"
+	"payment-server/internal/config"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
