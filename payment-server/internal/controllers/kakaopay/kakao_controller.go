@@ -26,7 +26,7 @@ type PaymentHandler struct {
 }
 
 // NewPaymentHandler는 PaymentHandler를 생성한다.
-func NewPaymentHandler(u *usecase.PaymentUsecase) *PaymentHandler{
+func NewPaymentHandler(u *usecase.PaymentUsecase) *PaymentHandler {
 	return &PaymentHandler{PaymentUsecase: u}
 }
 
@@ -36,10 +36,13 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {
 		log.Printf("세션 쿠키를 찾을 수 없음")
-		return c.JSON(http.StatusBadRequest, map[string]string{"error":"사용자 정보를 찾을 수 없습니다."})
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "사용자 정보를 찾을 수 없습니다."})
 	}
 
+	log.Printf("세션 %s", sessionID)
+
 	decodedSessionID, err := url.QueryUnescape(sessionID.Value)
+	log.Printf("세션 디코딩 %s", decodedSessionID)
 	if err != nil {
 		log.Printf("세션 디코딩 실패")
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션을 디코딩하는데 실패하였습니다."})
@@ -52,6 +55,8 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID 형식이 잘못되었습니다."})
 	}
 	actualSessionID := strings.Split(parts[1], ".")[0]
+
+	log.Printf("세션 완전히 해석된 세션 %s", actualSessionID)
 
 	// 사용자 정보 조회
 	userID := actualSessionID
@@ -67,12 +72,12 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 
 	if err := c.Bind(&req); err != nil {
 		log.Printf("요청 형식이 잘못됨 %v", err)
-		return c.JSON(http.StatusBadRequest, map[string]string{"error":"요청 형식이 잘못되었습니다."})
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "요청 형식이 잘못되었습니다."})
 	}
 
 	// 결제 요청 생성
 	partnerPayOrderID := fmt.Sprintf("pay-order-%s-%d", userID, time.Now().Unix())
-	
+
 	payOrder := entity.PayOrder{
 		PayOrderID: partnerPayOrderID,
 		UserID:     objectID,
@@ -103,7 +108,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	}
 
 	// 사용자 스키마에 결제내역 추가
-	if err := h.PaymentUsecase.UpdateUserPayments(context.Background(), objectID, payOrder.PayOrderID); err != nil{
+	if err := h.PaymentUsecase.UpdateUserPayments(context.Background(), objectID, payOrder.PayOrderID); err != nil {
 		log.Printf("사용자 정보 업데이트 성공 %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보 업데이트에 성공하였습니다."})
 	}
