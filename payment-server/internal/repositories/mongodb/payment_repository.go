@@ -49,22 +49,6 @@ func (r *PaymentRepository) CreateTTLIndex() {
 	log.Println("TTL 인덱스가 성공적으로 설정되었습니다.")
 }
 
-// UpdatePaymentStatus는 결제 상태를 업데이트하는 함수입니다.
-func (r *PaymentRepository) UpdatePaymentStatus(ctx context.Context, payOrderID, currentStatus, newStatus string) error {
-	filter := bson.M{"pay_order_id": payOrderID, "status": currentStatus}
-	update := bson.M{"$set": bson.M{"status": newStatus}}
-
-	result, err := r.Collection.UpdateOne(ctx, filter, update)
-	if err != nil {
-		return fmt.Errorf("결제 상태 업데이트 실패: %v", err)
-	}
-	if result.ModifiedCount == 0 {
-		return fmt.Errorf("결제 상태 업데이트 실패: 이미 처리된 주문이거나 잘못된 상태")
-	}
-
-	return nil
-}
-
 // UpdateUserBalance는 사용자의 잔액을 업데이트하는 함수입니다.
 func (r *UserRepository) UpdateUserBalance(ctx context.Context, userID primitive.ObjectID, amount int) error {
 	filter := bson.M{"_id": userID}
@@ -87,6 +71,22 @@ func (r *PaymentRepository) FindPayOrder(ctx context.Context, payOrderID string,
 			return fmt.Errorf("결제 내역을 찾을 수 없습니다: %v", err)
 		}
 		return fmt.Errorf("결제 내역 조회 실패: %v", err)
+	}
+	return nil
+}
+
+// UpdatePayOrder는 결제 상태를 업데이트하고 선택적으로 TTL 필드를 제거한다.
+func (r *PaymentRepository) UpdatePayOrder(ctx context.Context, payOrderID string, status string, removeTTL bool) error {
+	filter := bson.M{"pay_order_id": payOrderID}
+	update := bson.M{"$set": bson.M{"status": status}}
+
+	if removeTTL {
+		update["$unset"] = bson.M{"expires_at": ""} // TTL 인덱스 필드를 제거한다.
+	}
+
+	_, err := r.Collection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return fmt.Errorf("결제 내역 업데이트 실패: %v", err)
 	}
 	return nil
 }
