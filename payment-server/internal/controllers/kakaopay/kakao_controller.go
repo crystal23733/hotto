@@ -9,7 +9,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"payment-server/internal/config"
@@ -38,28 +37,24 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	// 세션 가져오기
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {
-		log.Printf("세션 쿠키를 찾을 수 없음")
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "사용자 정보를 찾을 수 없습니다."})
 	}
 
-	log.Printf("세션 %s", sessionID)
-
 	decodedSessionID, err := url.QueryUnescape(sessionID.Value)
-	log.Printf("세션 디코딩 %s", decodedSessionID)
+
 	if err != nil {
-		log.Printf("세션 디코딩 실패")
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션을 디코딩하는데 실패하였습니다."})
 	}
 
 	// 세션 ID에서 실제 세션 ID 추출
 	parts := strings.Split(decodedSessionID, ":")
 	if len(parts) < 2 {
-		log.Printf("세션 형식 에러")
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID 형식이 잘못되었습니다."})
 	}
 	actualSessionID := strings.Split(parts[1], ".")[0]
-
-	log.Printf("세션 완전히 해석된 세션 %s", actualSessionID)
 
 	// Session 구조체 정의
 	var sessionDoc struct {
@@ -70,13 +65,12 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	err = h.PaymentUsecase.SessionRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			log.Printf("세션을 찾을 수 없음: %v", err)
+
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 		}
-		log.Printf("데이터베이스 오류: %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
-	log.Printf("세션 조회 성공: %+v", sessionDoc)
 
 	// 세션 데이터 파싱
 	var sessionData struct {
@@ -84,17 +78,15 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	}
 	err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
 	if err != nil {
-		log.Printf("세션 데이터 파싱 실패: %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터를 파싱하는데 실패하였습니다."})
 	}
 
-	log.Printf("파싱한 세션: %v", sessionData)
-
 	var user entity.User
 	objectID, err := primitive.ObjectIDFromHex(sessionData.UserID)
-	log.Printf("User ID: %v", objectID)
+
 	if err != nil {
-		log.Printf("유효하지 않은 ID: %v", err)
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 ID입니다."})
 	}
 
@@ -103,17 +95,16 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		if err == mongo.ErrNoDocuments {
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "사용자를 찾을 수 없습니다."})
 		}
-		log.Printf("데이터베이스 오류: %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
-	log.Printf("유저 정보: %v", user)
 
 	var req struct {
 		Option int `json:"option"`
 	}
 
 	if err := c.Bind(&req); err != nil {
-		log.Printf("요청 형식이 잘못됨 %v", err)
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "요청 형식이 잘못되었습니다."})
 	}
 
@@ -145,7 +136,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	// 결제 요청
 	response, paymentID, err := h.PaymentUsecase.CreatePayOrder(context.Background(), payOrder, kakaoPayRequest)
 	if err != nil {
-		log.Printf("결제 요청 실패 상세: %+v", err)
+
 		if strings.Contains(err.Error(), "400 Bad Request") {
 			return c.JSON(http.StatusBadRequest, map[string]string{"error": "결제 요청 형식이 올바르지 않습니다"})
 		}
@@ -154,7 +145,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 
 	// 사용자 스키마에 결제내역 추가
 	if err := h.PaymentUsecase.UserRepo.UpdateUserPayments(context.Background(), objectID, paymentID); err != nil {
-		log.Printf("사용자 정보 업데이트 성공 %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보 업데이트에 성공하였습니다."})
 	}
 
@@ -174,14 +165,12 @@ func (h *PaymentHandler) PayApproveHandler(c echo.Context) error {
 	}
 
 	if err := c.Bind(&requestBody); err != nil {
-		log.Printf("잘못된 요청 형식: %v", err)
+
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청 형식입니다."})
 	}
 
 	pgToken := requestBody.PgToken
 	partnerPayOrderID := requestBody.PartnerPayOrderID
-
-	log.Printf("클라이언트에서 가져온 값, %s %s", pgToken, partnerPayOrderID)
 
 	if partnerPayOrderID == "" || pgToken == "" {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "필수 파라미터가 누락되었습니다"})
@@ -190,7 +179,7 @@ func (h *PaymentHandler) PayApproveHandler(c echo.Context) error {
 	// 유즈케이스 호출
 	approveResponse, err := h.PaymentUsecase.ApprovePayOrder(context.Background(), pgToken, partnerPayOrderID)
 	if err != nil {
-		log.Printf("결제 승인 실패: %v", err)
+
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": fmt.Sprintf("결제 승인 실패: %v", err)})
 	}
 
