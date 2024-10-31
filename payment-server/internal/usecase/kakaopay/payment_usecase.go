@@ -64,15 +64,15 @@ func (u *PaymentUsecase) ApprovePayOrder(ctx context.Context, pgToken, partnerPa
 			return nil, fmt.Errorf("카카오페이 승인 실패: %v", err)
 		}
 
-		// 결제 상태 업데이트
-		if err := u.PaymentRepo.UpdatePaymentStatus(sessCtx, partnerPayOrderID, "결제 대기", "결제 완료"); err != nil {
-			return nil, fmt.Errorf("결제 상태 업데이트 실패: %v", err)
-		}
-
 		// 사용자 잔액 업데이트
 		err = u.UserRepo.UpdateUserBalance(sessCtx, payOrder.UserID, payOrder.Amount)
 		if err != nil {
 			return nil, fmt.Errorf("사용자 잔액 업데이트 실패: %v", err)
+		}
+
+		// 결제 상태 업데이트 및 TTL 제거
+		if err := u.PaymentRepo.UpdatePayOrder(sessCtx, partnerPayOrderID, "결제 완료", true); err != nil {
+			return nil, fmt.Errorf("결제 상태 업데이트 실패: %v", err)
 		}
 
 		return approveResponse, nil
