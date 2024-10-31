@@ -22,17 +22,18 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client) {
 	// 레포지토리 설정
 	userRepo := mongodb.NewUserRepository(client, dbName)
 	paymentRepo := mongodb.NewPaymentRepository(client, dbName)
+	sessionRepo := mongodb.NewSessionRepository(client, dbName)
 
 	// 서비스 설정
 	kakaoService := kakaopay.NewKakaoPayService()
 
 	// 유즈케이스 설정
-	paymentUsecase := usecase.NewPaymentUsecase(paymentRepo, kakaoService)
+	paymentUsecase := usecase.NewPaymentUsecase(paymentRepo, userRepo, sessionRepo, kakaoService)
 	paymentUsecase.UserRepo = userRepo
 
 	// 핸들러 설정
 	kakaoPayHandler := controllers.NewPaymentHandler(paymentUsecase)
 
 	e.POST("/pay", kakaoPayHandler.CreatePayment)
-	// e.POST("/pay/approval", paymentHandler.ApprovePayment)
+	e.POST("/pay/approval", kakaoPayHandler.PayApproveHandler)
 }

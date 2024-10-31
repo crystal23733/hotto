@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"payment-server/internal/config"
 	"payment-server/internal/entity"
 	usecase "payment-server/internal/usecase/kakaopay"
 	"strings"
@@ -61,13 +62,12 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	log.Printf("세션 완전히 해석된 세션 %s", actualSessionID)
 
 	// Session 구조체 정의
-	type Session struct {
+	var sessionDoc struct {
 		Session string `bson:"session"`
 	}
 
 	// 세션 정보 조회
-	var sessionDoc Session
-	err = h.PaymentUsecase.UserRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
+	err = h.PaymentUsecase.SessionRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			log.Printf("세션을 찾을 수 없음: %v", err)
@@ -91,7 +91,8 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	log.Printf("파싱한 세션: %v", sessionData)
 
 	var user entity.User
-	objectID, err := primitive.ObjectIDFromHex(user.ID)
+	objectID, err := primitive.ObjectIDFromHex(sessionData.UserID)
+	log.Printf("User ID: %v", objectID)
 	if err != nil {
 		log.Printf("유효하지 않은 ID: %v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 ID입니다."})
@@ -105,6 +106,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		log.Printf("데이터베이스 오류: %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
+	log.Printf("유저 정보: %v", user)
 
 	var req struct {
 		Option int `json:"option"`
@@ -114,8 +116,6 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		log.Printf("요청 형식이 잘못됨 %v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "요청 형식이 잘못되었습니다."})
 	}
-
-	userID := sessionData.UserID
 
 	// 결제 요청 생성
 	partnerPayOrderID := fmt.Sprintf("pay-order-%s-%d", user.Email, time.Now().Unix())
@@ -132,106 +132,67 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	kakaoPayRequest := entity.KakaoPayRequest{
 		Cid:            h.PaymentUsecase.KakaoPayService.Cid,
 		PartnerOrderId: partnerPayOrderID,
-		PartnerUserId:  userID,
+		PartnerUserId:  user.ID,
 		ItemName:       fmt.Sprintf("%d", req.Option),
 		Quantity:       1,
 		TotalAmount:    req.Option,
 		TaxFreeAmount:  req.Option,
-		ApprovalUrl:    fmt.Sprintf("%s/kakaopay/success?pay_order=%s", "https://clienturl.com", partnerPayOrderID),
-		CancelUrl:      fmt.Sprintf("%s/kakaopay/cancel?pay_order=%s", "https://clienturl.com", partnerPayOrderID),
-		FailUrl:        fmt.Sprintf("%s/kakaopay/fail?pay_order=%s", "https://clienturl.com", partnerPayOrderID),
+		ApprovalUrl:    fmt.Sprintf("%s/kakaopay/success?pay_order=%s", config.ClientURL(), partnerPayOrderID),
+		CancelUrl:      fmt.Sprintf("%s/kakaopay/cancel?pay_order=%s", config.ClientURL(), partnerPayOrderID),
+		FailUrl:        fmt.Sprintf("%s/kakaopay/fail?pay_order=%s", config.ClientURL(), partnerPayOrderID),
 	}
 
-	// 결제 요청 및 결제 결제 내역 저장
-	response, err := h.PaymentUsecase.CreatePayOrder(context.Background(), payOrder, kakaoPayRequest)
+	// 결제 요청
+	response, paymentID, err := h.PaymentUsecase.CreatePayOrder(context.Background(), payOrder, kakaoPayRequest)
 	if err != nil {
-		log.Printf("결제 요청 실패 %v", err)
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 요청 생성에 실패했습니다."})
+		log.Printf("결제 요청 실패 상세: %+v", err)
+		if strings.Contains(err.Error(), "400 Bad Request") {
+			return c.JSON(http.StatusBadRequest, map[string]string{"error": "결제 요청 형식이 올바르지 않습니다"})
+		}
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 요청 처리 중 오류가 발생했습니다"})
 	}
 
 	// 사용자 스키마에 결제내역 추가
-	if err := h.PaymentUsecase.UpdateUserPayments(context.Background(), objectID, payOrder.PayOrderID); err != nil {
+	if err := h.PaymentUsecase.UserRepo.UpdateUserPayments(context.Background(), objectID, paymentID); err != nil {
 		log.Printf("사용자 정보 업데이트 성공 %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보 업데이트에 성공하였습니다."})
 	}
 
-	return c.JSON(http.StatusOK, response)
+	responseData := map[string]string{
+		"redirect_url": response.NextRedirectPcUrl,
+	}
+
+	fmt.Printf("수신된 데이터 (JSON): %+v\n", responseData)
+	return c.JSON(http.StatusOK, responseData)
 }
 
-// // PayApproveHandler는 카카오페이 결제 승인 요청을 처리하는 함수
-// func PayApproveHandler(c echo.Context, client *mongo.Client) error {
-// 	dbName := config.DBName()
+// PayApproveHandler는 카카오페이 결제 승인 요청을 처리하는 함수.
+func (h *PaymentHandler) PayApproveHandler(c echo.Context) error {
+	var requestBody struct {
+		PgToken           string `json:"pg_token"`
+		PartnerPayOrderID string `json:"pay_order"`
+	}
 
-// 	var requestBody struct {
-// 		PgToken           string `json:"pg_token"`
-// 		PartnerPayOrderID string `json:"pay_order"`
-// 	}
+	if err := c.Bind(&requestBody); err != nil {
+		log.Printf("잘못된 요청 형식: %v", err)
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청 형식입니다."})
+	}
 
-// 	if err := c.Bind(&requestBody); err != nil {
+	pgToken := requestBody.PgToken
+	partnerPayOrderID := requestBody.PartnerPayOrderID
 
-// 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청 형식입니다."})
-// 	}
+	log.Printf("클라이언트에서 가져온 값, %s %s", pgToken, partnerPayOrderID)
 
-// 	pgToken := requestBody.PgToken
-// 	PartnerPayOrderID := requestBody.PartnerPayOrderID
+	if partnerPayOrderID == "" || pgToken == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "필수 파라미터가 누락되었습니다"})
+	}
 
-// 	log.Printf("클라이언트에서 가져온 값, %s %s", pgToken, PartnerPayOrderID)
+	// 유즈케이스 호출
+	approveResponse, err := h.PaymentUsecase.ApprovePayOrder(context.Background(), pgToken, partnerPayOrderID)
+	if err != nil {
+		log.Printf("결제 승인 실패: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": fmt.Sprintf("결제 승인 실패: %v", err)})
+	}
 
-// 	if PartnerPayOrderID == "" || pgToken == "" {
-// 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "필수 파라미터가 누락되었습니다"})
-// 	}
-
-// 	mongoSession, err := client.StartSession()
-// 	if err != nil {
-// 		log.Printf("MongoDB 세션 생성 실패: %v", err)
-// 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "세션 생성에 실패하였습니다"})
-// 	}
-// 	defer mongoSession.EndSession(context.Background())
-
-// 	callback := func(sessCtx mongo.SessionContext) (interface{}, error) {
-// 		var payOrder models.PayOrder
-// 		err = client.Database(dbName).Collection("payments").FindOne(sessCtx, bson.M{"pay_order_id": PartnerPayOrderID}).Decode(&payOrder)
-// 		if err != nil {
-// 			log.Printf("주문 조회 실패: %v", err)
-// 			return nil, fmt.Errorf("주문 조회 실패: %v", err)
-// 		}
-
-// 		kakaoClient := payment.NewKakaoPayClient()
-// 		approveResponse, err := kakaoClient.ApprovePayment(pgToken, payOrder.Tid, payOrder.PayOrderID, payOrder.UserID.Hex())
-// 		if err != nil {
-// 			log.Printf("카카오페이 승인 실패: %v", err)
-// 			return nil, fmt.Errorf("카카오페이 승인 실패: %v", err)
-// 		}
-
-// 		result, err := client.Database(dbName).Collection("payments").UpdateOne(sessCtx, bson.M{"pay_order_id": PartnerPayOrderID, "status": "결제 대기"}, bson.M{"$set": bson.M{"status": "결제 완료"}})
-// 		if err != nil || result.ModifiedCount == 0 {
-// 			log.Printf("주문 상태 업데이트 실패: %v", err)
-// 			return nil, fmt.Errorf("주문 상태 업데이트 실패: 이미 처리된 주문이거나 오류 발생")
-// 		}
-
-// 		var user models.User
-// 		err = client.Database(dbName).Collection("users").FindOne(sessCtx, bson.M{"_id": payOrder.UserID}).Decode(&user)
-// 		if err != nil {
-// 			log.Printf("사용자 조회 실패: %v", err)
-// 			return nil, fmt.Errorf("사용자 조회 실패: %v", err)
-// 		}
-
-// 		updatedBalance := user.Balance + payOrder.Amount
-// 		_, err = client.Database(dbName).Collection("users").UpdateOne(sessCtx, bson.M{"_id": payOrder.UserID}, bson.M{"$set": bson.M{"balance": updatedBalance}})
-// 		if err != nil {
-// 			log.Printf("사용자 잔액 업데이트에 실패하였습니다.")
-// 			return nil, fmt.Errorf("사용자 잔액 업데이트에 실패하였습니다")
-// 		}
-
-// 		log.Printf("사용자 금액 업데이트 성공: 사용자 ID = %s, 새로운 잔액 = %d", payOrder.UserID.Hex(), updatedBalance)
-
-// 		return approveResponse, nil
-// 	}
-
-// 	result, err := mongoSession.WithTransaction(context.Background(), callback, options.Transaction())
-// 	if err != nil {
-// 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": fmt.Sprintf("트랜잭션 실패: %v", err)})
-// 	}
-
-// 	return c.JSON(http.StatusOK, result)
-// }
+	return c.JSON(http.StatusOK, approveResponse)
+}
