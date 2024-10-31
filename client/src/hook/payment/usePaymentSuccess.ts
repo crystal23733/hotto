@@ -17,6 +17,7 @@ export default () => {
 
   useEffect(() => {
     const pgToken = router.query.pg_token;
+    const payOrder = router.query.pay_order;
     if (typeof pgToken === "string") {
       setLoading(true);
       const payUrl = process.env.NEXT_PUBLIC_PAY_ENDPOINT as string;
@@ -27,12 +28,12 @@ export default () => {
         .request(
           payUrl + approvalUrl,
           "POST",
-          { pg_token: pgToken },
+          { pg_token: pgToken, pay_order: payOrder },
           null,
           true,
         )
-        .then((reponse) => {
-          setData(reponse);
+        .then((response) => {
+          setData(response);
           setLoading(false);
         })
         .catch((err: Error) => {

@@ -20,5 +20,8 @@
   "devDependencies": {
     "@types/node": "^20.14.9",
     "arkit": "^1.6.4"
+  },
+  "dependencies": {
+    "swr": "^2.2.5"
   }
 }

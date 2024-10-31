@@ -5,21 +5,15 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"payment-server/config"
-	"payment-server/db"
-	"payment-server/routers"
+	"payment-server/internal/config"
+	"payment-server/internal/repositories/mongodb"
+	"payment-server/internal/routers"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
-
-// 결제 요청을 나타내는 구조체
-type PaymentRequest struct {
-	Option    string `json:"option"`
-	SessionID string `json:"session_id"`
-}
 
 // 애플리케이션 진입점
 func main() {
@@ -29,11 +23,15 @@ func main() {
 		log.Fatal("환경 변수를 로드하지 못했습니다:", err)
 	}
 
-	client, err := db.ConnectDB()
+	client, err := mongodb.ConnectDB()
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer client.Disconnect(context.Background())
+
+	dbName := config.DBName()
+	paymentRepo := mongodb.NewPaymentRepository(client, dbName)
+	paymentRepo.CreateTTLIndex()
 
 	e := echo.New()
 
@@ -41,10 +39,10 @@ func main() {
 	CookieSecretKey := config.CookieSecret()
 	store := sessions.NewCookieStore([]byte(CookieSecretKey))
 	store.Options = &sessions.Options{
-		Path: "/",
-		MaxAge: 360000,
+		Path:     "/",
+		MaxAge:   360000,
 		HttpOnly: true,
-		Secure: true,
+		Secure:   true,
 		SameSite: http.SameSiteStrictMode,
 	}
 
@@ -60,7 +58,7 @@ func main() {
 	// 미들웨어
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	
+
 	// 라우트 설정
 	routers.SetupRoutes(e, client)
 

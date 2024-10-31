@@ -3,7 +3,6 @@ import loginRequest from "../../api/auth/loginRequest";
 import React, { useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import { useRouter } from "next/router";
-import { useAuth } from "client/src/context/AuthContext";
 import FetchApi from "client/src/api/lib/FetchApi";
 import serverUrl from "client/src/module/serverUrl";
 import checkAuthStatus from "client/src/api/auth/checkAuthStatus";
@@ -17,7 +16,6 @@ const fetchApi = new FetchApi(serverUrl);
 const LoginFormContainer: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsAuthenticated } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -50,7 +48,6 @@ const LoginFormContainer: React.FC = () => {
       await loginRequest(email, password);
       const response = await checkAuthStatus();
       if (response.isAuthenticated) {
-        setIsAuthenticated(true);
         router.reload();
       } else {
         setError("로그인 처리 중 문제가 발생했습니다.");
@@ -61,7 +58,6 @@ const LoginFormContainer: React.FC = () => {
       } else {
         setError("로그인에 실패했습니다.");
       }
-      setIsAuthenticated(false);
     }
   };
 
