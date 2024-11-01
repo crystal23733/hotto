@@ -15,7 +15,7 @@ export class LottoService {
    * @returns {Promise<number[]>} - 고유한 로또 번호 조합
    */
   async generateUniqueNumbers(): Promise<number[]> {
-    const history = await this.fileReaderService.loadHistory();
+    const history = await this.fileReaderService.getCachedHistory();
     let newNumbers: number[];
     do {
       newNumbers = randonNumber();

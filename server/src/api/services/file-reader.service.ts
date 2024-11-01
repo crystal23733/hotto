@@ -1,42 +1,67 @@
-import { Injectable } from "@nestjs/common";
+import {
+  GetObjectCommand,
+  ListObjectsCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { Injectable, OnModuleInit } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import ILottoRoundData from "@shared/interface/lottoRound.interface";
-import * as fs from "fs/promises";
-import * as path from "path";
+import { Readable } from "stream";
 
 /**
- * FileReaderService는 파일 시스템과 관련된 작업을 처리하는 서비스입니다.
- * 로또 데이터 파일을 읽어오고, 최신 회차의 로또 데이터를 반환하는 기능을 제공합니다.
+ * FileReaderService는 로또 당첨번호 데이터를 S3 버킷에서 가져와 
+ * 서버 메모리에 캐싱하여 제공하는 서비스입니다.
+ * 서버 시작 시 S3 데이터를 비동기로 로드하여 메모리에 저장하고,
+ * 이후 요청 시 캐싱된 데이터를 사용하여 응답 속도를 최적화합니다.
  */
 @Injectable()
-export class FileReaderService {
-  private readonly historyDir: string;
+export class FileReaderService implements OnModuleInit {
+  private readonly s3Client: S3Client;
+  private readonly bucketName: string;
+  private readonly prefix: string;
+  private memoryCache: Set<string> | null = null; // 로또 번호 조합을 저장하는 메모리 캐시 (null 상태는 초기화가 완료되지 않은 상태)
+  private latestLottoData: ILottoRoundData | null = null; // 최신 회차의 로또 데이터 캐시 (초기화가 완료되지 않은 상태)
 
-  /**
-   * @param {ConfigService} configService - 환경 변수를 관리하는 서비스
-   */
   constructor(private readonly configService: ConfigService) {
-    this.historyDir =
-      this.configService.get<string>("HISTORY_DIR") ||
-      path.resolve("src/assets/history");
+    this.s3Client = new S3Client({
+      region: this.configService.get<string>("AWS_REGION"),
+    });
+    this.bucketName = this.configService.get<string>("HISTORY_BUCKET")!;
+    this.prefix = this.configService.get<string>("HISTORY_PREFIX") || "";
+  }
+
+  async onModuleInit() {
+    // 비동기로 S3 데이터를 로드하여 메모리에 캐시
+    this.loadHistory();
   }
 
   /**
-   * 로또 번호의 히스토리를 로드합니다.
-   *
-   * @returns {Promise<Set<string>>} - 로또 번호 조합의 Set
-   * @throws {Error} - 디렉토리를 읽는 중 오류 발생 시 예외를 던집니다.
+   * S3 버킷에서 모든 로또 히스토리를 비동기로 로드하여 메모리 캐시에 저장합니다.
    */
-  async loadHistory(): Promise<Set<string>> {
-    const historyData = new Set<string>();
+  private async loadHistory(): Promise<void> {
+    const command = new ListObjectsCommand({
+      Bucket: this.bucketName,
+      Prefix: this.prefix,
+    });
+
     try {
-      const files = await fs.readdir(this.historyDir);
-      for (const file of files) {
-        const filePath = path.join(this.historyDir, file);
-        const data: ILottoRoundData = JSON.parse(
-          await fs.readFile(filePath, "utf-8"),
-        );
-        const numbers: string = [
+      const historyData = new Set<string>();
+      const { Contents } = await this.s3Client.send(command);
+      if (!Contents) {
+        this.memoryCache = historyData; // 비어 있는 경우 빈 캐시로 초기화
+        return;
+      }
+
+      const numberedFiles = Contents.map((content) => ({
+        key: content.Key!,
+        number: parseInt(content.Key!.replace(/[^0-9]/g, ""), 10),
+      }))
+        .filter((file) => !isNaN(file.number))
+        .sort((a, b) => b.number - a.number);
+
+      for (const content of numberedFiles) {
+        const data: ILottoRoundData = await this.readJsonFromS3(content.key);
+        const numbers = [
           data.drwtNo1,
           data.drwtNo2,
           data.drwtNo3,
@@ -45,74 +70,76 @@ export class FileReaderService {
           data.drwtNo6,
         ].join(",");
         historyData.add(numbers);
+
+        if (!this.latestLottoData) {
+          this.latestLottoData = data;
+        }
       }
+
+      this.memoryCache = historyData;
     } catch (error) {
-      console.error("Error reading directory:", error);
+      console.error("Error loading history from S3:", error);
       throw error;
     }
-    return historyData;
+  }
+
+  /**
+   * 메모리에 캐싱된 로또 히스토리 데이터를 반환합니다.
+   * 캐시가 초기화되지 않았을 경우, S3에서 직접 데이터를 로드합니다.
+   * @returns {Promise<Set<string>>} - 메모리에 저장된 로또 번호 조합의 Set
+   */
+  async getCachedHistory(): Promise<Set<string>> {
+    if (!this.memoryCache) {
+      await this.loadHistory(); // 캐시가 없으면 S3에서 로드
+    }
+    return this.memoryCache!;
   }
 
   /**
    * 최신 회차의 로또 데이터를 반환합니다.
-   *
+   * 캐시가 초기화되지 않았을 경우, S3에서 직접 데이터를 로드합니다.
    * @returns {Promise<ILottoRoundData>} - 최신 회차의 로또 데이터
-   * @throws {Error} - 파일을 읽는 중 오류 발생 시 예외를 던집니다.
    */
   async getLatestLottoData(): Promise<ILottoRoundData> {
+    if (!this.latestLottoData) {
+      await this.loadHistory(); // 최신 데이터가 없으면 S3에서 로드
+    }
+    return this.latestLottoData!;
+  }
+
+  /**
+   * S3에서 특정 회차의 로또 데이터를 반환합니다.
+   * @param {string} round - 조회할 회차 번호
+   * @returns {Promise<ILottoRoundData>} - 특정 회차의 로또 데이터
+   */
+  async getLottoDataForRound(round: string): Promise<ILottoRoundData> {
+    const key = `${this.prefix}/${round}.json`;
     try {
-      const files = await fs.readdir(this.historyDir);
-
-      // 파일명을 숫자로 변환하여 비교하기 위해 파일명을 정수로 변환합니다.
-      const numberedFiles = files
-        .map((file) => ({
-          name: file,
-          number: parseInt(file.replace(/[^0-9]/g, ""), 10),
-        }))
-        .filter((file) => !isNaN(file.number)) // 숫자로 변환된 파일만 필터링
-        .sort((a, b) => b.number - a.number); // 최신 파일 순서로 정렬
-
-      if (numberedFiles.length === 0) {
-        throw new Error("로또 데이터 파일이 없습니다.");
-      }
-
-      const latestFile = numberedFiles[0].name;
-      const filePath = path.join(this.historyDir, latestFile);
-      const data: ILottoRoundData = JSON.parse(
-        await fs.readFile(filePath, "utf-8"),
-      );
-      return data;
+      return await this.readJsonFromS3(key);
     } catch (error) {
-      console.error("Error reading latest lotto data:", error);
+      console.error("Error reading lotto data for round from S3:", error);
       throw error;
     }
   }
 
   /**
-   * 특정 회차의 로또 데이터를 반환합니다.
-   *
-   * @param {string} round - 회차 번호
-   * @returns {Promise<ILottoRoundData>} - 특정 회차의 로또 데이터
-   * @throws {Error} - 파일을 읽는 중 오류 발생 시 예외를 던집니다.
+   * S3에서 특정 키의 JSON 객체를 읽어옵니다.
    */
-  async getLottoDataForRound(round: string): Promise<ILottoRoundData> {
-    try {
-      const files = await fs.readdir(this.historyDir);
-      const foundFile = files.find((file) => {
-        const nameWithoutExt = path.parse(file).name;
-        return nameWithoutExt === round;
-      });
+  private async readJsonFromS3(key: string): Promise<ILottoRoundData> {
+    const command = new GetObjectCommand({
+      Bucket: this.bucketName,
+      Key: key,
+    });
 
-      if (!foundFile) {
-        throw new Error("해당 회차의 로또 데이터 파일이 없습니다.");
-      }
-      const filePath = path.join(this.historyDir, foundFile);
-      const data: ILottoRoundData = JSON.parse(
-        await fs.readFile(filePath, "utf-8"),
-      );
-      return data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await this.s3Client.send(command);
+    const stream = response.Body as Readable;
+    const data = await new Promise<string>((resolve, reject) => {
+      const chunks: Uint8Array[] = [];
+      stream.on("data", (chunk) => chunks.push(chunk));
+      stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf-8")));
+      stream.on("error", reject);
+    });
+
+    return JSON.parse(data);
   }
 }
