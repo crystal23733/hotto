@@ -14,7 +14,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "incremental": true,
+    "baseUrl": "../"
   },
-  "include": ["src/**/*.ts", "test/**/*"],
+  "include": ["src/**/*.ts", "test/**/*", "../shared/**/*", "../client/src/pipes/interface/fortune.interface.ts", "../client/src/pipes/interface/payment", "../client/src/pipes/interface/modal.interface.ts", "../client/src/pipes/interface/optionSelector.interface.ts", "../client/src/pipes/interface/verifyPassword.interface.ts"],
   "exclude": ["node_modules"],
 }
