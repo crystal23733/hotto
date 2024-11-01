@@ -1,4 +1,4 @@
-import OptionSelectorProps from "@shared/interface/optionSelector.interface";
+import OptionSelectorProps from "client/src/pipes/interface/optionSelector.interface";
 import React from "react";
 
 /**

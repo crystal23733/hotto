@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { ApiService } from "./api.service";
-import ILottoRoundData from "../../../shared/interface/lottoRound.interface";
+import ILottoRoundData from "@shared/interface/lottoRound.interface";
 
 /**
  * ApiController는 API 엔드포인트를 관리하는 컨트롤러입니다.
