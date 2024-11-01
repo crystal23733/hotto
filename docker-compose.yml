@@ -1,31 +1,40 @@
-# docker-compose.yml
-version: '3.8'
-
 services:
-  client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"  # Next.js 클라이언트 포트
-
   server:
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: server/Dockerfile
     ports:
-      - "8080:8080"  # Nest.js 서버 포트
+      - "8080:8080"
+    env_file:
+      - ./server/.env
+      - ./server/.env.production
+    networks:
+      - my_network
 
   fortune-server:
     build:
       context: ./fortune-server
       dockerfile: Dockerfile
     ports:
-      - "5501:5501"  # FastAPI 서버 포트
+      - "5501:5501"
+    volumes:
+      - ./fortune-server/.env:/app/.env:ro
+      - ./fortune-server/.env.production:/app/.env.production:ro
+    networks:
+      - my_network
 
   payment-server:
     build:
       context: ./payment-server
       dockerfile: Dockerfile
     ports:
-      - "5505:5505"  # Echo 서버 포트
+      - "5505:5505"
+    volumes:
+      - ./payment-server/.env:/app/.env:ro
+      - ./payment-server/.env.production:/app/.env.production:ro
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
