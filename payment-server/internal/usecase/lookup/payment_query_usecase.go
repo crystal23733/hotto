@@ -37,11 +37,17 @@ func (u *PaymentQueryUsecase) GetUserPayments(ctx context.Context, userID primit
 	var payments []entity.PayOrder
 	for _, paymentID := range paymentIDs {
 		var payOrder entity.PayOrder
-		err := u.PaymentRepo.FindPayOrder(ctx, paymentID.Hex(), &payOrder)
+		err := u.PaymentRepo.FindPayOrderByObjectID(ctx, paymentID, &payOrder)
 		if err != nil {
-			return nil, fmt.Errorf("결제 내역 조회 실패: %v", err)
+			log.Printf("결제 내역 조회 실패 (결제 ID: %v): %v", paymentID.Hex(), err)
+			continue // 조회 실패 시 계속 진행
 		}
 		payments = append(payments, payOrder)
 	}
+
+	if len(payments) == 0 {
+		return nil, fmt.Errorf("결제 내역을 찾을 수 없습니다")
+	}
+
 	return payments, nil
 }

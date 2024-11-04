@@ -84,6 +84,3 @@ func (u *PaymentUsecase) ApprovePayOrder(ctx context.Context, pgToken, partnerPa
 
 	return result.(*entity.KakaoPayApproveResponse), nil
 }
-
-// 
-func (u *PaymentUsecase)FindPayOrder 
