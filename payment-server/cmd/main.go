@@ -8,6 +8,7 @@ import (
 	"payment-server/internal/config"
 	"payment-server/internal/repositories/mongodb"
 	"payment-server/internal/routers"
+	"payment-server/internal/watchers"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
@@ -30,8 +31,14 @@ func main() {
 	defer client.Disconnect(context.Background())
 
 	dbName := config.DBName()
+
+	// 레포지토리 초기화
 	paymentRepo := mongodb.NewPaymentRepository(client, dbName)
 	paymentRepo.CreateTTLIndex()
+	userRepo := mongodb.NewUserRepository(client, dbName)
+	sessionRepo := mongodb.NewSessionRepository(client, dbName)
+
+	go watchers.WatchPaymentDeletions(client, userRepo)
 
 	e := echo.New()
 
@@ -60,7 +67,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// 라우트 설정
-	routers.SetupRoutes(e, client)
+	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo)
 
 	// 서버 시작
 	// 개발 환경인지 확인

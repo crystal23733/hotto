@@ -5,7 +5,6 @@ routers 패키지는 애플리케이션의 라우터를 정의하고 핸들러�
 package routers
 
 import (
-	"payment-server/internal/config"
 	kakaoControllers "payment-server/internal/controllers/kakaopay"
 	queryControllers "payment-server/internal/controllers/lookup"
 	"payment-server/internal/repositories/mongodb"
@@ -18,14 +17,7 @@ import (
 )
 
 // SetupRoutes는 라우터를 설정합니다.
-func SetupRoutes(e *echo.Echo, client *mongo.Client) {
-	dbName := config.DBName()
-
-	// 레포지토리 설정
-	userRepo := mongodb.NewUserRepository(client, dbName)
-	paymentRepo := mongodb.NewPaymentRepository(client, dbName)
-	sessionRepo := mongodb.NewSessionRepository(client, dbName)
-
+func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository) {
 	// 서비스 설정
 	kakaoService := kakaopay.NewKakaoPayService()
 
