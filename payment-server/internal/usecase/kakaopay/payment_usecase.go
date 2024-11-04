@@ -42,7 +42,7 @@ func (u *PaymentUsecase) CreatePayOrder(ctx context.Context, order entity.PayOrd
 	return response, paymentID, nil
 }
 
-// PaymentUsecase는 결제 관련 비즈니스 로직을 처리하는 유즈케이스.
+// ApprovePayOrder는 결제 승인 관련 비즈니스 로직을 처리하는 유즈케이스.
 func (u *PaymentUsecase) ApprovePayOrder(ctx context.Context, pgToken, partnerPayOrderID string) (*entity.KakaoPayApproveResponse, error) {
 	session, err := u.PaymentRepo.Collection.Database().Client().StartSession()
 	if err != nil {
@@ -84,3 +84,6 @@ func (u *PaymentUsecase) ApprovePayOrder(ctx context.Context, pgToken, partnerPa
 
 	return result.(*entity.KakaoPayApproveResponse), nil
 }
+
+// 
+func (u *PaymentUsecase)FindPayOrder 
