@@ -21,7 +21,7 @@ const LottoRoundPage: React.FC = () => {
 
   return (
     <div id="round-container">
-      <RoundSelectOption onSelectRound={setSelectedRound} maxRound={1142} />{" "}
+      <RoundSelectOption onSelectRound={setSelectedRound} maxRound={1143} />{" "}
       {/* 최대 회차는 예시 */}
       <div id="round-description">
         <h1 id="round-description__title">회차별 당첨번호 조회</h1>
