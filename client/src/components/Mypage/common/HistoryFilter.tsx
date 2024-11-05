@@ -8,7 +8,7 @@ import HistoryFilterProps from "../interface/HistoryFilterProps";
  */
 const HistoryFilter: React.FC<HistoryFilterProps> = ({ setDateFilter }) => {
   return (
-    <div>
+    <div className="date-filter-container">
       <label>날짜 선택: </label>
       <input
         placeholder="날짜"

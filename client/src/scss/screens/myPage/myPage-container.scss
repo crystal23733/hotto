@@ -6,21 +6,73 @@
   width: 100%;
   height: 100%;
   @include display.flex(column, center, center);
+
   & > #mypage-container__content {
     @include display.flex(column, flex-start, center);
     height: 90%;
     width: 90%;
+
+    & > .change-password-box {
+      width: 200px;
+      height: 50px;
+      margin: 5px;
+    }
+
     & > .mypage-container__info-container {
-      width: 100%;
-      height: 5vh;
-      @include display.flex(row, space-evenly, center);
+      width: 70%;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      @include display.flex(row, space-between, center);
+      border: 1px solid #e0e0e0;
+
       & > .info-container__title {
         font-size: font.$sub-size;
         font-weight: font.$sub-weight;
       }
+
       & > .info-container__description {
         font-size: font.$sub-size;
         font-weight: font.$sub-weight;
+      }
+    }
+
+    & > .history-box {
+      width: 95%;
+      height: 90%;
+      & > .tab-content {
+        & > div {
+          & > .date-filter-container {
+            width: 50%;
+            margin: 20px auto;
+            padding: 10px;
+            @include display.flex(row, space-around, center);
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+            & > label {
+              font-size: font.$dec-size;
+              font-weight: font.$sub-weight;
+              margin-right: 10px;
+            }
+
+            & > input[type="date"] {
+              padding: 5px;
+              border-radius: 5px;
+              border: 1px solid #ccc;
+              box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+              font-size: font.$dec-size;
+            }
+
+            & > input[type="date"]:focus {
+              border: 1px solid #0d99ff;
+              outline: none;
+            }
+          }
+        }
       }
     }
   }
