@@ -50,14 +50,16 @@ func (u *PaymentQueryUsecase) GetUserPayments(ctx context.Context, userID primit
 
 		// 필요한 형식으로 변환 (예: "YYYY-MM-DD HH:mm")
 		createdAtFormatted := createdAtKST.Format("2006년 1월 2일 15:04")
+		createdAtDate := createdAtKST.Format("2006-01-02")
 
 		// 필요한 필드만 담은 PayOrderResponse 생성
 		payOrderResponse := entity.PayOrderResponse{
-			PayOrderID: payOrder.PayOrderID,
-			Amount:     payOrder.Amount,
-			Status:     payOrder.Status,
-			CreatedAt:  createdAtFormatted,
-			Pay:        payOrder.Pay,
+			PayOrderID:    payOrder.PayOrderID,
+			Amount:        payOrder.Amount,
+			Status:        payOrder.Status,
+			CreatedAt:     createdAtFormatted,
+			CreatedAtDate: createdAtDate,
+			Pay:           payOrder.Pay,
 		}
 
 		payments = append(payments, payOrderResponse)
