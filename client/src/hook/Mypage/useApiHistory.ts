@@ -19,10 +19,14 @@ export default <T extends IHistoryItem>(endpoint: string) => {
     setLoading(true);
     try {
       const response = await mypageHistoryRequest<T[]>(endpoint);
-      console.log(response);
+      // 응답이 빈 배열인 경우 에러로 처리
+      if (!response || response.length === 0) {
+        throw new Error("결제 내역이 없습니다.");
+      }
       setData(response);
     } catch (err) {
       setError(err as Error);
+      setData([]);
     } finally {
       setLoading(false);
     }
