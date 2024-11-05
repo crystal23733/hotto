@@ -19,6 +19,7 @@ export default <T extends IHistoryItem>(endpoint: string) => {
     setLoading(true);
     try {
       const response = await mypageHistoryRequest<T[]>(endpoint);
+      console.log(response);
       // 응답이 빈 배열인 경우 에러로 처리
       if (!response || response.length === 0) {
         throw new Error("결제 내역이 없습니다.");
@@ -34,7 +35,8 @@ export default <T extends IHistoryItem>(endpoint: string) => {
 
   useEffect(() => {
     fetchHistory();
-  }, []);
+    console.log(dateFilter);
+  }, [dateFilter]);
 
   // 필터링된 데이터를 반환
   const filteredData = filterByDate(data || [], dateFilter);
