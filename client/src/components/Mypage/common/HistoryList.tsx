@@ -10,21 +10,21 @@ import Loading from "../../common/Loading";
 const HistoryList: React.FC<HistoryListProps> = ({ data, loading, error }) => {
   if (!data || data.length === 0) {
     return (
-      <div className="empty-state">
+      <div className="empty-state history-error">
         <p className="help is-danger">결제 내역이 없습니다.</p>
       </div>
     );
   }
 
   return (
-    <div className="hitory-list">
+    <div className="history-list">
       {data.map((item) => (
         <div className="history-item" key={item.pay_order_id}>
-          <p>주문번호: {item.pay_order_id}</p>
-          <p>상품 금액: {item.amount}</p>
-          <p>결제 상태: {item.status}</p>
-          <p>결제일: {item.created_at}</p>
-          <p>결제 방법: {item.pay}</p>
+          <p className="history-item-title">주문번호: {item.pay_order_id}</p>
+          <p className="history-item-amount">상품 금액: {item.amount}</p>
+          <p className="history-item-detail">결제 상태: {item.status}</p>
+          <p className="history-item-detail">결제 방법: {item.pay}</p>
+          <p className="history-item-date">결제일: {item.created_at}</p>
           {loading && <Loading />}
           {error && <p className="help is-danger">{error.message}</p>}
         </div>
