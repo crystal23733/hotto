@@ -4,4 +4,5 @@ export default interface IHistoryItem {
   status: string;
   created_at: string;
   pay: string;
+  created_at_date: string;
 }
