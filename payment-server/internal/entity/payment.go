@@ -19,7 +19,7 @@ type PayOrder struct {
 	Status     string             `json:"status" bson:"status"`
 	CreatedAt  time.Time          `json:"created_at" bson:"created_at"`
 	ExpiresAt  time.Time          `bson:"expires_at"`
-	Pay string 										`json:"pay" bson:"pay"`
+	Pay        string             `json:"pay" bson:"pay"`
 }
 
 // CreateTTLIndex는 결제 내역 컬렉션에 TTL 인덱스를 설정하는 함수입니다.
