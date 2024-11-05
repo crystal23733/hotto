@@ -45,7 +45,7 @@
       & > .tab-content {
         height: 100%;
         & > div {
-          height: 100%;
+          height: 93%;
           & > .date-filter-container {
             width: 50%;
             margin: 20px auto;
@@ -77,6 +77,8 @@
           .history-list {
             @include display.flex(row, center, flex-start);
             flex-wrap: wrap; // 여러 개의 카드를 배치하기 위해 flex-wrap 추가
+            max-height: 550px;
+            overflow-y: auto;
 
             & > .history-item {
               @include display.flex(column, flex-start, flex-start);
