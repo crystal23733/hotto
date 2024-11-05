@@ -1,6 +1,8 @@
 export default interface IHistoryItem {
-  orderID: string;
+  pay_order_id: string;
   amount: number;
   status: string;
-  createAt: string;
+  created_at: string;
+  pay: string;
+  created_at_date: string;
 }

@@ -11,7 +11,6 @@ const PaymentHistory: React.FC = () => {
     .NEXT_PUBLIC_PAY_PAYMENT_HISTORY_ENDPOINT as string;
   const { data, setDateFilter, loading, error } =
     useApiHistory(paymentHistoryUrl);
-  console.log(data);
 
   return (
     <div>

@@ -8,8 +8,8 @@ import IHistoryItem from "../../components/Mypage/interface/IHistoryItem";
  */
 export default (data: IHistoryItem[], dateFilter: string): IHistoryItem[] => {
   if (!dateFilter) return data;
+
   return data.filter((item) => {
-    new Date(item.createAt).toLocaleDateString() ===
-      new Date(dateFilter).toLocaleDateString();
+    return item.created_at_date === dateFilter; // 단순 문자열 비교
   });
 };

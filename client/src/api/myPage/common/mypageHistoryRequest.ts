@@ -8,5 +8,5 @@ import FetchApi from "../../lib/FetchApi";
  */
 export default <T>(endpoint: string) => {
   const fetchApi = new FetchApi<T>(payServer);
-  return fetchApi.request(endpoint, "GET");
+  return fetchApi.request(endpoint, "GET", null, null, true);
 };

@@ -118,6 +118,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		Status:     "결제 대기",
 		CreatedAt:  time.Now(),
 		ExpiresAt:  time.Now().Add(30 * time.Minute),
+		Pay: "KakaoPay",
 	}
 
 	kakaoPayRequest := entity.KakaoPayRequest{

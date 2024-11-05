@@ -13,7 +13,9 @@ const HistoryFilter: React.FC<HistoryFilterProps> = ({ setDateFilter }) => {
       <input
         placeholder="날짜"
         type="date"
-        onChange={(e) => setDateFilter(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setDateFilter(e.target.value)
+        }
       />
     </div>
   );

@@ -90,3 +90,17 @@ func (r *PaymentRepository) UpdatePayOrder(ctx context.Context, payOrderID strin
 	}
 	return nil
 }
+
+// FindPayOrderByObjectID는 특정 결제 내역을 ObjectID로 조회하는 메서드입니다.
+func (r *PaymentRepository) FindPayOrderByObjectID(ctx context.Context, paymentID primitive.ObjectID, payOrder *entity.PayOrder) error {
+	filter := bson.M{"_id": paymentID}
+	err := r.Collection.FindOne(ctx, filter).Decode(payOrder)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return fmt.Errorf("결제 내역을 찾을 수 없습니다: %v", err)
+		}
+		return fmt.Errorf("결제 내역 조회 실패: %v", err)
+	}
+
+	return nil
+}
