@@ -7,7 +7,6 @@ import IHistoryItem from "../../components/Mypage/interface/IHistoryItem";
  * @returns {IHistoryItem[]} - 필터링 된 날짜 배열
  */
 export default (data: IHistoryItem[], dateFilter: string): IHistoryItem[] => {
-  console.log(dateFilter);
   if (!dateFilter) return data;
 
   return data.filter((item) => {
