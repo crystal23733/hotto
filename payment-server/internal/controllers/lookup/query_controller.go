@@ -81,6 +81,9 @@ func (h *PaymentQueryHandler) GetPayments(c echo.Context) error {
 
 	payments, err := h.PaymentQueryUsecase.GetUserPayments(context.Background(), userID)
 	if err != nil {
+		if err.Error() == "결제 내역을 찾을 수 없습니다" {
+			return c.JSON(http.StatusNotFound, map[string]string{"error": "결제 내역을 찾을 수 없습니다."})
+		}
 		log.Printf("결제 내역 조회에 실패:%v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 내역 조회에 실패하였습니다."})
 	}
