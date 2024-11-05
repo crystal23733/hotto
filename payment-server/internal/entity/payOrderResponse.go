@@ -6,5 +6,5 @@ type PayOrderResponse struct {
 	Amount     int    `json:"amount"`
 	Status     string `json:"status"`
 	CreatedAt  string `json:"created_at"`
-	pay        string `json:"pay"`
+	Pay        string `json:"pay"`
 }
