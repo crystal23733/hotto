@@ -17,22 +17,24 @@ const Mypage: React.FC = () => {
       <div className="box" id="mypage-container__content">
         <MypageInfoContainer />
         <MypageFormModal isActive={isActive} closeModal={closeModal} />
-        <div className="change-password-box">
+        <div className="change-password-box button is-info">
           <button onClick={handleMypageModal}>비밀번호 변경</button>
         </div>
-        <div className="tabs is-centered is-boxed">
-          <ul>
-            <li className={activeTab === "payment" ? "is-active" : ""}>
-              <a onClick={() => handleTabChange("payment")}>결제 내역</a>
-            </li>
-            <li className={activeTab === "order" ? "is-active" : ""}>
-              <a onClick={() => handleTabChange("order")}>주문 내역</a>
-            </li>
-          </ul>
-        </div>
-        <div className="tab-content">
-          {activeTab === "payment" && <PaymentHistory />}
-          {activeTab === "order" && <p>주문 내역이 여기 표시됩니다.</p>}
+        <div className="history-box card">
+          <div className="tabs is-centered is-boxed card">
+            <ul>
+              <li className={activeTab === "payment" ? "is-active" : ""}>
+                <a onClick={() => handleTabChange("payment")}>결제 내역</a>
+              </li>
+              <li className={activeTab === "order" ? "is-active" : ""}>
+                <a onClick={() => handleTabChange("order")}>주문 내역</a>
+              </li>
+            </ul>
+          </div>
+          <div className="tab-content">
+            {activeTab === "payment" && <PaymentHistory />}
+            {activeTab === "order" && <p>주문 내역이 여기 표시됩니다.</p>}
+          </div>
         </div>
       </div>
     </div>
