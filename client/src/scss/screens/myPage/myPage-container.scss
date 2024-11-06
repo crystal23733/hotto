@@ -41,7 +41,6 @@
 
     & > .history-box {
       width: 95%;
-      height: 90%;
       & > .tab-content {
         height: 100%;
         & > div {
@@ -77,7 +76,7 @@
           .history-list {
             @include display.flex(row, center, flex-start);
             flex-wrap: wrap; // 여러 개의 카드를 배치하기 위해 flex-wrap 추가
-            max-height: 550px;
+            max-height: 600px;
             overflow-y: auto;
 
             & > .history-item {
