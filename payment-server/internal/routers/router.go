@@ -7,6 +7,7 @@ package routers
 import (
 	kakaoControllers "payment-server/internal/controllers/kakaopay"
 	queryControllers "payment-server/internal/controllers/lookup"
+	controllers "payment-server/internal/controllers/lotto"
 	"payment-server/internal/repositories/mongodb"
 	"payment-server/internal/services/kakaopay"
 	kakaoUsecase "payment-server/internal/usecase/kakaopay"
@@ -17,7 +18,7 @@ import (
 )
 
 // SetupRoutes는 라우터를 설정합니다.
-func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository) {
+func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository, lottoController *controllers.LottoController) {
 	// 서비스 설정
 	kakaoService := kakaopay.NewKakaoPayService()
 
@@ -36,4 +37,12 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepos
 	paymentQueryHandler := queryControllers.NewPaymentQueryHandler(paymentQueryUsecase)
 
 	e.GET("/payment-history", paymentQueryHandler.GetPayments)
+
+	// 로또 관련 라우트
+	lottoGroup := e.Group("/lotto")
+	{
+		lottoGroup.GET("/numbers", lottoController.GetUniqueNumbers)
+		lottoGroup.GET("/latest", lottoController.GetLatestLottoData)
+		lottoGroup.GET("/round/:round", lottoController.GetLottoDataForRound)
+	}
 }
