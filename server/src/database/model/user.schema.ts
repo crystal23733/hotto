@@ -27,6 +27,9 @@ export class User {
   @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: "Payment" }], default: [] })
   payments: ObjectId[];
 
+  @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: "Order" }], default: [] })
+  orders: ObjectId[];
+
   _id: ObjectId;
 }
 
