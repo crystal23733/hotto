@@ -6,8 +6,11 @@ import (
 	"net/http"
 	"os"
 	"payment-server/internal/config"
+	controllers "payment-server/internal/controllers/lotto"
+	"payment-server/internal/repositories/lotto"
 	"payment-server/internal/repositories/mongodb"
 	"payment-server/internal/routers"
+	usecase "payment-server/internal/usecase/lotto"
 	"payment-server/internal/watchers"
 
 	"github.com/gorilla/sessions"
@@ -40,6 +43,21 @@ func main() {
 
 	go watchers.WatchPaymentDeletions(client, userRepo)
 
+	// S3 Repository 초기화
+	s3Repo, err := lotto.NewS3Repository(
+		os.Getenv("HISTORY_BUCKET"),
+		os.Getenv("HISTORY_PREFIX"),
+	)
+	if err != nil {
+		log.Fatal("S3 Repository 초기화 실패:", err)
+	}
+
+	// Lotto Usecase 초기화
+	lottoUsecase := usecase.NewLottoUsecase(s3Repo)
+
+	// Lotto Controller 초기화
+	lottoController := controllers.NewLottoController(lottoUsecase)
+
 	e := echo.New()
 
 	// 세션 미들웨어 설정
@@ -67,7 +85,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// 라우트 설정
-	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo)
+	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo, lottoController)
 
 	// 서버 시작
 	// 개발 환경인지 확인

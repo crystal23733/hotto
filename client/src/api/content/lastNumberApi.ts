@@ -1,9 +1,9 @@
 import FetchApi from "../lib/FetchApi";
-import serverUrl from "client/src/module/serverUrl";
 import apiUrl from "client/src/module/apiUrl";
 import ILottoRoundData from "@shared/interface/lottoRound.interface";
+import payServer from "client/src/module/payServer";
 
-const fetchApi = new FetchApi<ILottoRoundData>(serverUrl);
+const fetchApi = new FetchApi<ILottoRoundData>(payServer);
 
 export default async (): Promise<ILottoRoundData> => {
   const latestNumberUrl = process.env

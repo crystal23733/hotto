@@ -91,7 +91,7 @@ const RoundSelectOption: React.FC<IRoundSelectOption> = ({
           >
             <option value="">회차를 선택하세요.</option>
             {filteredRounds.map((roundNumber) => (
-              <option value={`history${roundNumber}`} key={roundNumber}>
+              <option value={`${roundNumber}`} key={roundNumber}>
                 {roundNumber} 회차
               </option>
             ))}

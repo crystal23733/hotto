@@ -89,3 +89,23 @@ func CidSecret() string {
 func CookieSecret() string {
 	return os.Getenv("COOKIE_SECRET")
 }
+
+func AwsRegion() string {
+	return os.Getenv("AWS_REGION")
+}
+
+func AwsAccessKey() string {
+	return os.Getenv("AWS_ACCESS_KEY_ID")
+}
+
+func AwsSecretAccessKey() string {
+	return os.Getenv("AWS_SECRET_ACCESS_KEY")
+}
+
+func HistoryBucket() string {
+	return os.Getenv("HISTORY_BUCKET")
+}
+
+func HistoryPrefix() string {
+	return os.Getenv("HISTORY_PREFIX")
+}

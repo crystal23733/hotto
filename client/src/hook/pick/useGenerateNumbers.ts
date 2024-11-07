@@ -35,7 +35,7 @@ const useGenerateNumbers = () => {
       setNumbers(evenRandomNumber);
     } else if (option === "multipleOfThree") {
       setNumbers(multipleOfThreeNumber);
-    } else {
+    } else if (option === "/unique-number") {
       try {
         setLoading(true);
         const fetchedNumbers = await lottoApi(option);
