@@ -9,7 +9,6 @@ import { AppService } from "./app.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { RootModule } from "./root/root.module";
-import { ApiModule } from "./api/api.module";
 import { SessionMiddleware } from "./common/middleware/session.middleware";
 import { AuthModule } from "./auth/auth.module";
 
@@ -26,7 +25,6 @@ import { AuthModule } from "./auth/auth.module";
       inject: [ConfigService],
     }),
     RootModule,
-    ApiModule,
     AuthModule,
   ],
   controllers: [AppController],
