@@ -39,7 +39,7 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepos
 	e.GET("/payment-history", paymentQueryHandler.GetPayments)
 
 	// 로또 관련 라우트
-	lottoGroup := e.Group("/lotto")
+	lottoGroup := e.Group("/api")
 	{
 		lottoGroup.GET("/numbers", lottoController.GetUniqueNumbers)
 		lottoGroup.GET("/latest", lottoController.GetLatestLottoData)
