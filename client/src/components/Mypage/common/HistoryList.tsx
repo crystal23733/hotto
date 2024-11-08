@@ -7,7 +7,9 @@ import Loading from "../../common/Loading";
  * @param {HistoryListProps} props - 데이터, 로딩, 에러 정보
  * @returns {JSX.Element} 컴포넌트
  */
-const HistoryList: React.FC<HistoryListProps> = ({ data, loading, error }) => {
+const HistoryList: React.FC<
+  HistoryListProps & { type: "payment" | "order" }
+> = ({ data, loading, error, type }) => {
   const [visibleItems, setVisibleItems] = useState(5);
   const observer = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -58,7 +60,9 @@ const HistoryList: React.FC<HistoryListProps> = ({ data, loading, error }) => {
           <p className="history-item-title">주문번호: {item.pay_order_id}</p>
           <p className="history-item-amount">상품 금액: {item.amount}</p>
           <p className="history-item-detail">결제 상태: {item.status}</p>
-          <p className="history-item-detail">결제 방법: {item.pay}</p>
+          {type === "payment" && (
+            <p className="history-item-detail">결제 방법: {item.pay}</p>
+          )}
           <p className="history-item-date">결제일: {item.created_at}</p>
         </div>
       ))}
