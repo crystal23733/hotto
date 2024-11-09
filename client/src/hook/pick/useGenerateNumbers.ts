@@ -24,7 +24,6 @@ import { useState, useEffect, useRef } from "react";
 const useGenerateNumbers = () => {
   const [numbers, setNumbers] = useState<number[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const numberListRef = useRef<HTMLDivElement>(null);
 
   const generateNumbers = async (option: string) => {
@@ -35,20 +34,6 @@ const useGenerateNumbers = () => {
       setNumbers(evenRandomNumber);
     } else if (option === "multipleOfThree") {
       setNumbers(multipleOfThreeNumber);
-    } else if (option === "/unique-number") {
-      try {
-        setLoading(true);
-        const fetchedNumbers = await lottoApi(option);
-        setNumbers(fetchedNumbers);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError("특수 번호 생성에 실패했습니다. " + error.message); // 오류 메시지 설정
-        } else {
-          setError("특수 번호 생성에 실패했습니다."); // 일반적인 오류 메시지 설정
-        }
-      } finally {
-        setLoading(false);
-      }
     }
   };
 
@@ -69,7 +54,7 @@ const useGenerateNumbers = () => {
     }
   }, [numbers]);
 
-  return { numbers, numberListRef, generateNumbers, error, loading };
+  return { numbers, numberListRef, generateNumbers, error };
 };
 
 export default useGenerateNumbers;

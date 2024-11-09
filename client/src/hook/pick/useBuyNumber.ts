@@ -15,10 +15,15 @@ export default () => {
       try {
         const response = await buyNumberRequest(body);
         setData(response);
-        return response.success;
+
+        if (response.success) {
+          return response.lottoNumbers; // 성공한 경우 번호 조합 반환
+        } else {
+          throw new Error(response.message || "결제에 실패했습니다.");
+        }
       } catch (error) {
         setError(error as Error);
-        return false;
+        return null; // 실패한 경우 null 반환
       } finally {
         setLoading(false);
       }

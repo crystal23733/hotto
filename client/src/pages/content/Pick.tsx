@@ -4,18 +4,20 @@ import useGenerateNumbers from "client/src/hook/pick/useGenerateNumbers";
 import NumberList from "client/src/components/pick/NumbersList";
 import OptionSelector from "client/src/components/pick/OptionSelector";
 import useLottoOptions from "client/src/hook/pick/useLottoOptions";
-import Loading from "client/src/components/common/Loading";
 import useBuyModal from "client/src/hook/pick/useBuyModal";
 import BuyModal from "client/src/components/content/Pick/BuyModal";
+import useGeneratePaidNumbers from "client/src/hook/pick/useGeneratePaidNumbers";
 
 const Pick: React.FC = () => {
-  const { numberListRef, generateNumbers, error, loading } =
+  const { numberListRef: freeNumberListRef, generateNumbers } =
     useGenerateNumbers();
   const { selectedOption, handleOptionChange } = useLottoOptions();
   const { isPayActive, closePayModal, handleBuyModal } = useBuyModal();
+  const { numberListRef: paidNumberListRef, generatePaidNumbers } =
+    useGeneratePaidNumbers();
 
   const handleClick = async () => {
-    if (selectedOption === process.env.NEXT_PUBLIC_API_UNIQUE_ENDPOINT) {
+    if (selectedOption === "unique") {
       handleBuyModal();
     } else {
       await generateNumbers(selectedOption); // 무료 옵션일 경우 바로 번호 생성
@@ -31,9 +33,11 @@ const Pick: React.FC = () => {
         selectedOption={selectedOption}
         onChange={handleOptionChange}
       />
-      {error && <div className="error-message">{error}</div>}
-      {loading && <Loading />}
-      <NumberList numberListRef={numberListRef} />
+      <NumberList
+        numberListRef={
+          selectedOption === "unique" ? paidNumberListRef : freeNumberListRef
+        }
+      />
       <input
         type="button"
         value="번호 생성"
@@ -41,7 +45,11 @@ const Pick: React.FC = () => {
         onClick={handleClick}
       />
       {/* 결제 모달 */}
-      <BuyModal isActive={isPayActive} closeModal={closePayModal} />
+      <BuyModal
+        isActive={isPayActive}
+        closeModal={closePayModal}
+        generatePaidNumbers={generatePaidNumbers}
+      />
     </div>
   );
 };

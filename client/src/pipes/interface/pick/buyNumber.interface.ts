@@ -1,6 +1,6 @@
 export interface IPaymentResponse {
-  success: boolean,
-  message: string,
+  success: boolean;
+  message: string;
   lottoNumbers: number[];
 }
 
