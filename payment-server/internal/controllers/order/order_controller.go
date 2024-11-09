@@ -59,10 +59,10 @@ func (h *OrderController) OrderHandler(c echo.Context) error {
 	err = h.OrderUsecase.SessionRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-
+			log.Printf("세션을 찾을 수 없습니다: %s", err)
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 		}
-
+		log.Printf("세션 데이터베이스 오류가 발생했습니다: %s", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
 
@@ -72,18 +72,20 @@ func (h *OrderController) OrderHandler(c echo.Context) error {
 	}
 	err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
 	if err != nil {
-
+		log.Printf("데이터를 파싱하는데 실패하였습니다: %s", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터를 파싱하는데 실패하였습니다."})
 	}
 
 	var req entity.ProdctOrderRequest
 	if err := c.Bind(&req); err != nil {
+		log.Printf("잘못된 요청입니다: %s", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청입니다:" + err.Error()})
 	}
 	log.Printf("요청 본문: %v", req)
 
 	lottoNumbers, err := h.OrderUsecase.CreateProductOrder(context.Background(), sessionData.UserID, &req)
 	if err != nil {
+		log.Printf("주문 생성 중 오류가 발생했습니다: %s", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{
 			"error": "주문 생성 중 오류가 발생했습니다: " + err.Error(),
 		})
