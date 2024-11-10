@@ -1,7 +1,7 @@
 export interface IPaymentResponse {
   success: boolean;
   message: string;
-  lottoNumbers: number[];
+  lottoNumbers?: number[];
 }
 
 export interface IPaymentRequest {

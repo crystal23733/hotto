@@ -19,7 +19,7 @@ export default () => {
         if (response.success) {
           return response.lottoNumbers; // 성공한 경우 번호 조합 반환
         } else {
-          throw new Error(response.message || "결제에 실패했습니다.");
+          throw new Error(response.message); // 실패한 경우 메시지 던짐
         }
       } catch (error) {
         setError(error as Error);

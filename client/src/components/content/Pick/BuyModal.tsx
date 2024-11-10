@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "../../common/Modal";
 import { UNIQUE_PRICE } from "client/src/constants/payment";
 import { v4 as uuidv4 } from "uuid";

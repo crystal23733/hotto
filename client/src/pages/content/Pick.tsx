@@ -13,8 +13,11 @@ const Pick: React.FC = () => {
     useGenerateNumbers();
   const { selectedOption, handleOptionChange } = useLottoOptions();
   const { isPayActive, closePayModal, handleBuyModal } = useBuyModal();
-  const { numberListRef: paidNumberListRef, generatePaidNumbers } =
-    useGeneratePaidNumbers();
+  const {
+    numberListRef: paidNumberListRef,
+    generatePaidNumbers,
+    error,
+  } = useGeneratePaidNumbers();
 
   const handleClick = async () => {
     if (selectedOption === "unique") {
@@ -38,6 +41,7 @@ const Pick: React.FC = () => {
           selectedOption === "unique" ? paidNumberListRef : freeNumberListRef
         }
       />
+      {error && <p className="help is-danger">{error.message}</p>}
       <input
         type="button"
         value="번호 생성"
