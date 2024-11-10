@@ -10,13 +10,9 @@ export default (): UseGeneratePaidNumbersReturn => {
   const { processBuy, loading, error } = useBuyNumber();
 
   const generatePaidNumbers = async (paymentDetails: IPaymentRequest) => {
-    try {
-      const generatedNumbers = await processBuy(paymentDetails);
-      if (generatedNumbers) {
-        setNumbers(generatedNumbers);
-      }
-    } catch (err) {
-      console.log("번호 생성에 실패하였습니다.", err);
+    const generatedNumbers = await processBuy(paymentDetails);
+    if (generatedNumbers) {
+      setNumbers(generatedNumbers);
     }
   };
 
