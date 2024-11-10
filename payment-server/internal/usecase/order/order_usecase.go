@@ -116,7 +116,7 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 
 	if err != nil {
 		log.Printf("주문 생성 트랜잭션 중 오류가 발생했습니다: %s", err)
-		return nil, fmt.Errorf("주문 생성 트랜잭션 중 오류가 발생했습니다: %w", err)
+		return nil, fmt.Errorf("%w", err)
 	}
 
 	return lottoNumbers, nil

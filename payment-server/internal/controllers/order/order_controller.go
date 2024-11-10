@@ -81,13 +81,14 @@ func (h *OrderController) OrderHandler(c echo.Context) error {
 		log.Printf("잘못된 요청입니다: %s", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청입니다:" + err.Error()})
 	}
-	log.Printf("요청 본문: %v", req)
+	log.Printf("요청 본문: %+v", req)
 
 	lottoNumbers, err := h.OrderUsecase.CreateProductOrder(context.Background(), sessionData.UserID, &req)
 	if err != nil {
 		log.Printf("주문 생성 중 오류가 발생했습니다: %s", err)
-		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"error": "주문 생성 중 오류가 발생했습니다: " + err.Error(),
+		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"success": false,
+			"message": err.Error(),
 		})
 	}
 
