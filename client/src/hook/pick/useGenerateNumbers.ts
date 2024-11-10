@@ -1,7 +1,6 @@
 import evenRandomNumber from "@shared/utils/numberLogic/evenRandomNumber";
 import multipleOfThreeNumber from "@shared/utils/numberLogic/multipleOfThreeNumber";
 import randomNumber from "@shared/utils/numberLogic/randomNumber";
-import lottoApi from "client/src/api/content/lottoApi";
 import setNumberBgColor from "client/src/utils/setNumberBgColor";
 import { useState, useEffect, useRef } from "react";
 

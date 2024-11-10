@@ -1,8 +1,5 @@
-import IModalProps from "@shared/interface/modal.interface";
 import React, { useState } from "react";
 import Modal from "../../common/Modal";
-import useBuyNumber from "client/src/hook/pick/useBuyNumber";
-import useGenerateNumbers from "client/src/hook/pick/useGenerateNumbers";
 import { UNIQUE_PRICE } from "client/src/constants/payment";
 import { v4 as uuidv4 } from "uuid";
 import BuyModalProps from "client/src/pipes/interface/pick/buyModalProps.interface";
