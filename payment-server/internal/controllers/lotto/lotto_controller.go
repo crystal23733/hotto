@@ -19,17 +19,6 @@ func NewLottoController(lu usecase.LottoUsecase) *LottoController {
 	}
 }
 
-// GetUniqueNumbers 고유한 로또 번호 생성 핸들러
-func (c *LottoController) GetUniqueNumbers(ctx echo.Context) error {
-	numbers, err := c.lottoUsecase.GenerateUniqueNumbers()
-	if err != nil {
-		return ctx.JSON(http.StatusInternalServerError, map[string]string{
-			"error": "번호 생성 중 오류가 발생했습니다: " + err.Error(),
-		})
-	}
-	return ctx.JSON(http.StatusOK, numbers)
-}
-
 // GetLatestLottoData 최신 로또 데이터 조회 핸들러
 func (c *LottoController) GetLatestLottoData(ctx echo.Context) error {
 	data, err := c.lottoUsecase.GetLatestLottoData()
