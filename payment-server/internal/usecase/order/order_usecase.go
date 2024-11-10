@@ -8,6 +8,7 @@ import (
 	"payment-server/internal/entity"
 	"payment-server/internal/repositories/mongodb"
 	usecase "payment-server/internal/usecase/lotto"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -79,11 +80,12 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 
 		// 주문 생성
 		newOrder := &entity.ProductOrder{
+			ID:           primitive.NewObjectID(),
 			PayOrderID:   request.PayOrderID,
 			UserID:       objectID,
 			Amount:       request.Amount,
 			Status:       "결제 완료",
-			CreatedAt:    request.CreatedAt,
+			CreatedAt:    time.Now(),
 			LottoNumbers: lottoNumbers,
 		}
 
@@ -101,7 +103,7 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 		// 사용자 잔액 감소 및 주문내역 업데이트
 		update := bson.M{
 			"$inc":  bson.M{"balance": -request.Amount},
-			"$push": bson.M{"orders": newOrder.PayOrderID},
+			"$push": bson.M{"orders": newOrder.ID},
 		}
 		_, err = u.UserRepo.Collection.UpdateOne(sc, bson.M{"_id": objectID}, update)
 		if err != nil {
