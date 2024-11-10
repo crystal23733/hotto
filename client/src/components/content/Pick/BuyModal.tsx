@@ -31,9 +31,8 @@ const BuyModal: React.FC<BuyModalProps> = ({
    */
   const handleConfirm = async () => {
     const buyRequestBody = {
+      pay_order_id: uuidv4(),
       amount: UNIQUE_PRICE,
-      date: new Date().toISOString(),
-      paymentId: uuidv4(),
     };
 
     await generatePaidNumbers(buyRequestBody);

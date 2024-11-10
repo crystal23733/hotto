@@ -5,7 +5,6 @@ export interface IPaymentResponse {
 }
 
 export interface IPaymentRequest {
+  pay_order_id: string;
   amount: number;
-  date: string;
-  paymentId: string;
 }
