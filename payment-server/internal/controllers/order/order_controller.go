@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"net/http"
 	"net/url"
 	"payment-server/internal/entity"
@@ -29,26 +28,20 @@ func (h *OrderController) OrderHandler(c echo.Context) error {
 	// 세션 가져오기
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {
-		log.Printf("사용자 정보를 찾을 수 없습니다: %v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "사용자 정보를 찾을 수 없습니다."})
 	}
 
 	decodedSessionID, err := url.QueryUnescape(sessionID.Value)
 	if err != nil {
-		log.Printf("세션을 디코딩하는데 실패하였습니다: %v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션을 디코딩하는데 실패하였습니다."})
 	}
-	log.Printf("디코딩 된 세션: %s", decodedSessionID)
 
 	// 세션 ID에서 실제 세션 ID 추출
 	parts := strings.Split(decodedSessionID, ":")
 	if len(parts) < 2 {
-
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID 형식이 잘못되었습니다."})
 	}
 	actualSessionID := strings.Split(parts[1], ".")[0]
-
-	log.Printf("추출된 세션 ID: %v", actualSessionID)
 
 	// Session 구조체 정의
 	var sessionDoc struct {
@@ -59,10 +52,8 @@ func (h *OrderController) OrderHandler(c echo.Context) error {
 	err = h.OrderUsecase.SessionRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			log.Printf("세션을 찾을 수 없습니다: %s", err)
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 		}
-		log.Printf("세션 데이터베이스 오류가 발생했습니다: %s", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
 	}
 
@@ -72,20 +63,16 @@ func (h *OrderController) OrderHandler(c echo.Context) error {
 	}
 	err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
 	if err != nil {
-		log.Printf("데이터를 파싱하는데 실패하였습니다: %s", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터를 파싱하는데 실패하였습니다."})
 	}
 
 	var req entity.ProdctOrderRequest
 	if err := c.Bind(&req); err != nil {
-		log.Printf("잘못된 요청입니다: %s", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청입니다:" + err.Error()})
 	}
-	log.Printf("요청 본문: %+v", req)
 
 	lottoNumbers, err := h.OrderUsecase.CreateProductOrder(context.Background(), sessionData.UserID, &req)
 	if err != nil {
-		log.Printf("주문 생성 중 오류가 발생했습니다: %s", err)
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
 			"success": false,
 			"message": err.Error(),

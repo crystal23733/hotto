@@ -3,7 +3,6 @@ package controller
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"net/http"
 	"net/url"
 	usecase "payment-server/internal/usecase/lookup"
@@ -29,20 +28,17 @@ func (h *PaymentQueryHandler) GetPayments(c echo.Context) error {
 	// 세션 가져오기
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {
-		log.Printf("세션 쿠키를 찾을 수 없습니다:%v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "사용자 정보를 찾을 수 없습니다.."})
 	}
 
 	decodedSessionID, err := url.QueryUnescape(sessionID.Value)
 	if err != nil {
-		log.Printf("세션 디코딩 실패:%v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션을 디코딩하는데 실패하였습니다."})
 	}
 
 	// 세션 ID에서 실제 세션 추출
 	parts := strings.Split(decodedSessionID, ":")
 	if len(parts) < 2 {
-		log.Printf("세션 데이터 추출 실패:%v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID형식이 잘못되었습니다."})
 	}
 	actualSessionID := strings.Split(parts[1], ".")[0]
@@ -55,10 +51,8 @@ func (h *PaymentQueryHandler) GetPayments(c echo.Context) error {
 	err = h.PaymentQueryUsecase.SessionRepo.SessionFind(context.Background(), actualSessionID, &sessionDoc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			log.Printf("세션을 가진 데이터베이스를 찾을 수 없습니다")
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
 		}
-		log.Printf("데이터베이스 오류:%v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생하였습니다."})
 	}
 
@@ -68,14 +62,12 @@ func (h *PaymentQueryHandler) GetPayments(c echo.Context) error {
 	}
 	err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
 	if err != nil {
-		log.Printf("데이터 파싱 실패:%v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터를 파싱하는데 실패하였습니다."})
 	}
 
 	// 사용자 ID를 기반으로 결제 내역 조회
 	userID, err := primitive.ObjectIDFromHex(sessionData.UserID)
 	if err != nil {
-		log.Printf("유효하지 않은 사용자:%v", err)
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 사용자 ID입니다."})
 	}
 
@@ -84,7 +76,6 @@ func (h *PaymentQueryHandler) GetPayments(c echo.Context) error {
 		if err.Error() == "결제 내역을 찾을 수 없습니다" {
 			return c.JSON(http.StatusNotFound, map[string]string{"error": "결제 내역을 찾을 수 없습니다."})
 		}
-		log.Printf("결제 내역 조회에 실패:%v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 내역 조회에 실패하였습니다."})
 	}
 

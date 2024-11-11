@@ -39,7 +39,6 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 	// 트랜잭션 생성
 	sess, err := u.Client.StartSession()
 	if err != nil {
-		log.Printf("트랜잭션 생성에 실패하였습니다: %v", err)
 		return nil, fmt.Errorf("트랜잭션을 생성하지 못했습니다: %w", err)
 	}
 	defer sess.EndSession(ctx)
@@ -50,19 +49,15 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 		var user entity.User
 		objectID, err := primitive.ObjectIDFromHex(userId)
 		if err != nil {
-			log.Printf("유효하지 않은 ID입니다: %s", err)
 			return fmt.Errorf("유효하지 않은 ID입니다: %w", err)
 		}
-		log.Printf("objectID로 변환된 userId : %s", objectID)
 
 		// 사용자 조회
 		err = u.UserRepo.UserFind(sc, objectID, &user)
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
-				log.Printf("사용자를 찾을 수 없습니다: %s", err)
 				return fmt.Errorf("사용자를 찾을 수 없습니다: %w", err)
 			}
-			log.Printf("데이터 베이스 오류가 발생하였습니다: %s", err)
 			return fmt.Errorf("데이터 베이스 오류가 발생하였습니다: %w", err)
 		}
 
@@ -74,7 +69,6 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 		// 번호 생성
 		lottoNumbers, err = u.LottoUsecase.GenerateUniqueNumbers()
 		if err != nil {
-			log.Printf("번호 조합에 실패하였습니다: %s", err)
 			return fmt.Errorf("번호 조합에 실패하였습니다: %w", err)
 		}
 
@@ -96,7 +90,6 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 
 		err = u.OrderRepo.CreateOrder(sc, newOrder)
 		if err != nil {
-			log.Printf("주문 저장 중 오류가 발생했습니다: %s", err)
 			return fmt.Errorf("주문 저장 중 오류가 발생했습니다: %w", err)
 		}
 
@@ -107,7 +100,6 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 		}
 		_, err = u.UserRepo.Collection.UpdateOne(sc, bson.M{"_id": objectID}, update)
 		if err != nil {
-			log.Printf("사용자 잔액 업데이트 중 오류가 발생했습니다: %s", err)
 			return fmt.Errorf("사용자 잔액 업데이트 중 오류가 발생했습니다: %w", err)
 		}
 
@@ -115,7 +107,6 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 	})
 
 	if err != nil {
-		log.Printf("주문 생성 트랜잭션 중 오류가 발생했습니다: %s", err)
 		return nil, fmt.Errorf("%w", err)
 	}
 
