@@ -15,7 +15,7 @@ const PaymentHistory: React.FC = () => {
   return (
     <div>
       <HistoryFilter setDateFilter={setDateFilter} />
-      <HistoryList data={data} loading={loading} error={error} />
+      <HistoryList data={data} loading={loading} error={error} type="payment" />
     </div>
   );
 };

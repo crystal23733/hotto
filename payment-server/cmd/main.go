@@ -7,10 +7,12 @@ import (
 	"os"
 	"payment-server/internal/config"
 	controllers "payment-server/internal/controllers/lotto"
+	orderControllers "payment-server/internal/controllers/order"
 	"payment-server/internal/repositories/lotto"
 	"payment-server/internal/repositories/mongodb"
 	"payment-server/internal/routers"
-	usecase "payment-server/internal/usecase/lotto"
+	lottoUsecase "payment-server/internal/usecase/lotto"
+	orderUsecase "payment-server/internal/usecase/order"
 	"payment-server/internal/watchers"
 
 	"github.com/gorilla/sessions"
@@ -40,6 +42,7 @@ func main() {
 	paymentRepo.CreateTTLIndex()
 	userRepo := mongodb.NewUserRepository(client, dbName)
 	sessionRepo := mongodb.NewSessionRepository(client, dbName)
+	orderRepo := mongodb.NewOrderRepository(client, dbName) // OrderRepository 생성
 
 	go watchers.WatchPaymentDeletions(client, userRepo)
 
@@ -53,10 +56,14 @@ func main() {
 	}
 
 	// Lotto Usecase 초기화
-	lottoUsecase := usecase.NewLottoUsecase(s3Repo)
+	lottoUsecase := lottoUsecase.NewLottoUsecase(s3Repo)
+
+	orderUsecase := orderUsecase.NewOrderUsecase(userRepo, sessionRepo, orderRepo, lottoUsecase, client) // OrderUsecase 생성
 
 	// Lotto Controller 초기화
 	lottoController := controllers.NewLottoController(lottoUsecase)
+
+	orderController := orderControllers.NewOrderController(orderUsecase)
 
 	e := echo.New()
 
@@ -85,7 +92,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// 라우트 설정
-	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo, lottoController)
+	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo, lottoController, orderController)
 
 	// 서버 시작
 	// 개발 환경인지 확인

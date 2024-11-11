@@ -38,7 +38,6 @@ func WatchPaymentDeletions(client *mongo.Client, userRepo *mongodb.UserRepositor
 			} `bson:"documentKey"`
 		}
 		if err := changeStream.Decode(&event); err != nil {
-			log.Printf("Change Stream 데이터 디코딩 실패: %v", err)
 			continue
 		}
 

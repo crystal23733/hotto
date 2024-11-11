@@ -36,3 +36,13 @@ func (r *UserRepository) UpdateUserPayments(ctx context.Context, userID primitiv
 	)
 	return err
 }
+
+// UpdateUserOrders는 사용자 스키마에 주문 내역을 추가합니다.
+func (r *UserRepository) UpdateUserOrders(ctx context.Context, userID primitive.ObjectID, orderID primitive.ObjectID) error {
+	_, err := r.Collection.UpdateOne(
+		ctx,
+		bson.M{"_id": userID},
+		bson.M{"$push": bson.M{"orders": orderID}},
+	)
+	return err
+}

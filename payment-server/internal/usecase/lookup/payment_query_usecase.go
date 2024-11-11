@@ -3,7 +3,6 @@ package usecase
 import (
 	"context"
 	"fmt"
-	"log"
 	"payment-server/internal/entity"
 	"payment-server/internal/repositories/mongodb"
 	"time"
@@ -29,7 +28,6 @@ func (u *PaymentQueryUsecase) GetUserPayments(ctx context.Context, userID primit
 	// 사용자 조회
 	err := u.UserRepo.UserFind(ctx, userID, &user)
 	if err != nil {
-		log.Printf("사용자 조회 실패:%v", err)
 		return nil, fmt.Errorf("사용자 조회 실패: %v", err)
 	}
 
@@ -40,7 +38,6 @@ func (u *PaymentQueryUsecase) GetUserPayments(ctx context.Context, userID primit
 		var payOrder entity.PayOrder
 		err := u.PaymentRepo.FindPayOrderByObjectID(ctx, paymentID, &payOrder)
 		if err != nil {
-			log.Printf("결제 내역 조회 실패 (결제 ID: %v): %v", paymentID.Hex(), err)
 			continue // 조회 실패 시 계속 진행
 		}
 
