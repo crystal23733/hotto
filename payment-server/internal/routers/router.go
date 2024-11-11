@@ -20,7 +20,7 @@ import (
 )
 
 // SetupRoutes는 라우터를 설정합니다.
-func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository, lottoController *controllers.LottoController, orderController *orderControllers.OrderController) {
+func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository, lottoController *controllers.LottoController, orderController *orderControllers.OrderController, orderRepo *mongodb.OrderRepository) {
 	// 서비스 설정
 	kakaoService := kakaopay.NewKakaoPayService()
 
@@ -38,8 +38,11 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepos
 	paymentQueryUsecase := queryUsecase.NewPaymentQueryUsecase(paymentRepo, userRepo, sessionRepo)
 	sessionHelper := helpers.NewSessionHelper(sessionRepo)
 	paymentQueryHandler := queryControllers.NewPaymentQueryHandler(paymentQueryUsecase, sessionHelper)
+	orderQueryUsecase := queryUsecase.NewOrderQueryUsecase(orderRepo, userRepo, sessionRepo)
+	orderQueryHandler := queryControllers.NewOrdersQueryHandler(orderQueryUsecase, sessionHelper)
 
 	e.GET("/payment-history", paymentQueryHandler.GetPayments)
+	e.GET("/order-history", orderQueryHandler.GetOrders)
 
 	// 로또 관련 라우트
 	lottoGroup := e.Group("/api")
