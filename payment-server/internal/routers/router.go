@@ -9,6 +9,7 @@ import (
 	queryControllers "payment-server/internal/controllers/lookup"
 	controllers "payment-server/internal/controllers/lotto"
 	orderControllers "payment-server/internal/controllers/order"
+	"payment-server/internal/helpers"
 	"payment-server/internal/repositories/mongodb"
 	"payment-server/internal/services/kakaopay"
 	kakaoUsecase "payment-server/internal/usecase/kakaopay"
@@ -35,7 +36,8 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepos
 
 	// 결제 조회 관련 라우팅 설정
 	paymentQueryUsecase := queryUsecase.NewPaymentQueryUsecase(paymentRepo, userRepo, sessionRepo)
-	paymentQueryHandler := queryControllers.NewPaymentQueryHandler(paymentQueryUsecase)
+	sessionHelper := helpers.NewSessionHelper(sessionRepo)
+	paymentQueryHandler := queryControllers.NewPaymentQueryHandler(paymentQueryUsecase, sessionHelper)
 
 	e.GET("/payment-history", paymentQueryHandler.GetPayments)
 
