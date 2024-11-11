@@ -7,9 +7,12 @@ import Loading from "../../common/Loading";
  * @param {HistoryListProps} props - 데이터, 로딩, 에러 정보
  * @returns {JSX.Element} 컴포넌트
  */
-const HistoryList: React.FC<
-  HistoryListProps & { type: "payment" | "order" }
-> = ({ data, loading, error, type }) => {
+const HistoryList: React.FC<HistoryListProps> = ({
+  data,
+  loading,
+  error,
+  type,
+}) => {
   const [visibleItems, setVisibleItems] = useState(5);
   const observer = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
