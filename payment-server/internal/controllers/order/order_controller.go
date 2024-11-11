@@ -25,6 +25,11 @@ func NewOrderController(orderUsecase *usecase.OrderUsecase) *OrderController {
 }
 
 func (h *OrderController) OrderHandler(c echo.Context) error {
+	payOrderID := c.Param("pay_order_id")
+	if payOrderID == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "주문 번호가 필요합니다."})
+	}
+
 	// 세션 가져오기
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {

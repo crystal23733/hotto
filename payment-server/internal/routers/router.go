@@ -46,6 +46,6 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepos
 		lottoGroup.GET("/round/:round", lottoController.GetLottoDataForRound)
 
 		// 주문 관련 라우터
-		lottoGroup.POST("/unique-order", orderController.OrderHandler)
+		lottoGroup.POST("/unique-order/:pay_order_id", orderController.OrderHandler)
 	}
 }
