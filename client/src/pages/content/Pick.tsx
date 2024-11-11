@@ -7,6 +7,7 @@ import useLottoOptions from "client/src/hook/pick/useLottoOptions";
 import useBuyModal from "client/src/hook/pick/useBuyModal";
 import BuyModal from "client/src/components/content/Pick/BuyModal";
 import useGeneratePaidNumbers from "client/src/hook/pick/useGeneratePaidNumbers";
+import ErrorMessage from "client/src/components/common/error/ErrorMessage";
 
 const Pick: React.FC = () => {
   const { numberListRef: freeNumberListRef, generateNumbers } =
@@ -41,7 +42,7 @@ const Pick: React.FC = () => {
           selectedOption === "unique" ? paidNumberListRef : freeNumberListRef
         }
       />
-      {error && <p className="help is-danger">{error.message}</p>}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
       <input
         type="button"
         value="번호 생성"
