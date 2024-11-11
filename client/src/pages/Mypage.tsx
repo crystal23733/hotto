@@ -5,6 +5,7 @@ import useModal from "../hook/Modal/useMyModal";
 import MypageFormModal from "../components/Mypage/MypageFormModal";
 import useTabSwitcher from "../hook/Mypage/useTabSwitcher";
 import PaymentHistory from "../components/Mypage/PaymentHistory";
+import OrderHistory from "../components/Mypage/OrderHistory";
 
 const Mypage: React.FC = () => {
   const { isActive, handleMypageModal, closeModal } = useModal();
@@ -33,7 +34,7 @@ const Mypage: React.FC = () => {
           </div>
           <div className="tab-content">
             {activeTab === "payment" && <PaymentHistory />}
-            {activeTab === "order" && <p>주문 내역이 여기 표시됩니다.</p>}
+            {activeTab === "order" && <OrderHistory />}
           </div>
         </div>
       </div>
