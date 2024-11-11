@@ -14,4 +14,5 @@ type User struct {
 	Email    string               `json:"email" bson:"email"`
 	Balance  int                  `json:"balance" bson:"balance"`
 	Payments []primitive.ObjectID `json:"payments" bson:"payments"`
+	Orders   []primitive.M        `json:"orders" bson:"orders"`
 }
