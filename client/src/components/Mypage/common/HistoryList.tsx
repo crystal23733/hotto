@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import HistoryListProps from "../interface/HistoryListProps";
 import Loading from "../../common/Loading";
+import ErrorMessage from "../../common/error/ErrorMessage";
 
 /**
  * 공통내역 리스트 컴포넌트
@@ -49,11 +50,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
   }, [visibleItems, data, loading]); // 의존성 배열에 visibleItems, data, loading 추가
 
   if (!data || data.length === 0) {
-    return (
-      <div className="empty-state history-error">
-        <p className="help is-danger">결제 내역이 없습니다.</p>
-      </div>
-    );
+    return <ErrorMessage>결제 내역이 없습니다.</ErrorMessage>;
   }
 
   return (
@@ -63,14 +60,19 @@ const HistoryList: React.FC<HistoryListProps> = ({
           <p className="history-item-title">주문번호: {item.pay_order_id}</p>
           <p className="history-item-amount">상품 금액: {item.amount}</p>
           <p className="history-item-detail">결제 상태: {item.status}</p>
-          {type === "payment" && (
+          {type === "payment" && "pay" in item && (
             <p className="history-item-detail">결제 방법: {item.pay}</p>
           )}
-          <p className="history-item-date">결제일: {item.created_at}</p>
+          {type === "order" && "lotto_numbers" in item && (
+            <p className="history-item-detail">
+              로또 번호: {item.lotto_numbers.join(", ")}
+            </p>
+          )}
+          <p className="history-item-date">생성일: {item.created_at}</p>
         </div>
       ))}
       {loading && <Loading />}
-      {error && <p className="help is-danger">{error.message}</p>}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
       {visibleItems < data.length && (
         <div ref={loadMoreRef} style={{ height: "20px" }} />
       )}
