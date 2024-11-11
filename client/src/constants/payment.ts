@@ -1,1 +1,1 @@
-export const UNIQUE_PRICE: number = 1000;
+export const UNIQUE_PRICE: number = 500;

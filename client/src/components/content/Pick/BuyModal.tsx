@@ -44,7 +44,7 @@ const BuyModal: React.FC<BuyModalProps> = ({
       onConfirm={handleConfirm}
       loadingStatus={loading}
     >
-      <p>구매하시겠습니까?</p>
+      <p>500원입니다. 구매하시겠습니까?</p>
       {error && <p className="help is-danger">{error.message}</p>}
     </Modal>
   );
