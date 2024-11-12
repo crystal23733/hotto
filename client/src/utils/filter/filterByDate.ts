@@ -1,4 +1,4 @@
-import IHistoryItem from "../../components/Mypage/interface/IHistoryItem";
+import { IHistoryItem } from "client/src/components/Mypage/interface/IHistoryItem";
 
 /**
  * 날짜에 따른 필터링 함수

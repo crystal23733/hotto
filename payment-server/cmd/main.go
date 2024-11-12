@@ -92,7 +92,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// 라우트 설정
-	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo, lottoController, orderController)
+	routers.SetupRoutes(e, client, userRepo, paymentRepo, sessionRepo, lottoController, orderController, orderRepo)
 
 	// 서버 시작
 	// 개발 환경인지 확인

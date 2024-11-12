@@ -9,6 +9,7 @@ import (
 	queryControllers "payment-server/internal/controllers/lookup"
 	controllers "payment-server/internal/controllers/lotto"
 	orderControllers "payment-server/internal/controllers/order"
+	"payment-server/internal/helpers"
 	"payment-server/internal/repositories/mongodb"
 	"payment-server/internal/services/kakaopay"
 	kakaoUsecase "payment-server/internal/usecase/kakaopay"
@@ -19,7 +20,7 @@ import (
 )
 
 // SetupRoutes는 라우터를 설정합니다.
-func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository, lottoController *controllers.LottoController, orderController *orderControllers.OrderController) {
+func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepository, paymentRepo *mongodb.PaymentRepository, sessionRepo *mongodb.SessionRepository, lottoController *controllers.LottoController, orderController *orderControllers.OrderController, orderRepo *mongodb.OrderRepository) {
 	// 서비스 설정
 	kakaoService := kakaopay.NewKakaoPayService()
 
@@ -35,9 +36,13 @@ func SetupRoutes(e *echo.Echo, client *mongo.Client, userRepo *mongodb.UserRepos
 
 	// 결제 조회 관련 라우팅 설정
 	paymentQueryUsecase := queryUsecase.NewPaymentQueryUsecase(paymentRepo, userRepo, sessionRepo)
-	paymentQueryHandler := queryControllers.NewPaymentQueryHandler(paymentQueryUsecase)
+	sessionHelper := helpers.NewSessionHelper(sessionRepo)
+	paymentQueryHandler := queryControllers.NewPaymentQueryHandler(paymentQueryUsecase, sessionHelper)
+	orderQueryUsecase := queryUsecase.NewOrderQueryUsecase(orderRepo, userRepo, sessionRepo)
+	orderQueryHandler := queryControllers.NewOrdersQueryHandler(orderQueryUsecase, sessionHelper)
 
 	e.GET("/payment-history", paymentQueryHandler.GetPayments)
+	e.GET("/order-history", orderQueryHandler.GetOrders)
 
 	// 로또 관련 라우트
 	lottoGroup := e.Group("/api")

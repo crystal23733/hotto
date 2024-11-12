@@ -22,6 +22,34 @@ export default <T extends IPaymentHistory | IOrderHistory>(
     setLoading(true);
     try {
       const response = await mypageHistoryRequest<T[]>(endpoint);
+      // 정렬 함수
+      const sortedData = response.sort((a, b) => {
+        const parseDateString = (dateString: string) => {
+          // 날짜 문자열을 '년', '월', '일'로 나누기
+          const [yearPart, monthPart, dayPart] = dateString.split(" ");
+
+          // 년도, 월, 일을 숫자로 파싱
+          const year = parseInt(yearPart.replace("년", ""), 10);
+          const month = parseInt(monthPart.replace("월", ""), 10) - 1; // 월은 0부터 시작하므로 1을 빼줌
+          const day = parseInt(dayPart.replace("일", ""), 10);
+
+          // 시간 부분 분리 및 파싱
+          const timePart = dateString.split(" ")[3] || "00:00";
+          const [hour, minute] = timePart.split(":").map(Number);
+
+          // Date 객체 생성
+          return new Date(year, month, day, hour, minute);
+        };
+
+        // 문자열을 Date 객체로 변환
+        const dateA = parseDateString(a.created_at);
+        const dateB = parseDateString(b.created_at);
+
+        // 내림차순 정렬
+        return dateB.getTime() - dateA.getTime();
+      });
+
+      console.log(sortedData);
       // 응답이 빈 배열인 경우 에러로 처리
       if (!response || response.length === 0) {
         throw new Error("결제 내역이 없습니다.");
