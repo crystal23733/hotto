@@ -63,9 +63,9 @@ const HistoryList: React.FC<HistoryListProps> = ({
           {type === "payment" && "pay" in item && (
             <p className="history-item-detail">결제 방법: {item.pay}</p>
           )}
-          {type === "order" && "lotto_numbers" in item && (
+          {type === "order" && "lotto_number" in item && (
             <p className="history-item-detail">
-              로또 번호: {item.lotto_numbers.join(", ")}
+              로또 번호: {item.lotto_number.join(", ")}
             </p>
           )}
           <p className="history-item-date">생성일: {item.created_at}</p>
