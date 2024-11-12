@@ -3,7 +3,6 @@ package mongodb
 import (
 	"context"
 	"fmt"
-	"log"
 	"payment-server/internal/entity"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -38,6 +37,5 @@ func (r *OrderRepository) FindOrderByObjectID(ctx context.Context, orderID primi
 		}
 		return fmt.Errorf("주문내역 조회 실패: %w", err)
 	}
-	log.Printf("주문내역: %v", err)
 	return nil
 }
