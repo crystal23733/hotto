@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import HistoryListProps from "../interface/HistoryListProps";
 import Loading from "../../common/Loading";
-import ErrorMessage from "../../common/error/ErrorMessage";
+import ErrorMessage from "../../common/atoms/error/ErrorMessage";
 
 /**
  * 공통내역 리스트 컴포넌트

@@ -7,7 +7,7 @@ import useLottoOptions from "client/src/hook/pick/useLottoOptions";
 import useBuyModal from "client/src/hook/pick/useBuyModal";
 import BuyModal from "client/src/components/content/Pick/BuyModal";
 import useGeneratePaidNumbers from "client/src/hook/pick/useGeneratePaidNumbers";
-import ErrorMessage from "client/src/components/common/error/ErrorMessage";
+import ErrorMessage from "client/src/components/common/atoms/error/ErrorMessage";
 
 const Pick: React.FC = () => {
   const { numberListRef: freeNumberListRef, generateNumbers } =

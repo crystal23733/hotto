@@ -1,5 +1,5 @@
 import React from "react";
-import homeNav from "../../../../utils/move/homeNav";
+import homeNav from "../../../../../utils/move/homeNav";
 
 const HomeButton: React.FC = () => {
   const { handleHome } = homeNav();
