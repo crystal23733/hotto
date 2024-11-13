@@ -1,7 +1,7 @@
 import AlertModalCardProps from "client/src/pipes/interface/common/alertModalCardProps.interface";
 import React from "react";
-import Text from "./atoms/text/Text";
-import AlertButton from "./atoms/button/Modal/AlertButton";
+import Text from "../atoms/text/Text";
+import AlertButton from "../atoms/button/Modal/AlertButton";
 
 const AlertModalCard: React.FC<AlertModalCardProps> = ({
   title,
