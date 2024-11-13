@@ -2,7 +2,7 @@ import { AppProps } from "next/app";
 import { AuthProvider } from "../context/AuthContext";
 import Layout from "../components/common/Layout";
 import "../scss/global.scss";
-import AlertModal from "../components/common/AlertModal";
+import AlertModal from "../components/common/modal/AlertModal";
 import useAlertModal from "../hook/common/useAlertModal";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
