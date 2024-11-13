@@ -1,9 +1,9 @@
 import React from "react";
-import Modal from "./Modal";
 import IModalProps from "@shared/interface/modal.interface";
 import PaymentLabel from "./PaymentLabel";
 import usePaymentModal from "client/src/hook/common/usePaymentModal";
 import usePayOption from "client/src/hook/Modal/usePayOption";
+import Modal from "./modal/Modal";
 
 /**
  * 결제 요청 창을 생성하는 모달창
