@@ -1,7 +1,7 @@
-import AlertButtonProps from "client/src/pipes/interface/common/button/alertButtonProps.interface";
+import ButtonProps from "client/src/pipes/interface/common/button/buttonProps.interface";
 import React from "react";
 
-const AlertButton: React.FC<AlertButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
   type = "primary",
@@ -16,4 +16,4 @@ const AlertButton: React.FC<AlertButtonProps> = ({
   );
 };
 
-export default AlertButton;
+export default Button;

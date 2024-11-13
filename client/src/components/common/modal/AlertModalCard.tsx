@@ -1,7 +1,7 @@
 import AlertModalCardProps from "client/src/pipes/interface/common/alertModalCardProps.interface";
 import React from "react";
 import Text from "../atoms/text/Text";
-import AlertButton from "../atoms/button/Modal/AlertButton";
+import Button from "../atoms/button/Modal/Button";
 
 const AlertModalCard: React.FC<AlertModalCardProps> = ({
   title,
@@ -23,9 +23,9 @@ const AlertModalCard: React.FC<AlertModalCardProps> = ({
         <Text content={content} />
       </section>
       <footer className="modal-card-foot">
-        <AlertButton label="닫기" onClick={onClose} type="secondary" />
+        <Button label="닫기" onClick={onClose} type="secondary" />
         {onDoNotShowAgain && (
-          <AlertButton
+          <Button
             label="24시간 동안 보지 않기"
             onClick={onDoNotShowAgain}
             type="primary"
