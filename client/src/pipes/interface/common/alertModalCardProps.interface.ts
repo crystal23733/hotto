@@ -1,6 +1,5 @@
-export default interface AlertModalCardProps {
-  title: string;
-  content: string;
-  onClose: () => void;
+import CommonModalProps from "./commonModalProps.interface";
+
+export default interface AlertModalCardProps extends CommonModalProps {
   onDoNotShowAgain?: () => void;
 }

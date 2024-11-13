@@ -1,7 +1,6 @@
-export default interface AlertModalProps {
+import CommonModalProps from "./commonModalProps.interface";
+
+export default interface AlertModalProps extends CommonModalProps {
   isVisible: boolean;
-  title: string;
-  content: string;
-  onClose: () => void;
   onDoNotShowAgain?: () => void;
 }
