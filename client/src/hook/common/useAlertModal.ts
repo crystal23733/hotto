@@ -1,4 +1,4 @@
-import UseAlertModal from "client/src/pipes/interface/common/useAlertModal.interface";
+import UseAlertModal from "client/src/pipes/interface/common/modal/useAlertModal.interface";
 import { useState, useEffect } from "react";
 
 const useAlertModal = (): UseAlertModal => {
