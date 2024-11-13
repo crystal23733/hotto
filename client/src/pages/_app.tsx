@@ -15,7 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <AlertModal
           isVisible={isModalVisible}
           title="테스트 알림"
-          content="회원가입 시 실제 이메일과 비밀번호를 입력하지 말아주세요. 또한, 결제는 테스트 기간 동안 무료로 진행됩니다."
+          content="회원가입 시 실제 이메일과 비밀번호를 입력하지 말아주세요. 또한, 예상번호 조합 구매는 테스트 기간 동안 무료로 진행됩니다."
           onClose={handleModalClose}
           onDoNotShowAgain={handleDoNotShowAgain}
         />

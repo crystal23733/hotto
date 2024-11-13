@@ -14,7 +14,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
   }
 
   return (
-    <div className={`modal ${isVisible ? "is-active" : ""}`}>
+    <div className={`modal ${isVisible ? "is-active" : ""}`} id="alert-modal">
       <div className="modal-background" onClick={onClose}></div>
       <AlertModalCard
         title={title}
