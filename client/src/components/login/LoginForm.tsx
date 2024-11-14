@@ -33,32 +33,39 @@ const LoginForm: React.FC<LoginFormProps> = ({
   onSubmit,
 }) => {
   return (
-    <div>
-      <form onSubmit={onSubmit} id="login-form">
-        <FormInput
-          id="email"
-          type="email"
-          value={email}
-          onChange={onEmailChange}
-          placeholder="이메일"
-          label="이메일"
-        />
-        <FormInput
-          id="password"
-          type="password"
-          value={password}
-          onChange={onPasswordChange}
-          placeholder="비밀번호"
-          label="비밀번호"
-          minLength={5}
-        />
-        {error && (
-          <div style={{ color: "red" }} className="error-message">
-            {error}
+    <div className="card">
+      <div className="card-content">
+        <h1 className="title has-text-centered">로그인</h1>
+        <form onSubmit={onSubmit} id="login-form">
+          <FormInput
+            id="email"
+            type="email"
+            value={email}
+            onChange={onEmailChange}
+            placeholder="이메일"
+            label="이메일"
+          />
+          <FormInput
+            id="password"
+            type="password"
+            value={password}
+            onChange={onPasswordChange}
+            placeholder="비밀번호"
+            label="비밀번호"
+            minLength={5}
+          />
+          {error && (
+            <div className="notification is-danger is-light mt-3">{error}</div>
+          )}
+          <div className="field mt-5">
+            <div className="control">
+              <button type="submit" className="button is-primary is-fullwidth">
+                로그인
+              </button>
+            </div>
           </div>
-        )}
-        <input type="submit" value="로그인" />
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

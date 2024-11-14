@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import useApiRequest from "../common/api/useApiRequest";
 import { useRouter } from "next/router";
 import changePasswordRequest from "client/src/api/auth/changePasswordRequest";
-import useSessionExpiredModal from "../common/modal/useSessionExpiredModal";
 
 export default () => {
   const [oldPassword, setOldPassword] = useState<string>("");
@@ -12,7 +11,6 @@ export default () => {
   const { data, setData, loading, setLoading, error, setError } =
     useApiRequest();
   const router = useRouter();
-  const { isSessionExpired, setIsSessionExpired } = useSessionExpiredModal();
 
   const verifyPassword = useCallback(async () => {
     setLoading(true);
@@ -34,16 +32,11 @@ export default () => {
         return false;
       }
     } catch (error) {
-      if (error instanceof Error && error.message === "Unauthorized") {
-        setIsSessionExpired(true); // 401 에러 발생 시 세션 만료 모달 표시
-      } else {
-        setError(
-          error instanceof Error
-            ? error
-            : new Error("서버에서 얘기치 못한 오류가 발생하였습니다."),
-        );
-      }
-      return false;
+      setError(
+        error instanceof Error
+          ? error
+          : new Error("서버에서 얘기치 못한 오류가 발생하였습니다."),
+      );
       return false;
     } finally {
       setLoading(false);
@@ -61,7 +54,5 @@ export default () => {
     loading,
     error,
     setError,
-    isSessionExpired,
-    setIsSessionExpired,
   };
 };

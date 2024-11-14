@@ -58,23 +58,36 @@ const FormInput: React.FC<FormInputProps> = ({
   status,
 }) => {
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <input
-        type={type}
-        id={id}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        minLength={minLength}
-        required={required}
-        name={id}
-      />
-      {status !== undefined && (
-        <div
-          id={`${id}-box`}
-          style={{ backgroundColor: status ? "green" : "red" }}
-        ></div>
+    <div className="field">
+      <label className="label" htmlFor={id}>
+        {label}
+      </label>
+      <div className="control">
+        <input
+          className={`input ${
+            status !== undefined ? (status ? "is-success" : "is-danger") : ""
+          }`}
+          type={type}
+          id={id}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          minLength={minLength}
+          required={required}
+          name={id}
+        />
+        {status !== undefined && (
+          <span
+            className={`icon ${status ? "has-text-success" : "has-text-danger"}`}
+          >
+            <i
+              className={`fas ${status ? "fa-check" : "fa-exclamation-triangle"}`}
+            ></i>
+          </span>
+        )}
+      </div>
+      {status === false && (
+        <p className="help is-danger">올바른 형식이 아닙니다</p>
       )}
     </div>
   );

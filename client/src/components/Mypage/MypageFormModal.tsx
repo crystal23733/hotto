@@ -2,7 +2,6 @@ import React from "react";
 import IModalProps from "@shared/interface/modal.interface";
 import useChangePassword from "client/src/hook/Mypage/useChangePassword";
 import Modal from "../common/modal/Modal";
-import SessionExpiredModal from "../common/modal/SessionExpiredModal";
 
 const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const {
@@ -16,8 +15,6 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
     loading,
     error,
     setError,
-    isSessionExpired,
-    setIsSessionExpired,
   } = useChangePassword();
 
   const handleChangePasswordBtn = async () => {
@@ -26,11 +23,6 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
       closeModal();
       setError(null);
     }
-  };
-
-  const handleSessionExpiredConfirm = () => {
-    setIsSessionExpired(false);
-    window.location.reload(); // 확인 버튼을 누르면 페이지 새로고침
   };
 
   return (
@@ -65,10 +57,6 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
         />
         {error && <p className="help is-danger">{error.message}</p>}
       </Modal>
-      <SessionExpiredModal
-        isVisible={isSessionExpired}
-        onConfirm={handleSessionExpiredConfirm}
-      />
     </>
   );
 };

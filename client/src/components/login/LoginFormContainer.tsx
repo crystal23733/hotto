@@ -54,7 +54,7 @@ const LoginFormContainer: React.FC = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message || "로그인에 실패했습니다.");
+        setError(error.message);
       } else {
         setError("로그인에 실패했습니다.");
       }

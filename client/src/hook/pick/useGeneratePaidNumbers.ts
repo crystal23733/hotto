@@ -6,8 +6,7 @@ import setNumberBgColor from "client/src/utils/setNumberBgColor";
 export default () => {
   const [numbers, setNumbers] = useState<number[]>([]);
   const numberListRef = useRef<HTMLDivElement>(null);
-  const { processBuy, loading, error, isSessionExpired, setIsSessionExpired } =
-    useBuyNumber();
+  const { processBuy, loading, error } = useBuyNumber();
 
   const generatePaidNumbers = async (paymentDetails: IPaymentRequest) => {
     const generatedNumbers = await processBuy(paymentDetails);
@@ -40,7 +39,5 @@ export default () => {
     generatePaidNumbers,
     loading,
     error,
-    isSessionExpired,
-    setIsSessionExpired,
   };
 };
