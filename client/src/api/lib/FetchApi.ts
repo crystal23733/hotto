@@ -56,6 +56,11 @@ export default class FetchApi<T> {
         signal: this.controller?.signal, // AbortController의 signal을 전달하여 요청 취소 가능
       });
 
+      // 401 상태 코드 처리 추가
+      if (response.status === 401) {
+        throw new Error("Unauthorized"); // 401 에러 throw
+      }
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "요청 실패");

@@ -1,13 +1,13 @@
-import UseGeneratePaidNumbersReturn from "client/src/pipes/interface/pick/generatePaidNumbersReturn.interface";
 import { useEffect, useRef, useState } from "react";
 import useBuyNumber from "./useBuyNumber";
 import { IPaymentRequest } from "client/src/pipes/interface/pick/buyNumber.interface";
 import setNumberBgColor from "client/src/utils/setNumberBgColor";
 
-export default (): UseGeneratePaidNumbersReturn => {
+export default () => {
   const [numbers, setNumbers] = useState<number[]>([]);
   const numberListRef = useRef<HTMLDivElement>(null);
-  const { processBuy, loading, error } = useBuyNumber();
+  const { processBuy, loading, error, isSessionExpired, setIsSessionExpired } =
+    useBuyNumber();
 
   const generatePaidNumbers = async (paymentDetails: IPaymentRequest) => {
     const generatedNumbers = await processBuy(paymentDetails);
@@ -40,5 +40,7 @@ export default (): UseGeneratePaidNumbersReturn => {
     generatePaidNumbers,
     loading,
     error,
+    isSessionExpired,
+    setIsSessionExpired,
   };
 };

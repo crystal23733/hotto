@@ -38,21 +38,21 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	sessionID, err := c.Cookie("LIN_HOTTO")
 	if err != nil {
 
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "사용자 정보를 찾을 수 없습니다."})
+		return c.JSON(http.StatusUnauthorized, map[string]string{"message": "사용자 정보를 찾을 수 없습니다."})
 	}
 
 	decodedSessionID, err := url.QueryUnescape(sessionID.Value)
 
 	if err != nil {
 
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션을 디코딩하는데 실패하였습니다."})
+		return c.JSON(http.StatusUnauthorized, map[string]string{"message": "세션을 디코딩하는데 실패하였습니다."})
 	}
 
 	// 세션 ID에서 실제 세션 ID 추출
 	parts := strings.Split(decodedSessionID, ":")
 	if len(parts) < 2 {
 
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "세션 ID 형식이 잘못되었습니다."})
+		return c.JSON(http.StatusUnauthorized, map[string]string{"message": "세션 ID 형식이 잘못되었습니다."})
 	}
 	actualSessionID := strings.Split(parts[1], ".")[0]
 
@@ -66,10 +66,10 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 
-			return c.JSON(http.StatusNotFound, map[string]string{"error": "세션을 찾을 수 없습니다."})
+			return c.JSON(http.StatusNotFound, map[string]string{"message": "세션을 찾을 수 없습니다."})
 		}
 
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "데이터베이스 오류가 발생했습니다."})
 	}
 
 	// 세션 데이터 파싱
@@ -79,7 +79,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	err = json.Unmarshal([]byte(sessionDoc.Session), &sessionData)
 	if err != nil {
 
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터를 파싱하는데 실패하였습니다."})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "데이터를 파싱하는데 실패하였습니다."})
 	}
 
 	var user entity.User
@@ -87,16 +87,16 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 
 	if err != nil {
 
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "유효하지 않은 ID입니다."})
+		return c.JSON(http.StatusUnauthorized, map[string]string{"message": "유효하지 않은 ID입니다."})
 	}
 
 	err = h.PaymentUsecase.UserRepo.UserFind(context.Background(), objectID, &user)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return c.JSON(http.StatusNotFound, map[string]string{"error": "사용자를 찾을 수 없습니다."})
+			return c.JSON(http.StatusNotFound, map[string]string{"message": "사용자를 찾을 수 없습니다."})
 		}
 
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "데이터베이스 오류가 발생했습니다."})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "데이터베이스 오류가 발생했습니다."})
 	}
 
 	var req struct {
@@ -105,7 +105,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 
 	if err := c.Bind(&req); err != nil {
 
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "요청 형식이 잘못되었습니다."})
+		return c.JSON(http.StatusBadRequest, map[string]string{"message": "요청 형식이 잘못되었습니다."})
 	}
 
 	// 결제 요청 생성
@@ -118,7 +118,7 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 		Status:     "결제 대기",
 		CreatedAt:  time.Now(),
 		ExpiresAt:  time.Now().Add(30 * time.Minute),
-		Pay: "KakaoPay",
+		Pay:        "KakaoPay",
 	}
 
 	kakaoPayRequest := entity.KakaoPayRequest{
@@ -139,15 +139,15 @@ func (h *PaymentHandler) CreatePayment(c echo.Context) error {
 	if err != nil {
 
 		if strings.Contains(err.Error(), "400 Bad Request") {
-			return c.JSON(http.StatusBadRequest, map[string]string{"error": "결제 요청 형식이 올바르지 않습니다"})
+			return c.JSON(http.StatusBadRequest, map[string]string{"message": "결제 요청 형식이 올바르지 않습니다"})
 		}
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "결제 요청 처리 중 오류가 발생했습니다"})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "결제 요청 처리 중 오류가 발생했습니다"})
 	}
 
 	// 사용자 스키마에 결제내역 추가
 	if err := h.PaymentUsecase.UserRepo.UpdateUserPayments(context.Background(), objectID, paymentID); err != nil {
 
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "사용자 정보 업데이트에 성공하였습니다."})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "사용자 정보 업데이트에 성공하였습니다."})
 	}
 
 	responseData := map[string]string{
@@ -167,21 +167,21 @@ func (h *PaymentHandler) PayApproveHandler(c echo.Context) error {
 
 	if err := c.Bind(&requestBody); err != nil {
 
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "잘못된 요청 형식입니다."})
+		return c.JSON(http.StatusBadRequest, map[string]string{"message": "잘못된 요청 형식입니다."})
 	}
 
 	pgToken := requestBody.PgToken
 	partnerPayOrderID := requestBody.PartnerPayOrderID
 
 	if partnerPayOrderID == "" || pgToken == "" {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "필수 파라미터가 누락되었습니다"})
+		return c.JSON(http.StatusBadRequest, map[string]string{"message": "필수 파라미터가 누락되었습니다"})
 	}
 
 	// 유즈케이스 호출
 	approveResponse, err := h.PaymentUsecase.ApprovePayOrder(context.Background(), pgToken, partnerPayOrderID)
 	if err != nil {
 
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": fmt.Sprintf("결제 승인 실패: %v", err)})
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": fmt.Sprintf("결제 승인 실패: %v", err)})
 	}
 
 	return c.JSON(http.StatusOK, approveResponse)

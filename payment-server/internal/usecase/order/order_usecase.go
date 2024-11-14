@@ -15,6 +15,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// 사용자 정의 오류 메시지
+var ErrUserNotFound = errors.New("사용자를 찾을 수 없습니다")
+
 // OrderUsecase는 상품 결제 관련 로직을 담당하는 유즈케이스이다.
 type OrderUsecase struct {
 	UserRepo     *mongodb.UserRepository
@@ -56,7 +59,7 @@ func (u *OrderUsecase) CreateProductOrder(ctx context.Context, userId string, re
 		err = u.UserRepo.UserFind(sc, objectID, &user)
 		if err != nil {
 			if err == mongo.ErrNoDocuments {
-				return fmt.Errorf("사용자를 찾을 수 없습니다: %w", err)
+				return fmt.Errorf("사용자를 찾을 수 없습니다: %w", ErrUserNotFound)
 			}
 			return fmt.Errorf("데이터 베이스 오류가 발생하였습니다: %w", err)
 		}

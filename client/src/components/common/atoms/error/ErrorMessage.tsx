@@ -1,6 +1,6 @@
 import React from "react";
-import ErrorMessageProps from "./props/ErrorMessageProps";
-import "../../../scss/common/error/error-message.scss";
+import ErrorMessageProps from "./interface/ErrorMessageProps";
+import "../../../../scss/common/error/error-message.scss";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ children }) => {
   return (

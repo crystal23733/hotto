@@ -8,6 +8,7 @@ import useBuyModal from "client/src/hook/pick/useBuyModal";
 import BuyModal from "client/src/components/content/Pick/BuyModal";
 import useGeneratePaidNumbers from "client/src/hook/pick/useGeneratePaidNumbers";
 import ErrorMessage from "client/src/components/common/atoms/error/ErrorMessage";
+import SessionExpiredModal from "client/src/components/common/modal/SessionExpiredModal";
 
 const Pick: React.FC = () => {
   const { numberListRef: freeNumberListRef, generateNumbers } =
@@ -18,6 +19,8 @@ const Pick: React.FC = () => {
     numberListRef: paidNumberListRef,
     generatePaidNumbers,
     error,
+    isSessionExpired,
+    setIsSessionExpired,
   } = useGeneratePaidNumbers();
 
   const handleClick = async () => {
@@ -26,6 +29,11 @@ const Pick: React.FC = () => {
     } else {
       await generateNumbers(selectedOption); // 무료 옵션일 경우 바로 번호 생성
     }
+  };
+
+  const handleSessionExpiredConfirm = () => {
+    setIsSessionExpired(false);
+    window.location.reload(); // 확인 버튼을 누르면 페이지 새로고침
   };
 
   return (
@@ -54,6 +62,10 @@ const Pick: React.FC = () => {
         isActive={isPayActive}
         closeModal={closePayModal}
         generatePaidNumbers={generatePaidNumbers}
+      />
+      <SessionExpiredModal
+        isVisible={isSessionExpired}
+        onConfirm={handleSessionExpiredConfirm}
       />
     </div>
   );

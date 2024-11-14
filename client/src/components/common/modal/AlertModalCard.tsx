@@ -1,4 +1,4 @@
-import AlertModalCardProps from "client/src/pipes/interface/common/modal/alertModalCardProps.interface";
+import AlertModalCardProps from "client/src/components/common/modal/interface/alertModalCardProps";
 import React from "react";
 import Text from "../atoms/text/Text";
 import Button from "../atoms/button/Modal/Button";
