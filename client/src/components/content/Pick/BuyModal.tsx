@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import BuyModalProps from "client/src/pipes/interface/pick/buyModalProps";
 import useGeneratePaidNumbers from "client/src/hook/pick/useGeneratePaidNumbers";
 import Modal from "../../common/modal/Modal";
+import useBuyNumber from "client/src/hook/pick/useBuyNumber";
+import SessionExpiredModal from "../../common/modal/SessionExpiredModal";
 
 /**
  * 유료 번호 생성 시 결제를 진행하는 모달 컴포넌트
@@ -22,6 +24,7 @@ const BuyModal: React.FC<BuyModalProps> = ({
   generatePaidNumbers,
 }) => {
   const { loading, error } = useGeneratePaidNumbers();
+  const { isSessionExpired, setIsSessionExpired } = useBuyNumber();
 
   /**
    * 모달에서 "확인" 버튼을 눌렀을 때 실행되는 함수
@@ -36,17 +39,28 @@ const BuyModal: React.FC<BuyModalProps> = ({
     closeModal();
   };
 
+  const handleSessionExpiredConfirm = () => {
+    setIsSessionExpired(false);
+    window.location.reload(); // 확인 버튼을 누르면 페이지 새로고침
+  };
+
   return (
-    <Modal
-      isActive={isActive}
-      closeModal={closeModal}
-      title="유니크 번호 생성"
-      onConfirm={handleConfirm}
-      loadingStatus={loading}
-    >
-      <p>500원입니다. 구매하시겠습니까?</p>
-      {error && <p className="help is-danger">{error.message}</p>}
-    </Modal>
+    <>
+      <Modal
+        isActive={isActive}
+        closeModal={closeModal}
+        title="유니크 번호 생성"
+        onConfirm={handleConfirm}
+        loadingStatus={loading}
+      >
+        <p>500원입니다. 구매하시겠습니까?</p>
+        {error && <p className="help is-danger">{error.message}</p>}
+      </Modal>
+      <SessionExpiredModal
+        isVisible={isSessionExpired}
+        onConfirm={handleSessionExpiredConfirm}
+      />
+    </>
   );
 };
 

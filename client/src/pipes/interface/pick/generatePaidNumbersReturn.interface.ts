@@ -6,4 +6,5 @@ export default interface UseGeneratePaidNumbersReturn {
   generatePaidNumbers: (paymentDetails: IPaymentRequest) => Promise<void>;
   loading: boolean;
   error: Error | null;
+  isSessionExpired: boolean;
 }
