@@ -1,5 +1,5 @@
 import React from "react";
-import HomeButton from "../../../components/common/button/kakaopay/HomeButton";
+import HomeButton from "../../../components/common/atoms/button/kakaopay/HomeButton";
 import "../../../scss/kakaoCancel-Fail.scss";
 
 const Cancel: React.FC = () => {

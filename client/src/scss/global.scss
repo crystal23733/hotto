@@ -1,1 +1,18 @@
+// 전역 최상위 스타일
+@use "./components/display.scss";
 @import "~bulma/bulma";
+
+%rowSideDisplay {
+  @include display.flex(row, space-between, normal);
+}
+
+#alert-modal {
+  & > .modal-card {
+    & > .modal-card-head {
+      @extend %rowSideDisplay;
+    }
+    & > .modal-card-foot {
+      @extend %rowSideDisplay;
+    }
+  }
+}

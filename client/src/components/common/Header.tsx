@@ -3,7 +3,7 @@ import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import MypageModal from "./MypageModal";
+import MypageModal from "./modal/MypageModal";
 import useMyModal from "client/src/hook/Modal/useMyModal";
 import usePayModal from "client/src/hook/Modal/usePayModal";
 import PaymentModal from "./PaymentModal";
