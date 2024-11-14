@@ -1,15 +1,22 @@
-import React from 'react';
-import '../../../scss/components/molecules/modalCard.scss';
-import CommonModalProps from 'client/src/pipes/interface/common/modal/commonModalProps.interface';
-import Text from '../atoms/text/Text';
-import Button from '../atoms/button/Modal/Button';
+import React from "react";
+import CommonModalProps from "client/src/components/common/modal/interface/commonModalProps";
+import Text from "../atoms/text/Text";
+import Button from "../atoms/button/Modal/Button";
 
-const ModalCard: React.FC<CommonModalProps> = ({ title, content, onClose }) => {
+const OneButtonModalCard: React.FC<CommonModalProps> = ({
+  title,
+  content,
+  onClose,
+}) => {
   return (
     <div className="modal-card">
       <header className="modal-card-head">
         <Text content={title} size="large" />
-        <button className="delete" aria-label="close" onClick={onClose}></button>
+        <button
+          className="delete"
+          aria-label="close"
+          onClick={onClose}
+        ></button>
       </header>
       <section className="modal-card-body">
         <Text content={content} />
@@ -21,4 +28,4 @@ const ModalCard: React.FC<CommonModalProps> = ({ title, content, onClose }) => {
   );
 };
 
-export default ModalCard;
+export default OneButtonModalCard;
