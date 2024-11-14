@@ -1,9 +1,9 @@
 import React from "react";
-import Modal from "../../common/Modal";
 import { UNIQUE_PRICE } from "client/src/constants/payment";
 import { v4 as uuidv4 } from "uuid";
-import BuyModalProps from "client/src/pipes/interface/pick/buyModalProps.interface";
+import BuyModalProps from "client/src/pipes/interface/pick/buyModalProps";
 import useGeneratePaidNumbers from "client/src/hook/pick/useGeneratePaidNumbers";
+import Modal from "../../common/modal/Modal";
 
 /**
  * 유료 번호 생성 시 결제를 진행하는 모달 컴포넌트

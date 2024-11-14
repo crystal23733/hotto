@@ -1,7 +1,7 @@
 import React from "react";
-import Modal from "../common/Modal";
 import IModalProps from "@shared/interface/modal.interface";
 import useChangePassword from "client/src/hook/Mypage/useChangePassword";
+import Modal from "../common/modal/Modal";
 
 const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const {

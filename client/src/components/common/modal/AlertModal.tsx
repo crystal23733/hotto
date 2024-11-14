@@ -1,4 +1,4 @@
-import AlertModalProps from "client/src/pipes/interface/common/modal/alertModalProps.interface";
+import AlertModalProps from "client/src/components/common/modal/interface/alertModalProps";
 import React from "react";
 import AlertModalCard from "./AlertModalCard";
 
