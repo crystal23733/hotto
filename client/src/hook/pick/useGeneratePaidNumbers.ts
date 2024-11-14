@@ -1,4 +1,3 @@
-import UseGeneratePaidNumbersReturn from "client/src/pipes/interface/pick/generatePaidNumbersReturn.interface";
 import { useEffect, useRef, useState } from "react";
 import useBuyNumber from "./useBuyNumber";
 import { IPaymentRequest } from "client/src/pipes/interface/pick/buyNumber.interface";
