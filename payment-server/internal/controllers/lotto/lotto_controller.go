@@ -24,7 +24,7 @@ func (c *LottoController) GetLatestLottoData(ctx echo.Context) error {
 	data, err := c.lottoUsecase.GetLatestLottoData()
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, map[string]string{
-			"error": "최신 로또 데이터 조회 중 오류가 발생했습니다: " + err.Error(),
+			"message": "최신 로또 데이터 조회 중 오류가 발생했습니다: " + err.Error(),
 		})
 	}
 	return ctx.JSON(http.StatusOK, data)
@@ -36,7 +36,7 @@ func (c *LottoController) GetLottoDataForRound(ctx echo.Context) error {
 	data, err := c.lottoUsecase.GetLottoDataForRound(round)
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, map[string]string{
-			"error": "로또 데이터 조회 중 오류가 발생했습니다: " + err.Error(),
+			"message": "로또 데이터 조회 중 오류가 발생했습니다: " + err.Error(),
 		})
 	}
 	return ctx.JSON(http.StatusOK, data)
