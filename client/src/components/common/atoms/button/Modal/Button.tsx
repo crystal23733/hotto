@@ -1,5 +1,5 @@
-import ButtonProps from "client/src/pipes/interface/common/button/buttonProps.interface";
 import React from "react";
+import ButtonProps from "./interface/buttonProps";
 
 const Button: React.FC<ButtonProps> = ({
   label,
