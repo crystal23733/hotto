@@ -2,11 +2,13 @@ import logoutFetch from "client/src/api/auth/logoutFetch";
 import { useAuth } from "client/src/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MypageModal from "./modal/MypageModal";
 import useMyModal from "client/src/hook/Modal/useMyModal";
 import usePayModal from "client/src/hook/Modal/usePayModal";
 import PaymentModal from "./PaymentModal";
+import useSessionExpiredModal from "client/src/hook/common/modal/useSessionExpiredModal";
+import SessionExpiredModal from "./modal/SessionExpiredModal";
 
 /**
  * 24.08.08
@@ -16,11 +18,30 @@ const Header: React.FC = () => {
   const { isAuthenticated, userName, userBalance } = useAuth();
   const { isActive, handleMypageModal, closeModal } = useMyModal();
   const { isPayActive, handlePaymentModal, closePayModal } = usePayModal();
+  const { isSessionExpired, setIsSessionExpired } = useSessionExpiredModal();
+  const [previousAuthState, setPreviousAuthState] = useState<boolean | null>(
+    null,
+  );
   const router = useRouter();
 
   const handleLogout = async () => {
     await logoutFetch();
     router.reload();
+  };
+
+  useEffect(() => {
+    if (previousAuthState !== null && previousAuthState !== isAuthenticated) {
+      // 이전 인증 상태와 현재 인증 상태를 비교
+      if (!isAuthenticated) {
+        setIsSessionExpired(true); // 세션이 만료되었다고 설정
+      }
+    }
+    setPreviousAuthState(isAuthenticated);
+  }, [isAuthenticated, previousAuthState]);
+
+  const handleSessionExpiredConfirm = () => {
+    setIsSessionExpired(false);
+    window.location.reload(); // 확인 버튼을 누르면 페이지 새로고침
   };
 
   if (isAuthenticated === null) {
@@ -60,6 +81,10 @@ const Header: React.FC = () => {
           </>
         )}{" "}
       </div>{" "}
+      <SessionExpiredModal
+        isVisible={isSessionExpired}
+        onConfirm={handleSessionExpiredConfirm}
+      />
     </div>
   );
 };
