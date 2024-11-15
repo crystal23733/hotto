@@ -3,30 +3,49 @@
 
 #login-form {
   @include display.flex(column, center, center);
-  height: 100vh - height.$header-height - height.$menu-height;
+  height: calc(100vh - #{height.$header-height} - #{height.$menu-height});
   width: 100%;
 
-  & > div {
-    @include display.flex(row, center, center);
+  .field {
     width: 100%;
-    padding: 20px;
+    margin-bottom: 1.5rem;
+  }
 
-    & > label {
-      width: 150px;
-      text-align: end;
-      padding-right: 5px;
-    }
+  .card {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow:
+      0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    transition: transform 0.3s ease;
 
-    & > input {
-      height: height.$status-box;
+    &:hover {
+      transform: translateY(-5px);
     }
   }
 
-  & > input {
+  .input {
+    height: height.$status-box;
+    transition: all 0.3s ease;
+  }
+
+  .label {
+    width: 150px;
+    text-align: end;
+    padding-right: 5px;
+  }
+
+  .button {
     padding: 20px;
+    width: 100%;
     border: none;
     background-color: #0d99ff;
     border-radius: 20px;
     color: white;
+
+    &:hover {
+      background-color: darken(#0d99ff, 10%);
+    }
   }
 }

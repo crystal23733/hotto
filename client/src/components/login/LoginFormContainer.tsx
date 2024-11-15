@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import FetchApi from "client/src/api/lib/FetchApi";
 import serverUrl from "client/src/module/serverUrl";
 import checkAuthStatus from "client/src/api/auth/checkAuthStatus";
+import { ERROR_UNKNOWN } from "client/src/constants/error/errorMessage";
 
 const fetchApi = new FetchApi(serverUrl);
 
@@ -45,19 +46,22 @@ const LoginFormContainer: React.FC = () => {
     }
 
     try {
-      await loginRequest(email, password);
-      const response = await checkAuthStatus();
-      if (response.isAuthenticated) {
-        router.reload();
+      const response = await loginRequest(email, password);
+
+      // 로그인 요청의 응답이 에러를 포함하고 있는지 확인
+      if (response.error) {
+        setError(response.error);
       } else {
-        setError("로그인 처리 중 문제가 발생했습니다.");
+        const authResponse = await checkAuthStatus();
+        if (authResponse.isAuthenticated) {
+          router.reload();
+        } else {
+          setError("로그인 처리 중 문제가 발생했습니다.");
+        }
       }
     } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message || "로그인에 실패했습니다.");
-      } else {
-        setError("로그인에 실패했습니다.");
-      }
+      console.error("로그인 중 오류 발생:", error);
+      setError(ERROR_UNKNOWN);
     }
   };
 

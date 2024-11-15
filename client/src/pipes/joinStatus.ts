@@ -12,7 +12,7 @@ import { useState } from "react";
  * @date 24.08.08
  */
 const useJoinStatus = (formData: Record<string, string>) => {
-  const [status, setStatus] = useState([false, false, false, false, false]);
+  const [status, setStatus] = useState([false, false, false, false]);
   /**
    * 입력 필드의 값을 변경하고 유효성을 업데이트하는 함수입니다.
    *

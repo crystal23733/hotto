@@ -1,5 +1,6 @@
 import React from "react";
 import FormInput from "../common/FormInput";
+import ErrorMessage from "../common/atoms/error/ErrorMessage";
 
 /**
  * 24.08.08
@@ -35,57 +36,70 @@ const JoinForm: React.FC<JoinFormProps> = ({
   onSubmit,
 }) => {
   return (
-    <form id="join-form" onSubmit={onSubmit}>
-      <FormInput
-        label="이름"
-        type="text"
-        id="name"
-        placeholder="이름"
-        minLength={2}
-        value={formData.name}
-        onChange={onInputChange}
-        status={status[0]}
-      />
-      <FormInput
-        label="이메일"
-        type="email"
-        id="email"
-        placeholder="이메일"
-        value={formData.email}
-        onChange={onInputChange}
-        status={status[1]}
-      />
-      <FormInput
-        label="비밀번호"
-        type="password"
-        id="password"
-        placeholder="비밀번호"
-        minLength={5}
-        value={formData.password}
-        onChange={onInputChange}
-        status={status[2]}
-      />
-      <FormInput
-        label="비밀번호 확인"
-        type="password"
-        id="checkPassword"
-        placeholder="비밀번호 확인"
-        minLength={5}
-        value={formData.checkPassword}
-        onChange={onInputChange}
-        status={status[3]}
-      />
-      <input type="submit" value="회원가입" />
-      {errors.length > 0 && (
-        <div>
-          {errors.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>
-              {error}
-            </p>
-          ))}
-        </div>
-      )}
-    </form>
+    <div className="card">
+      <div className="card-content">
+        <h1 className="title has-text-centered">회원가입</h1>
+        <form id="join-form" onSubmit={onSubmit}>
+          <FormInput
+            label="이름"
+            type="text"
+            id="name"
+            placeholder="이름"
+            minLength={2}
+            value={formData.name}
+            onChange={onInputChange}
+            status={status[0]}
+          />
+          <FormInput
+            label="이메일"
+            type="email"
+            id="email"
+            placeholder="이메일"
+            value={formData.email}
+            onChange={onInputChange}
+            status={status[1]}
+          />
+          <FormInput
+            label="비밀번호"
+            type="password"
+            id="password"
+            placeholder="비밀번호"
+            minLength={5}
+            value={formData.password}
+            onChange={onInputChange}
+            status={status[2]}
+          />
+          <FormInput
+            label="비밀번호 확인"
+            type="password"
+            id="checkPassword"
+            placeholder="비밀번호 확인"
+            minLength={5}
+            value={formData.checkPassword}
+            onChange={onInputChange}
+            status={status[3]}
+          />
+          {errors.length > 0 && (
+            <div className="mt-3">
+              {errors.map((error, index) => (
+                <ErrorMessage key={index}>{error}</ErrorMessage>
+              ))}
+            </div>
+          )}
+          <div className="field mt-5">
+            <div className="control">
+              <button
+                type="submit"
+                className="button is-primary is-fullwidth"
+                disabled={!status.every((s) => s)}
+              >
+                회원가입
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

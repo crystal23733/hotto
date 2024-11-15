@@ -3,42 +3,97 @@
 
 #join-form {
   @include display.flex(column, center, center);
-  height: 100vh - height.$header-height - height.$menu-height;
+  height: calc(100vh - #{height.$header-height} - #{height.$menu-height});
   width: 100%;
 
-  & > div {
-    @include display.flex(row, center, center);
+  .field {
     width: 100%;
-    padding: 20px;
+    margin-bottom: 1.5rem;
+  }
 
-    & > label {
-      width: 150px;
-      text-align: end;
-      padding-right: 5px;
-    }
+  .card {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow:
+      0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    transition: transform 0.3s ease;
 
-    & > input {
-      height: height.$status-box;
-    }
-
-    & > div {
-      height: height.$status-box;
-      width: height.$status-box;
-      background-color: red;
-      margin-left: 5px;
-      border-radius: 5px;
+    &:hover {
+      transform: translateY(-5px);
     }
   }
 
-  & > p {
-    color: red;
+  .input {
+    height: height.$status-box;
+    transition: all 0.3s ease;
+
+    &.is-success {
+      animation: success-pulse 1s;
+    }
+
+    &.is-danger {
+      animation: danger-pulse 1s;
+    }
   }
 
-  & > input {
+  .label {
+    width: 150px;
+    text-align: end;
+    padding-right: 5px;
+  }
+
+  .control {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .button {
     padding: 20px;
+    width: 100%;
     border: none;
     background-color: #0d99ff;
     border-radius: 20px;
     color: white;
+
+    &:hover {
+      background-color: darken(#0d99ff, 10%);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes success-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(72, 199, 116, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(72, 199, 116, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(72, 199, 116, 0);
+  }
+}
+
+@keyframes danger-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(241, 70, 104, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(241, 70, 104, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 70, 104, 0);
   }
 }

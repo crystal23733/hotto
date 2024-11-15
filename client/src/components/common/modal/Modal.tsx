@@ -28,25 +28,29 @@ const Modal: React.FC<{
     <div className={`modal ${isActive ? "is-active" : ""}`}>
       <div className="modal-background" onClick={closeModal}></div>
       <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">{title}</p>
+        <header className="modal-card-head has-background-info">
+          <p className="modal-card-title has-text-white">{title}</p>
           <button
-            className="delete"
+            className="delete is-medium"
             aria-label="close"
             onClick={closeModal}
           ></button>
         </header>
         <section className="modal-card-body">{children}</section>
         <footer className="modal-card-foot">
-          <div className="buttons">
+          <div className="buttons is-centered is-flex-grow-1">
             <button
-              className="button is-success"
+              className={`button is-info ${loadingStatus ? "is-loading" : ""}`}
               onClick={onConfirm}
               disabled={loadingStatus}
             >
               확인
             </button>
-            <button className="button" type="reset" onClick={closeModal}>
+            <button
+              className="button is-light"
+              type="reset"
+              onClick={closeModal}
+            >
               취소
             </button>
           </div>
