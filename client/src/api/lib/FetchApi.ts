@@ -63,7 +63,7 @@ export default class FetchApi<T> {
         throw new Error(data.message || "요청 실패");
       }
 
-      return (await response.json()) as T;
+      return data as T;
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
         throw error; // 요청 취소 에러를 다시 throw하여 처리 흐름 유지
