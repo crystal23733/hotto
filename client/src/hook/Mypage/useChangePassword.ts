@@ -8,6 +8,7 @@ export default () => {
   const [changePassword, setChangePassword] = useState<string>("");
   const [changePasswordConfirm, setChangePasswordConfirm] =
     useState<string>("");
+  const [validationError, setValidationError] = useState<string | null>(null);
   const { data, setData, loading, setLoading, error, setError } =
     useApiRequest();
   const router = useRouter();
@@ -49,6 +50,8 @@ export default () => {
     setChangePassword,
     changePasswordConfirm,
     setChangePasswordConfirm,
+    validationError,
+    setValidationError,
     data,
     verifyPassword,
     loading,
