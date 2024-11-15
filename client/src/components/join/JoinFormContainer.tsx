@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import JoinForm from "./JoinForm";
 import joinRequest from "client/src/api/join/joinRequest";
 import FetchApi from "client/src/api/lib/FetchApi";
+import { ERROR_UNKNOWN } from "client/src/constants/error/errorMessage";
 
 const fetchApi = new FetchApi(process.env.NEXT_PUBLIC_SERVER_URL as string);
 
@@ -21,6 +22,7 @@ const JoinFormContainer: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<string[]>([]);
+  const [serverError, setServerError] = useState<string | null>(null);
   const { status, handleChange } = useJoinStatus(formData);
 
   useEffect(() => {
@@ -39,12 +41,17 @@ const JoinFormContainer: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: string[] = [];
-    if (!status[0]) newErrors.push("아이디가 유효하지 않습니다.");
-    if (!status[1]) newErrors.push("이메일이 유효하지 않습니다.");
-    if (!status[2]) newErrors.push("비밀번호가 유효하지 않습니다.");
-    if (!status[3]) newErrors.push("비밀번호 확인이 유효하지 않습니다.");
+    if (!status[0])
+      newErrors.push("이름은 한글 2자 이상 또는 영문 8자 이상이어야 합니다.");
+    if (!status[1]) newErrors.push("유효한 이메일 형식이 아닙니다.");
+    if (!status[2])
+      newErrors.push(
+        "비밀번호는 8자 이상이어야 하며, 대소문자, 숫자, 특수문자가 포함되어야 합니다.",
+      );
+    if (!status[3]) newErrors.push("비밀번호 확인이 일치하지 않습니다.");
 
     setErrors(newErrors);
+    setServerError(null); // 서버 에러 초기화
 
     if (newErrors.length === 0) {
       try {
@@ -53,11 +60,11 @@ const JoinFormContainer: React.FC = () => {
         if (!response.error) {
           router.push("/Login");
         } else {
-          setErrors([response.error || "회원가입 실패"]);
+          setServerError(response.error || "회원가입 실패");
         }
       } catch (error) {
         console.error("회원가입 중 오류 발생:", error);
-        setErrors(["회원가입 중 오류가 발생했습니다."]);
+        setServerError(ERROR_UNKNOWN);
       }
     }
   };
@@ -66,6 +73,7 @@ const JoinFormContainer: React.FC = () => {
     <JoinForm
       formData={formData}
       errors={errors}
+      serverError={serverError}
       status={status}
       onInputChange={handleInputChange}
       onSubmit={handleSubmit}

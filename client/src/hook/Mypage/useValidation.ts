@@ -16,7 +16,7 @@ export default (changePassword: string, changePasswordConfirm: string) => {
 
   useEffect(() => {
     setValidations({
-      lengthValid: conditional.passwordLength(changePassword),
+      lengthValid: conditional.passwordComplexity(changePassword),
       matchValid: conditional.passwordCon(
         changePassword,
         changePasswordConfirm,

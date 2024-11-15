@@ -30,7 +30,7 @@ const useJoinStatus = (formData: Record<string, string>) => {
         newStatus[1] = conditional.emailCon(value);
         break;
       case "password":
-        newStatus[2] = conditional.passwordLength(value);
+        newStatus[2] = conditional.passwordComplexity(value);
         break;
       case "checkPassword":
         newStatus[3] = conditional.passwordCon(formData.password, value);

@@ -19,7 +19,7 @@ export class AuthService {
       throw new UnauthorizedException("이메일 형식이 유효하지 않습니다.");
     }
 
-    if (!conditional.passwordLength(password)) {
+    if (!conditional.passwordComplexity(password)) {
       throw new UnauthorizedException("비밀번호가 너무 짧습니다.");
     }
 
@@ -130,8 +130,8 @@ export class AuthService {
     const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
 
     if (
-      !conditional.passwordLength(changePassword) ||
-      !conditional.passwordLength(changePasswordConfirm)
+      !conditional.passwordComplexity(changePassword) ||
+      !conditional.passwordComplexity(changePasswordConfirm)
     ) {
       return { success: false, message: "비밀번호가 너무 짧습니다." };
     }

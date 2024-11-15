@@ -6,7 +6,10 @@ import useShakeAnimation from "client/src/hook/Mypage/useShakeAnimation";
 import useValidation from "client/src/hook/Mypage/useValidation";
 import getInputClass from "client/src/utils/filter/getInputClass";
 
-const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
+const ChangePasswordModal: React.FC<IModalProps> = ({
+  isActive,
+  closeModal,
+}) => {
   const {
     oldPassword,
     setOldPassword,
@@ -25,22 +28,24 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const { shake, triggerShake } = useShakeAnimation();
   const validations = useValidation(changePassword, changePasswordConfirm);
 
-  const handleChangePasswordBtn = async () => {
+  const handleChangePassword = async () => {
     if (!oldPassword) {
       triggerShake("oldPassword");
-      setValidationError("기존 비밀번호를 입력해주세요."); // 검증 오류 메시지
+      setValidationError("기존 비밀번호를 입력해주세요.");
       return;
     }
 
     if (!validations.lengthValid) {
       triggerShake("newPassword");
-      setValidationError("새 비밀번호는 4자 이상이어야 합니다."); // 검증 오류 메시지
+      setValidationError(
+        "새 비밀번호는 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다.",
+      );
       return;
     }
 
     if (!validations.matchValid) {
       triggerShake("confirmPassword");
-      setValidationError("새 비밀번호가 일치하지 않습니다."); // 검증 오류 메시지
+      setValidationError("새 비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -57,7 +62,7 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
       isActive={isActive}
       closeModal={closeModal}
       title="비밀번호 변경"
-      onConfirm={handleChangePasswordBtn}
+      onConfirm={handleChangePassword}
       loadingStatus={loading}
     >
       <div className="field">
@@ -74,6 +79,9 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
             <i className="fas fa-lock"></i>
           </span>
         </div>
+        {validationError && shake.oldPassword && (
+          <p className="help is-danger">{validationError}</p>
+        )}
       </div>
 
       <div className="field">
@@ -90,6 +98,9 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
             <i className="fas fa-key"></i>
           </span>
         </div>
+        {validationError && shake.newPassword && (
+          <p className="help is-danger">{validationError}</p>
+        )}
       </div>
 
       <div className="field">
@@ -106,9 +117,12 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
             <i className="fas fa-key"></i>
           </span>
         </div>
+        {validationError && shake.confirmPassword && (
+          <p className="help is-danger">{validationError}</p>
+        )}
       </div>
 
-      {(validationError || error) && (
+      {error && (
         <div className="notification is-danger is-light">
           <p
             className="delete"
@@ -117,11 +131,11 @@ const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
               setError(null);
             }}
           ></p>
-          {validationError || error?.message}
+          {error.message}
         </div>
       )}
     </Modal>
   );
 };
 
-export default MypageFormModal;
+export default ChangePasswordModal;

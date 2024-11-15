@@ -40,7 +40,7 @@ const LoginFormContainer: React.FC = () => {
       setError("유효하지 않은 양식의 이메일입니다!");
       return;
     }
-    if (!conditional.passwordLength(password)) {
+    if (!conditional.passwordComplexity(password)) {
       setError("유효하지 않은 양식의 비밀번호 입니다!");
       return;
     }

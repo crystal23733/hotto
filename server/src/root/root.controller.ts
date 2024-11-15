@@ -1,4 +1,11 @@
-import { Controller, Post, Body, HttpCode, HttpStatus, HttpException } from "@nestjs/common"; // 필요한 데코레이터를 가져옵니다.
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  HttpStatus,
+  HttpException,
+} from "@nestjs/common"; // 필요한 데코레이터를 가져옵니다.
 import { RootService } from "./root.service"; // RootService를 가져옵니다.
 
 @Controller() // 기본 경로를 설정하지 않으면 기본 루트 '/'로 설정됩니다.
