@@ -1,5 +1,6 @@
 import serverUrl from "client/src/module/serverUrl";
 import FetchApi from "../lib/FetchApi";
+import { ERROR_UNKNOWN } from "client/src/constants/error/errorMessage";
 
 const fetchApi = new FetchApi<{ error?: string }>(serverUrl);
 
@@ -14,5 +15,12 @@ export default async (formData: {
   checkPassword: string;
 }) => {
   const joinUrl = process.env.NEXT_PUBLIC_JOIN_ENDPOINT as string;
-  return await fetchApi.request(joinUrl, "POST", formData);
+  try {
+    return await fetchApi.request(joinUrl, "POST", formData);
+  } catch (error) {
+    if (error instanceof Error) {
+      return { error: error.message };
+    }
+    return { error: ERROR_UNKNOWN };
+  }
 };

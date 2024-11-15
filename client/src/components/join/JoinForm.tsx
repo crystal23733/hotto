@@ -1,5 +1,6 @@
 import React from "react";
 import FormInput from "../common/FormInput";
+import ErrorMessage from "../common/atoms/error/ErrorMessage";
 
 /**
  * 24.08.08
@@ -78,6 +79,13 @@ const JoinForm: React.FC<JoinFormProps> = ({
             onChange={onInputChange}
             status={status[3]}
           />
+          {errors.length > 0 && (
+            <div className="mt-3">
+              {errors.map((error, index) => (
+                <ErrorMessage key={index}>{error}</ErrorMessage>
+              ))}
+            </div>
+          )}
           <div className="field mt-5">
             <div className="control">
               <button
@@ -89,13 +97,6 @@ const JoinForm: React.FC<JoinFormProps> = ({
               </button>
             </div>
           </div>
-          {errors.length > 0 && (
-            <div className="notification is-danger is-light mt-3">
-              {errors.map((error, index) => (
-                <p key={index}>{error}</p>
-              ))}
-            </div>
-          )}
         </form>
       </div>
     </div>

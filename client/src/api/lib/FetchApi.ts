@@ -56,9 +56,11 @@ export default class FetchApi<T> {
         signal: this.controller?.signal, // AbortController의 signal을 전달하여 요청 취소 가능
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "요청 실패");
+        // HTTP 상태가 2xx가 아닌 경우 에러 throw
+        throw new Error(data.message || "요청 실패");
       }
 
       return (await response.json()) as T;

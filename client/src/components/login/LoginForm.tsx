@@ -1,5 +1,6 @@
 import React from "react";
 import FormInput from "../common/FormInput";
+import ErrorMessage from "../common/atoms/error/ErrorMessage";
 
 /**
  * 24.08.08
@@ -54,9 +55,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             label="비밀번호"
             minLength={5}
           />
-          {error && (
-            <div className="notification is-danger is-light mt-3">{error}</div>
-          )}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <div className="field mt-5">
             <div className="control">
               <button type="submit" className="button is-primary is-fullwidth">
