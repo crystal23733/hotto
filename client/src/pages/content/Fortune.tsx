@@ -45,14 +45,16 @@ const Fortune: React.FC = () => {
     <div id="background-box">
       <BackgroundSky />
       <div id="content__chat-box">
-        <div className="main-chat">
-          {messages.map((msg, index) => {
-            return msg.type === "user" ? (
-              <UserMessage key={index} message={msg.content} />
-            ) : (
-              <AiMessage key={index} message={msg.content} />
-            );
-          })}
+        <div id="content__chat-block">
+          <div className="main-chat">
+            {messages.map((msg, index) => {
+              return msg.type === "user" ? (
+                <UserMessage key={index} message={msg.content} />
+              ) : (
+                <AiMessage key={index} message={msg.content} />
+              );
+            })}
+          </div>
         </div>
         <ChatForm addUserMessage={addUserMessage} addAiMessage={addAiMessage} />
       </div>
