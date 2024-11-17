@@ -6,10 +6,7 @@ import useShakeAnimation from "client/src/hook/Mypage/useShakeAnimation";
 import useValidation from "client/src/hook/Mypage/useValidation";
 import getInputClass from "client/src/utils/filter/getInputClass";
 
-const ChangePasswordModal: React.FC<IModalProps> = ({
-  isActive,
-  closeModal,
-}) => {
+const MypageFormModal: React.FC<IModalProps> = ({ isActive, closeModal }) => {
   const {
     oldPassword,
     setOldPassword,
@@ -29,10 +26,12 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
   const validations = useValidation(changePassword, changePasswordConfirm);
 
   const handleChangePassword = async () => {
+    let hasError = false;
+
     if (!oldPassword) {
       triggerShake("oldPassword");
       setValidationError("기존 비밀번호를 입력해주세요.");
-      return;
+      hasError = true;
     }
 
     if (!validations.lengthValid) {
@@ -40,12 +39,16 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
       setValidationError(
         "새 비밀번호는 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다.",
       );
-      return;
+      hasError = true;
     }
 
     if (!validations.matchValid) {
       triggerShake("confirmPassword");
       setValidationError("새 비밀번호가 일치하지 않습니다.");
+      hasError = true;
+    }
+
+    if (hasError) {
       return;
     }
 
@@ -54,6 +57,16 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
       closeModal();
       setValidationError(null); // 검증 오류 메시지 초기화
       setError(null); // 서버 에러 메시지 초기화
+    }
+  };
+
+  const clearValidationError = (field: string) => {
+    if (field === "oldPassword" && oldPassword) {
+      setValidationError(null);
+    } else if (field === "newPassword" && validations.lengthValid) {
+      setValidationError(null);
+    } else if (field === "confirmPassword" && validations.matchValid) {
+      setValidationError(null);
     }
   };
 
@@ -73,13 +86,16 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
             className={`input ${shake.oldPassword ? "shake" : ""}`}
             placeholder="기존 비밀번호를 입력해주세요"
             value={oldPassword}
-            onChange={(event) => setOldPassword(event.target.value)}
+            onChange={(event) => {
+              setOldPassword(event.target.value);
+              clearValidationError("oldPassword");
+            }}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-lock"></i>
           </span>
         </div>
-        {validationError && shake.oldPassword && (
+        {validationError && !oldPassword && (
           <p className="help is-danger">{validationError}</p>
         )}
       </div>
@@ -89,16 +105,25 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
         <div className="control has-icons-left has-icons-right">
           <input
             type="password"
-            className={`${getInputClass("new", validations.lengthValid, validations.matchValid, changePassword, changePasswordConfirm)} ${shake.newPassword ? "shake" : ""}`}
+            className={`${getInputClass(
+              "new",
+              validations.lengthValid,
+              validations.matchValid,
+              changePassword,
+              changePasswordConfirm,
+            )} ${shake.newPassword ? "shake" : ""}`}
             placeholder="새로운 비밀번호를 입력해주세요"
             value={changePassword}
-            onChange={(event) => setChangePassword(event.target.value)}
+            onChange={(event) => {
+              setChangePassword(event.target.value);
+              clearValidationError("newPassword");
+            }}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-key"></i>
           </span>
         </div>
-        {validationError && shake.newPassword && (
+        {validationError && !validations.lengthValid && (
           <p className="help is-danger">{validationError}</p>
         )}
       </div>
@@ -108,16 +133,25 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
         <div className="control has-icons-left has-icons-right">
           <input
             type="password"
-            className={`${getInputClass("confirm", validations.lengthValid, validations.matchValid, changePassword, changePasswordConfirm)} ${shake.confirmPassword ? "shake" : ""}`}
+            className={`${getInputClass(
+              "confirm",
+              validations.lengthValid,
+              validations.matchValid,
+              changePassword,
+              changePasswordConfirm,
+            )} ${shake.confirmPassword ? "shake" : ""}`}
             placeholder="새로운 비밀번호를 다시 입력해주세요"
             value={changePasswordConfirm}
-            onChange={(event) => setChangePasswordConfirm(event.target.value)}
+            onChange={(event) => {
+              setChangePasswordConfirm(event.target.value);
+              clearValidationError("confirmPassword");
+            }}
           />
           <span className="icon is-small is-left">
             <i className="fas fa-key"></i>
           </span>
         </div>
-        {validationError && shake.confirmPassword && (
+        {validationError && !validations.matchValid && (
           <p className="help is-danger">{validationError}</p>
         )}
       </div>
@@ -138,4 +172,4 @@ const ChangePasswordModal: React.FC<IModalProps> = ({
   );
 };
 
-export default ChangePasswordModal;
+export default MypageFormModal;
